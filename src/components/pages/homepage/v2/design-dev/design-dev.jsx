@@ -10,10 +10,10 @@ import ScrubWord from "./scrub-word";
 import VerbsQuote from "./verbs-quote";
 
 /**
- * Design & development — the manifesto.
+ * Design & development: the manifesto.
  * Section title, then an editorial paragraph whose words scrub from dim to
  * bright as they cross the viewport (scroll-linked, no loop). Accent segments
- * (from the message file) take the blue gradient — the early "with you, not
+ * (from the message file) take the blue gradient: the early "with you, not
  * for you" and the closing promise. The three verbs land below as the
  * signature.
  */
@@ -42,10 +42,10 @@ const DesignDevV2 = () => {
                 </h2>
 
                 <blockquote ref={manifestoRef} className={styles.manifesto}>
-                    {/* Les mots scrubbés partent à opacity 0.16 : décoratifs pour
-                        l'accessibilité (aria-hidden), le vrai texte est la copie
-                        .srOnly juste après — phrases entières au lieu de mots
-                        éparpillés pour les lecteurs d'écran. */}
+                    {/* Les mots scrubbés sont décoratifs pour l'accessibilité
+                        (aria-hidden), le vrai texte est la copie .srOnly juste
+                        après : phrases entières au lieu de mots éparpillés pour
+                        les lecteurs d'écran. */}
                     <span aria-hidden="true">
                         {words.map(({w, accent}, i) => (
                             <ScrubWord

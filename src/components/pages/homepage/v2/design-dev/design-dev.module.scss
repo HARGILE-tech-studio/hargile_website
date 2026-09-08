@@ -1,4 +1,4 @@
-/* Design & development — editorial manifesto scrubbed at scroll, verbs quote
+/* Design & development: editorial manifesto scrubbed at scroll, verbs quote
    with word reveal + one-shot shine on the closing phrase (design: Homepage v2) */
 
 .centered {
@@ -23,9 +23,10 @@
 }
 
 /* Copie intégrale du manifesto pour les lecteurs d'écran : les mots scrubbés
-   sont aria-hidden (à opacity 0.16 au chargement ils échouent l'audit de
-   contraste, et lus mot à mot ils étaient de toute façon un mauvais contenu
-   SR). Le texte reste aussi dans le HTML pour les crawlers. */
+   sont aria-hidden (lus mot à mot ils sont un mauvais contenu SR). Le texte
+   reste aussi dans le HTML pour les crawlers. Le plancher d'opacité du scrub
+   est fixé dans scrub-word.jsx, pas ici : aria-hidden ne dispense pas du
+   contraste, l'audit regarde ce qu'un voyant perçoit. */
 .srOnly {
   position: absolute;
   width: 1px;
@@ -45,7 +46,7 @@
   -webkit-text-fill-color: transparent;
 }
 
-/* The verbs land quieter here — the manifesto already carries the message */
+/* The verbs land quieter here, the manifesto already carries the message */
 .quoteAfterManifesto {
   margin-top: clamp(40px, 6vw, 80px);
 }
@@ -67,7 +68,7 @@
   letter-spacing: -0.018em;
   text-shadow: none;
 
-  /* Bigger on phones — the quote is the section's punchline and reads small at
+  /* Bigger on phones: the quote is the section's punchline and reads small at
      the clamp floor once each phrase is on its own line. */
   @media (max-width: 640px) {
     font-size: clamp(30px, 8vw, 40px);
@@ -75,7 +76,7 @@
   }
 }
 
-/* Desktop: the three phrases flow together on one centred row (they're short —
+/* Desktop: the three phrases flow together on one centred row (they're short,
    no need to spend three lines of height on them). Each stays inline-block so
    its words still animate and the closing phrase keeps its shine.
    Mobile: each phrase drops onto its own centred line (a full-width block needs
@@ -106,7 +107,7 @@
   /* Reveal per word. A transition rather than an animation on purpose: the
      accent words spend their single `animation` slot on the shine below, and
      two shorthands on one element would just overwrite each other.
-     The resting state — here — is the finished one, so the server HTML has no
+     The resting state (here) is the finished one, so the server HTML has no
      per-word opacity for a crawler to read as blank (see verbs-quote.jsx). */
   transition:
     opacity 0.55s cubic-bezier(0.22, 1, 0.36, 1),
@@ -116,9 +117,12 @@
 
 /* Parked below the fold by JS. `transition: none` makes the hiding a jump cut:
    it happens off-screen during hydration and must never be a visible fade-out
-   for someone already scrolling. */
+   for someone already scrolling.
+
+   Hard 0 rather than 0.01, for the reason spelled out in reveal.module.scss:
+   axe-core only skips an element whose computed opacity is exactly "0". */
 .wordPending {
-  opacity: 0.01;
+  opacity: 0;
   transform: translateY(0.7em);
   transition: none;
 
