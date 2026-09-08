@@ -1,19 +1,28 @@
-/* Scroll-reveal states for the v2 homepage sections — driven by useReveal.js.
+/* Scroll-reveal states for the v2 homepage sections, driven by useReveal.js.
 
    The resting state is *visible*: neither class is in the server HTML, so a
-   client that never runs JS reads finished, opaque copy. JS only subtracts —
+   client that never runs JS reads finished, opaque copy. JS only subtracts:
    it adds .pending to what is still off-screen, then hands it to .revealIn as
    it comes into view. Same 0.5 s / 16 px / 0.09 s-stagger the motion props had.
 
-   Kept identical in shape to the hero's keyframes (hero/hero.module.scss),
-   including the 0.01 opacity floor rather than a hard 0 — one reveal on the
-   page, one set of numbers. */
+   Two different floors on purpose, see .pending below:
+   the parked state sits at a hard 0, the keyframes keep the hero's 0.01. */
 
 /* Off-screen, waiting its turn. No animation here: this is a jump cut applied
    to something nobody can see, and a transition would fade the copy back OUT
-   during hydration if the reader happened to be scrolling. */
+   during hydration if the reader happened to be scrolling.
+
+   opacity is exactly 0, not the 0.01 the keyframes use. An element parked here
+   stays parked for as long as the reader never scrolls to it, and axe-core
+   reads anything above 0 as painted text: at 0.01 it computed a 1.01:1 ratio
+   against the page background and failed color-contrast on every section below
+   the fold (Lighthouse CI run 34125838861). Its opacityHidden() check tests for
+   the string "0", so the hard zero takes the element out of the audit instead.
+   The LCP argument that makes 0.01 load-bearing in hero.module.scss does not
+   apply here: nothing parked by the observer is on screen at first paint, so
+   none of it was ever an LCP candidate. */
 .pending {
-  opacity: 0.01;
+  opacity: 0;
   transform: translateY(16px);
 }
 
@@ -21,7 +30,7 @@
   animation: v2Reveal 0.5s ease-out both;
 }
 
-/* Stagger — the index the call site passes to reveal(). Beyond this range the
+/* Stagger, the index the call site passes to reveal(). Beyond this range the
    delay just lands at 0; widen the loop rather than letting a section grow past
    it silently. */
 @for $i from 1 through 8 {
@@ -41,13 +50,13 @@
   }
 }
 
-/* Rule variant — for the 1px hairlines that open a column or split a frame.
+/* Rule variant, for the 1px hairlines that open a column or split a frame.
    Same observer, same stagger: the call site adds .hairline next to its own
    class and spreads reveal(i) as usual, so a rule drawn at the same index as
    the copy it belongs to lands with it rather than after it.
 
    A hairline that rose 16px and faded would read as a slab; it draws from its
-   left edge instead. Opacity stays 1 the whole way — the line is never a ghost,
+   left edge instead. Opacity stays 1 the whole way: the line is never a ghost,
    it is simply not there yet. Everything below the fold is still parked by the
    same first pass, so the server HTML keeps a full-width rule. */
 .hairline {
@@ -94,9 +103,10 @@
   }
 
   /* A line that draws itself is motion whichever axis it uses: the hairlines
-     fall back to the same fade as everything else. */
+     fall back to the same fade as everything else, and to the same hard 0 as
+     the parked copy above. */
   .pending.hairline {
-    opacity: 0.01;
+    opacity: 0;
     transform: none;
   }
 
