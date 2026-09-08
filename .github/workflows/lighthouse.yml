@@ -46,10 +46,13 @@ jobs:
       - name: Run Lighthouse CI
         uses: treosh/lighthouse-ci-action@v12
         with:
+          # /en/about-us is gone since the GEO pivot (307 to /), which made the
+          # run audit the homepage twice and fail the redirects audit. The FAQ
+          # is the page that replaced it in the nav, so it takes the slot.
           urls: |
             http://localhost:3000/en
             http://localhost:3000/en/contact
-            http://localhost:3000/en/about-us
+            http://localhost:3000/en/faq
             http://localhost:3000/en/services
           uploadArtifacts: true
           temporaryPublicStorage: true

@@ -69,3 +69,6 @@ next-env.d.ts
 # Generated before the image build from git history (scripts/gen-sitemap-lastmod.cjs).
 # Never committed: it is derived, and a stale copy would out-rank the real dates.
 sitemap-lastmod.json
+
+# Lighthouse CI local output
+.lighthouseci/
