@@ -78,6 +78,7 @@
       "copyright": "© {year} HARGILE. Tous droits réservés",
       "links": {
         "aboutUs": "À propos de nous",
+        "blog": "Blog",
         "contact": "Contact",
         "faq": "FAQ",
         "privacyPolicy": "Politique de confidentialité",
@@ -124,6 +125,7 @@
     },
     "menu": {
       "agves": "AGVES",
+      "blog": "Blog",
       "contact": "Contact",
       "faq": "FAQ",
       "home": "Accueil",
@@ -209,6 +211,17 @@
           "title": "Notre Équipe"
         }
       }
+    },
+    "blog": {
+      "ctaSecondary": "Voir les services",
+      "empty": "Aucun article pour le moment. Revenez bientôt.",
+      "hero": {
+        "title": "Le blog HARGILE",
+        "answer": "Des notes sur le GEO, le SEO et la visibilité dans les réponses des IA : ce qu'on observe, ce qu'on teste, et ce que ça change pour les entreprises qu'on accompagne."
+      },
+      "publishedOn": "Publié le",
+      "readMore": "Lire l'article",
+      "updatedOn": "Mis à jour le"
     },
     "faq": {
       "ctaSecondary": "Voir les services",
@@ -488,7 +501,7 @@
             },
             "architects": {
               "title": "Architectes & bureaux d'études",
-              "text": "Un maître d'ouvrage demande à ChatGPT quel architecte choisir pour son projet. Votre portfolio parle pour vous — encore faut-il qu'il soit lu."
+              "text": "Un maître d'ouvrage demande à ChatGPT quel architecte choisir pour son projet. Votre portfolio parle pour vous : encore faut-il qu'il soit lu."
             }
           }
         },
@@ -1306,8 +1319,8 @@
   "seo": {
     "global": {
       "defaultDescription": "HARGILE rend les entreprises visibles dans les réponses des assistants IA et sur Google. GEO et SEO, depuis Bruxelles.",
-      "defaultImageAlt": "HARGILE — GEO & SEO",
-      "defaultTitle": "HARGILE — Visible dans les IA et sur Google",
+      "defaultImageAlt": "HARGILE : GEO & SEO",
+      "defaultTitle": "HARGILE : Visible dans les IA et sur Google",
       "siteName": "HARGILE"
     },
     "pages": {
@@ -1320,6 +1333,16 @@
         },
         "schemaType": "AboutPage",
         "title": "À Propos d'HARGILE - Notre Histoire & Mission | Agence d'Innovation Digitale"
+      },
+      "blog": {
+        "description": "Notes et analyses d'HARGILE sur le GEO, le SEO et la visibilité dans les réponses des IA et sur Google.",
+        "og": {
+          "description": "Ce qu'on observe, ce qu'on teste, et ce que ça change pour la visibilité IA et Google.",
+          "imageAlt": "Blog HARGILE",
+          "title": "Blog HARGILE : GEO, SEO et visibilité IA"
+        },
+        "schemaType": "CollectionPage",
+        "title": "Blog HARGILE : GEO, SEO et visibilité IA"
       },
       "contact": {
         "description": "Un projet, une question, ou un audit gratuit de votre visibilité dans les réponses des IA et sur Google. Écrivez-nous, on répond sous 48 h.",
@@ -1355,7 +1378,7 @@
         "description": "GEO et SEO pour entreprises en Belgique. Soyez nommé par ChatGPT, Perplexity et les moteurs de réponse IA, et trouvé sur Google.",
         "og": {
           "description": "GEO et SEO pour entreprises en Belgique. Soyez nommé par ChatGPT, Perplexity et les moteurs de réponse IA, et trouvé sur Google.",
-          "imageAlt": "HARGILE — GEO & SEO",
+          "imageAlt": "HARGILE : GEO & SEO",
           "title": "HARGILE | Soyez nommé par les IA, pas seulement indexé"
         },
         "schemaType": "WebPage",
