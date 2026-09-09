@@ -1,20 +1,31 @@
 import {NAP, napCityLine} from "@/lib/nap";
 import {SAME_AS} from "@/seo/same-as";
 import {SITE_URL} from "@/lib/site-url";
+import {getAllPosts} from "@/lib/blog";
 
-/* /llms.txt — a plain-Markdown index of the site for LLM crawlers.
+/* /llms.txt: a plain-Markdown index of the site for LLM crawlers.
  *
  * HARG-302: rewritten for the GEO/SEO pivot. The site no longer sells web
- * dev — it sells visibility in AI answers and on Google.
+ * dev, it sells visibility in AI answers and on Google.
  *
  * Honest expectations: the evidence for llms.txt is weak. SE Ranking's study
  * of 300 k domains found no correlation with AI citations, only one of the 50
  * most-cited domains publishes one, and Google has said publicly it does not
  * use it. We ship it because it costs nothing and a few smaller crawlers do
- * read it — not because it is expected to move anything.
+ * read it, not because it is expected to move anything.
  */
 
 const page = (path) => `${SITE_URL}${path}`;
+
+function blogSection() {
+    const fr = getAllPosts("fr");
+    const en = getAllPosts("en");
+    if (fr.length === 0 && en.length === 0) return "";
+
+    const line = (locale, post) => `- [${post.title} (${locale.toUpperCase()})](${page(`${locale === "en" ? "/en" : ""}/blog/${post.slug}`)}): ${post.description}`;
+
+    return `\n## Blog\n\n${[...fr.map((p) => line("fr", p)), ...en.map((p) => line("en", p))].join("\n")}\n`;
+}
 
 function body() {
     return `# HARGILE
@@ -30,34 +41,36 @@ served at the root: ${page("/")} is the French home page. English lives under
 /en. Each page exists in both languages and the two are cross-linked with
 hreflang; neither is a translation proxy of the other.
 
-The full copy of every page is present in the first HTML response — no
+The full copy of every page is present in the first HTML response: no
 JavaScript execution is required to read this site.
 
 ## Pages
 
-- [Home — FR](${page("/")}): what HARGILE does — GEO and SEO, the problem,
+- [Home (FR)](${page("/")}): what HARGILE does, GEO and SEO, the problem,
   the method, who it's for, and a free diagnostic CTA.
-- [Home — EN](${page("/en")}): English version of the above.
-- [SEO — FR](${page("/services/seo")}): the four-step method — audit,
-  technical, content, measure — including visibility in AI answers.
-- [SEO — EN](${page("/en/services/seo")}): English version of the above.
-- [FAQ — FR](${page("/faq")}): direct answers on GEO, AI citations, SEO
+- [Home (EN)](${page("/en")}): English version of the above.
+- [SEO (FR)](${page("/services/seo")}): the four-step method (audit,
+  technical, content, measure), including visibility in AI answers.
+- [SEO (EN)](${page("/en/services/seo")}): English version of the above.
+- [FAQ (FR)](${page("/faq")}): direct answers on GEO, AI citations, SEO
   timelines, what's guaranteed and what's not.
-- [FAQ — EN](${page("/en/faq")}): English version of the above.
-- [Contact — FR](${page("/contact")}): free GEO diagnostic form.
-- [Contact — EN](${page("/en/contact")}): English version of the above.
-- [Privacy policy — FR](${page("/legal/privacy-policy")}): how personal data
+- [FAQ (EN)](${page("/en/faq")}): English version of the above.
+- [Blog (FR)](${page("/blog")}): notes on GEO, SEO and AI visibility.
+- [Blog (EN)](${page("/en/blog")}): English version of the above.
+- [Contact (FR)](${page("/contact")}): free GEO diagnostic form.
+- [Contact (EN)](${page("/en/contact")}): English version of the above.
+- [Privacy policy (FR)](${page("/legal/privacy-policy")}): how personal data
   is collected, used and protected.
-- [Privacy policy — EN](${page("/en/legal/privacy-policy")}): English version of
+- [Privacy policy (EN)](${page("/en/legal/privacy-policy")}): English version of
   the above.
 
 ## What HARGILE does
 
-- **GEO (Generative Engine Optimization)** — monitoring and optimizing
+- **GEO (Generative Engine Optimization)**: monitoring and optimizing
   business visibility in AI assistant answers: ChatGPT, Perplexity, Claude.
-- **[SEO](${page("/services/seo")})** — search engine visibility on Google,
+- **[SEO](${page("/services/seo")})**: search engine visibility on Google,
   from technical foundations to content and measurement.
-
+${blogSection()}
 ## Contact
 
 - Email: ${NAP.email}

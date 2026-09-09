@@ -73,6 +73,7 @@
       "copyright": "© {year} HARGILE. All Rights Reserved",
       "links": {
         "aboutUs": "About Us",
+        "blog": "Blog",
         "contact": "Contact",
         "faq": "FAQ",
         "privacyPolicy": "Privacy Policy",
@@ -119,6 +120,7 @@
     },
     "menu": {
       "agves": "AGVES",
+      "blog": "Blog",
       "contact": "Contact",
       "faq": "FAQ",
       "home": "Home",
@@ -205,6 +207,17 @@
         }
       }
     },
+    "blog": {
+      "ctaSecondary": "See the services",
+      "empty": "No articles yet. Check back soon.",
+      "hero": {
+        "title": "The HARGILE blog",
+        "answer": "Notes on GEO, SEO and visibility in AI answers: what we're seeing, what we're testing, and what it changes for the businesses we work with."
+      },
+      "publishedOn": "Published on",
+      "readMore": "Read the article",
+      "updatedOn": "Updated on"
+    },
     "faq": {
       "ctaSecondary": "See the services",
       "hero": {
@@ -222,7 +235,7 @@
           "id": "what-is-geo",
           "group": "geo",
           "q": "What exactly is GEO?",
-          "a": "GEO stands for Generative Engine Optimization. It is the work of making your business appear in the answers that AI assistants give — ChatGPT, Perplexity, Claude, Google AI Overviews. When someone asks 'which accountant should I use in Brussels', the assistant cites sources. GEO is what makes your site one of those sources: machine-readable content, structured data, clear answers to the questions your buyers actually ask."
+          "a": "GEO stands for Generative Engine Optimization. It is the work of making your business appear in the answers that AI assistants give (ChatGPT, Perplexity, Claude, Google AI Overviews). When someone asks 'which accountant should I use in Brussels', the assistant cites sources. GEO is what makes your site one of those sources: machine-readable content, structured data, clear answers to the questions your buyers actually ask."
         },
         {
           "id": "ai-mentions-me",
@@ -234,7 +247,7 @@
           "id": "geo-replace-seo",
           "group": "geo",
           "q": "Does GEO replace SEO?",
-          "a": "No. GEO builds on SEO. The foundations are the same: clean structure, fast site, structured data, content that answers real questions. What GEO adds is the lens of answer engines — making sure the content is not just indexable by Google, but citable by AI. We do both, because they reinforce each other."
+          "a": "No. GEO builds on SEO. The foundations are the same: clean structure, fast site, structured data, content that answers real questions. What GEO adds is the lens of answer engines: making sure the content is not just indexable by Google, but citable by AI. We do both, because they reinforce each other."
         },
         {
           "id": "who-benefits",
@@ -246,7 +259,7 @@
           "id": "how-long",
           "group": "seo",
           "q": "How long until we see results?",
-          "a": "Technical fixes — speed, structure, structured data — show effects within weeks. Content-driven improvements take longer: typically two to four months for Google rankings to move, and AI citation patterns shift on their own schedule as models update. We track both from day one so you see the trajectory, not just the destination."
+          "a": "Technical fixes (speed, structure, structured data) show effects within weeks. Content-driven improvements take longer: typically two to four months for Google rankings to move, and AI citation patterns shift on their own schedule as models update. We track both from day one so you see the trajectory, not just the destination."
         },
         {
           "id": "guarantee-first",
@@ -258,7 +271,7 @@
           "id": "geo-seo-together",
           "group": "seo",
           "q": "How do GEO and SEO work together?",
-          "a": "SEO makes your site rank on Google. GEO makes your site get cited by AI assistants. The work overlaps heavily: structured data, fast loading, clear content written around real questions. We treat them as one workflow because the same optimizations feed both channels. A page that ranks well on Google is already halfway to being cited by AI — and the other half is what we add."
+          "a": "SEO makes your site rank on Google. GEO makes your site get cited by AI assistants. The work overlaps heavily: structured data, fast loading, clear content written around real questions. We treat them as one workflow because the same optimizations feed both channels. A page that ranks well on Google is already halfway to being cited by AI, and the other half is what we add."
         },
         {
           "id": "free-diagnostic",
@@ -276,7 +289,7 @@
           "id": "track-results",
           "group": "method",
           "q": "How do we track results?",
-          "a": "With shared data. Google rankings, organic traffic, and AI citations are tracked in a dashboard you have access to — the same numbers we look at, at the same time. No cherry-picked metrics, no reports that only show the good numbers. If something is not working, you see it when we do."
+          "a": "With shared data. Google rankings, organic traffic, and AI citations are tracked in a dashboard you have access to: the same numbers we look at, at the same time. No cherry-picked metrics, no reports that only show the good numbers. If something is not working, you see it when we do."
         }
       ],
       "more": {
@@ -469,7 +482,7 @@
         },
         "verticals": {
           "title": "Who it's for",
-          "lead": "GEO works best for professions where clients search for a local, qualified provider — exactly the questions they ask AI.",
+          "lead": "GEO works best for professions where clients search for a local, qualified provider, exactly the questions they ask AI.",
           "items": {
             "fiduciaries": {
               "title": "Accountants & fiduciaries",
@@ -493,7 +506,7 @@
             },
             "architects": {
               "title": "Architects & engineering firms",
-              "text": "A developer asks ChatGPT which architect to choose for their project. Your portfolio speaks for itself — if it's read."
+              "text": "A developer asks ChatGPT which architect to choose for their project. Your portfolio speaks for itself: if it's read."
             }
           }
         },
@@ -1140,8 +1153,8 @@
   "seo": {
     "global": {
       "defaultDescription": "HARGILE makes businesses visible in AI assistant answers and on Google. GEO and SEO, from Brussels.",
-      "defaultImageAlt": "HARGILE — GEO & SEO",
-      "defaultTitle": "HARGILE — Visible in AI and on Google",
+      "defaultImageAlt": "HARGILE: GEO & SEO",
+      "defaultTitle": "HARGILE: Visible in AI and on Google",
       "siteName": "HARGILE"
     },
     "pages": {
@@ -1154,6 +1167,16 @@
         },
         "schemaType": "AboutPage",
         "title": "About HARGILE - Our Story & Mission | Digital Innovation Agency"
+      },
+      "blog": {
+        "description": "HARGILE's notes and analysis on GEO, SEO and visibility in AI answers and on Google.",
+        "og": {
+          "description": "What we're seeing, what we're testing, and what it changes for AI and Google visibility.",
+          "imageAlt": "HARGILE Blog",
+          "title": "HARGILE Blog: GEO, SEO and AI visibility"
+        },
+        "schemaType": "CollectionPage",
+        "title": "HARGILE Blog: GEO, SEO and AI visibility"
       },
       "contact": {
         "description": "Request a free GEO diagnostic from HARGILE. We analyze your visibility in AI answers and on Google, and send you the results within 48 hours.",
@@ -1179,7 +1202,7 @@
         "description": "GEO and SEO for businesses in Belgium. Get named by ChatGPT, Perplexity and AI answer engines, and found on Google.",
         "og": {
           "description": "GEO and SEO for businesses in Belgium. Get named by ChatGPT, Perplexity and AI answer engines, and found on Google.",
-          "imageAlt": "HARGILE — GEO & SEO",
+          "imageAlt": "HARGILE: GEO & SEO",
           "title": "HARGILE | Get named by AI, not just indexed"
         },
         "schemaType": "WebPage",

@@ -54,6 +54,7 @@ jobs:
             http://localhost:3000/en/contact
             http://localhost:3000/en/faq
             http://localhost:3000/en/services
+            http://localhost:3000/en/blog
           uploadArtifacts: true
           temporaryPublicStorage: true
           configPath: ./.github/lighthouserc.json

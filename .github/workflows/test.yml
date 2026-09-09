@@ -1,0 +1,34 @@
+name: Test
+
+# PR gate for the unit test suite (Vitest). Deliberately does not run
+# `npm run lint` here: examplesPages/NosValeurs2a.jsx currently fails lint
+# and is out of scope for this workflow, so making lint a blocking gate in
+# the same job would fail every PR in the repo, not just ones that touch
+# blog.js. Fix that file and add a lint gate as a separate change.
+on:
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Setup Node
+        uses: actions/setup-node@v5
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci --no-audit --no-fund
+
+      - name: Run tests
+        run: npm run test

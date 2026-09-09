@@ -4,8 +4,9 @@ import {localeUrl} from "@/seo/locale-url";
 import {NAP} from "@/lib/nap";
 import {ROUTES} from "@/seo/routes";
 import {SAME_AS} from "@/seo/same-as";
+import {getAllPosts} from "@/lib/blog";
 
-/* Topics the homepage actually sells — the three hero capability cards plus the
+/* Topics the homepage actually sells: the three hero capability cards plus the
    MVP-in-a-month offer. Deliberately not read from the message files: these are
    stable topic names for a knowledge graph, not marketing copy that gets
    reworded. If the hero cards change what they promise, change these too;
@@ -18,7 +19,7 @@ const KNOWS_ABOUT = [
 ];
 
 /* The four service pages carry a Service node *alongside* their WebPage node
-   (see the schemaType comment below — never in its place). serviceType values
+   (see the schemaType comment below, never in its place). serviceType values
    are copied character for character from KNOWS_ABOUT: the same topic asserted
    twice is corroboration, two near-identical strings are two topics. */
 /* HARG-302: /services/applications-web is being retired. The SEO page
@@ -28,12 +29,75 @@ const SERVICE_NODES = {
 };
 
 /* The four offers as /services lists them, in the sales order the page renders
-   (offers-index.jsx OFFERS) — position in the ItemList has to match what a
+   (offers-index.jsx OFFERS): position in the ItemList has to match what a
    reader sees, or the markup describes a different page. Keys index both
    ROUTES and pages.services.index.offers, so the listed name is the visible
    row title rather than a fifth restatement of it. */
 /* HARG-302: the hub now lists GEO and SEO. */
 const SERVICES_INDEX = ["geo", "seo"];
+
+/* One Organization node with a stable @id, referenced by every page (and by
+   every blog post, via buildBlogPostJsonLd below). The @id is what lets
+   Google merge the fr and en pages into a single entity instead of reading
+   them as two unrelated companies. Factored out of buildJsonLd so the article
+   JSON-LD, which is built outside that function's pagePath/seo.pages.*
+   lookup, declares the exact same entity rather than a hand-copied one that
+   can drift from it. */
+function buildOrganizationNode(globalT, imageUrl) {
+    return {
+        /* ProfessionalService is a LocalBusiness subtype: it corroborates the
+           "Developpeur de logiciels" category on the Google Business Profile. */
+        "@type": ["Organization", "ProfessionalService"],
+        "@id": `${SITE_URL}/#organization`,
+        name: globalT("siteName"),
+        /* The GBP, the GitHub org and Instagram all say "Tech Studio"; the bare
+           "HARGILE" is the outlier across our own properties. alternateName
+           resolves both strings to this one entity instead of two competing ones. */
+        alternateName: "HARGILE Tech Studio",
+        description: globalT("defaultDescription"),
+        url: SITE_URL,
+        logo: {
+            "@type": "ImageObject",
+            url: imageUrl,
+            width: 1200,
+            height: 630,
+        },
+        /* Same asset as the logo, but a distinct property: Google reads `logo`
+           as the mark and `image` as what represents the entity in a knowledge
+           panel. Recommended once the type includes a LocalBusiness subtype.
+           Deliberately no `priceRange`: the site publishes no prices, and
+           inventing a "EUR EUR" would be a claim nothing on the site supports. */
+        image: imageUrl,
+        /* NAP mirrors the footer and navbar character for character: engines
+           cross-check the copy against the structured data, so a mismatch here
+           is worse than an absent field. Single source: @/lib/nap. */
+        address: {
+            "@type": "PostalAddress",
+            streetAddress: NAP.street,
+            postalCode: NAP.postalCode,
+            addressLocality: NAP.locality,
+            addressRegion: NAP.region,
+            addressCountry: NAP.countryCode,
+        },
+        email: NAP.email,
+        telephone: NAP.phone,
+        contactPoint: {
+            "@type": "ContactPoint",
+            contactType: "customer support",
+            email: NAP.email,
+            telephone: NAP.phone,
+            availableLanguage: ["fr", "en"],
+        },
+        areaServed: {"@type": "Country", "name": "Belgium"},
+        foundingDate: "2025",
+        knowsAbout: KNOWS_ABOUT,
+        sameAs: SAME_AS,
+        /* No identifier / vatID / taxID, deliberately. HARGILE has no company
+           number of its own (0896.755.397 belongs to Productions Associees
+           ASBL), and asserting it here would point this entity at a different
+           organisation. No self-asserted aggregateRating either. */
+    };
+}
 
 // Builds the JSON-LD object for a given locale + pagePath.
 // Returns null if SEO translations cannot be loaded (graceful fallback).
@@ -42,13 +106,13 @@ export async function buildJsonLd({locale, pagePath}) {
         const globalT = await getTranslations({locale, namespace: "seo.global"});
         const pageT = await getTranslations({locale, namespace: `seo.pages.${pagePath}`});
 
-        /* French unprefixed, English /en — localeUrl owns that rule. Note this
+        /* French unprefixed, English /en: localeUrl owns that rule. Note this
            changes each page's @id on migration day: the page entity is reissued
-           under its new URL, which is the point — the 301 from the old /fr URL
+           under its new URL, which is the point, the 301 from the old /fr URL
            tells engines the two are the same page. */
         const pathSuffix = ROUTES[pagePath] ?? `/${pagePath.replaceAll(".", "/")}`;
         const baseUrl = localeUrl(locale, pathSuffix);
-        /* Same 1200×630 asset the OG tags use (see shared-metadata.js) — it has
+        /* Same 1200x630 asset the OG tags use (see shared-metadata.js): it has
            to be, since `logo` and `image` below are what an engine shows next to
            the entity, and a mark that differs from the one shared on social is a
            mismatch of exactly the kind this file exists to avoid. */
@@ -56,11 +120,11 @@ export async function buildJsonLd({locale, pagePath}) {
 
         /* Per-page type, read from the message files so it can differ per page.
            It must always be WebPage or one of its subtypes (ContactPage,
-           AboutPage, CollectionPage, FAQPage…): this node is a *page*, and the
+           AboutPage, CollectionPage, FAQPage...): this node is a *page*, and the
            `isPartOf` below points it at the site-level WebSite node. The home
            page used to declare `WebSite` here, which published a WebSite that
-           was part of another WebSite — two competing site entities instead of
-           one site plus N pages, and page properties (breadcrumb,
+           was part of another WebSite (two competing site entities instead of
+           one site plus N pages), and page properties (breadcrumb,
            datePublished) with nothing to attach to. Never put a non-page type
            here; a Service or SoftwareApplication belongs in its own node
            alongside this one, not in its place. */
@@ -69,65 +133,10 @@ export async function buildJsonLd({locale, pagePath}) {
             const candidate = pageT("schemaType");
             if (candidate) schemaType = candidate;
         } catch {
-            /* schemaType key missing — fall back to WebPage */
+            /* schemaType key missing, fall back to WebPage */
         }
 
-        /* One Organization node with a stable @id, referenced by every page.
-           The @id is what lets Google merge the fr and en pages into a single
-           entity instead of reading them as two unrelated companies. */
-        const organization = {
-            /* ProfessionalService is a LocalBusiness subtype — it corroborates the
-               "Développeur de logiciels" category on the Google Business Profile. */
-            "@type": ["Organization", "ProfessionalService"],
-            "@id": `${SITE_URL}/#organization`,
-            name: globalT("siteName"),
-            /* The GBP, the GitHub org and Instagram all say "Tech Studio"; the bare
-               "HARGILE" is the outlier across our own properties. alternateName
-               resolves both strings to this one entity instead of two competing ones. */
-            alternateName: "HARGILE Tech Studio",
-            description: globalT("defaultDescription"),
-            url: SITE_URL,
-            logo: {
-                "@type": "ImageObject",
-                url: imageUrl,
-                width: 1200,
-                height: 630,
-            },
-            /* Same asset as the logo, but a distinct property: Google reads `logo`
-               as the mark and `image` as what represents the entity in a knowledge
-               panel. Recommended once the type includes a LocalBusiness subtype.
-               Deliberately no `priceRange` — the site publishes no prices, and
-               inventing a "€€" would be a claim nothing on the site supports. */
-            image: imageUrl,
-            /* NAP mirrors the footer and navbar character for character — engines
-               cross-check the copy against the structured data, so a mismatch here
-               is worse than an absent field. Single source: @/lib/nap. */
-            address: {
-                "@type": "PostalAddress",
-                streetAddress: NAP.street,
-                postalCode: NAP.postalCode,
-                addressLocality: NAP.locality,
-                addressRegion: NAP.region,
-                addressCountry: NAP.countryCode,
-            },
-            email: NAP.email,
-            telephone: NAP.phone,
-            contactPoint: {
-                "@type": "ContactPoint",
-                contactType: "customer support",
-                email: NAP.email,
-                telephone: NAP.phone,
-                availableLanguage: ["fr", "en"],
-            },
-            areaServed: {"@type": "Country", "name": "Belgium"},
-            foundingDate: "2025",
-            knowsAbout: KNOWS_ABOUT,
-            sameAs: SAME_AS,
-            /* No identifier / vatID / taxID, deliberately. HARGILE has no company
-               number of its own — 0896.755.397 belongs to Productions Associées
-               ASBL, and asserting it here would point this entity at a different
-               organisation. No self-asserted aggregateRating either. */
-        };
+        const organization = buildOrganizationNode(globalT, imageUrl);
 
         const pageNode = {
             "@type": schemaType,
@@ -147,10 +156,12 @@ export async function buildJsonLd({locale, pagePath}) {
             publisher: organization,
         };
 
+        const extraNodes = [];
+
         /* A FAQPage without its questions is legal markup and a useless
            signal. mainEntity is read from the same pages.faq.items the
            visible accordion renders, so the structured data cannot drift
-           from the copy — Google treats a mismatch as spam. */
+           from the copy: Google treats a mismatch as spam. */
         if (pagePath === "faq") {
             const faqT = await getTranslations({locale, namespace: "pages.faq"});
             pageNode.mainEntity = faqT.raw("items").map(({q, a}) => ({
@@ -164,7 +175,7 @@ export async function buildJsonLd({locale, pagePath}) {
            FAQPage without its questions: /services declared the type but never
            said what it indexed, so the hub and the four Service nodes it links
            to were four unrelated pages to a crawler. The ItemList is the join.
-           Names come from the visible row titles, URLs from ROUTES — both
+           Names come from the visible row titles, URLs from ROUTES, both
            already single-sourced, so this cannot drift from the page. */
         if (pagePath === "services") {
             const offersT = await getTranslations({locale, namespace: "pages.services.index.offers"});
@@ -181,7 +192,35 @@ export async function buildJsonLd({locale, pagePath}) {
             };
         }
 
-        const extraNodes = [];
+        /* Same doctrine as /services above: the blog index declares
+           CollectionPage (seo.pages.blog.schemaType) and the ItemList is what
+           makes that declaration true, one entry per published post, newest
+           first (getAllPosts already sorts that way, so this cannot drift from
+           the visible list). A companion Blog node carries the collection's own
+           identity, referenced by every article's isPartOf below rather than
+           redefined in every article's document. */
+        if (pagePath === "blog") {
+            const posts = getAllPosts(locale);
+            pageNode.mainEntity = {
+                "@type": "ItemList",
+                itemListOrder: "https://schema.org/ItemListOrderDescending",
+                numberOfItems: posts.length,
+                itemListElement: posts.map((post, i) => ({
+                    "@type": "ListItem",
+                    position: i + 1,
+                    name: post.title,
+                    url: localeUrl(locale, `/blog/${post.slug}`),
+                })),
+            };
+            extraNodes.push({
+                "@type": "Blog",
+                "@id": `${SITE_URL}/#blog`,
+                url: baseUrl,
+                name: pageT("title"),
+                publisher: {"@id": `${SITE_URL}/#organization`},
+            });
+        }
+
         const service = SERVICE_NODES[pagePath];
         if (service) {
             const serviceNode = {
@@ -195,7 +234,7 @@ export async function buildJsonLd({locale, pagePath}) {
                 serviceType: service.serviceType,
                 provider: {"@id": `${SITE_URL}/#organization`},
                 areaServed: {"@type": "Country", name: "Belgium"},
-                /* No offers/price: the site publishes no amounts — same
+                /* No offers/price: the site publishes no amounts, same
                    doctrine as the absent priceRange on the Organization. */
             };
             pageNode.mainEntity = {"@id": serviceNode["@id"]};
@@ -208,6 +247,61 @@ export async function buildJsonLd({locale, pagePath}) {
         return extraNodes.length
             ? {"@context": "https://schema.org", "@graph": [pageNode, ...extraNodes]}
             : {"@context": "https://schema.org", ...pageNode};
+    } catch {
+        return null;
+    }
+}
+
+/* BlogPosting for a single article. Kept separate from buildJsonLd rather than
+   forced through its pagePath/seo.pages.* lookup: an article's title,
+   description and dates come from its own front matter (src/lib/blog.js), not
+   from a translation file, and its path is dynamic (`/blog/<slug>`) rather
+   than a static ROUTES entry. Reuses the same Organization node, the same
+   localeUrl() rule and the same Blog node @id the index page defines. */
+export async function buildBlogPostJsonLd({locale, post, availableLocales}) {
+    try {
+        const globalT = await getTranslations({locale, namespace: "seo.global"});
+        const pathSuffix = `/blog/${post.slug}`;
+        const baseUrl = localeUrl(locale, pathSuffix);
+        const imageUrl = `${SITE_URL}/images/brand/og-hargile-tech-studio.png`;
+
+        const organization = buildOrganizationNode(globalT, imageUrl);
+
+        const postNode = {
+            "@type": "BlogPosting",
+            "@id": `${baseUrl}#article`,
+            headline: post.title,
+            description: post.description,
+            url: baseUrl,
+            image: imageUrl,
+            inLanguage: locale,
+            datePublished: post.date,
+            ...(post.updated ? {dateModified: post.updated} : {}),
+            /* The default author is HARGILE itself: reference the Organization
+               node rather than redeclare it as a Person, which it is not. A
+               named author gets a real Person node instead. */
+            author: post.author === "HARGILE"
+                ? {"@id": `${SITE_URL}/#organization`}
+                : {"@type": "Person", name: post.author},
+            isPartOf: {"@id": `${SITE_URL}/#blog`},
+            publisher: {"@id": `${SITE_URL}/#organization`},
+        };
+
+        /* Every locale this post exists in is a translation of the same
+           article, not a different one: declared with inLanguage-tagged
+           workTranslation links so engines can tell they are one work. Absent
+           entirely for a post that only ever existed in one locale. */
+        const translations = (availableLocales ?? []).filter((l) => l !== locale);
+        if (translations.length) {
+            postNode.workTranslation = translations.map((l) => ({
+                "@type": "BlogPosting",
+                "@id": `${localeUrl(l, pathSuffix)}#article`,
+                url: localeUrl(l, pathSuffix),
+                inLanguage: l,
+            }));
+        }
+
+        return {"@context": "https://schema.org", "@graph": [postNode, organization]};
     } catch {
         return null;
     }

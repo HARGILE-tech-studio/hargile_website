@@ -30,10 +30,11 @@ import {
     SocialIcons,
     SocialIcon
 } from "@/components/navigation/navbar.styled";
-/* HARG-302: /services hub removed from nav — the homepage is the pitch now.
+/* HARG-302: /services hub removed from nav, the homepage is the pitch now.
    FAQ and Contact stay; FAQ carries the GEO questions. */
 const menuItems = [
     {path: '/', id: 'home'},
+    {path: '/blog', id: 'blog'},
     {path: '/faq', id: 'faq'},
     {path: '/contact', id: 'contact'},
 ];
@@ -45,7 +46,7 @@ const Navbar = () => {
     const brandRef = useRef(null);
     const [scrolled, setScrolled] = useState(false);
     const t = useTranslations('components.menu');
-    // The country line is shared with the footer — one translated string, one source.
+    // The country line is shared with the footer: one translated string, one source.
     const tAddress = useTranslations('components.footer');
     const isMounted = useIsClient();
 
@@ -91,7 +92,7 @@ const Navbar = () => {
     return (
         <>
             <StyledNavbar ref={navbarRef} $scrolled={scrolled || isOpen}>
-                {/* Only the bar's own row is measured — NavbarNavigation is the
+                {/* Only the bar's own row is measured: NavbarNavigation is the
                     full-screen menu panel and stays outside, or it would be boxed
                     into the container width. */}
                 <NavbarInner>
@@ -102,7 +103,7 @@ const Navbar = () => {
                         onClick={triggerHomeTransitionAnimation}
                     >
                         {/* Rendered width lives in Brand's img rule (16rem, 13rem
-                            on mobile) — sizes mirrors it so srcset picks a small
+                            on mobile), sizes mirrors it so srcset picks a small
                             variant instead of a viewport-width one. */}
                         <OptimizedImage
                             width={2000}
@@ -176,7 +177,7 @@ const Navbar = () => {
             </StyledNavbar>
 
             {/* Always rendered, sized by the same CSS var the measuring effect
-                keeps up to date — the SSR paint then already reserves the
+                keeps up to date: the SSR paint then already reserves the
                 navbar's space instead of the page jumping down on hydration. */}
             <Spacer style={{height: "var(--navbar-height, 68px)"}}/>
         </>

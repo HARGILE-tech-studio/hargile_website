@@ -3,9 +3,9 @@
  *
  * Why this exists: neither validator.schema.org nor Google's Rich Results Test
  * has a usable public API (POSTing to them returns `numObjects: 0`), and both
- * only accept a pasted snippet by hand. This script does the mechanical half —
+ * only accept a pasted snippet by hand. This script does the mechanical half:
  * does every @type exist, does every property exist, is every property allowed
- * on the type that carries it — against the vocabulary those tools use, so a
+ * on the type that carries it, against the vocabulary those tools use, so a
  * regression is caught before anyone opens a browser.
  *
  * It does NOT replace the Rich Results Test: that tool also knows Google's
@@ -23,7 +23,7 @@
  * validated. A file is read as raw JSON-LD, or scanned for script tags if it
  * looks like HTML.
  *
- * The vocabulary (~1.5 MB) is downloaded once and cached under .cache/ — which
+ * The vocabulary (~1.5 MB) is downloaded once and cached under .cache/, which
  * is gitignored, so the first run needs network and later ones do not.
  */
 
@@ -67,7 +67,7 @@ function indexVocabulary(vocab) {
     /* The dump identifies its own terms as `schema:Organization`, not as the
        full https URL. It also references foreign vocabularies (`gs1:`,
        `fibo-fnd-org-org:`) in owl:equivalentClass and occasionally in
-       subClassOf — returning null for those keeps them out of the index
+       subClassOf, returning null for those keeps them out of the index
        instead of registering a bogus `Organization` twice. */
     const localName = (v) => {
         if (typeof v === "string") {
@@ -125,7 +125,7 @@ function validateNode(node, {classes, properties}, where, errors, warnings) {
     }
 
     /* A node that is only an {@id} reference to another node carries no
-       properties of its own — that is legal and common (publisher: {@id}). */
+       properties of its own: that is legal and common (publisher: {@id}). */
     const isReference = declared.length === 0 && Object.keys(node).every((k) => k === "@id");
 
     const allowed = new Set();
@@ -141,7 +141,7 @@ function validateNode(node, {classes, properties}, where, errors, warnings) {
         if (!properties.has(key)) {
             errors.push(`${childWhere}: "${key}" is not a schema.org property`);
         } else if (declared.length === 0 && !isReference) {
-            warnings.push(`${childWhere}: property on a node with no @type — cannot check it is allowed here`);
+            warnings.push(`${childWhere}: property on a node with no @type, cannot check it is allowed here`);
         } else if (declared.length > 0) {
             const domain = properties.get(key);
             /* An empty domainIncludes means the vocabulary does not constrain it. */
@@ -254,24 +254,30 @@ async function selfTest(vocab) {
         }
     }
     process.stdout.write(failed === 0
-        ? "\nNegative control passed — the validator does detect broken markup.\n"
-        : `\n${failed} self-test case(s) failed — do not trust this validator's output.\n`);
+        ? "\nNegative control passed: the validator does detect broken markup.\n"
+        : `\n${failed} self-test case(s) failed: do not trust this validator's output.\n`);
     return failed === 0;
 }
 
 /* ---------------------------------------------------------------------- main */
 
-/* French — the default locale — is unprefixed, English is /en (mirrors
+/* French, the default locale, is unprefixed, English is /en (mirrors
    src/seo/locale-url.js). Validating the canonical URLs directly matters:
    the old prefixed /fr URLs answer 301, and following the redirect would
    validate the right page under the wrong address. */
 const LOCALES = ["fr", "en"];
+/* No witness article slug yet: the only content under src/content/blog today
+   is the draft demo post (draft: true, see src/content/blog/fr), which 404s
+   like any other unpublished slug and would fail this check for the wrong
+   reason. Add a real slug here (fr and en as available) the day the first
+   published post ships, to exercise the BlogPosting JSON-LD it emits. */
 const SITE_PATHS = [
   "",
   "/services",
   "/services/applications-web",
   "/services/seo",
   "/faq",
+  "/blog",
   "/contact",
   "/legal/privacy-policy",
 ];
@@ -324,7 +330,7 @@ async function main() {
             try {
                 doc = JSON.parse(raw);
             } catch (err) {
-                process.stdout.write(`✗ ${label}: not valid JSON — ${err.message}\n`);
+                process.stdout.write(`✗ ${label}: not valid JSON, ${err.message}\n`);
                 totalErrors++;
                 return;
             }
@@ -333,7 +339,7 @@ async function main() {
             totalWarnings += warnings.length;
             const mark = errors.length === 0 ? "✓" : "✗";
             process.stdout.write(
-                `${mark} ${label} — ${propertyCount} properties, ` +
+                `${mark} ${label}: ${propertyCount} properties, ` +
                 `${errors.length} error(s), ${warnings.length} warning(s)\n`,
             );
             for (const e of errors) process.stdout.write(`    ERROR   ${e}\n`);

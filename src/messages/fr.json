@@ -73,6 +73,7 @@
       "copyright": "© {year} HARGILE. Tous droits réservés",
       "links": {
         "aboutUs": "À propos de nous",
+        "blog": "Blog",
         "contact": "Contact",
         "faq": "FAQ",
         "privacyPolicy": "Politique de confidentialité",
@@ -119,6 +120,7 @@
     },
     "menu": {
       "agves": "AGVES",
+      "blog": "Blog",
       "contact": "Contact",
       "faq": "FAQ",
       "home": "Accueil",
@@ -205,6 +207,17 @@
         }
       }
     },
+    "blog": {
+      "ctaSecondary": "Voir les services",
+      "empty": "Aucun article pour le moment. Revenez bientôt.",
+      "hero": {
+        "title": "Le blog HARGILE",
+        "answer": "Des notes sur le GEO, le SEO et la visibilité dans les réponses des IA : ce qu'on observe, ce qu'on teste, et ce que ça change pour les entreprises qu'on accompagne."
+      },
+      "publishedOn": "Publié le",
+      "readMore": "Lire l'article",
+      "updatedOn": "Mis à jour le"
+    },
     "faq": {
       "ctaSecondary": "Voir les services",
       "hero": {
@@ -258,7 +271,7 @@
           "id": "geo-seo-complement",
           "group": "seo",
           "q": "Comment le GEO et le SEO se complètent-ils ?",
-          "a": "Le SEO rend votre site trouvable sur Google. Le GEO rend votre entreprise citable par les assistants IA. La bonne nouvelle : une grande partie du travail est commune. Un contenu bien structuré, des données schema.org, des réponses nettes aux vraies questions de vos clients — tout ça sert les deux. On ne fait pas le travail deux fois."
+          "a": "Le SEO rend votre site trouvable sur Google. Le GEO rend votre entreprise citable par les assistants IA. La bonne nouvelle : une grande partie du travail est commune. Un contenu bien structuré, des données schema.org, des réponses nettes aux vraies questions de vos clients : tout ça sert les deux. On ne fait pas le travail deux fois."
         },
         {
           "id": "method-diagnostic",
@@ -469,7 +482,7 @@
         },
         "verticals": {
           "title": "Pour qui",
-          "lead": "Le GEO fonctionne pour les métiers où les clients cherchent un prestataire local et qualifié — exactement les questions qu'ils posent aux IA.",
+          "lead": "Le GEO fonctionne pour les métiers où les clients cherchent un prestataire local et qualifié, exactement les questions qu'ils posent aux IA.",
           "items": {
             "fiduciaries": {
               "title": "Fiduciaires & comptables",
@@ -493,7 +506,7 @@
             },
             "architects": {
               "title": "Architectes & bureaux d'études",
-              "text": "Un maître d'ouvrage demande à ChatGPT quel architecte choisir pour son projet. Votre portfolio parle pour vous — encore faut-il qu'il soit lu."
+              "text": "Un maître d'ouvrage demande à ChatGPT quel architecte choisir pour son projet. Votre portfolio parle pour vous : encore faut-il qu'il soit lu."
             }
           }
         },
@@ -1140,8 +1153,8 @@
   "seo": {
     "global": {
       "defaultDescription": "HARGILE rend les entreprises visibles dans les réponses des assistants IA et sur Google. GEO et SEO, depuis Bruxelles.",
-      "defaultImageAlt": "HARGILE — GEO & SEO",
-      "defaultTitle": "HARGILE — Visible dans les IA et sur Google",
+      "defaultImageAlt": "HARGILE : GEO & SEO",
+      "defaultTitle": "HARGILE : Visible dans les IA et sur Google",
       "siteName": "HARGILE"
     },
     "pages": {
@@ -1154,6 +1167,16 @@
         },
         "schemaType": "AboutPage",
         "title": "À Propos d'HARGILE - Notre Histoire & Mission | Agence d'Innovation Digitale"
+      },
+      "blog": {
+        "description": "Notes et analyses d'HARGILE sur le GEO, le SEO et la visibilité dans les réponses des IA et sur Google.",
+        "og": {
+          "description": "Ce qu'on observe, ce qu'on teste, et ce que ça change pour la visibilité IA et Google.",
+          "imageAlt": "Blog HARGILE",
+          "title": "Blog HARGILE : GEO, SEO et visibilité IA"
+        },
+        "schemaType": "CollectionPage",
+        "title": "Blog HARGILE : GEO, SEO et visibilité IA"
       },
       "contact": {
         "description": "Demandez votre diagnostic GEO gratuit. HARGILE analyse votre visibilité dans les IA et sur Google, et vous envoie les résultats sous 48 heures.",
@@ -1179,7 +1202,7 @@
         "description": "GEO et SEO pour entreprises en Belgique. Soyez nommé par ChatGPT, Perplexity et les moteurs de réponse IA, et trouvé sur Google.",
         "og": {
           "description": "GEO et SEO pour entreprises en Belgique. Soyez nommé par ChatGPT, Perplexity et les moteurs de réponse IA, et trouvé sur Google.",
-          "imageAlt": "HARGILE — GEO & SEO",
+          "imageAlt": "HARGILE : GEO & SEO",
           "title": "HARGILE | Soyez nommé par les IA, pas seulement indexé"
         },
         "schemaType": "WebPage",
