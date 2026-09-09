@@ -26,20 +26,20 @@ const OFFERS = [
 
 const Footer = () => {
     const t = useTranslations('components.footer');
-    // "Tech Studio" lives with the hero copy — one source for the label site-wide
+    // "Tech Studio" lives with the hero copy: one source for the label site-wide
     const tHero = useTranslations('pages.homepage.sections.hero.v2');
     const tOffers = useTranslations('pages.services.index.offers');
 
     // The *build* year, inlined by next.config.mjs. Calling new Date() during
     // render of a client component would be non-deterministic (server prerender
-    // and hydration can straddle a year boundary), which Next.js 16 flags — and
+    // and hydration can straddle a year boundary), which Next.js 16 flags, and
     // the previous hardcoded 2025 meant the raw HTML, the only thing AI crawlers
     // ever read since none of them run JS, advertised a stale year indefinitely.
     //
     // An effect used to correct this to the live year after mount. It was
     // dropped: it fired a cascading render on every visit to fix a value that is
     // already correct in the HTML, and it only ever fixed it for JS-running
-    // humans — crawlers kept reading the build year regardless. If a deploy ever
+    // humans: crawlers kept reading the build year regardless. If a deploy ever
     // sits unrebuilt across New Year the footer lags, which is what `postbuild`
     // refreshing this env var on every build is there to prevent.
     const year = Number(process.env.NEXT_PUBLIC_BUILD_YEAR) || 2025;
@@ -70,7 +70,7 @@ const Footer = () => {
     return (
         <FooterContainerStyled>
             <FooterInnerStyled>
-                {/* Top bar: brand — nav column — socials. New site links belong in
+                {/* Top bar: brand, nav column, socials. New site links belong in
                     the nav column. */}
                 <FooterContentStyled>
                     <BrandBlockStyled>
@@ -79,6 +79,7 @@ const Footer = () => {
                     </BrandBlockStyled>
 
                     <BottomLinksStyled as="nav" aria-label={t('sections.company')}>
+                        <FooterLinkStyled as={Link} href="/blog">{t('links.blog')}</FooterLinkStyled>
                         <FooterLinkStyled as={Link} href="/faq">{t('links.faq')}</FooterLinkStyled>
                         <FooterLinkStyled as={Link} href="/contact">{t('links.contact')}</FooterLinkStyled>
                         <FooterLinkStyled as={Link}
@@ -96,7 +97,7 @@ const Footer = () => {
                     </SocialContainer>
                 </FooterContentStyled>
 
-                {/* Bottom bar: address — offer pages — copyright. The offers sit in
+                {/* Bottom bar: address, offer pages, copyright. The offers sit in
                     the middle column, under the nav above and between the two lines
                     that were already here. DOM order is the wide-screen order; below
                     1100px the three no longer fit on one line and the offers take
@@ -106,7 +107,7 @@ const Footer = () => {
                         entity cannot drift apart. Only the country is translated.
 
                         The email used to close this line. It was the fourth place
-                        it appeared — it is still in the JSON-LD (Organization and
+                        it appeared: it is still in the JSON-LD (Organization and
                         contactPoint), in llms.txt and in the overlay menu, and the
                         page already ends on a contact CTA. Dropping it here costs
                         no signal and buys the width that lets the offers sit in the

@@ -8,16 +8,16 @@ import {generateSharedMetadata} from './shared-metadata';
 import StyledComponentsRegistry from "@/components/StyledComponentsRegistry";
 import ClientGDPRWrapper from "@/components/GDPR/ClientGDPRWrapper";
 
-/* Namespaces réellement consommés par des composants client (useTranslations) —
+/* Namespaces réellement consommés par des composants client (useTranslations) :
    le fichier de locale complet (58-65 KB) partait sinon en entier dans le HTML
    de chaque page via NextIntlClientProvider. Les getTranslations serveur ne
    passent pas par le provider et ne sont pas concernés. Attention : une string
-   absente est SILENCIEUSE en prod (MISSING_MESSAGE seulement en dev) — après
+   absente est SILENCIEUSE en prod (MISSING_MESSAGE seulement en dev), après
    tout ajout de namespace client, re-vérifier cette liste par grep de
    useTranslations( et cliquer toutes les routes en dev. Le namespace
    pages.about-us est volontairement absent : ses composants ne sont routés
    nulle part (307 vers /). pages.services et pages.faq sont les arbres M4
-   (les pages /services* et /faq), réécrits — la taxonomie v1 n'existe plus. */
+   (les pages /services* et /faq), réécrits, la taxonomie v1 n'existe plus. */
 const CLIENT_NAMESPACES = [
     'components',
     'pages.homepage',
@@ -26,6 +26,7 @@ const CLIENT_NAMESPACES = [
     'pages.privacy-policy',
     'pages.services',
     'pages.faq',
+    'pages.blog',
 ];
 
 export function generateStaticParams() {
@@ -65,7 +66,7 @@ export default async function LocaleLayout({children, params}) {
             <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"/>
             {/* The @font-face rules live in a render-blocking CSS chunk
                 (_font-family.scss), so without preload the woff2 discovery costs
-                three sequential round trips. Latin subsets only — the -ext files
+                three sequential round trips. Latin subsets only, the -ext files
                 are unicode-range-gated and would download bytes the page never
                 paints. Same-origin, so preload (not preconnect) is the fix. */}
             <link rel="preload" as="font" type="font/woff2" crossOrigin="anonymous"
