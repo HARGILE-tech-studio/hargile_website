@@ -339,7 +339,7 @@
 /* Column header — same technical-marker register as the eyebrow, one size
    down, so the two label the hero's left and right halves as a pair. */
 .railLabel {
-  margin: 0 0 26px;
+  margin: 0 0 10px;
   font-size: 12px;
   font-weight: 600;
   letter-spacing: 0.3em;
@@ -348,6 +348,20 @@
   text-shadow:
     0 1px 3px rgba(0, 0, 0, 1),
     0 2px 14px rgba(0, 0, 0, 0.85);
+}
+
+/* Lead-in sentence between the label and the two cards. Same size, weight
+   and halo as .capText below it (same busy part of the backdrop), so it
+   reads as a line of copy, not a second, competing headline. */
+.railLead {
+  margin: 0 0 24px;
+  font-size: 14px;
+  font-weight: 350;
+  line-height: 1.55;
+  color: rgba(237, 237, 237, 0.78);
+  text-shadow:
+    0 1px 3px rgba(0, 0, 0, 0.95),
+    0 2px 10px rgba(0, 0, 0, 0.7);
 }
 
 .railBody {

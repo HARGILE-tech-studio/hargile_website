@@ -37,6 +37,10 @@ const Verticals = () => {
                         </li>
                     ))}
                 </ul>
+
+                <p className={`${section.lead} ${styles.outro}`} {...reveal(8)}>
+                    {t("outro")}
+                </p>
             </div>
         </section>
     );

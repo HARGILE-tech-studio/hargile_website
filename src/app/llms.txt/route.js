@@ -36,7 +36,7 @@ JavaScript execution is required to read this site.
 ## Pages
 
 - [Home — FR](${page("/")}): what HARGILE does — GEO and SEO, the problem,
-  the method, who it's for, and a free diagnostic CTA.
+  the method, who it's for, and a free audit CTA.
 - [Home — EN](${page("/en")}): English version of the above.
 - [SEO — FR](${page("/services/seo")}): the four-step method — audit,
   technical, content, measure — including visibility in AI answers.
@@ -44,7 +44,7 @@ JavaScript execution is required to read this site.
 - [FAQ — FR](${page("/faq")}): direct answers on GEO, AI citations, SEO
   timelines, what's guaranteed and what's not.
 - [FAQ — EN](${page("/en/faq")}): English version of the above.
-- [Contact — FR](${page("/contact")}): free GEO diagnostic form.
+- [Contact — FR](${page("/contact")}): free GEO audit form.
 - [Contact — EN](${page("/en/contact")}): English version of the above.
 - [Privacy policy — FR](${page("/legal/privacy-policy")}): how personal data
   is collected, used and protected.

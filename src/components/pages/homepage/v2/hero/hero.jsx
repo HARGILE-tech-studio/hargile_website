@@ -195,6 +195,7 @@ const HeroV2 = () => {
                     same content, one design. */}
                 <div className={styles.rail}>
                     <p className={styles.railLabel}>{t("cardsLabel")}</p>
+                    <p className={styles.railLead}>{t("cardsLead")}</p>
                     <div className={styles.railBody}>
                         <span className={styles.railLine} aria-hidden="true"/>
                         <ul className={styles.capList}>

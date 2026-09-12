@@ -47,14 +47,32 @@
 
 .actions {
   display: flex;
+  flex-direction: column;
+  align-items: flex-end;
   gap: 14px;
   flex-wrap: wrap;
-  justify-content: flex-end;
+}
+
+/* Lower-emphasis line right under the button: no dashboard/tooling to learn.
+   Muted but still AA against the section's flat background (same ratio as
+   the card copy elsewhere on the page, e.g. verticals' .desc). */
+.reassurance {
+  max-width: 36ch;
+  margin: 0;
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.5;
+  color: rgba(237, 237, 237, 0.62);
+  text-align: right;
 }
 
 @media (max-width: 760px) {
   .actions {
-    justify-content: flex-start;
+    align-items: flex-start;
+  }
+
+  .reassurance {
+    text-align: left;
   }
 }
 
