@@ -22,7 +22,7 @@
         },
         "title": "Informations de contact"
       },
-      "description": "Entrez l'URL de votre site. Nous analysons votre visibilité dans les réponses des IA et sur Google, et vous envoyons les résultats sous 48 heures.",
+      "description": "Entrez l'URL de votre site. Nous analysons votre visibilité dans les réponses des IA et sur Google, et vous envoyons les résultats.",
       "privacy": {
         "link": "politique de confidentialité",
         "requiredFields": "Champs obligatoires",
@@ -31,7 +31,7 @@
       "prose": {
         "emailPlaceholder": "votre@email.com",
         "greeting": "Bonjour, je m'appelle",
-        "messagePlaceholder": "Contexte, questions, attentes : tout ce qui nous aide à préparer votre diagnostic.",
+        "messagePlaceholder": "Contexte, questions, attentes : tout ce qui nous aide à préparer votre audit.",
         "moreLabel": "Un mot de plus ?",
         "namePlaceholder": "votre nom",
         "objectPlaceholder": "www.votre-site.be",
@@ -56,7 +56,7 @@
       "submitNetworkError": "Une erreur de réseau s'est produite. Veuillez vérifier votre connexion et réessayer.",
       "submitSuccess": "Merci ! Votre message a été envoyé avec succès.",
       "submitting": "Envoi en cours...",
-      "title": "Diagnostic GEO gratuit",
+      "title": "Audit GEO gratuit",
       "validation": {
         "emailInvalid": "Veuillez entrer une adresse e-mail valide.",
         "emailRequired": "Veuillez entrer votre adresse e-mail.",
@@ -222,61 +222,61 @@
           "id": "geo-definition",
           "group": "geo",
           "q": "C'est quoi le GEO exactement ?",
-          "a": "GEO, pour Generative Engine Optimization, c'est le travail qui fait que votre entreprise est nommée quand quelqu'un pose une question à ChatGPT, Perplexity ou un autre assistant IA. Ces moteurs de réponse citent des sources : le GEO consiste à faire de votre site l'une de ces sources, en rendant votre contenu lisible par les machines, structuré et pertinent."
+          "a": "GEO, pour Generative Engine Optimization, c'est le travail qui fait que votre entreprise est nommée quand quelqu'un pose une question à un assistant IA : ChatGPT, Perplexity, Claude, Google AI Overviews. Ces assistants citent des sources. Le GEO fait de votre site l'une de ces sources : contenu lisible par les machines, données structurées, réponses nettes aux questions que vos acheteurs posent vraiment."
         },
         {
           "id": "geo-check",
           "group": "geo",
           "q": "Comment savoir si les IA me citent déjà ?",
-          "a": "On pose aux IA les 25 questions que vos acheteurs posent réellement, et on regarde qui est cité dans les réponses. Le diagnostic montre où vous apparaissez, où apparaissent vos concurrents, et où personne n'est encore bien positionné. C'est gratuit et c'est la première étape."
+          "a": "On pose aux IA les 25 questions que vos acheteurs posent réellement, et on regarde qui est cité : vous, vos concurrents, ou personne. C'est l'audit gratuit, et c'est la première étape. Vous recevez les résultats, sans engagement."
         },
         {
           "id": "geo-vs-seo",
           "group": "geo",
           "q": "Est-ce que le GEO remplace le SEO ?",
-          "a": "Non. Google reste le premier réflexe pour beaucoup de recherches, et le SEO technique reste la fondation : un site rapide, bien structuré et lisible profite autant au SEO qu'au GEO. Ce qui change, c'est qu'une part croissante de vos prospects ne clique plus sur un lien : ils lisent la réponse directement dans l'assistant IA. Le GEO couvre cette partie-là. Les deux se complètent."
+          "a": "Non. Le SEO reste la fondation : un site rapide, bien structuré et lisible profite autant au SEO qu'au GEO. Ce que le GEO ajoute, c'est le regard des moteurs de réponse : rendre votre contenu non seulement indexable par Google, mais citable par les IA. On fait les deux, parce qu'ils se renforcent."
         },
         {
           "id": "geo-target",
           "group": "geo",
           "q": "Quels types d'entreprises profitent le plus du GEO ?",
-          "a": "Les entreprises de services professionnels dont les clients posent des questions avant de choisir : fiduciaires, avocats, notaires, consultants, recruteurs, architectes. Si vos prospects tapent « quel comptable choisir à Bruxelles » dans ChatGPT et que votre concurrent est nommé mais pas vous, le GEO est fait pour votre situation."
+          "a": "Les entreprises de services dont les clients se renseignent avant de choisir : fiduciaires, avocats, notaires, consultants, recruteurs, architectes. Votre métier n'est pas dans la liste ? Si un prospect peut demander à une IA « qui fait X à tel endroit » et que vous faites X à cet endroit, le GEO vous concerne."
         },
         {
           "id": "seo-timeline",
           "group": "seo",
           "q": "Au bout de combien de temps voit-on des résultats ?",
-          "a": "Les corrections techniques (vitesse, structure, données structurées) font effet en quelques semaines. Le travail de contenu prend plus de temps : comptez trois à six mois pour des mouvements significatifs sur Google. Pour les citations IA, les premiers changements apparaissent souvent plus vite, parce que les modèles rafraîchissent leurs sources régulièrement. On suit les chiffres avec vous dès le départ."
+          "a": "Les corrections techniques (vitesse, structure, données structurées) font effet en quelques semaines. Le travail de contenu prend plus de temps : comptez trois à six mois pour des mouvements significatifs sur Google. Côté citations IA, les premiers changements arrivent souvent plus vite, parce que les modèles rafraîchissent leurs sources régulièrement. On suit les chiffres avec vous dès le départ."
         },
         {
           "id": "seo-guarantee",
           "group": "seo",
           "q": "Garantissez-vous la première position sur Google ?",
-          "a": "Non, et personne de sérieux ne le peut : les résultats dépendent d'un algorithme que personne ne contrôle. Même chose pour les IA : personne ne garantit d'être cité. Ce qu'on garantit, c'est la méthode, la transparence sur ce qu'elle produit, et le fait que vous voyez les mêmes chiffres que nous."
+          "a": "Non, et personne de sérieux ne le peut : l'algorithme de Google ne nous appartient pas, les modèles d'IA non plus. Ce qu'on garantit, c'est la méthode, et la transparence totale sur ce qu'elle produit. Une agence qui vous garantit la première place vous a déjà dit quelque chose sur le reste."
         },
         {
           "id": "geo-seo-complement",
           "group": "seo",
           "q": "Comment le GEO et le SEO se complètent-ils ?",
-          "a": "Le SEO rend votre site trouvable sur Google. Le GEO rend votre entreprise citable par les assistants IA. La bonne nouvelle : une grande partie du travail est commune. Un contenu bien structuré, des données schema.org, des réponses nettes aux vraies questions de vos clients — tout ça sert les deux. On ne fait pas le travail deux fois."
+          "a": "Le SEO rend votre site trouvable sur Google. Le GEO rend votre entreprise citable par les assistants IA. Le travail se recoupe largement : données structurées, site rapide, contenu clair écrit autour des vraies questions de vos clients. On le traite comme un seul chantier, parce que les mêmes optimisations nourrissent les deux canaux. Une page bien classée sur Google est déjà à mi-chemin d'être citée par une IA ; l'autre moitié, c'est ce qu'on ajoute."
         },
         {
-          "id": "method-diagnostic",
+          "id": "method-audit",
           "group": "method",
-          "q": "Comment fonctionne le diagnostic gratuit ?",
-          "a": "Vous nous donnez l'URL de votre site. On identifie les 25 questions que vos acheteurs posent aux IA dans votre secteur, on les soumet à ChatGPT, Perplexity et Claude, et on note qui est cité. On regarde aussi votre position sur Google pour ces mêmes requêtes. Vous recevez les résultats sous 48 heures, sans engagement."
+          "q": "Comment fonctionne l'audit gratuit ?",
+          "a": "Vous nous donnez l'URL de votre site. On identifie les 25 questions que vos acheteurs posent aux IA dans votre secteur, on les soumet à ChatGPT, Perplexity et Claude, et on note qui est cité. On regarde aussi votre position sur Google sur ces mêmes requêtes. Vous recevez un rapport écrit, sans engagement ni paiement. S'il y a matière à progresser, on vous explique ce qu'on ferait. Sinon, on vous le dit aussi."
         },
         {
           "id": "method-monthly",
           "group": "method",
           "q": "Que comprend l'accompagnement mensuel ?",
-          "a": "L'optimisation de votre contenu pour qu'il soit repris par les IA et bien positionné sur Google : structure du site, données structurées schema.org, rédaction ou réécriture de pages qui répondent aux questions de vos acheteurs. Plus le suivi : on refait le monitoring chaque mois et on ajuste. Pas de rapport de 40 pages : un tableau partagé avec les chiffres qui comptent."
+          "a": "Trois choses. D'abord le suivi des citations IA : on regarde si les moteurs de réponse vous nomment, et sur quelles questions. Ensuite l'optimisation, contenu et technique : données structurées schema.org, améliorations on-page, rédaction ou réécriture de pages quand il le faut. Enfin le reporting : positions Google, trafic organique, citations IA, dans un tableau partagé. Ce qui n'est pas inclus : la publicité payante, la gestion des réseaux sociaux, l'achat de liens. On fait le travail qui rend votre site citable, pas celui qui triche avec l'algorithme. Pas de rapport de 40 pages : les chiffres qui comptent, que vous consultez quand vous voulez."
         },
         {
           "id": "method-tracking",
           "group": "method",
           "q": "Comment suit-on les résultats ?",
-          "a": "Trois indicateurs, suivis et partagés : vos positions Google sur les requêtes qui comptent pour votre métier, les citations de votre entreprise par les assistants IA, et le trafic organique vers votre site. Les chiffres sont dans un tableau que vous consultez quand vous voulez. On regarde les mêmes que vous, pas un rapport filtré."
+          "a": "Avec des chiffres partagés. Positions Google, trafic organique et citations IA sont dans un tableau auquel vous avez accès : les mêmes chiffres que nous, au même moment. Pas de métriques triées sur le volet, pas de rapport qui ne montre que le beau. Si quelque chose ne marche pas, vous le voyez quand on le voit."
         }
       ],
       "more": {
@@ -298,7 +298,7 @@
           ],
           "our-values": [
             {
-              "value": "Diagnostic",
+              "value": "Audit",
               "description": "25 questions de vos acheteurs, posées aux IA. On mesure lesquelles vous citent déjà, et lesquelles citent vos concurrents."
             },
             {
@@ -317,7 +317,7 @@
             "years": "Années d'expérience"
           },
           "subtitle": "Découvrez notre agence",
-          "who_description": "Trois étapes, pas de boîte noire. Le diagnostic montre où vous en êtes, les corrections vous rendent citable, et le suivi prouve que ça fonctionne.",
+          "who_description": "Trois étapes, pas de boîte noire. L'audit montre où vous en êtes, les corrections vous rendent citable, et le suivi prouve que ça fonctionne.",
           "who_title": "Comment ça marche"
         },
         "hero": {
@@ -335,10 +335,11 @@
           "v2": {
             "eyebrow": "GEO & SEO",
             "headline": "Vos clients demandent à ChatGPT. Êtes-vous dans la réponse ?",
-            "paragraph": "HARGILE monitore les questions que vos acheteurs posent aux IA, et travaille votre site pour que vous soyez nommé dans les réponses. Google et au-delà.",
-            "ctaAudit": "Diagnostic GEO gratuit",
-            "ctaWork": "Découvrir",
+            "paragraph": "On repère les questions que vos clients posent aux IA, puis on retravaille votre site pour que ce soit vous qu'elles citent. Sur ChatGPT comme sur Google.",
+            "ctaAudit": "Demander l'audit",
+            "ctaWork": "Voir comment ça marche",
             "cardsLabel": "Notre approche",
+            "cardsLead": "Deux leviers, un seul objectif : que vos futurs clients tombent sur vous, qu'ils cherchent sur Google ou qu'ils posent la question à une IA.",
             "cards": {
               "geo": {
                 "title": "GEO",
@@ -445,17 +446,17 @@
           "title": "Le problème",
           "manifesto": [
             {
-              "text": "Vos prospects demandent à ChatGPT quel comptable choisir à Bruxelles."
+              "text": "Un prospect demande à ChatGPT quel avocat contacter à Bruxelles."
             },
             {
               "text": "Votre concurrent est nommé.",
               "accent": true
             },
             {
-              "text": "Vous, non. Et vous ne le savez pas. Le référencement ne se limite plus à Google : les moteurs de réponse citent des sources,"
+              "text": "Vous, non. Et vous ne le savez pas."
             },
             {
-              "text": "et ce sont ces sources qu'on travaille.",
+              "text": "Le référencement ne se limite plus à Google.",
               "accent": true
             }
           ],
@@ -463,13 +464,14 @@
             "your-project": {
               "title": "Votre projet",
               "tagline": "Facteur de croissance",
-              "description": "On monitore. On optimise. On prouve."
+              "description": "On mesure. On optimise. On prouve."
             }
           }
         },
         "verticals": {
           "title": "Pour qui",
-          "lead": "Le GEO fonctionne pour les métiers où les clients cherchent un prestataire local et qualifié — exactement les questions qu'ils posent aux IA.",
+          "lead": "Le GEO change tout pour les métiers de service qu'on choisit après s'être renseigné : ceux dont un client compare deux ou trois noms avant de décrocher son téléphone.",
+          "outro": "Votre métier n'est pas dans la liste ? Si vos clients se renseignent avant de vous choisir, le GEO vous concerne. L'audit vous le dira.",
           "items": {
             "fiduciaries": {
               "title": "Fiduciaires & comptables",
@@ -485,7 +487,7 @@
             },
             "consultants": {
               "title": "Consultants",
-              "text": "Expertise et réputation comptent. Les IA recommandent les consultants dont le site démontre les deux."
+              "text": "Une entreprise cherche un consultant pour un projet et pose la question à ChatGPT. Si votre expertise n'est pas lisible en ligne, elle ne vous verra pas."
             },
             "recruiters": {
               "title": "Cabinets de recrutement",
@@ -497,10 +499,14 @@
             }
           }
         },
+        "trust": {
+          "title": "Ils nous font confiance"
+        },
         "audit-cta": {
           "title": "Commencez par la preuve",
-          "text": "Entrez votre URL. Nous analysons votre visibilité dans les réponses des IA et sur Google, et vous envoyons les résultats sous 48 heures. Gratuit, sans engagement.",
-          "button": "Demander le diagnostic"
+          "text": "Entrez l'URL de votre site. On analyse votre visibilité dans les réponses des IA et sur Google, et on vous envoie les résultats : les questions où vos concurrents sont cités, et pas vous. Gratuit, sans engagement.",
+          "button": "Demander l'audit",
+          "reassurance": "Pas de dashboard à apprendre, ni d'outils à maîtriser. On fait le boulot, et on vous montre exactement ce qui a été fait."
         }
       }
     },
@@ -1009,8 +1015,8 @@
       "shared": {
         "ctaBand": {
           "title": "Parlons de votre visibilité",
-          "text": "Entrez l'URL de votre site ; on analyse votre présence dans les IA et sur Google, et on vous envoie les résultats.",
-          "button": "Diagnostic gratuit"
+          "text": "Entrez l'URL de votre site. On vous dit ce que les IA racontent sur vous, et ce qu'on ferait pour changer ça.",
+          "button": "Demander l'audit"
         },
         "miniFaq": {
           "title": "Questions fréquentes",
@@ -1156,14 +1162,14 @@
         "title": "À Propos d'HARGILE - Notre Histoire & Mission | Agence d'Innovation Digitale"
       },
       "contact": {
-        "description": "Demandez votre diagnostic GEO gratuit. HARGILE analyse votre visibilité dans les IA et sur Google, et vous envoie les résultats sous 48 heures.",
+        "description": "Demandez votre audit GEO gratuit. HARGILE analyse votre visibilité dans les IA et sur Google, et vous envoie les résultats.",
         "og": {
-          "description": "Diagnostic GEO gratuit : découvrez si les IA citent votre entreprise et comment améliorer votre visibilité sur Google et dans les moteurs de réponse.",
+          "description": "Audit GEO gratuit : découvrez si les IA citent votre entreprise et comment améliorer votre visibilité sur Google et dans les moteurs de réponse.",
           "imageAlt": "Contact HARGILE",
-          "title": "Diagnostic GEO gratuit | HARGILE"
+          "title": "Audit GEO gratuit | HARGILE"
         },
         "schemaType": "ContactPage",
-        "title": "Diagnostic GEO gratuit | HARGILE"
+        "title": "Audit GEO gratuit | HARGILE"
       },
       "faq": {
         "description": "GEO et SEO pour entreprises en Belgique : qu'est-ce que le GEO, comment savoir si les IA vous citent, combien de temps pour des résultats, méthode et suivi. 10 réponses directes.",

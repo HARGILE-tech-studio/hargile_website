@@ -1,0 +1,51 @@
+/* Trust strip: compact band between the verticals grid and the audit CTA.
+   Same structure as audit-cta: room above, then a hairline band inside the
+   shared container, so both hairlines share one width. No bottom padding of
+   its own: audit-cta's top padding already sets the gap below. Client names
+   render as plain text, centered, since there is only ever a short row. */
+
+.section {
+  position: relative;
+  padding: clamp(72px, 8vw, 120px) 0 0;
+  /* Full-bleed like the sibling v2 sections, so the container (and the
+     hairline inside it) lines up with audit-cta's band. */
+  margin-inline: calc(50% - 50vw);
+  text-align: center;
+
+  h2 {
+    text-shadow: none;
+  }
+}
+
+.band {
+  border-top: 1px solid rgba(255, 255, 255, 0.09);
+  padding-top: clamp(40px, 5vw, 64px);
+}
+
+/* Same small-caps technical-marker register as the hero's eyebrow/railLabel. */
+.heading {
+  margin: 0 0 28px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: #96b9f9;
+}
+
+.list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 32px;
+}
+
+.name {
+  font-family: var(--font-headings);
+  font-weight: 600;
+  font-size: clamp(16px, 1.6vw, 20px);
+  letter-spacing: -0.01em;
+  color: #ededed;
+}

@@ -22,7 +22,7 @@
         },
         "title": "Contact Information"
       },
-      "description": "Enter your website URL. We analyze your visibility in AI answers and on Google, and send you the results within 48 hours.",
+      "description": "Enter your website URL. We analyze your visibility in AI answers and on Google, and send you the results.",
       "privacy": {
         "link": "privacy policy",
         "requiredFields": "Required fields",
@@ -31,7 +31,7 @@
       "prose": {
         "emailPlaceholder": "your@email.com",
         "greeting": "Hi, my name is",
-        "messagePlaceholder": "Context, questions, expectations: anything that helps us prepare your diagnostic.",
+        "messagePlaceholder": "Context, questions, expectations: anything that helps us prepare your audit.",
         "moreLabel": "Anything else?",
         "namePlaceholder": "your name",
         "objectPlaceholder": "www.your-site.be",
@@ -56,7 +56,7 @@
       "submitNetworkError": "A network error occurred. Please check your connection and try again.",
       "submitSuccess": "Thank you! Your message has been sent successfully.",
       "submitting": "Submitting...",
-      "title": "Free GEO diagnostic",
+      "title": "Free GEO audit",
       "validation": {
         "emailInvalid": "Please enter a valid email address.",
         "emailRequired": "Please enter your email address.",
@@ -222,61 +222,61 @@
           "id": "what-is-geo",
           "group": "geo",
           "q": "What exactly is GEO?",
-          "a": "GEO stands for Generative Engine Optimization. It is the work of making your business appear in the answers that AI assistants give — ChatGPT, Perplexity, Claude, Google AI Overviews. When someone asks 'which accountant should I use in Brussels', the assistant cites sources. GEO is what makes your site one of those sources: machine-readable content, structured data, clear answers to the questions your buyers actually ask."
+          "a": "GEO stands for Generative Engine Optimization. It is the work that gets your business named when someone asks an AI assistant a question: ChatGPT, Perplexity, Claude, Google AI Overviews. These assistants cite sources. GEO makes your site one of those sources: machine-readable content, structured data, clear answers to the questions your buyers actually ask."
         },
         {
           "id": "ai-mentions-me",
           "group": "geo",
           "q": "How do I know if AI already mentions me?",
-          "a": "You ask. We run 25 questions that your buyers are likely to ask AI about your industry and your region, and we record which answers cite you, which cite your competitors, and which cite nobody. That is the free diagnostic: you get the results within 48 hours, with no commitment."
+          "a": "We run the 25 questions your buyers actually ask AI, and we look at who gets cited: you, your competitors, or nobody. That is the free audit, and it is the first step. You get the results, with no commitment."
         },
         {
           "id": "geo-replace-seo",
           "group": "geo",
           "q": "Does GEO replace SEO?",
-          "a": "No. GEO builds on SEO. The foundations are the same: clean structure, fast site, structured data, content that answers real questions. What GEO adds is the lens of answer engines — making sure the content is not just indexable by Google, but citable by AI. We do both, because they reinforce each other."
+          "a": "No. GEO builds on SEO. The foundation is the same: a fast, well-structured, readable site serves SEO and GEO alike. What GEO adds is the lens of answer engines: making your content not just indexable by Google, but citable by AI. We do both, because they reinforce each other."
         },
         {
           "id": "who-benefits",
           "group": "geo",
           "q": "What types of businesses benefit most from GEO?",
-          "a": "Any business whose clients research before buying: professional services (law, accounting, consulting), health practitioners, B2B companies, local businesses with a speciality. If someone might ask an AI assistant 'who does X in Y', and you do X in Y, GEO matters to you."
+          "a": "Service businesses whose clients research before choosing: accountants and fiduciaries, law firms, notaries, consultants, recruiters, architects. Not on the list? If a prospect might ask an AI \"who does X in Y\" and you do X in Y, GEO is for you."
         },
         {
           "id": "how-long",
           "group": "seo",
           "q": "How long until we see results?",
-          "a": "Technical fixes — speed, structure, structured data — show effects within weeks. Content-driven improvements take longer: typically two to four months for Google rankings to move, and AI citation patterns shift on their own schedule as models update. We track both from day one so you see the trajectory, not just the destination."
+          "a": "Technical fixes (speed, structure, structured data) show effects within weeks. Content work takes longer: expect three to six months for significant movement on Google. On the AI-citation side, the first changes often come faster, because models refresh their sources regularly. We track the numbers with you from day one."
         },
         {
           "id": "guarantee-first",
           "group": "seo",
           "q": "Do you guarantee first position on Google?",
-          "a": "No, and nobody honest can. Google's algorithm is not ours to control, and neither are the AI models. What we commit to is the method: clean technical foundations, content that answers real questions, structured data, and full transparency about what it produces. An agency that guarantees rankings has already told you something about the rest."
+          "a": "No, and nobody honest can: Google's algorithm is not ours to control, and neither are the AI models. What we commit to is the method, and full transparency about what it produces. An agency that guarantees you first place has already told you something about the rest."
         },
         {
           "id": "geo-seo-together",
           "group": "seo",
           "q": "How do GEO and SEO work together?",
-          "a": "SEO makes your site rank on Google. GEO makes your site get cited by AI assistants. The work overlaps heavily: structured data, fast loading, clear content written around real questions. We treat them as one workflow because the same optimizations feed both channels. A page that ranks well on Google is already halfway to being cited by AI — and the other half is what we add."
+          "a": "SEO makes your site findable on Google. GEO makes your business citable by AI assistants. The work overlaps heavily: structured data, fast site, clear content written around your clients' real questions. We treat it as one workflow, because the same optimizations feed both channels. A page that ranks well on Google is already halfway to being cited by AI; the other half is what we add."
         },
         {
-          "id": "free-diagnostic",
+          "id": "free-audit",
           "group": "method",
-          "q": "How does the free diagnostic work?",
-          "a": "You give us your website URL. We run 25 questions your buyers are likely to ask AI, check which answers mention you or your competitors, and audit your site's technical SEO foundations. You get a written report within 48 hours. No commitment, no payment. If the results show room for improvement, we explain what we would do. If they don't, we tell you that too."
+          "q": "How does the free audit work?",
+          "a": "You give us your website URL. We identify the 25 questions your buyers ask AI in your industry, run them through ChatGPT, Perplexity and Claude, and record who gets cited. We also check your Google position on those same queries. You get a written report, with no commitment and no payment. If there is room to improve, we explain what we would do. If there isn't, we tell you that too."
         },
         {
           "id": "monthly-service",
           "group": "method",
           "q": "What's included in the monthly service?",
-          "a": "Three things. First, AI citation monitoring: we track whether answer engines mention you, and for which questions. Second, content and technical optimization: structured data, on-page improvements, new content when needed. Third, reporting: Google rankings, organic traffic, AI citations, all in a shared dashboard. What is not included: paid advertising, social media management, and link-building schemes. We do the work that makes your site the answer, not the work that games the system."
+          "a": "Three things. First, AI-citation monitoring: we track whether answer engines mention you, and for which questions. Second, optimization, content and technical: schema.org structured data, on-page improvements, writing or rewriting pages when needed. Third, reporting: Google rankings, organic traffic, AI citations, in a shared dashboard. What is not included: paid advertising, social media management, link-buying. We do the work that makes your site citable, not the work that games the algorithm. No 40-page report: the numbers that matter, whenever you want them."
         },
         {
           "id": "track-results",
           "group": "method",
           "q": "How do we track results?",
-          "a": "With shared data. Google rankings, organic traffic, and AI citations are tracked in a dashboard you have access to — the same numbers we look at, at the same time. No cherry-picked metrics, no reports that only show the good numbers. If something is not working, you see it when we do."
+          "a": "With shared numbers. Google rankings, organic traffic and AI citations are in a dashboard you have access to: the same numbers we look at, at the same time. No cherry-picked metrics, no report that only shows the good news. If something isn't working, you see it when we do."
         }
       ],
       "more": {
@@ -298,7 +298,7 @@
           ],
           "our-values": [
             {
-              "value": "Diagnostic",
+              "value": "Audit",
               "description": "25 questions your buyers ask AI. We measure which ones already cite you, and which ones cite your competitors."
             },
             {
@@ -317,7 +317,7 @@
             "years": "Years experience"
           },
           "subtitle": "Get to know our agency",
-          "who_description": "Three steps, no black box. The diagnostic shows where you stand, the optimizations make you citable, and tracking proves it works.",
+          "who_description": "Three steps, no black box. The audit shows where you stand, the optimizations make you citable, and tracking proves it works.",
           "who_title": "How it works"
         },
         "hero": {
@@ -335,10 +335,11 @@
           "v2": {
             "eyebrow": "GEO & SEO",
             "headline": "Your clients ask ChatGPT. Are you in the answer?",
-            "paragraph": "HARGILE monitors the questions your buyers ask AI, and optimizes your site so you get named in the answers. Google and beyond.",
-            "ctaAudit": "Free GEO diagnostic",
-            "ctaWork": "Learn more",
+            "paragraph": "We spot the questions your clients ask AI, then rework your site so it's you those answers cite. On ChatGPT as much as on Google.",
+            "ctaAudit": "Request audit",
+            "ctaWork": "See how it works",
             "cardsLabel": "Our approach",
+            "cardsLead": "Two levers, one goal: that your future clients land on you, whether they search on Google or ask an AI.",
             "cards": {
               "geo": {
                 "title": "GEO",
@@ -445,17 +446,17 @@
           "title": "The problem",
           "manifesto": [
             {
-              "text": "Your prospects ask ChatGPT which accountant to choose in Brussels."
+              "text": "A prospect asks ChatGPT which lawyer to contact in Brussels."
             },
             {
               "text": "Your competitor is named.",
               "accent": true
             },
             {
-              "text": "You're not. And you don't even know it. Search is no longer just Google: answer engines cite sources,"
+              "text": "You're not. And you don't even know it."
             },
             {
-              "text": "and those sources are what we work on.",
+              "text": "Search is no longer just Google.",
               "accent": true
             }
           ],
@@ -463,13 +464,14 @@
             "your-project": {
               "title": "Your project",
               "tagline": "Growth factor",
-              "description": "We monitor. We optimize. We prove."
+              "description": "We measure. We optimize. We prove."
             }
           }
         },
         "verticals": {
           "title": "Who it's for",
-          "lead": "GEO works best for professions where clients search for a local, qualified provider — exactly the questions they ask AI.",
+          "lead": "GEO changes everything for service businesses people choose after doing their research: the ones where a client compares two or three names before picking up the phone.",
+          "outro": "Not on the list? If your clients research before choosing you, GEO is for you. The audit will tell you.",
           "items": {
             "fiduciaries": {
               "title": "Accountants & fiduciaries",
@@ -485,7 +487,7 @@
             },
             "consultants": {
               "title": "Consultants",
-              "text": "Expertise and reputation matter. AI recommends consultants whose sites demonstrate both."
+              "text": "A company looks for a consultant for a project and asks ChatGPT. If your expertise isn't legible online, it won't see you."
             },
             "recruiters": {
               "title": "Recruitment agencies",
@@ -497,10 +499,14 @@
             }
           }
         },
+        "trust": {
+          "title": "Trusted by"
+        },
         "audit-cta": {
           "title": "Start with proof",
-          "text": "Enter your URL. We analyze your visibility in AI answers and on Google, and send you the results within 48 hours. Free, no strings attached.",
-          "button": "Request diagnostic"
+          "text": "Enter your website URL. We analyze your visibility in AI answers and on Google, and send you the results: the questions where your competitors are cited, and you're not. Free, no strings attached.",
+          "button": "Request audit",
+          "reassurance": "No dashboard to learn, no tools to master. We do the work, and we show you exactly what was done."
         }
       }
     },
@@ -1009,8 +1015,8 @@
       "shared": {
         "ctaBand": {
           "title": "Let's talk about your visibility",
-          "text": "Tell us your website URL. We'll tell you what AI says about you, and what we would do about it.",
-          "button": "Contact us"
+          "text": "Enter your website URL. We'll tell you what AI says about you, and what we would do about it.",
+          "button": "Request audit"
         },
         "miniFaq": {
           "title": "Frequently asked questions",
@@ -1156,17 +1162,17 @@
         "title": "About HARGILE - Our Story & Mission | Digital Innovation Agency"
       },
       "contact": {
-        "description": "Request a free GEO diagnostic from HARGILE. We analyze your visibility in AI answers and on Google, and send you the results within 48 hours.",
+        "description": "Request a free GEO audit from HARGILE. We analyze your visibility in AI answers and on Google, and send you the results.",
         "og": {
-          "description": "Get a free GEO diagnostic: we analyze your visibility in AI answers and on Google. Results within 48 hours, no commitment.",
+          "description": "Get a free GEO audit: we analyze your visibility in AI answers and on Google. No commitment.",
           "imageAlt": "HARGILE Contact",
-          "title": "Free GEO diagnostic | HARGILE"
+          "title": "Free GEO audit | HARGILE"
         },
         "schemaType": "ContactPage",
-        "title": "Free GEO diagnostic | HARGILE"
+        "title": "Free GEO audit | HARGILE"
       },
       "faq": {
-        "description": "What is GEO, how long until results, does GEO replace SEO, how the free diagnostic works, what's included: 10 direct answers from a GEO and SEO agency in Brussels.",
+        "description": "What is GEO, how long until results, does GEO replace SEO, how the free audit works, what's included: 10 direct answers from a GEO and SEO agency in Brussels.",
         "og": {
           "description": "What is GEO, how it works with SEO, how long, what results: straight answers from a Brussels GEO & SEO agency.",
           "imageAlt": "HARGILE FAQ",

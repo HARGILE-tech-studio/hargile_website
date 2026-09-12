@@ -1,8 +1,8 @@
 "use client";
 
-/* Homepage audit CTA — full-width band with the GEO diagnostic pitch
+/* Homepage audit CTA: full-width band with the GEO audit pitch
    and a single link to the contact/audit form. Reuses the shared CTA band
-   shape but reads from homepage-specific copy so it can say "diagnostic"
+   shape but reads from homepage-specific copy so it can say "audit"
    instead of "parlons de votre projet". */
 
 import {useTranslations} from "next-intl";
@@ -31,6 +31,9 @@ const AuditCta = () => {
                         <CtaLink href="/contact" variant="primary">
                             {t("button")}
                         </CtaLink>
+                        <p className={styles.reassurance}>
+                            {t("reassurance")}
+                        </p>
                     </div>
                 </div>
             </div>
