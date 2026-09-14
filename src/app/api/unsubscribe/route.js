@@ -77,7 +77,7 @@ const page = (title, body, status = 200) =>
       a{color:#3498db;text-decoration:none}
       .footer{margin-top:24px;padding-top:16px;border-top:1px solid #eee;font-size:12px;color:#888}
     </style></head><body><div class="card"><h1>${escapeHtml(title)}</h1>${body}
-    <div class="footer">HARGILE SRL — Tech Studio · <a href="mailto:charles@hargile.com">charles@hargile.com</a></div>
+    <div class="footer">HARGILE SRL · <a href="mailto:charles@hargile.com">charles@hargile.com</a></div>
     </div></body></html>`,
     { status, headers: { "Content-Type": "text/html; charset=utf-8" } }
   );

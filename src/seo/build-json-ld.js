@@ -52,7 +52,7 @@ export async function buildJsonLd({locale, pagePath}) {
            to be, since `logo` and `image` below are what an engine shows next to
            the entity, and a mark that differs from the one shared on social is a
            mismatch of exactly the kind this file exists to avoid. */
-        const imageUrl = `${SITE_URL}/images/brand/og-hargile-tech-studio.png`;
+        const imageUrl = `${SITE_URL}/images/brand/og-hargile.png`;
 
         /* Per-page type, read from the message files so it can differ per page.
            It must always be WebPage or one of its subtypes (ContactPage,
@@ -81,10 +81,6 @@ export async function buildJsonLd({locale, pagePath}) {
             "@type": ["Organization", "ProfessionalService"],
             "@id": `${SITE_URL}/#organization`,
             name: globalT("siteName"),
-            /* The GBP, the GitHub org and Instagram all say "Tech Studio"; the bare
-               "HARGILE" is the outlier across our own properties. alternateName
-               resolves both strings to this one entity instead of two competing ones. */
-            alternateName: "HARGILE Tech Studio",
             description: globalT("defaultDescription"),
             url: SITE_URL,
             logo: {

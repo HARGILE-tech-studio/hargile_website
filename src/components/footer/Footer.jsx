@@ -6,7 +6,6 @@ import {FooterContentStyled} from "@/components/footer/footer-content.styled";
 import {BottomBarStyled} from "@/components/footer/bottom-bar.styled";
 import {BottomLinksStyled} from "@/components/footer/bottom-links.styled";
 import {BrandBlockStyled, BrandStyled, BrandTaglineStyled} from "@/components/footer/brand.styled";
-import {OfferLinksStyled, OfferLinkStyled} from "@/components/footer/offer-links.styled";
 import {Link} from "@/i18n/navigation";
 import {useTranslations} from 'next-intl';
 import {Address} from "@/components/footer/Adress.styled";
@@ -16,19 +15,9 @@ import {SiGithub, SiInstagram} from "@icons-pack/react-simple-icons";
 import LinkedinIcon from "@/components/icons/LinkedinIcon";
 import {NAP, napCityLine} from "@/lib/nap";
 
-
-/* HARG-302: two offers are now GEO and SEO. Both route to /services/seo
-   until a dedicated GEO page exists. */
-const OFFERS = [
-    {id: 'geo', href: '/services/seo'},
-    {id: 'seo', href: '/services/seo'},
-];
-
 const Footer = () => {
     const t = useTranslations('components.footer');
-    // "Tech Studio" lives with the hero copy — one source for the label site-wide
     const tHero = useTranslations('pages.homepage.sections.hero.v2');
-    const tOffers = useTranslations('pages.services.index.offers');
 
     // The *build* year, inlined by next.config.mjs. Calling new Date() during
     // render of a client component would be non-deterministic (server prerender
@@ -55,7 +44,7 @@ const Footer = () => {
         },
         {
             id: "linkedin",
-            title: "HARGILE - Tech Studio",
+            title: "HARGILE",
             icon: <LinkedinIcon title={"hargile"} size={iconSize}/>,
             href: "https://www.linkedin.com/company/hargile"
         },
@@ -79,6 +68,7 @@ const Footer = () => {
                     </BrandBlockStyled>
 
                     <BottomLinksStyled as="nav" aria-label={t('sections.company')}>
+                        <FooterLinkStyled as={Link} href="/services/seo">{t('links.services')}</FooterLinkStyled>
                         <FooterLinkStyled as={Link} href="/faq">{t('links.faq')}</FooterLinkStyled>
                         <FooterLinkStyled as={Link} href="/contact">{t('links.contact')}</FooterLinkStyled>
                         <FooterLinkStyled as={Link}
@@ -96,32 +86,21 @@ const Footer = () => {
                     </SocialContainer>
                 </FooterContentStyled>
 
-                {/* Bottom bar: address — offer pages — copyright. The offers sit in
-                    the middle column, under the nav above and between the two lines
-                    that were already here. DOM order is the wide-screen order; below
-                    1100px the three no longer fit on one line and the offers take
-                    their own row back, on top (see OfferLinksStyled). */}
+                {/* Bottom bar: address — copyright. The offer links used to sit
+                    between them; they now live in the nav row above as a single
+                    "Nos services" link (see BottomLinksStyled), so this bar goes
+                    back to its original two columns. */}
                 <BottomBarStyled>
                     {/* Address comes from @/lib/nap so the copy and the JSON-LD
                         entity cannot drift apart. Only the country is translated.
 
-                        The email used to close this line. It was the fourth place
-                        it appeared — it is still in the JSON-LD (Organization and
-                        contactPoint), in llms.txt and in the overlay menu, and the
-                        page already ends on a contact CTA. Dropping it here costs
-                        no signal and buys the width that lets the offers sit in the
-                        middle: the line now matches the copyright opposite it. */}
+                        The email used to close this line. It is still in the
+                        JSON-LD (Organization and contactPoint), in llms.txt and in
+                        the overlay menu, and the page already ends on a contact
+                        CTA. Dropping it here costs no signal. */}
                     <Address>
                         {NAP.street} · {napCityLine} · {t('address.country')}
                     </Address>
-
-                    <OfferLinksStyled aria-label={t('sections.services')}>
-                        {OFFERS.map((offer) => (
-                            <OfferLinkStyled as={Link} key={offer.id} href={offer.href}>
-                                {tOffers(`${offer.id}.title`)}
-                            </OfferLinkStyled>
-                        ))}
-                    </OfferLinksStyled>
 
                     <Copyright>{t('copyright', {year})}</Copyright>
                 </BottomBarStyled>

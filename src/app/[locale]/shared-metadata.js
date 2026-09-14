@@ -9,8 +9,8 @@ export function generateSharedMetadata(params, translations) {
     // Base URL with locale: French unprefixed, English /en (localeUrl).
     const baseUrl = localeUrl(locale);
 
-    /* OG image — the existing lockup, still correct as a brand mark. */
-    const imageUrl = `${SITE_URL}/images/brand/og-hargile-tech-studio.png`;
+    /* OG image — new logo lockup, no "Tech Studio" (HARG-302 pivot). */
+    const imageUrl = `${SITE_URL}/images/brand/og-hargile.png`;
 
     return {
         metadataBase: new URL(SITE_URL),
