@@ -76,7 +76,7 @@
         "contact": "Contact",
         "faq": "FAQ",
         "privacyPolicy": "Privacy Policy",
-        "services": "Services",
+        "services": "Solution",
         "siteMap": "Site Map"
       },
       "sections": {
@@ -125,7 +125,7 @@
       "i-go": "I go",
       "our-dna": "Our DNA",
       "portfolio": "Portfolio",
-      "services": "Services",
+      "services": "Solution",
       "solutions": "Solutions"
     },
     "read-more": {
@@ -723,37 +723,192 @@
           "hero": {
             "eyebrow": "GEO",
             "title": "Your visibility, automated",
-            "answer": "We make SMEs visible where their customers search now: in the answers of AI assistants like ChatGPT and Perplexity, and on Google. GEO and SEO, content and measurement, automated where possible, for a durable result rather than a one-off campaign."
+            "answer": "We make SMEs visible where their customers now search: in the answers of ChatGPT, Perplexity or Gemini, and on Google. GEO and SEO, technical work, content and measurement. Whatever can be automated is. The rest we do by hand, and we show you both."
+          },
+          "geo": {
+            "title": "How do you get cited by AI?",
+            "lead": "When a client asks ChatGPT or Perplexity which agency builds web applications in Brussels, the assistant answers by citing its sources. Being one of those sources is where visibility now starts, and it is worked page by page.",
+            "cols": {
+              "readable": {
+                "title": "Content machines can read",
+                "text": "The answers are in the HTML on the first load, with no JavaScript to run. An engine that only sees an empty page cites nothing."
+              },
+              "structured": {
+                "title": "Structured data",
+                "text": "Every page states what it is and who wrote it, in schema.org format. That is what lets the engine attach an answer to one specific company."
+              },
+              "answers": {
+                "title": "One page, one real question",
+                "text": "Every page answers, plainly, a question your clients actually ask. That is the format answer engines quote and attribute."
+              }
+            },
+            "conditions": "Three conditions, in the order an answer engine meets them:",
+            "demo": {
+              "example": "An illustration, not a result",
+              "question": "Which agency builds web applications in Brussels?",
+              "sourcesLabel": "Sources",
+              "you": "Your brand",
+              "yourPage": "your-site.be/web-applications",
+              "before": {
+                "label": "Today",
+                "answer": "Three agencies come up most often:",
+                "names": [
+                  "Agency A",
+                  "Studio B",
+                  "Collective C"
+                ],
+                "sources": [
+                  "agency-a.be",
+                  "studio-b.com",
+                  "collective-c.be"
+                ],
+                "caption": "Your site exists. The engine never read it."
+              },
+              "after": {
+                "label": "After the work",
+                "answer": "Four agencies come up most often:",
+                "names": [
+                  "Agency A",
+                  "Studio B",
+                  "Collective C"
+                ],
+                "sources": [
+                  "agency-a.be",
+                  "studio-b.com",
+                  "collective-c.be"
+                ],
+                "caption": "A page that answers this question, readable and structured."
+              }
+            }
           },
           "process": {
             "title": "How we work",
+            "lead": "Each step says what the system does and what we do ourselves.",
+            "systemLabel": "System:",
+            "usLabel": "Us:",
             "steps": {
               "audit": {
                 "title": "Audit",
-                "text": "First, the facts: what makes you visible today, what holds you back, and where the queries that matter to your business are."
+                "text": "The facts on day one: what makes you visible, what holds you back, and where the queries that matter to your business are. We also measure your starting point in AI answers, before touching anything.",
+                "system": "mobile speed, Chrome field data, robots, sitemap, full site crawl.",
+                "us": "choosing the queries, the AI questions and the competitors to track."
               },
               "tech": {
                 "title": "Technical",
-                "text": "A site engines can read without obstacles: speed, structure, structured data, content present from the first load."
+                "text": "A site engines can read without obstacles: speed, structure, structured data, content present from the first load.",
+                "system": "page titles and descriptions, proposed then applied to your CMS after approval.",
+                "us": "schema.org, hreflang, canonical, performance, done by hand and checked."
               },
               "content": {
                 "title": "Content",
-                "text": "Pages that each answer one real customer question, the format Google and answer engines cite."
+                "text": "Pages that each answer one real customer question, the format Google and answer engines cite.",
+                "us": "the writing, with you, in your own vocabulary: revisions, new pages, blog articles when they are needed.",
+                "system": "flags, from the questions we track, the texts to revise, the pages that are missing and the article topics to write."
               },
               "measure": {
                 "title": "Measure",
-                "text": "Rankings, traffic, AI citations: we track what changes, and we adjust. What is not measured does not improve."
+                "text": "We start from the day-one baseline and track what changes.",
+                "system": "your presence and your competitors' in the answers of ChatGPT, Perplexity, Gemini, Copilot and Google AI Overviews, on 25 real customer questions, in French and Dutch; rankings and traffic reviewed with you at every check-in.",
+                "us": "choosing the competitors to compare, reading, deciding, adjusting, at every check-in with you."
+              }
+            }
+          },
+          "approval": {
+            "title": "Nothing is written to your site without your consent",
+            "text": "The system does not edit your site live. It proposes. Every recommendation becomes a proposal: the page concerned, the current value, the proposed value, and why.",
+            "modesTitle": "You choose the mode",
+            "modes": {
+              "validate": {
+                "title": "Approval mode",
+                "text": "You receive every proposal and accept or reject it. Nothing goes out without your click. This is the default."
+              },
+              "auto": {
+                "title": "Automatic mode",
+                "text": "You trust us with routine changes (titles, descriptions): proposals we have approved are applied every morning, under a daily cap you set. You can switch back to approval mode at any time."
+              }
+            },
+            "bothTitle": "In both modes",
+            "rules": [
+              "The system never replaces a value it has not read first.",
+              "Every write is checked afterwards and logged: what, when, before, after.",
+              "On the first failed write, the pilot stops by itself and alerts us.",
+              "Your changes live in your CMS, not with us. If you leave, they stay."
+            ],
+            "flow": {
+              "steps": [
+                "Analysis",
+                "Proposal",
+                "Decision",
+                "Verified write"
+              ],
+              "branchValidate": "you approve",
+              "branchAuto": "automatic mode",
+              "journal": "Log",
+              "journalLine": [
+                "14/09 09:02",
+                "/services",
+                "meta_description",
+                "replaced",
+                "verified"
+              ]
+            },
+            "card": {
+              "title": "Proposal",
+              "page": "/services",
+              "field": "meta_description",
+              "beforeLabel": "Current",
+              "before": "Our services",
+              "afterLabel": "Proposed",
+              "after": "Web development, GEO and SEO for SMEs in Brussels. Free audit within 48 h.",
+              "why": "Why: description too short (12 characters), the page names neither the trade nor the city.",
+              "accept": "Accept",
+              "reject": "Reject"
+            }
+          },
+          "access": {
+            "title": "Your credentials",
+            "text": "Your credentials are never stored in our database. They live in an encrypted vault, and every read is traced: who, when, what for. To stop, one message is enough: we remove the subscription from our CRM, the system reads nothing more, nothing breaks.",
+            "items": {
+              "vault": {
+                "title": "Encrypted vault",
+                "text": "Never in our database."
+              },
+              "log": {
+                "title": "Traced reads",
+                "text": "Who, when, what for."
+              },
+              "revoke": {
+                "title": "Stop on request",
+                "text": "One message, and we remove the subscription."
+              }
+            },
+            "platforms": "WordPress (Yoast, Rank Math, The SEO Framework) and Shopify: approved proposals are applied automatically. Webflow and custom-built sites: same audit, same proposals, applied by us, by hand or in the code.",
+            "cms": {
+              "wordpress": {
+                "name": "WordPress",
+                "note": "Yoast · Rank Math · The SEO Framework · automatic application"
+              },
+              "shopify": {
+                "name": "Shopify",
+                "note": "automatic application"
+              },
+              "webflow": {
+                "name": "Webflow",
+                "note": "applied by hand"
+              },
+              "custom": {
+                "name": "Custom-built sites",
+                "note": "applied in the code, by us"
               }
             }
           },
           "metaProof": {
             "title": "Architecture & source",
-            "text": "The method we propose is the one we apply to our own site:",
+            "text": "The method we propose is the one we apply to our own site. View this page's source: it is all there.",
             "points": [
               "Every page exists in French and English, with the tags that tell engines which one to serve.",
               "Every page carries its structured data (schema.org), validated automatically before every release.",
-              "All the content is in the HTML from the first response, readable by search engines and AI assistants alike.",
-              "View this page's source: it is all there."
+              "All the content is in the HTML from the first response, readable by search engines and AI assistants alike."
             ]
           },
           "measured": {
@@ -771,53 +926,51 @@
               "ttfb": "Server response"
             },
             "targetLabel": "target {value}",
-            "note": "The main content paint is still over its 2.5 second threshold, and we leave it on display rather than picking the numbers that suit us. That one is work in progress. An agency that only publishes its good scores is not telling you what it measures: it is telling you what it shows."
-          },
-          "geo": {
-            "title": "How do you get cited by AI?",
-            "lead": "When a client asks ChatGPT or Perplexity which agency builds web applications in Brussels, the assistant answers by citing its sources. Being one of those sources is where visibility now starts, and it is worked page by page.",
-            "cols": {
-              "readable": {
-                "title": "Content machines can read",
-                "text": "The answers are in the HTML on the first response, with no JavaScript to run. An answer engine that only sees an empty page will never cite anything."
-              },
-              "structured": {
-                "title": "Structured data",
-                "text": "Every page states what it is and who wrote it, in schema.org format. That is what lets an engine attach an answer to one specific company."
-              },
-              "answers": {
-                "title": "One page, one real question",
-                "text": "Pages are written to answer, plainly, a question your clients actually ask. That is the format answer engines quote and attribute."
-              }
-            },
-            "schema": {
-              "page": "Your page",
-              "readable": "The text, in the HTML",
-              "structured": "schema.org: what, and who",
-              "answers": "One question, one answer",
-              "engine": "The answer engine",
-              "engineNote": "ChatGPT · Perplexity",
-              "answer": "The answer, attributed",
-              "source": "hargile.com/geo",
-              "sourceNote": "your page, cited as a source",
-              "blank": "A page nobody worked on",
-              "blankCompact": [
-                "A page nobody",
-                "worked on"
-              ],
-              "blankNote": "nothing to read",
-              "nothing": "nothing to cite"
-            }
+            "note": "The main content paint is still over its 2.5 second threshold, and we leave it on display rather than picking the numbers that suit us. That one is work in progress. An agency that only publishes its good scores is not telling you what it measures: it is telling you what it shows.",
+            "meta": "Lighthouse mobile, measured on {date}"
           },
           "measures": {
             "title": "What we measure and what we don't promise",
-            "text": "You don't have to take our word for it. The numbers are tracked and shared: we look at the same ones you do, at the same time.",
+            "text": "You don't have to take our word for it. We look at the same numbers you do, at the same time, against a baseline taken on day one.",
             "points": [
-              "Positions on the queries that matter to your business, not the ones that look good in a report.",
-              "Organic traffic, with the honest timeline: a few weeks for what is technical, several months for what is editorial.",
-              "Pages cited by answer engines, tracked on the same footing as Google positions."
+              "Your presence in AI answers, and that of the competitors you choose: mentions, share of voice, average position, and whether your domain is used as a source. On 25 real customer questions, in FR and NL, across ChatGPT, Perplexity, Gemini, Copilot and Google AI Overviews.",
+              "Rankings on the queries that matter to your business, not the ones that look good in a report, reviewed with you at every check-in.",
+              "Organic traffic, with the honest timeline: a few weeks for technical work, several months for content."
             ],
-            "refusal": "What we will not sell: a guaranteed first position, or the certainty of being cited by AI. Nobody controls Google's algorithm, nobody controls the models, and an agency that promises you either has already told you something about the rest. What we commit to is the method, and transparency about what it produces."
+            "refusal": "What we will not sell: a guaranteed first position, or the certainty of being cited by AI. Nobody controls Google's algorithm, nobody controls the models, and no tool \"pushes\" a site into their answers. An agency that promises you otherwise has already told you something about the rest. What we commit to: the method, and transparency about what it produces.",
+            "cadence": "Cadence: a full analysis every two weeks (weekly or monthly on request), approved proposals applied every morning, a shared check-in with you at every analysis.",
+            "tracking": {
+              "baseline": "Day-one baseline",
+              "today": "Today",
+              "example": "example values",
+              "rows": [
+                {
+                  "label": "Mentions",
+                  "a": "3 / 25",
+                  "b": "11 / 25"
+                },
+                {
+                  "label": "Share of voice",
+                  "a": "4%",
+                  "b": "12%"
+                },
+                {
+                  "label": "Average position",
+                  "a": "5.8",
+                  "b": "3.1"
+                },
+                {
+                  "label": "Domain cited as source",
+                  "a": "1 time",
+                  "b": "6 times"
+                },
+                {
+                  "label": "Google queries in top 10",
+                  "a": "2 / 15",
+                  "b": "6 / 15"
+                }
+              ]
+            }
           },
           "proofCase": {
             "text": "VENIZI sells its jewellery online and across a network of 50 boutiques in Belgium and France: a catalogue where every product has to be findable."
@@ -839,8 +992,31 @@
               {
                 "q": "How do we track results?",
                 "a": "You do not have to take our word for it: rankings, organic traffic and cited pages are tracked and shared. We look at the same numbers you do."
+              },
+              {
+                "q": "What do you change on my site, and who decides?",
+                "a": "Nothing is written without approval. Every recommendation is filed with the current value and the proposed value. You accept or reject it, or you hand us routine changes in automatic mode, under a daily cap. Everything is checked after writing and logged."
+              },
+              {
+                "q": "Which CMS?",
+                "a": "WordPress (Yoast, Rank Math, The SEO Framework) and Shopify for automatic application. Webflow and custom-built sites: we do the audit and the proposals, and we apply them ourselves, by hand or in the code."
+              },
+              {
+                "q": "What do you do with my credentials?",
+                "a": "They are never stored in our database. They live in an encrypted vault, every read is traced. To stop, one message is enough: we remove the subscription and the system reads nothing more."
+              },
+              {
+                "q": "What if I stop?",
+                "a": "One message, and we remove the subscription from our CRM. The changes live in your CMS, they stay. We delete nothing, and we hand you the baseline and the log."
+              },
+              {
+                "q": "Is the content written by an AI?",
+                "a": "No. The pages are written with you. What the system automates is the analysis, the technical proposals and the measurement."
               }
             ]
+          },
+          "cta": {
+            "text": "Enter your website URL. We hand you the facts: what holds your site back today, and your starting point in AI answers on the questions of your trade."
           }
         },
         "web": {

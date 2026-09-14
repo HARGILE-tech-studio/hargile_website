@@ -155,7 +155,7 @@ const HeroV2 = () => {
                         <CtaLink href="/contact" variant="primary">
                             {t("ctaAudit")}
                         </CtaLink>
-                        <CtaLink href="/faq" variant="ghost">
+                        <CtaLink href="/geo" variant="ghost">
                             {t("ctaWork")}
                         </CtaLink>
                     </div>

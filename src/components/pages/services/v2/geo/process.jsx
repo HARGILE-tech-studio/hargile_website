@@ -32,33 +32,39 @@
  * ne le touche pas. Le seuil doit rester synchronisé avec le @media de
  * process.module.scss. */
 
-import {useEffect, useRef, useState} from "react";
-import {motion, useMotionValue, useReducedMotion, useScroll, useSpring, useTransform} from "motion/react";
+import {useRef} from "react";
+import {motion, useTransform} from "motion/react";
 import {useTranslations} from "next-intl";
 import section from "@/components/pages/homepage/v2/v2-section.module.scss";
 import {useReveal} from "@/components/pages/homepage/v2/useReveal";
+import {railFillStyle, useRailFill} from "@/components/pages/services/v2/shared/use-rail-fill";
 import styles from "./process.module.scss";
 
+/* 14/09/2026 (docs/PAGE-GEO-SEO-refonte.md) : chaque étape porte deux lignes,
+   Système / Nous, pour qu'un lecteur pressé lise les icônes et sache ce qui
+   est automatisé. Contenu inverse l'ordre : « Nous » d'abord, « Système :
+   rien » ensuite, parce que c'est la phrase qui compte. */
 const STEPS = [
-    {key: "audit", num: "01"},
-    {key: "tech", num: "02"},
-    {key: "content", num: "03"},
-    {key: "measure", num: "04"},
+    {key: "audit", num: "01", lines: ["system", "us"]},
+    {key: "tech", num: "02", lines: ["system", "us"]},
+    {key: "content", num: "03", lines: ["system", "us"]},
+    {key: "measure", num: "04", lines: ["system", "us"]},
 ];
 
-/* Doit correspondre au @media de process.module.scss. */
-const useVerticalRail = () => {
-    const [vertical, setVertical] = useState(false);
-
-    useEffect(() => {
-        const mq = window.matchMedia("(max-width: 1100px)");
-        const sync = () => setVertical(mq.matches);
-        sync();
-        mq.addEventListener("change", sync);
-        return () => mq.removeEventListener("change", sync);
-    }, []);
-
-    return vertical;
+/* Engrenage et main, 14px, trait 1.5 : la même famille de trait que les
+   filets. Pas de bibliothèque d'icônes pour deux glyphes. */
+const ICONS = {
+    system: (
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+            <circle cx="12" cy="12" r="3"/>
+            <path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M4.9 19.1L7 17M17 7l2.1-2.1"/>
+        </svg>
+    ),
+    us: (
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M7 11V6a1.5 1.5 0 013 0v5M10 10V4.5a1.5 1.5 0 013 0V11M13 10.5V6a1.5 1.5 0 013 0v6M16 12V9.5a1.5 1.5 0 013 0V15a6 6 0 01-6 6h-1.5a6 6 0 01-4.8-2.4L4 15.2a1.6 1.6 0 012.4-2.1L7 14"/>
+        </svg>
+    ),
 };
 
 const Step = ({step, i, fill, reveal, t}) => {
@@ -80,6 +86,18 @@ const Step = ({step, i, fill, reveal, t}) => {
                 </motion.div>
                 <h3 className={`${section.blockHeading} ${styles.stepTitle}`}>{t(`steps.${step.key}.title`)}</h3>
                 <p className={styles.stepText}>{t(`steps.${step.key}.text`)}</p>
+                <ul className={styles.who}>
+                    {step.lines.map((who) => (
+                        <li key={who} className={styles.whoLine}>
+                            <span className={styles.whoIcon}>{ICONS[who]}</span>
+                            <span className={styles.whoText}>
+                                <span className={styles.whoLabel}>{t(`${who}Label`)}</span>
+                                {" "}
+                                {t(`steps.${step.key}.${who}`)}
+                            </span>
+                        </li>
+                    ))}
+                </ul>
             </div>
         </div>
     );
@@ -88,38 +106,20 @@ const Step = ({step, i, fill, reveal, t}) => {
 const Process = () => {
     const t = useTranslations("pages.services.detail.seo.process");
     const reveal = useReveal();
-    const reducedMotion = useReducedMotion();
-    const vertical = useVerticalRail();
     const timelineRef = useRef(null);
-
-    /* Le rail se remplit pendant que la section traverse l'écran : il démarre
-       quand son haut dégage le bas de la fenêtre et se termine un peu après le
-       centre — les quatre étapes « se passent » en un seul geste de scroll. */
-    const {scrollYProgress} = useScroll({
-        target: timelineRef,
-        offset: ["start 0.85", "end 0.5"],
-    });
-    const fillSpring = useSpring(scrollYProgress, {stiffness: 90, damping: 24, mass: 0.4});
-    /* Mouvement réduit : la timeline est simplement complète. Reste une
-       MotionValue pour que les useTransform de <Step> marchent à l'identique. */
-    const staticFull = useMotionValue(1);
-    const fill = reducedMotion ? staticFull : fillSpring;
+    /* Le rail se remplit pendant que la section traverse l'écran ; mécanique
+       partagée avec approval.jsx, voir shared/use-rail-fill.js. */
+    const {fill, vertical} = useRailFill(timelineRef);
 
     return (
         <section className={section.section}>
             <div className={section.container}>
                 <h2 className={section.heading} {...reveal(0)}>{t("title")}</h2>
+                <p className={section.lead} {...reveal(0)}>{t("lead")}</p>
 
                 <div className={styles.timeline} ref={timelineRef}>
                     <div className={styles.rail} aria-hidden="true">
-                        <motion.div
-                            className={styles.railFill}
-                            style={
-                                vertical
-                                    ? {scaleY: fill, transformOrigin: "top"}
-                                    : {scaleX: fill, transformOrigin: "left"}
-                            }
-                        />
+                        <motion.div className={styles.railFill} style={railFillStyle(fill, vertical)}/>
                     </div>
                     <div className={styles.steps}>
                         {STEPS.map((step, i) => (

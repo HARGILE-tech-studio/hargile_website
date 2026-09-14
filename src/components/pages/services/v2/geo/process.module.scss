@@ -74,6 +74,55 @@
   max-width: 34ch;
 }
 
+/* Les deux lignes Système / Nous sous chaque étape. Icône à gauche, texte
+   en 13px un cran sous le corps : c'est un cartouche, pas un paragraphe. */
+.who {
+  list-style: none;
+  margin: 14px 0 0;
+  padding: 12px 0 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-width: 34ch;
+}
+
+.whoLine {
+  display: grid;
+  grid-template-columns: 14px minmax(0, 1fr);
+  gap: 10px;
+  align-items: start;
+}
+
+.whoIcon {
+  display: block;
+  width: 14px;
+  height: 14px;
+  margin-top: 2px;
+
+  svg {
+    width: 14px;
+    height: 14px;
+    fill: none;
+    stroke: rgba(150, 185, 249, 0.85);
+    stroke-width: 1.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+}
+
+.whoText {
+  font-size: 13px;
+  font-weight: 300;
+  color: rgba(237, 237, 237, 0.62);
+  line-height: 1.5;
+}
+
+.whoLabel {
+  font-weight: 600;
+  color: rgba(237, 237, 237, 0.85);
+}
+
 /* Rail vertical. Le seuil doit correspondre à useVerticalRail() dans
    process.jsx — quatre colonnes deviennent illisibles bien avant le 640px de
    la homepage, qui n'en aligne que trois. */
@@ -100,7 +149,8 @@
     gap: clamp(40px, 5vw, 56px);
   }
 
-  .stepText {
+  .stepText,
+  .who {
     max-width: 62ch;
   }
 }

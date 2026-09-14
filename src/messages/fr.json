@@ -76,7 +76,7 @@
         "contact": "Contact",
         "faq": "FAQ",
         "privacyPolicy": "Politique de confidentialité",
-        "services": "Notre service",
+        "services": "Solution",
         "siteMap": "Plan du site"
       },
       "sections": {
@@ -125,7 +125,7 @@
       "i-go": "I go",
       "our-dna": "Notre ADN",
       "portfolio": "Portfolio",
-      "services": "Notre service",
+      "services": "Solution",
       "solutions": "Solutions"
     },
     "read-more": {
@@ -723,37 +723,192 @@
           "hero": {
             "eyebrow": "GEO",
             "title": "Votre visibilité, automatisée",
-            "answer": "Nous rendons les PME visibles là où leurs clients cherchent désormais : dans les réponses des assistants IA comme ChatGPT ou Perplexity, et sur Google. GEO et SEO, contenu et mesure, automatisés là où c'est possible, pour un résultat durable plutôt qu'une campagne ponctuelle."
+            "answer": "Nous rendons les PME visibles là où leurs clients cherchent désormais : dans les réponses de ChatGPT, Perplexity ou Gemini, et sur Google. GEO et SEO, technique, contenu et mesure. Ce qui peut être automatisé l'est. Le reste, on le fait à la main, et on vous montre les deux."
+          },
+          "geo": {
+            "title": "Comment se faire citer par les IA ?",
+            "lead": "Quand un client demande à ChatGPT ou Perplexity quelle agence développe des applications web à Bruxelles, l'assistant répond en citant ses sources. Être l'une de ces sources, c'est le référencement qui commence, et il se travaille, page par page.",
+            "cols": {
+              "readable": {
+                "title": "Un contenu lisible par les machines",
+                "text": "Les réponses sont dans le HTML dès le premier chargement, sans JavaScript à exécuter. Un moteur qui ne voit qu'une page vide ne cite rien."
+              },
+              "structured": {
+                "title": "Des données structurées",
+                "text": "Chaque page déclare ce qu'elle est et qui l'écrit, au format schema.org. C'est ce qui permet au moteur de rattacher une réponse à une entreprise précise."
+              },
+              "answers": {
+                "title": "Une page, une vraie question",
+                "text": "Chaque page répond nettement à une question que vos clients posent réellement. C'est le format que les moteurs de réponse reprennent et attribuent."
+              }
+            },
+            "conditions": "Trois conditions, dans l'ordre où un moteur de réponse les rencontre :",
+            "demo": {
+              "example": "Illustration, pas un résultat",
+              "question": "Quelle agence fait des applications web à Bruxelles ?",
+              "sourcesLabel": "Sources",
+              "you": "Votre marque",
+              "yourPage": "votre-site.be/applications-web",
+              "before": {
+                "label": "Aujourd'hui",
+                "answer": "Trois agences reviennent le plus souvent :",
+                "names": [
+                  "Agence A",
+                  "Studio B",
+                  "Collectif C"
+                ],
+                "sources": [
+                  "agence-a.be",
+                  "studio-b.com",
+                  "collectif-c.be"
+                ],
+                "caption": "Votre site existe. Le moteur ne l'a pas lu."
+              },
+              "after": {
+                "label": "Après le travail",
+                "answer": "Quatre agences reviennent le plus souvent :",
+                "names": [
+                  "Agence A",
+                  "Studio B",
+                  "Collectif C"
+                ],
+                "sources": [
+                  "agence-a.be",
+                  "studio-b.com",
+                  "collectif-c.be"
+                ],
+                "caption": "Une page qui répond à cette question, lisible et structurée."
+              }
+            }
           },
           "process": {
             "title": "Comment on s'y prend",
+            "lead": "Chaque étape indique ce que fait le système et ce que nous faisons nous-mêmes.",
+            "systemLabel": "Système :",
+            "usLabel": "Nous :",
             "steps": {
               "audit": {
                 "title": "Audit",
-                "text": "D'abord un état des lieux : ce qui vous rend visible aujourd'hui, ce qui vous freine, et où sont les requêtes qui comptent pour votre métier."
+                "text": "État des lieux au premier jour : ce qui vous rend visible, ce qui vous freine, et où sont les requêtes qui comptent pour votre métier. On mesure aussi votre point de départ dans les réponses des IA, avant de toucher à quoi que ce soit.",
+                "system": "vitesse mobile, données terrain Chrome, robots, sitemap, analyse complète du site.",
+                "us": "choix des requêtes, des questions IA et des concurrents à suivre."
               },
               "tech": {
                 "title": "Technique",
-                "text": "Un site que les moteurs lisent sans obstacle : vitesse, structure, données structurées, contenu présent dès le premier chargement."
+                "text": "Un site que les moteurs lisent sans obstacle : vitesse, structure, données structurées, contenu présent dès le premier chargement.",
+                "system": "titres et descriptions des pages, proposés puis appliqués sur votre CMS après validation.",
+                "us": "schema.org, hreflang, canonical, performance, faits à la main et vérifiés."
               },
               "content": {
                 "title": "Contenu",
-                "text": "Des pages qui répondent chacune à une vraie question de vos clients, le format que Google et les moteurs de réponse citent."
+                "text": "Des pages qui répondent chacune à une vraie question de vos clients, le format que Google et les moteurs de réponse citent.",
+                "us": "la rédaction, avec vous, dans votre vocabulaire : retouches, nouvelles pages, articles de blog quand il en faut.",
+                "system": "repère, à partir des questions suivies, les textes à retoucher, les pages qui manquent et les sujets d'articles à écrire."
               },
               "measure": {
                 "title": "Mesure",
-                "text": "Positions, trafic, citations par les IA : on suit ce qui change, et on ajuste. Ce qui ne se mesure pas ne s'améliore pas."
+                "text": "On repart de la baseline du jour 1 et on suit ce qui change.",
+                "system": "votre présence et celle de vos concurrents dans les réponses de ChatGPT, Perplexity, Gemini, Copilot et Google AI Overviews, sur 25 questions réelles de vos clients, en français et en néerlandais ; positions et trafic revus avec vous à chaque point.",
+                "us": "choix des concurrents à comparer, lecture, décision, ajustement, à chaque point avec vous."
+              }
+            }
+          },
+          "approval": {
+            "title": "Rien n'est écrit sur votre site sans votre accord",
+            "text": "Le système ne modifie pas votre site en direct. Il propose. Chaque recommandation devient une proposition : la page concernée, la valeur actuelle, la valeur proposée, et pourquoi.",
+            "modesTitle": "Vous choisissez le mode",
+            "modes": {
+              "validate": {
+                "title": "Mode validation",
+                "text": "Vous recevez chaque proposition et vous l'acceptez ou la refusez. Rien ne part sans votre clic. C'est le mode par défaut."
+              },
+              "auto": {
+                "title": "Mode automatique",
+                "text": "Vous nous faites confiance sur les changements de routine (titres, descriptions) : les propositions approuvées par nous sont appliquées chaque matin, avec un plafond quotidien que vous fixez. Vous pouvez repasser en mode validation à tout moment."
+              }
+            },
+            "bothTitle": "Dans les deux modes",
+            "rules": [
+              "Le système ne remplace jamais une valeur qu'il n'a pas lue d'abord.",
+              "Chaque écriture est vérifiée après coup et journalisée : quoi, quand, avant, après.",
+              "Au moindre échec d'écriture, le pilote s'arrête de lui-même et nous prévient.",
+              "Vos changements sont dans votre CMS, pas chez nous. Si vous partez, ils restent."
+            ],
+            "flow": {
+              "steps": [
+                "Analyse",
+                "Proposition",
+                "Décision",
+                "Écriture vérifiée"
+              ],
+              "branchValidate": "vous validez",
+              "branchAuto": "mode automatique",
+              "journal": "Journal",
+              "journalLine": [
+                "14/09 09:02",
+                "/services",
+                "meta_description",
+                "remplacement",
+                "vérifié"
+              ]
+            },
+            "card": {
+              "title": "Proposition",
+              "page": "/services",
+              "field": "meta_description",
+              "beforeLabel": "Actuel",
+              "before": "Nos services",
+              "afterLabel": "Proposé",
+              "after": "Développement web, GEO et SEO pour PME à Bruxelles. Audit gratuit en 48 h.",
+              "why": "Pourquoi : description trop courte (12 caractères), la page n'annonce ni le métier ni la ville.",
+              "accept": "Accepter",
+              "reject": "Refuser"
+            }
+          },
+          "access": {
+            "title": "Vos accès",
+            "text": "Vos identifiants ne sont jamais stockés dans notre base de données. Ils vivent dans un coffre chiffré, et chaque lecture est tracée : qui, quand, pour quoi. Pour arrêter, un message suffit : on retire l'abonnement de notre CRM, le système ne lit plus rien, rien ne casse.",
+            "items": {
+              "vault": {
+                "title": "Coffre chiffré",
+                "text": "Jamais dans notre base de données."
+              },
+              "log": {
+                "title": "Lecture tracée",
+                "text": "Qui, quand, pour quoi."
+              },
+              "revoke": {
+                "title": "Arrêt sur demande",
+                "text": "Un message, et on retire l'abonnement."
+              }
+            },
+            "platforms": "WordPress (Yoast, Rank Math, The SEO Framework) et Shopify : les propositions approuvées sont appliquées automatiquement. Webflow et sites sur mesure : même audit, mêmes propositions, application faite par nous, à la main ou dans le code.",
+            "cms": {
+              "wordpress": {
+                "name": "WordPress",
+                "note": "Yoast · Rank Math · The SEO Framework · application automatique"
+              },
+              "shopify": {
+                "name": "Shopify",
+                "note": "application automatique"
+              },
+              "webflow": {
+                "name": "Webflow",
+                "note": "application à la main"
+              },
+              "custom": {
+                "name": "Sites sur mesure",
+                "note": "application dans le code, par nous"
               }
             }
           },
           "metaProof": {
             "title": "Architecture & source",
-            "text": "La méthode qu'on vous propose est celle qu'on applique à notre propre site :",
+            "text": "La méthode qu'on vous propose est celle qu'on applique à notre propre site. Affichez le code source de cette page : tout y est.",
             "points": [
               "Chaque page existe en français et en anglais, avec les balises qui disent aux moteurs laquelle servir.",
               "Chaque page porte ses données structurées (schema.org), validées automatiquement avant chaque mise en production.",
-              "Tout le contenu est présent dans le HTML dès la première réponse, lisible par les moteurs comme par les assistants IA.",
-              "Affichez le code source de cette page : tout y est."
+              "Tout le contenu est présent dans le HTML dès la première réponse, lisible par les moteurs comme par les assistants IA."
             ]
           },
           "measured": {
@@ -771,53 +926,51 @@
               "ttfb": "Réponse du serveur"
             },
             "targetLabel": "seuil {value}",
-            "note": "L'affichage principal dépasse encore son seuil de 2,5 secondes, et nous le laissons affiché plutôt que de choisir les chiffres qui nous arrangent. C'est le chantier en cours. Une agence qui ne publie que ses bons scores ne vous dit pas ce qu'elle mesure : elle vous dit ce qu'elle montre."
-          },
-          "geo": {
-            "title": "Comment se faire citer par les IA ?",
-            "lead": "Quand un client demande à ChatGPT ou à Perplexity quelle agence développe des applications web à Bruxelles, l'assistant répond en citant ses sources. Être l'une de ces sources, c'est le référencement qui commence, et il se travaille, page par page.",
-            "cols": {
-              "readable": {
-                "title": "Un contenu lisible par les machines",
-                "text": "Les réponses sont dans le HTML dès le premier chargement, sans JavaScript à exécuter. Un moteur de réponse qui ne voit qu'une page vide ne citera jamais rien."
-              },
-              "structured": {
-                "title": "Des données structurées",
-                "text": "Chaque page déclare ce qu'elle est et qui l'écrit, au format schema.org. C'est ce qui permet à un moteur de rattacher une réponse à une entreprise précise."
-              },
-              "answers": {
-                "title": "Une page, une vraie question",
-                "text": "Les pages sont écrites pour répondre nettement à une question que vos clients posent réellement. C'est le format que les moteurs de réponse reprennent et attribuent."
-              }
-            },
-            "schema": {
-              "page": "Votre page",
-              "readable": "Le texte, dans le HTML",
-              "structured": "schema.org : quoi, et qui",
-              "answers": "Une question, une réponse",
-              "engine": "Le moteur de réponse",
-              "engineNote": "ChatGPT · Perplexity",
-              "answer": "La réponse citée",
-              "source": "hargile.com/geo",
-              "sourceNote": "votre page, citée comme source",
-              "blank": "Une page qui n'est pas travaillée",
-              "blankCompact": [
-                "Une page qui n'est",
-                "pas travaillée"
-              ],
-              "blankNote": "rien à lire",
-              "nothing": "rien à citer"
-            }
+            "note": "L'affichage principal dépasse encore son seuil de 2,5 secondes, et nous le laissons affiché plutôt que de choisir les chiffres qui nous arrangent. C'est le chantier en cours. Une agence qui ne publie que ses bons scores ne vous dit pas ce qu'elle mesure : elle vous dit ce qu'elle montre.",
+            "meta": "Lighthouse mobile, mesuré le {date}"
           },
           "measures": {
             "title": "Ce qu'on mesure et ce qu'on ne promet pas",
-            "text": "Vous n'avez pas à nous croire sur parole. Les chiffres sont suivis et partagés : on regarde les mêmes que vous, aux mêmes moments.",
+            "text": "Vous n'avez pas à nous croire sur parole. On regarde les mêmes chiffres que vous, aux mêmes moments, à partir d'une baseline prise le premier jour.",
             "points": [
-              "Les positions sur les requêtes qui comptent pour votre métier, pas sur celles qui font joli dans un rapport.",
-              "Le trafic organique, avec l'échéance honnête : quelques semaines pour ce qui relève de la technique, plusieurs mois pour ce qui relève du contenu.",
-              "Les pages citées par les moteurs de réponse, suivies au même titre que les positions Google."
+              "Votre présence dans les réponses des IA, et celle des concurrents que vous choisissez : mentions, part de voix, position moyenne, et si votre domaine est utilisé comme source. Sur 25 questions réelles de vos clients, en FR et NL, dans ChatGPT, Perplexity, Gemini, Copilot et Google AI Overviews.",
+              "Les positions sur les requêtes qui comptent pour votre métier, pas sur celles qui font joli dans un rapport, revues avec vous à chaque point.",
+              "Le trafic organique, avec l'échéance honnête : quelques semaines pour la technique, plusieurs mois pour le contenu."
             ],
-            "refusal": "Ce que nous ne vendrons pas : la première position garantie, ni la certitude d'être cité par les IA. Personne ne contrôle l'algorithme de Google, personne ne contrôle les modèles, et une agence qui vous les promet vous dit déjà quelque chose sur le reste. Ce sur quoi nous nous engageons, c'est la méthode et la transparence sur ce qu'elle produit."
+            "refusal": "Ce que nous ne vendrons pas : la première position garantie, ni la certitude d'être cité par les IA. Personne ne contrôle l'algorithme de Google, personne ne contrôle les modèles, et aucun outil ne « pousse » un site dans leurs réponses. Une agence qui vous le promet vous dit déjà quelque chose sur le reste. Ce sur quoi nous nous engageons : la méthode, et la transparence sur ce qu'elle produit.",
+            "cadence": "Cadence : analyse complète toutes les deux semaines (hebdomadaire ou mensuelle sur demande), application des propositions approuvées chaque matin, point partagé avec vous à chaque analyse.",
+            "tracking": {
+              "baseline": "Baseline jour 1",
+              "today": "Aujourd'hui",
+              "example": "valeurs d'exemple",
+              "rows": [
+                {
+                  "label": "Mentions",
+                  "a": "3 / 25",
+                  "b": "11 / 25"
+                },
+                {
+                  "label": "Part de voix",
+                  "a": "4 %",
+                  "b": "12 %"
+                },
+                {
+                  "label": "Position moyenne",
+                  "a": "5,8",
+                  "b": "3,1"
+                },
+                {
+                  "label": "Domaine cité en source",
+                  "a": "1 fois",
+                  "b": "6 fois"
+                },
+                {
+                  "label": "Requêtes Google en top 10",
+                  "a": "2 / 15",
+                  "b": "6 / 15"
+                }
+              ]
+            }
           },
           "proofCase": {
             "text": "VENIZI vend ses bijoux en ligne et dans un réseau de 50 boutiques en Belgique et en France : un catalogue où chaque produit doit être trouvable."
@@ -839,8 +992,31 @@
               {
                 "q": "Comment suit-on les résultats ?",
                 "a": "Vous n'avez pas à nous croire sur parole : positions, trafic organique et pages citées sont suivis et partagés. On regarde les mêmes chiffres que vous."
+              },
+              {
+                "q": "Que modifiez-vous sur mon site, et qui décide ?",
+                "a": "Rien n'est écrit sans validation. Chaque recommandation est déposée avec la valeur actuelle et la valeur proposée. Vous l'acceptez ou la refusez, ou vous nous confiez les changements de routine en mode automatique, avec un plafond quotidien. Tout est vérifié après écriture et journalisé."
+              },
+              {
+                "q": "Quels CMS ?",
+                "a": "WordPress (Yoast, Rank Math, The SEO Framework) et Shopify pour l'application automatique. Webflow et sites sur mesure : on fait l'audit et les propositions, et on les applique nous-mêmes, à la main ou dans le code."
+              },
+              {
+                "q": "Que faites-vous de mes accès ?",
+                "a": "Ils ne sont jamais stockés dans notre base. Ils vivent dans un coffre chiffré, chaque lecture est tracée. Pour arrêter, un message suffit : on retire l'abonnement et le système ne lit plus rien."
+              },
+              {
+                "q": "Et si j'arrête ?",
+                "a": "Un message, et on retire l'abonnement de notre CRM. Les changements sont dans votre CMS, ils restent. On ne supprime rien, et on vous remet la baseline et le journal."
+              },
+              {
+                "q": "Le contenu est-il écrit par une IA ?",
+                "a": "Non. Les pages sont rédigées avec vous. Ce que le système automatise, c'est l'analyse, les propositions techniques et la mesure."
               }
             ]
+          },
+          "cta": {
+            "text": "Entrez l'URL de votre site. On vous rend un état des lieux : ce qui freine votre site aujourd'hui, et votre point de départ dans les réponses des IA sur les questions de votre métier."
           }
         },
         "web": {

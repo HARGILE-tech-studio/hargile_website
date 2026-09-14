@@ -78,6 +78,14 @@
   max-width: 14ch;
 }
 
+.meta {
+  margin: clamp(24px, 3vw, 36px) 0 0;
+  text-align: center;
+  font-size: 13px;
+  font-weight: 300;
+  color: rgba(237, 237, 237, 0.5);
+}
+
 @media (max-width: 860px) {
   .gauges {
     grid-template-columns: repeat(2, minmax(0, 1fr));

@@ -1,0 +1,248 @@
+/* Le parcours d'une proposition en quatre cases reliées, puis les deux modes
+   à gauche et la carte de proposition à droite. Hairlines, pas de fonds :
+   la carte est le seul objet cadré, parce que c'est un objet. */
+
+.lead {
+  max-width: 68ch;
+}
+
+/* ---------- Le parcours, sur le rail de process.module.scss ---------- */
+
+.flow {
+  margin-top: clamp(40px, 5vw, 60px);
+}
+
+.flowList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.flowLabel {
+  display: block;
+  margin-top: 10px;
+  font-family: var(--font-headings);
+  font-weight: 600;
+  font-size: clamp(18px, 1.6vw, 22px);
+  letter-spacing: -0.015em;
+  color: #ededed;
+}
+
+/* La bifurcation sous Décision : deux libellés, chacun tenu par un tiret
+   vertical, comme deux branches qui partent du même point. */
+.branch {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 12px;
+  padding-left: 12px;
+  border-left: 1px solid rgba(150, 185, 249, 0.45);
+
+  span {
+    font-size: 12.5px;
+    font-weight: 300;
+    color: rgba(237, 237, 237, 0.62);
+  }
+}
+
+.journal {
+  display: block;
+  margin-top: 12px;
+  max-width: 34ch;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 6px;
+  padding: 8px 10px;
+}
+
+.journalTitle {
+  display: block;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(237, 237, 237, 0.42);
+  margin-bottom: 6px;
+}
+
+.journalLine {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 10px;
+  font-family: ui-monospace, "Cascadia Mono", "SF Mono", Menlo, Consolas, monospace;
+  font-size: 11px;
+  color: rgba(237, 237, 237, 0.66);
+
+  span:last-child {
+    color: #96b9f9;
+  }
+}
+
+/* ---------- Modes et carte ---------- */
+
+.split {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 0.9fr);
+  gap: clamp(32px, 4.5vw, 72px);
+  margin-top: clamp(48px, 6vw, 76px);
+  align-items: start;
+}
+
+.kicker {
+  margin: 0 0 16px;
+  font-size: 11.5px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(150, 185, 249, 0.85);
+}
+
+.mode {
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  padding: 20px 0 24px;
+}
+
+.modeText {
+  margin: 10px 0 0;
+  font-size: 15px;
+  font-weight: 300;
+  color: rgba(237, 237, 237, 0.66);
+  line-height: 1.6;
+  max-width: 56ch;
+}
+
+.mode + .kicker {
+  margin-top: 16px;
+}
+
+.rules {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  li {
+    position: relative;
+    padding-left: 18px;
+    font-size: 14.5px;
+    font-weight: 300;
+    color: rgba(237, 237, 237, 0.66);
+    line-height: 1.55;
+    max-width: 56ch;
+
+    &::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0.7em;
+      width: 8px;
+      height: 1px;
+      background: rgba(150, 185, 249, 0.8);
+    }
+  }
+}
+
+/* La carte de proposition. */
+.card {
+  border: 1px solid rgba(150, 185, 249, 0.42);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.cardHead {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+  flex-wrap: wrap;
+  padding: 12px 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.cardTitle {
+  font-family: var(--font-headings);
+  font-weight: 600;
+  font-size: 13px;
+  color: #96b9f9;
+}
+
+.cardMeta {
+  font-family: ui-monospace, "Cascadia Mono", "SF Mono", Menlo, Consolas, monospace;
+  font-size: 11.5px;
+  color: rgba(237, 237, 237, 0.5);
+}
+
+.cardRow {
+  display: grid;
+  grid-template-columns: 7ch minmax(0, 1fr);
+  gap: 12px;
+  padding: 12px 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  align-items: baseline;
+}
+
+.cardLabel {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(237, 237, 237, 0.42);
+}
+
+.cardBefore {
+  font-size: 14px;
+  font-weight: 300;
+  color: rgba(237, 237, 237, 0.5);
+  text-decoration: line-through;
+  text-decoration-color: rgba(237, 237, 237, 0.3);
+}
+
+.cardAfter {
+  font-size: 14px;
+  font-weight: 400;
+  color: rgba(237, 237, 237, 0.88);
+  line-height: 1.5;
+}
+
+.cardWhy {
+  margin: 0;
+  padding: 12px 16px;
+  font-size: 13px;
+  font-weight: 300;
+  color: rgba(237, 237, 237, 0.6);
+  line-height: 1.5;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.cardActions {
+  display: flex;
+  gap: 10px;
+  padding: 12px 16px;
+}
+
+.accept,
+.reject {
+  display: inline-block;
+  padding: 7px 14px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 500;
+  border: 1px solid;
+}
+
+.accept {
+  border-color: #96b9f9;
+  color: #96b9f9;
+}
+
+.reject {
+  border-color: rgba(255, 255, 255, 0.2);
+  color: rgba(237, 237, 237, 0.6);
+}
+
+@media (max-width: 900px) {
+  .split {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

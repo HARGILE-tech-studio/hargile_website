@@ -8,7 +8,9 @@
    a different page from the four service pages, so there is now a single
    band and no variant to pick.
 
-   `secondary` is the optional quiet second action ({href, label}). */
+   `secondary` is the optional quiet second action ({href, label}).
+   `text` overrides the shared paragraph for one page (/geo names the audit it
+   hands back; the other pages keep the shared line). */
 
 import {useTranslations} from "next-intl";
 import CtaLink from "@/components/ui/cta-link/cta-link";
@@ -16,7 +18,7 @@ import section from "@/components/pages/homepage/v2/v2-section.module.scss";
 import {useReveal} from "@/components/pages/homepage/v2/useReveal";
 import styles from "./cta-band.module.scss";
 
-const CtaBand = ({secondary}) => {
+const CtaBand = ({secondary, text}) => {
     const t = useTranslations("pages.services.shared.ctaBand");
     const reveal = useReveal();
 
@@ -29,7 +31,7 @@ const CtaBand = ({secondary}) => {
                             {t("title")}
                         </h2>
                         <p className={`${section.lead} ${styles.text}`} {...reveal(1)}>
-                            {t("text")}
+                            {text ?? t("text")}
                         </p>
                     </div>
                     <div className={styles.actions} {...reveal(2)}>

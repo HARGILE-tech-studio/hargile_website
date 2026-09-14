@@ -28,6 +28,98 @@
   line-height: 1.6;
 }
 
+.cadence {
+  margin: clamp(32px, 4vw, 48px) 0 0;
+  font-size: 14px;
+  font-weight: 300;
+  color: rgba(237, 237, 237, 0.55);
+  line-height: 1.6;
+  max-width: 72ch;
+}
+
+/* Les deux cartes de suivi, même gabarit. Celle d'aujourd'hui prend le
+   filet accent : c'est la colonne qui bouge. */
+.tracking {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(16px, 2.5vw, 32px);
+  margin-top: clamp(28px, 3.5vw, 44px);
+  max-width: 760px;
+}
+
+/* Sans cadre : un filet haut par carte, accent sur celle d'aujourd'hui. */
+.trackCard,
+.trackCardNow {
+  border-top: 1px solid rgba(255, 255, 255, 0.14);
+  min-width: 0;
+}
+
+.trackCardNow {
+  border-top-color: rgba(150, 185, 249, 0.7);
+}
+
+.trackHead {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 8px;
+  padding: 14px 0 10px;
+}
+
+.trackTitle {
+  font-family: var(--font-headings);
+  font-weight: 600;
+  font-size: 13px;
+  color: rgba(237, 237, 237, 0.85);
+}
+
+.trackCardNow .trackTitle {
+  color: #96b9f9;
+}
+
+.trackExample {
+  font-size: 11px;
+  font-weight: 300;
+  color: rgba(237, 237, 237, 0.42);
+  letter-spacing: 0.02em;
+}
+
+.trackRows {
+  margin: 0;
+  padding: 0;
+}
+
+.trackRow {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 7px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+
+  &:last-child {
+    border-bottom: 0;
+  }
+
+  dt {
+    font-size: 13px;
+    font-weight: 300;
+    color: rgba(237, 237, 237, 0.6);
+  }
+
+  dd {
+    margin: 0;
+    font-family: var(--font-headings);
+    font-weight: 600;
+    font-size: 13px;
+    color: rgba(237, 237, 237, 0.88);
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+.trackCardNow .trackRow dd {
+  color: #96b9f9;
+}
+
 /* Le plus grand pas vertical de la page — délibérément le double d'un pas de
    bloc ordinaire. C'est lui qui dit « on change de registre ». */
 .refusalBlock {
@@ -68,5 +160,11 @@
   .point {
     padding: clamp(20px, 4vw, 26px) 0;
     max-width: 68ch;
+  }
+}
+
+@media (max-width: 560px) {
+  .tracking {
+    grid-template-columns: minmax(0, 1fr);
   }
 }

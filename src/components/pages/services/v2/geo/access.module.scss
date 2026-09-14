@@ -1,0 +1,123 @@
+/* Vos accès : trois pictos sur une ligne à filet, puis le paragraphe des
+   plateformes et les deux cartouches CMS. */
+
+.lead {
+  max-width: 68ch;
+}
+
+.items {
+  list-style: none;
+  margin: clamp(40px, 5vw, 60px) 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(28px, 3.5vw, 56px);
+}
+
+.item {
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  padding-top: 22px;
+}
+
+.icon {
+  display: block;
+  width: 26px;
+  height: 26px;
+  margin-bottom: 14px;
+
+  svg {
+    width: 26px;
+    height: 26px;
+    fill: none;
+    stroke: #96b9f9;
+    stroke-width: 1.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+}
+
+.itemTitle {
+  font-family: var(--font-headings);
+  font-weight: 600;
+  font-size: 16px;
+  letter-spacing: -0.01em;
+  color: #ededed;
+  margin: 0;
+}
+
+.itemText {
+  margin: 6px 0 0;
+  font-size: 14px;
+  font-weight: 300;
+  color: rgba(237, 237, 237, 0.62);
+  line-height: 1.55;
+}
+
+.platforms {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr);
+  gap: clamp(28px, 4vw, 64px);
+  align-items: center;
+  margin-top: clamp(40px, 5vw, 60px);
+  padding-top: clamp(24px, 3vw, 36px);
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.platformsText {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 300;
+  color: rgba(237, 237, 237, 0.66);
+  line-height: 1.6;
+  max-width: 60ch;
+}
+
+/* Quatre plateformes, sans cadre : un filet haut chacune, comme les trois
+   pictos au-dessus. Le cadre faisait « logo », et ce n'en sont pas. */
+.cms {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px clamp(16px, 2vw, 28px);
+}
+
+.cmsCard {
+  border-top: 1px solid rgba(255, 255, 255, 0.14);
+  padding-top: 12px;
+  min-width: 0;
+}
+
+.cmsName {
+  display: block;
+  font-family: var(--font-headings);
+  font-weight: 700;
+  font-size: 18px;
+  letter-spacing: -0.02em;
+  color: #ededed;
+}
+
+.cmsNote {
+  display: block;
+  margin-top: 6px;
+  font-size: 12px;
+  font-weight: 300;
+  color: rgba(237, 237, 237, 0.5);
+  line-height: 1.4;
+}
+
+@media (max-width: 900px) {
+  .items {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0;
+  }
+
+  .item {
+    padding: clamp(20px, 4vw, 26px) 0;
+  }
+
+  .platforms {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

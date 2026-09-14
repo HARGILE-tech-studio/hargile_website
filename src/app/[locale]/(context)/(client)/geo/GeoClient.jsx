@@ -32,6 +32,14 @@
  *   5. Measures     → clôture : ce qu'on mesure, et le refus de garantir une
  *      citation ou un classement.
  *
+ * 14/09/2026, refonte (docs/PAGE-GEO-SEO-refonte.md) : deux sections
+ * s'insèrent entre Process et MetaProof. Approval (« Rien n'est écrit sur
+ * votre site sans votre accord ») et Access (« Vos accès ») décrivent le
+ * pilote tel qu'il tourne : ce qu'il propose, qui décide, où vivent les
+ * identifiants. Elles viennent juste après la méthode parce qu'elles en sont
+ * la condition de confiance, et avant la preuve par la source qui reste le
+ * bloc le plus honnête de la page. Le CTA final reçoit son propre texte.
+ *
  * SiblingOffers a disparu : il n'existe plus qu'une seule offre (GEO), donc
  * "les autres offres" n'a plus de sens à une seule alternative — voir
  * sibling-offers.jsx, qui documente pourquoi il ne route plus que vers /geo
@@ -40,6 +48,8 @@
 import {useTranslations} from "next-intl";
 import PosterHero from "@/components/pages/services/v2/shared/poster-hero";
 import Process from "@/components/pages/services/v2/geo/process";
+import Approval from "@/components/pages/services/v2/geo/approval";
+import Access from "@/components/pages/services/v2/geo/access";
 import MetaProof from "@/components/pages/services/v2/geo/meta-proof";
 import MeasuredProof from "@/components/pages/services/v2/geo/measured-proof";
 import GeoAnswer from "@/components/pages/services/v2/geo/geo-answer";
@@ -50,6 +60,7 @@ import WaveGridBackdrop from "@/components/pages/services/v2/shared/wave-grid-ba
 
 export default function GeoClient() {
     const t = useTranslations("pages.services.detail.seo.hero");
+    const cta = useTranslations("pages.services.detail.seo.cta");
 
     return (
         <>
@@ -72,6 +83,8 @@ export default function GeoClient() {
                 14/09/2026 note at the top of this file. */}
             <GeoAnswer/>
             <Process/>
+            <Approval/>
+            <Access/>
             <MetaProof/>
             {/* Straight after MetaProof, which makes the claims this section
                 then puts numbers on. Figures live in src/data/site-metrics.js
@@ -80,7 +93,7 @@ export default function GeoClient() {
             <MeasuredProof/>
             <Measures/>
             <MiniFaq namespace="pages.services.detail.seo.faq"/>
-            <CtaBand/>
+            <CtaBand text={cta("text")}/>
         </>
     );
 }

@@ -55,6 +55,32 @@ const Measures = () => {
                     ))}
                 </div>
 
+                <p className={styles.cadence} {...reveal(3)}>{t("cadence")}</p>
+
+                {/* 14/09/2026 (docs/PAGE-GEO-SEO-refonte.md §8) : le format du
+                    suivi, deux cartes au même gabarit, cinq lignes. Valeurs
+                    fictives, marquées « exemple » : le message est le format,
+                    pas un résultat. aria-hidden : les trois mesures au-dessus
+                    listent déjà chaque ligne en prose. */}
+                <div className={styles.tracking} {...reveal(3)} aria-hidden="true">
+                    {[["baseline", "a"], ["today", "b"]].map(([head, col]) => (
+                        <div key={head} className={col === "b" ? styles.trackCardNow : styles.trackCard}>
+                            <div className={styles.trackHead}>
+                                <span className={styles.trackTitle}>{t(`tracking.${head}`)}</span>
+                                <span className={styles.trackExample}>{t("tracking.example")}</span>
+                            </div>
+                            <dl className={styles.trackRows}>
+                                {t.raw("tracking.rows").map((row) => (
+                                    <div key={row.label} className={styles.trackRow}>
+                                        <dt>{row.label}</dt>
+                                        <dd>{row[col]}</dd>
+                                    </div>
+                                ))}
+                            </dl>
+                        </div>
+                    ))}
+                </div>
+
                 {/* Le pas le plus large de la page, puis un filet accent court :
                     c'est le changement de registre, et plus aucune boîte ne
                     l'annonce. */}
@@ -62,9 +88,9 @@ const Measures = () => {
                     <span
                         className={`${styles.refusalRule} ${revealStyles.hairline}`}
                         aria-hidden="true"
-                        {...reveal(3)}
+                        {...reveal(4)}
                     />
-                    <p className={styles.refusal} {...reveal(4)}>{t("refusal")}</p>
+                    <p className={styles.refusal} {...reveal(5)}>{t("refusal")}</p>
                 </div>
             </div>
         </section>
