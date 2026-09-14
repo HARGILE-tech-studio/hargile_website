@@ -518,7 +518,7 @@ export const SlotInput = styled.input`
   transition: border-color 0.2s ease;
 
   &::placeholder {
-    color: rgba(237, 241, 250, 0.32);
+    color: rgba(237, 241, 250, 0.5);
   }
 
   &:focus {
@@ -559,12 +559,69 @@ export const ProseTextArea = styled.textarea`
   transition: border-color 0.2s ease;
 
   &::placeholder {
-    color: rgba(237, 241, 250, 0.32);
+    color: rgba(237, 241, 250, 0.5);
   }
 
   &:focus {
     outline: none;
     border-color: rgba(150, 185, 249, 0.8);
+  }
+`;
+
+/* The one checkbox of the contact form, "je veux un audit de mon site". Native
+   input, brand accent, sized to the prose: a custom box would be more code for
+   the same square. The label is the whole line so the click target is wide. */
+export const ProseCheck = styled.label`
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+  margin: 0.2em 0 0.4em;
+  font-size: inherit;
+  line-height: inherit;
+  font-family: inherit;
+  cursor: pointer;
+  user-select: none;
+
+  /* !important on the box: the global input rules (padding, font-size) win on
+     specificity otherwise and squash the square into a 10x16 sliver. */
+  input {
+    appearance: none;
+    flex: none;
+    font-size: inherit;
+    width: 0.7em !important;
+    height: 0.7em !important;
+    padding: 0 !important;
+    margin: 0;
+    border: 1px solid rgba(150, 185, 249, 0.55);
+    border-radius: 0.15em;
+    background: transparent;
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+    transition: border-color 0.2s ease, background-color 0.2s ease;
+  }
+
+  input::before {
+    content: "";
+    width: 0.38em;
+    height: 0.38em;
+    border-radius: 0.06em;
+    background: #96b9f9;
+    transform: scale(0);
+    transition: transform 0.15s ease;
+  }
+
+  input:checked {
+    border-color: #96b9f9;
+  }
+
+  input:checked::before {
+    transform: scale(1);
+  }
+
+  input:focus-visible {
+    outline: 2px solid rgba(150, 185, 249, 0.6);
+    outline-offset: 3px;
   }
 `;
 

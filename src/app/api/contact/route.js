@@ -37,6 +37,8 @@ export async function POST(req) {
   try {
     const body = await req.json();
     const { name, email, phone, object, description, services } = body;
+    const audit = body.audit === true;
+    const website = typeof body.website === "string" ? body.website.trim() : "";
 
     // --- Server-Side Validation ---
     if (!name || typeof name !== "string" || name.trim() === "") {
@@ -100,6 +102,17 @@ export async function POST(req) {
         { status: 400 }
       );
     }
+    // The site URL is required only when the audit box is ticked.
+    if (audit && (website === "" || website.length > 200)) {
+      return NextResponse.json(
+        {
+          success: false,
+          messageKey: "validation.websiteRequired",
+          field: "website",
+        },
+        { status: 400 }
+      );
+    }
     if (phone && (typeof phone !== "string" || phone.length > 30)) {
       return NextResponse.json(
         {
@@ -151,7 +164,10 @@ export async function POST(req) {
       <div class="content-section"><h2>Inquiry Details</h2><ul>
       <li><strong>Subject:</strong> ${
         object ? escapeHtml(object) : "N/A"
-      }</li></ul></div>
+      }</li>
+      <li><strong>Audit requested:</strong> ${audit ? "yes" : "no"}</li>
+      ${audit ? `<li><strong>Website:</strong> ${escapeHtml(website)}</li>` : ""}
+      </ul></div>
       ${
         services && services.length > 0
           ? `<div class="content-section"><h2>Services Interested In</h2><ul>
@@ -170,6 +186,7 @@ Nouveau message depuis le formulaire de contact HARGILE
 -------------------------------------------------
 FROM: Name: ${name} Email: ${email} ${phone ? `Phone: ${phone}` : ""}
 INQUIRY DETAILS: Subject: ${object || "N/A"}
+AUDIT REQUESTED: ${audit ? `yes, website: ${website}` : "no"}
 ${
   services && services.length > 0
     ? `SERVICES INTERESTED IN:\n${services
@@ -186,7 +203,7 @@ Ce mail est envoyé depuis le formulaire de contact sur hargile.com. © ${new Da
       from: `HARGILE Website (${name.replace(/["<>]/g, "")}) <${fromEmail}>`,
       to: [toEmail],
       replyTo: email,
-      subject: `HARGILE Contact: ${
+      subject: `${audit ? "[Audit] " : ""}HARGILE Contact: ${
         object ? object.substring(0, 70).replace(/[\r\n]/g, " ") : "New Inquiry"
       } from ${name.substring(0, 50).replace(/[\r\n]/g, " ")}`,
       text: textEmailContent.trim(),

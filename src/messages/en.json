@@ -20,9 +20,10 @@
           "more6months": "More than 6 months",
           "select": "Select"
         },
-        "title": "Contact Information"
+        "title": "Contact Information",
+        "website": "Website"
       },
-      "description": "Enter your website URL. We analyze your visibility in AI answers and on Google, and send you the results.",
+      "description": "A project, a question, or a free audit of your visibility in AI answers and on Google: write to us, we reply within 48 hours.",
       "privacy": {
         "link": "privacy policy",
         "requiredFields": "Required fields",
@@ -31,15 +32,18 @@
       "prose": {
         "emailPlaceholder": "your@email.com",
         "greeting": "Hi, my name is",
-        "messagePlaceholder": "Context, questions, expectations: anything that helps us prepare your audit.",
+        "messagePlaceholder": "Context, questions, expectations: anything that helps us reply.",
         "moreLabel": "Anything else?",
         "namePlaceholder": "your name",
-        "objectPlaceholder": "www.your-site.be",
+        "objectPlaceholder": "your project or your question",
         "optional": "optional",
         "phonePlaceholder": "+32 4.. .. .. ..",
         "reach": "You can reach me at",
         "reachOr": "or on",
-        "subject": "and my site is"
+        "subject": "and I am writing about",
+        "audit": "I want an audit of my website",
+        "site": "My website is",
+        "sitePlaceholder": "www.your-site.be"
       },
       "services": {
         "advice": "Advice",
@@ -56,14 +60,15 @@
       "submitNetworkError": "A network error occurred. Please check your connection and try again.",
       "submitSuccess": "Thank you! Your message has been sent successfully.",
       "submitting": "Submitting...",
-      "title": "Free GEO audit",
+      "title": "Contact",
       "validation": {
         "emailInvalid": "Please enter a valid email address.",
         "emailRequired": "Please enter your email address.",
         "messageRequired": "Please enter your message (minimum {min} characters).",
         "nameRequired": "Please enter your name.",
         "objectRequired": "Please enter the subject of your inquiry.",
-        "serviceRequired": "Please select at least one service."
+        "serviceRequired": "Please select at least one service.",
+        "websiteRequired": "Please enter your website address for the audit."
       }
     },
     "footer": {
@@ -1317,14 +1322,14 @@
         "title": "About HARGILE - Our Story & Mission | Digital Innovation Agency"
       },
       "contact": {
-        "description": "Request a free GEO audit from HARGILE. We analyze your visibility in AI answers and on Google, and send you the results.",
+        "description": "A project, a question, or a free audit of your visibility in AI answers and on Google. Write to us, we reply within 48 hours.",
         "og": {
-          "description": "Get a free GEO audit: we analyze your visibility in AI answers and on Google. No commitment.",
+          "description": "A project, a question, or a free audit of your visibility in AI answers and on Google: write to us.",
           "imageAlt": "HARGILE Contact",
-          "title": "Free GEO audit | HARGILE"
+          "title": "Contact | HARGILE"
         },
         "schemaType": "ContactPage",
-        "title": "Free GEO audit | HARGILE"
+        "title": "Contact | HARGILE"
       },
       "faq": {
         "description": "What is GEO, how long until results, does GEO replace SEO, how the free audit works, what's included: 10 direct answers from a GEO and SEO agency in Brussels.",

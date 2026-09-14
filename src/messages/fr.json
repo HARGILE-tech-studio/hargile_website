@@ -20,9 +20,10 @@
           "more6months": "",
           "select": ""
         },
-        "title": "Informations de contact"
+        "title": "Informations de contact",
+        "website": "Site web"
       },
-      "description": "Entrez l'URL de votre site. Nous analysons votre visibilité dans les réponses des IA et sur Google, et vous envoyons les résultats.",
+      "description": "Un projet, une question, ou un audit gratuit de votre visibilité dans les réponses des IA et sur Google : écrivez-nous, on répond sous 48 h.",
       "privacy": {
         "link": "politique de confidentialité",
         "requiredFields": "Champs obligatoires",
@@ -31,15 +32,18 @@
       "prose": {
         "emailPlaceholder": "votre@email.com",
         "greeting": "Bonjour, je m'appelle",
-        "messagePlaceholder": "Contexte, questions, attentes : tout ce qui nous aide à préparer votre audit.",
+        "messagePlaceholder": "Contexte, questions, attentes : tout ce qui nous aide à vous répondre.",
         "moreLabel": "Un mot de plus ?",
         "namePlaceholder": "votre nom",
-        "objectPlaceholder": "www.votre-site.be",
+        "objectPlaceholder": "votre projet ou votre question",
         "optional": "facultatif",
         "phonePlaceholder": "+32 4.. .. .. ..",
         "reach": "Vous pouvez me joindre à",
         "reachOr": "ou au",
-        "subject": "et mon site est"
+        "subject": "et je vous écris au sujet de",
+        "audit": "Je veux un audit de mon site",
+        "site": "Mon site est",
+        "sitePlaceholder": "www.votre-site.be"
       },
       "services": {
         "advice": "",
@@ -56,14 +60,15 @@
       "submitNetworkError": "Une erreur de réseau s'est produite. Veuillez vérifier votre connexion et réessayer.",
       "submitSuccess": "Merci ! Votre message a été envoyé avec succès.",
       "submitting": "Envoi en cours...",
-      "title": "Audit GEO gratuit",
+      "title": "Contact",
       "validation": {
         "emailInvalid": "Veuillez entrer une adresse e-mail valide.",
         "emailRequired": "Veuillez entrer votre adresse e-mail.",
         "messageRequired": "Veuillez entrer votre message (minimum {min} caractères).",
         "nameRequired": "Veuillez entrer votre nom.",
         "objectRequired": "Veuillez entrer l'objet de votre demande.",
-        "serviceRequired": "Veuillez sélectionner au moins un service."
+        "serviceRequired": "Veuillez sélectionner au moins un service.",
+        "websiteRequired": "Veuillez entrer l'adresse de votre site pour l'audit."
       }
     },
     "footer": {
@@ -1317,14 +1322,14 @@
         "title": "À Propos d'HARGILE - Notre Histoire & Mission | Agence d'Innovation Digitale"
       },
       "contact": {
-        "description": "Demandez votre audit GEO gratuit. HARGILE analyse votre visibilité dans les IA et sur Google, et vous envoie les résultats.",
+        "description": "Un projet, une question, ou un audit gratuit de votre visibilité dans les réponses des IA et sur Google. Écrivez-nous, on répond sous 48 h.",
         "og": {
-          "description": "Audit GEO gratuit : découvrez si les IA citent votre entreprise et comment améliorer votre visibilité sur Google et dans les moteurs de réponse.",
+          "description": "Un projet, une question, ou un audit gratuit de votre visibilité dans les IA et sur Google : écrivez-nous.",
           "imageAlt": "Contact HARGILE",
-          "title": "Audit GEO gratuit | HARGILE"
+          "title": "Contact | HARGILE"
         },
         "schemaType": "ContactPage",
-        "title": "Audit GEO gratuit | HARGILE"
+        "title": "Contact | HARGILE"
       },
       "faq": {
         "description": "GEO et SEO pour entreprises en Belgique : qu'est-ce que le GEO, comment savoir si les IA vous citent, combien de temps pour des résultats, méthode et suivi. 10 réponses directes.",

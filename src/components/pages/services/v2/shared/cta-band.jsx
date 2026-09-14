@@ -9,6 +9,8 @@
    band and no variant to pick.
 
    `secondary` is the optional quiet second action ({href, label}).
+   `href` lets a page send the primary action elsewhere than /contact, e.g.
+   /geo sends it to /contact?audit=1 so the audit box arrives pre-ticked.
    `text` overrides the shared paragraph for one page (/geo names the audit it
    hands back; the other pages keep the shared line). */
 
@@ -18,7 +20,7 @@ import section from "@/components/pages/homepage/v2/v2-section.module.scss";
 import {useReveal} from "@/components/pages/homepage/v2/useReveal";
 import styles from "./cta-band.module.scss";
 
-const CtaBand = ({secondary, text}) => {
+const CtaBand = ({secondary, text, href = "/contact"}) => {
     const t = useTranslations("pages.services.shared.ctaBand");
     const reveal = useReveal();
 
@@ -35,7 +37,7 @@ const CtaBand = ({secondary, text}) => {
                         </p>
                     </div>
                     <div className={styles.actions} {...reveal(2)}>
-                        <CtaLink href="/contact" variant="primary">
+                        <CtaLink href={href} variant="primary">
                             {t("button")}
                         </CtaLink>
                         {secondary ? (

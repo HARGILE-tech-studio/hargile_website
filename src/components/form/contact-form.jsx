@@ -2,8 +2,8 @@
 // (Adjust path as necessary for your project structure)
 
 import { useTranslations } from "next-intl";
-import { useCallback, useRef, useState } from "react";
-import { useForm } from "react-hook-form";
+import { useCallback, useEffect, useRef, useState } from "react";
+import { useForm, useWatch } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { motion } from "motion/react";
@@ -62,6 +62,10 @@ export default function ContactForm() {
       .pipe(z.email({ error: t("validation.emailInvalid") })),
     phone: z.string().trim().optional().or(z.literal("")),
     object: z.string().min(1, { error: t("validation.objectRequired") }),
+    // "Je veux un audit de mon site": the site URL is only asked, and only
+    // required, when this is on. See ProseContactSection.
+    audit: z.boolean(),
+    website: z.string().trim(),
 
     // Schema for the main text area field, named 'description'
     description: z
@@ -76,6 +80,14 @@ export default function ContactForm() {
           error: t("validation.messageRequired", { min: MIN_MESSAGE_CHARS }), // Using 'messageRequired' key for description
         })
       ),
+  }).superRefine((data, ctx) => {
+    if (data.audit && data.website === "") {
+      ctx.addIssue({
+        code: "custom",
+        path: ["website"],
+        message: t("validation.websiteRequired"),
+      });
+    }
   });
 
   const {
@@ -83,6 +95,7 @@ export default function ContactForm() {
     handleSubmit,
     formState: { errors, isSubmitting, isValid }, // isSubmitting is RHF's internal state during validation/submission
     setValue,
+    control,
     reset,
     watch, // Still useful for debugging specific field values if needed
     // getValues, // Removed debugging function
@@ -98,9 +111,22 @@ export default function ContactForm() {
       email: "",
       phone: "",
       object: "",
+      audit: false,
+      website: "",
       description: "", // Ensure this matches the field name in schema and register
     },
   });
+
+  const audit = useWatch({ control, name: "audit" });
+
+  /* /contact?audit=1 arrives pre-ticked: every "Demander l'audit" CTA on the
+     site links here with it, so the intent survives the click. Read off
+     window rather than useSearchParams, which would make the route dynamic. */
+  useEffect(() => {
+    if (new URLSearchParams(window.location.search).get("audit") === "1") {
+      setValue("audit", true);
+    }
+  }, [setValue]);
 
   // State for the API submission status message
   const [submitStatus, setSubmitStatus] = useState({
@@ -172,7 +198,7 @@ export default function ContactForm() {
           showBackgroundBlur={false}
         />
         <FormGrid onSubmit={handleSubmit(onSubmitForm)}>
-          <ProseContactSection t={t} register={register} errors={errors} />
+          <ProseContactSection t={t} register={register} errors={errors} audit={audit} />
           <SubmitButton type="submit" disabled={isSubmittingAPI}>
             {isSubmittingAPI ? t("submitting") : t("submit")}
             <svg viewBox="0 0 16 16" fill="none" aria-hidden="true">

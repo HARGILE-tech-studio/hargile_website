@@ -93,7 +93,7 @@ export default function GeoClient() {
             <MeasuredProof/>
             <Measures/>
             <MiniFaq namespace="pages.services.detail.seo.faq"/>
-            <CtaBand text={cta("text")}/>
+            <CtaBand text={cta("text")} href="/contact?audit=1"/>
         </>
     );
 }

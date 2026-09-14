@@ -10,11 +10,15 @@ import {
   ProseMessage,
   ProseTextArea,
   ProseErrorList,
+  ProseCheck,
 } from "../quote-request-form.styled";
 
-const FIELD_ORDER = ["name", "email", "phone", "object", "description"];
+const FIELD_ORDER = ["name", "object", "email", "phone", "website", "description"];
 
-export function ProseContactSection({ t, register, errors }) {
+/* `audit` is the checkbox; when it is on, the site line appears and its slot
+   becomes required (schema in contact-form.jsx). Off, the form is a plain
+   contact form. */
+export function ProseContactSection({ t, register, errors, audit }) {
   const errorMessages = FIELD_ORDER.map((field) => errors[field]?.message).filter(
     Boolean
   );
@@ -50,6 +54,28 @@ export function ProseContactSection({ t, register, errors }) {
           />
           <SlotRequiredMark aria-hidden="true">*</SlotRequiredMark>.
         </ProseLine>
+        <ProseCheck htmlFor="audit">
+          <input id="audit" type="checkbox" {...register("audit")} />
+          {t("prose.audit")}
+        </ProseCheck>
+        {audit ? (
+          <ProseLine style={{ paddingLeft: "1.2em" }}>
+            {t("prose.site")}{" "}
+            <SlotInput
+              id="website"
+              type="text"
+              inputMode="url"
+              autoComplete="url"
+              aria-label={t("contact.website")}
+              aria-required="true"
+              placeholder={t("prose.sitePlaceholder")}
+              $minCh={18}
+              $hasError={!!errors.website}
+              {...register("website")}
+            />
+            <SlotRequiredMark aria-hidden="true">*</SlotRequiredMark>.
+          </ProseLine>
+        ) : null}
         <ProseLine>
           {t("prose.reach")}{" "}
           <SlotInput

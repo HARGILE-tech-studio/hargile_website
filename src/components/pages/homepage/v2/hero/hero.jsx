@@ -152,7 +152,7 @@ const HeroV2 = () => {
                     </p>
 
                     <div className={styles.ctaRow}>
-                        <CtaLink href="/contact" variant="primary">
+                        <CtaLink href="/contact?audit=1" variant="primary">
                             {t("ctaAudit")}
                         </CtaLink>
                         <CtaLink href="/geo" variant="ghost">

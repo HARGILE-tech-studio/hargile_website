@@ -28,7 +28,7 @@ const AuditCta = () => {
                         </p>
                     </div>
                     <div className={styles.actions} {...reveal(2)}>
-                        <CtaLink href="/contact" variant="primary">
+                        <CtaLink href="/contact?audit=1" variant="primary">
                             {t("button")}
                         </CtaLink>
                         <p className={styles.reassurance}>
