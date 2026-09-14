@@ -1,8 +1,8 @@
-/* Un extrait de la source réellement servie par /services/seo.
+/* Un extrait de la source réellement servie par /geo.
  *
- * La section « Cette page est la démonstration » (seo/meta-proof.jsx) invite le
- * lecteur à afficher le code source. Depuis le 06/08/2026 elle le montre
- * directement : ces lignes sont l'argument, pas une illustration.
+ * La section « Architecture & source » (geo/meta-proof.jsx) invite le lecteur
+ * à afficher le code source. Depuis le 06/08/2026 elle le montre directement :
+ * ces lignes sont l'argument, pas une illustration.
  *
  * ── LA SEULE RÈGLE QUI COMPTE ────────────────────────────────────────────
  * Un extrait périmé serait exactement l'hypocrisie que la section dénonce.
@@ -11,12 +11,17 @@
  * POUR LE REGÉNÉRER (à faire dès que le head, le JSON-LD ou le H1 de la page
  * changent, et au minimum quand `fetchedOn` date de plusieurs mois) :
  *
- *   curl -s https://hargile.com/services/seo > /tmp/seo.html
- *   grep -o '<link rel="canonical"[^>]*>' /tmp/seo.html
- *   grep -o '<link rel="alternate"[^>]*>' /tmp/seo.html
+ *   curl -s https://hargile.com/geo > /tmp/geo.html
+ *   grep -o '<link rel="canonical"[^>]*>' /tmp/geo.html
+ *   grep -o '<link rel="alternate"[^>]*>' /tmp/geo.html
  *   node -e "…"   # bloc application/ld+json
  *
  * Puis mettre `fetchedOn` à jour dans le même commit que les lignes.
+ *
+ * ⚠️ HARG-302 (2026-09-14) : URLs mises à jour pour /geo (au lieu de
+ * /services/seo), sans re-fetch réel — la page n'est pas encore déployée à
+ * cette URL. `fetchedOn` n'est donc PAS avancée : refaire un vrai `curl` une
+ * fois la page en ligne, avant de considérer cet extrait à jour.
  *
  * Les abrégements sont marqués par « … » et n'ont le droit de retirer que du
  * volume, jamais un fait : le JSON-LD réel porte le graphe complet de
@@ -28,18 +33,18 @@
 
 export const SOURCE_EXCERPT = {
     fetchedOn: "2026-08-06",
-    url: "https://hargile.com/services/seo",
+    url: "https://hargile.com/geo",
 
     /* Une entrée par ligne affichée, dans l'ordre. `proven: true` fait porter à
        la ligne le filet accent : c'est une ligne qu'un des quatre points
        revendique, et que le lecteur peut retrouver dans sa propre vue source. */
     lines: [
-        {text: `<link rel="canonical" href="https://hargile.com/services/seo"/>`},
-        {text: `<link rel="alternate" hrefLang="fr" href="https://hargile.com/services/seo"/>`, proven: true},
-        {text: `<link rel="alternate" hrefLang="en" href="https://hargile.com/en/services/seo"/>`, proven: true},
+        {text: `<link rel="canonical" href="https://hargile.com/geo"/>`},
+        {text: `<link rel="alternate" hrefLang="fr" href="https://hargile.com/geo"/>`, proven: true},
+        {text: `<link rel="alternate" hrefLang="en" href="https://hargile.com/en/geo"/>`, proven: true},
         {text: `<script type="application/ld+json">`, proven: true},
         {text: `{"@context":"https://schema.org","@graph":[`, proven: true},
-        {text: `  {"@type":"WebPage","@id":"…/services/seo#page","inLanguage":"fr",`, proven: true},
+        {text: `  {"@type":"WebPage","@id":"…/geo#page","inLanguage":"fr",`, proven: true},
         {text: `   "isPartOf":{"@type":"WebSite","@id":"https://hargile.com/#website"}},`, proven: true},
         {text: `  {"@type":"Service","serviceType":"Search engine optimization",`, proven: true},
         {text: `   "provider":{"@id":"https://hargile.com/#organization"}}]}`, proven: true},

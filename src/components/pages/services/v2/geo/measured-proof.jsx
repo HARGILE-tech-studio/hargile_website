@@ -31,7 +31,12 @@
  *
  * Les arcs sont statiques — le compteur sur les nombres est la seule pièce
  * mobile, la même île que /services et la section scope du MVP utilisent
- * déjà. Le moment signature de la page est le rail de Process, plus haut. */
+ * déjà. Le moment signature de la page est le rail de Process, plus haut.
+ *
+ * HARG-302 : la section reste collée à MetaProof (Architecture & source) —
+ * les scores Lighthouse sont la preuve chiffrée de la même page, juste après
+ * la preuve par le code. Voir l'en-tête de GeoClient.jsx pour le fil complet
+ * de /geo. */
 
 import {useLocale, useTranslations} from "next-intl";
 import section from "@/components/pages/homepage/v2/v2-section.module.scss";

@@ -32,7 +32,7 @@ import {
 } from "@/components/navigation/navbar.styled";
 const menuItems = [
     {path: '/', id: 'home'},
-    {path: '/services/seo', id: 'services'},
+    {path: '/geo', id: 'services'},
     {path: '/faq', id: 'faq'},
     {path: '/contact', id: 'contact'},
 ];

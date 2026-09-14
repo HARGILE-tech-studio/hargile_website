@@ -721,7 +721,7 @@
       "detail": {
         "seo": {
           "hero": {
-            "eyebrow": "SEO",
+            "eyebrow": "GEO",
             "title": "Votre visibilité, automatisée",
             "answer": "Nous rendons les PME visibles là où leurs clients cherchent : sur Google, et désormais dans les réponses des assistants IA comme ChatGPT ou Perplexity. SEO technique, contenu et mesure, automatisés là où c'est possible, pour un résultat durable plutôt qu'une campagne ponctuelle."
           },
@@ -747,7 +747,7 @@
             }
           },
           "metaProof": {
-            "title": "Cette page est la démonstration",
+            "title": "Architecture & source",
             "text": "La méthode qu'on vous propose est celle qu'on applique à notre propre site :",
             "points": [
               "Chaque page existe en français et en anglais, avec les balises qui disent aux moteurs laquelle servir.",
@@ -798,7 +798,7 @@
               "engine": "Le moteur de réponse",
               "engineNote": "ChatGPT · Perplexity",
               "answer": "La réponse citée",
-              "source": "hargile.com/services/seo",
+              "source": "hargile.com/geo",
               "sourceNote": "votre page, citée comme source",
               "blank": "Une page qui n'est pas travaillée",
               "blankCompact": [
@@ -965,20 +965,11 @@
         "offers": {
           "geo": {
             "title": "GEO",
-            "promise": "Être nommé par les IA.",
+            "promise": "Être nommé par les IA, et trouvé sur Google.",
             "deliverables": [
               "Monitoring des citations IA",
-              "Optimisation du contenu",
-              "Données structurées schema.org"
-            ]
-          },
-          "seo": {
-            "title": "SEO",
-            "promise": "Être trouvé sur Google.",
-            "deliverables": [
               "SEO technique et contenu",
-              "Suivi des positions et du trafic",
-              "Mesure et reporting partagé"
+              "Données structurées schema.org"
             ]
           },
           "web": {
@@ -1169,6 +1160,16 @@
         "schemaType": "FAQPage",
         "title": "FAQ GEO & SEO : visibilité IA et Google | HARGILE"
       },
+      "geo": {
+        "description": "SEO technique, contenu et mesure pour entreprises en Belgique. Visible sur Google et cité par les assistants IA comme ChatGPT. GEO + SEO, depuis Bruxelles.",
+        "og": {
+          "description": "GEO et SEO : soyez trouvé sur Google et cité par les moteurs de réponse IA, avec une méthode que notre propre site démontre.",
+          "imageAlt": "GEO & SEO, HARGILE",
+          "title": "GEO & SEO : visible sur Google et dans les IA | HARGILE"
+        },
+        "schemaType": "WebPage",
+        "title": "GEO & SEO : visible sur Google et dans les IA | HARGILE"
+      },
       "home": {
         "description": "GEO et SEO pour entreprises en Belgique. Soyez nommé par ChatGPT, Perplexity et les moteurs de réponse IA, et trouvé sur Google.",
         "og": {
@@ -1209,16 +1210,6 @@
           "title": "GEO & SEO : visible dans les IA et sur Google | HARGILE"
         },
         "schemaType": "CollectionPage",
-        "seo": {
-          "description": "SEO technique, contenu et mesure pour entreprises en Belgique. Visible sur Google et cité par les assistants IA comme ChatGPT. GEO + SEO, depuis Bruxelles.",
-          "og": {
-            "description": "GEO et SEO : soyez trouvé sur Google et cité par les moteurs de réponse IA, avec une méthode que notre propre site démontre.",
-            "imageAlt": "GEO & SEO, HARGILE",
-            "title": "GEO & SEO : visible sur Google et dans les IA | HARGILE"
-          },
-          "schemaType": "WebPage",
-          "title": "GEO & SEO : visible sur Google et dans les IA | HARGILE"
-        },
         "title": "GEO & SEO : visible dans les IA et sur Google | HARGILE",
         "web": {
           "description": "Conception, développement et maintenance d'applications web sur mesure pour PME, entièrement en interne à Bruxelles. Votre code et vos données vous appartiennent.",

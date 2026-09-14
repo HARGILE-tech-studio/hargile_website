@@ -1,13 +1,13 @@
-/* Measured numbers about this site, published on /services/seo.
+/* Measured numbers about this site, published on /geo.
  *
  * Everything here is a real measurement of the live site — nothing is
  * illustrative, and nothing may be rounded up. The page invites the reader to
  * re-run the tool, so a number that flatters us is a number that gets caught.
  *
- * HOW TO RE-MEASURE (do this after any deploy that changes the seo page, and
+ * HOW TO RE-MEASURE (do this after any deploy that changes the geo page, and
  * at least whenever `measuredOn` is more than a few months old):
  *
- *   npx lighthouse@12 "https://hargile.com/services/seo" \
+ *   npx lighthouse@12 "https://hargile.com/geo" \
  *     --chrome-flags="--headless=new" --output=json --output-path=./lh.json \
  *     --quiet --only-categories=performance,accessibility,best-practices,seo
  *
@@ -23,7 +23,7 @@
 
 export const LIGHTHOUSE = {
     measuredOn: "2026-08-05",
-    url: "https://hargile.com/services/seo",
+    url: "https://hargile.com/geo",
     formFactor: "mobile",
     tool: "Lighthouse 12",
 };

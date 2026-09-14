@@ -38,9 +38,9 @@ JavaScript execution is required to read this site.
 - [Home — FR](${page("/")}): what HARGILE does — GEO and SEO, the problem,
   the method, who it's for, and a free audit CTA.
 - [Home — EN](${page("/en")}): English version of the above.
-- [SEO — FR](${page("/services/seo")}): the four-step method — audit,
-  technical, content, measure — including visibility in AI answers.
-- [SEO — EN](${page("/en/services/seo")}): English version of the above.
+- [GEO — FR](${page("/geo")}): the four-step method — audit, technical,
+  content, measure — visibility in AI answers and on Google alike.
+- [GEO — EN](${page("/en/geo")}): English version of the above.
 - [FAQ — FR](${page("/faq")}): direct answers on GEO, AI citations, SEO
   timelines, what's guaranteed and what's not.
 - [FAQ — EN](${page("/en/faq")}): English version of the above.
@@ -55,8 +55,8 @@ JavaScript execution is required to read this site.
 
 - **GEO (Generative Engine Optimization)** — monitoring and optimizing
   business visibility in AI assistant answers: ChatGPT, Perplexity, Claude.
-- **[SEO](${page("/services/seo")})** — search engine visibility on Google,
-  from technical foundations to content and measurement.
+- **[GEO](${page("/geo")})** — visibility in AI assistant answers and on
+  Google alike, from technical foundations to content and measurement.
 
 ## Contact
 

@@ -8,9 +8,9 @@
    Heading and the way out on the left, accordion on the right, first answer
    resting open — the layout /services/ia used to hand-roll. It now mounts this
    too: a client component inside a Server Component still ships every answer in
-   the first HTML response (measured on /services/applications-web and
-   /services/seo), so the GEO guard in docs/geo-plan.md §1.5 holds, and the page
-   loses the open-then-collapse layout shift the island cost it.
+   the first HTML response (measured on /services/applications-web and /geo),
+   so the GEO guard in docs/geo-plan.md §1.5 holds, and the page loses the
+   open-then-collapse layout shift the island cost it.
 
    `bare` drops the <section> wrapper for that case: /services/ia is one long
    section that owns its own rhythm, so the block only needs its grid. */

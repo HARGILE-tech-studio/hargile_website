@@ -32,10 +32,13 @@ import styles from "./offers-index.module.scss";
 /* Sales order, not the alphabetical order of the message keys. This is now also
    the reading order top-to-bottom, and the ItemList order published in
    build-json-ld.js — change one and change the other. */
-/* HARG-302: GEO + SEO. Both route to /services/seo for now. */
+/* HARG-302: /services/seo merged into /geo. The hub used to list GEO and SEO
+   as two rows pointing at the same page — a duplicate, not two offers. It now
+   lists one GEO offer (which covers SEO as its foundation, see /geo's
+   measures.jsx) next to the unchanged web offer. */
 const OFFERS = [
-    {key: "geo", href: "/services/seo"},
-    {key: "seo", href: "/services/seo"},
+    {key: "geo", href: "/geo"},
+    {key: "web", href: "/services/applications-web"},
 ];
 
 const OffersIndex = () => {

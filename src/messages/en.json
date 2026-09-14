@@ -721,7 +721,7 @@
       "detail": {
         "seo": {
           "hero": {
-            "eyebrow": "SEO",
+            "eyebrow": "GEO",
             "title": "Your visibility, automated",
             "answer": "We make SMEs visible where their customers actually search: on Google, and now in the answers of AI assistants like ChatGPT and Perplexity. Technical SEO, content and measurement, automated where possible, for a durable result rather than a one-off campaign."
           },
@@ -747,7 +747,7 @@
             }
           },
           "metaProof": {
-            "title": "This page is the demonstration",
+            "title": "Architecture & source",
             "text": "The method we propose is the one we apply to our own site:",
             "points": [
               "Every page exists in French and English, with the tags that tell engines which one to serve.",
@@ -798,7 +798,7 @@
               "engine": "The answer engine",
               "engineNote": "ChatGPT · Perplexity",
               "answer": "The answer, attributed",
-              "source": "hargile.com/services/seo",
+              "source": "hargile.com/geo",
               "sourceNote": "your page, cited as a source",
               "blank": "A page nobody worked on",
               "blankCompact": [
@@ -965,20 +965,11 @@
         "offers": {
           "geo": {
             "title": "GEO",
-            "promise": "Get named by AI.",
+            "promise": "Get named by AI, and found on Google.",
             "deliverables": [
               "AI citation monitoring",
-              "Content optimization",
-              "schema.org structured data"
-            ]
-          },
-          "seo": {
-            "title": "SEO",
-            "promise": "Get found on Google.",
-            "deliverables": [
               "Technical SEO and content",
-              "Rank tracking",
-              "Measured and shared"
+              "schema.org structured data"
             ]
           },
           "web": {
@@ -1169,6 +1160,16 @@
         "schemaType": "FAQPage",
         "title": "GEO & SEO FAQ: AI visibility, method, results | HARGILE"
       },
+      "geo": {
+        "description": "GEO and SEO for businesses: get named by AI assistants like ChatGPT and Perplexity, and rank on Google. A method applied to our own site, from Brussels.",
+        "og": {
+          "description": "GEO and SEO: get cited by AI answer engines and rank on Google, with a method our own site demonstrates.",
+          "imageAlt": "GEO & SEO, HARGILE",
+          "title": "GEO & SEO: visible in AI answers and on Google | HARGILE"
+        },
+        "schemaType": "WebPage",
+        "title": "GEO & SEO: visible in AI answers and on Google | HARGILE"
+      },
       "home": {
         "description": "GEO and SEO for businesses in Belgium. Get named by ChatGPT, Perplexity and AI answer engines, and found on Google.",
         "og": {
@@ -1209,16 +1210,6 @@
           "title": "GEO & SEO: visible in AI and on Google | HARGILE"
         },
         "schemaType": "CollectionPage",
-        "seo": {
-          "description": "GEO and SEO for businesses: get named by AI assistants like ChatGPT and Perplexity, and rank on Google. A method applied to our own site, from Brussels.",
-          "og": {
-            "description": "GEO and SEO: get cited by AI answer engines and rank on Google, with a method our own site demonstrates.",
-            "imageAlt": "GEO & SEO, HARGILE",
-            "title": "GEO & SEO: visible in AI answers and on Google | HARGILE"
-          },
-          "schemaType": "WebPage",
-          "title": "GEO & SEO: visible in AI answers and on Google | HARGILE"
-        },
         "title": "GEO & SEO: visible in AI and on Google | HARGILE",
         "web": {
           "description": "Design, development and maintenance of custom web applications for SMEs, fully in-house in Brussels. Your code and your data belong to you.",

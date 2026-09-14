@@ -18,7 +18,13 @@
  * ── LE RAIL EST LE MOMENT SIGNATURE DE LA PAGE ───────────────────────────
  * Budget de mouvement : un seul par page (docs/m5-immersive-design-concepts.md
  * §0.3). C'est celui-ci. Le compteur des scores plus bas est une île déjà
- * admise ailleurs sur le site ; rien d'autre ne doit bouger sur /services/seo.
+ * admise ailleurs sur le site ; rien d'autre ne doit bouger sur /geo.
+ *
+ * HARG-302 : la section ouvre toujours la page après le hero. Le fil imposé
+ * pour /geo (Contenu → Architecture → Source → Moteur de réponse) décrit ce
+ * que les sections suivantes prouvent une à une ; ce rail décrit d'abord
+ * comment on y arrive, donc il reste devant plutôt que d'être annexé à
+ * l'étape « Contenu » qu'il ne fait que traverser.
  *
  * Le rail passe à la verticale sous 1100px, et non 640px comme sur la
  * homepage : à quatre colonnes, la fenêtre où la grille se replie en deux

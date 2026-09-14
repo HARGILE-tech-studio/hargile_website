@@ -86,6 +86,8 @@ const nextConfig = {
             // index, the closest surviving destination, rather than 404.
             {path: 'services/ia', to: '/services', permanent: true},
             {path: 'services/mvp-30-jours', to: '/services', permanent: true},
+            // HARG-302: /services/seo merged into /geo, at the root.
+            {path: 'services/seo', to: '/geo', permanent: true},
             {path: 'solutions/agves', to: '/', permanent: true},
             {path: 'solutions/i-go', to: '/', permanent: true},
             {path: 'solutions/multipass', to: '/', permanent: true},

@@ -26,10 +26,10 @@ import {useReveal} from "@/components/pages/homepage/v2/useReveal";
 import {FAQ_GROUPS} from "./groups";
 import styles from "./faq-groups.module.scss";
 
-/* HARG-302: mirrors OFFERS in offers-index.jsx — GEO + SEO. */
+/* HARG-302: mirrors OFFERS in offers-index.jsx — GEO merged into one row. */
 const OFFER_LINKS = [
-    {key: "geo", href: "/services/seo"},
-    {key: "seo", href: "/services/seo"},
+    {key: "geo", href: "/geo"},
+    {key: "web", href: "/services/applications-web"},
 ];
 
 const FaqGroups = () => {

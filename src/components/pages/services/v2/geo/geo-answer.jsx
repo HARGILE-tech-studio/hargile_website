@@ -46,8 +46,14 @@
  * compacte garde le contre-exemple (les colonnes en parlent) et perd la note
  * « rien à lire », que le titre du bloc dit déjà.
  *
- * Aucune animation : le moment signature de /services/seo est le rail de
- * Process. La figure arrive avec le reveal de la section et ne bouge plus. */
+ * Aucune animation : le moment signature de /geo est le rail de Process. La
+ * figure arrive avec le reveal de la section et ne bouge plus.
+ *
+ * HARG-302 : cette section porte le titre « Moteur de réponse (IA) » dans le
+ * fil Contenu → Architecture → Source → Moteur de réponse demandé pour /geo —
+ * c'est la section reine du GEO, celle que tout le reste de la page prépare.
+ * Rien à changer dans la figure ou la prose : sa place dans l'ordre, juste
+ * après la preuve par la source, suffit à la mettre en avant. */
 
 import {useTranslations} from "next-intl";
 import section from "@/components/pages/homepage/v2/v2-section.module.scss";

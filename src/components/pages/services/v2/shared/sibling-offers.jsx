@@ -1,19 +1,24 @@
 "use client";
 
-/* The three offers you are NOT reading, plus the way back to the index.
+/* The other offer you are NOT reading, plus the way back to the index.
 
-   Without this a detail page is a dead end: the four offers only ever linked
+   Without this a detail page is a dead end: the offers only ever linked
    downward from /services, so moving between two of them meant the browser's
    back button. That is a navigation problem first — a visitor comparing two
    offers is the most interesting visitor on the site — and an internal-linking
-   problem second: the four pages sat on a single inbound link each, from one
+   problem second: the detail pages sat on a single inbound link each, from one
    hub, with nothing between siblings.
+
+   HARG-302: down to two offers (geo, web) since /services/seo merged into
+   /geo. `current` still exists for when a third offer returns — dropping it
+   now to hardcode "the other one" would be the wrong economy for a two-line
+   filter.
 
    Named by the offer, not "read more": the link text IS the crawlable signal,
    so it reuses the index's own offer titles (pages.services.index.offers.*)
    rather than restating them. One copy of that string, in one place.
 
-   `current` is the key to leave out. Passing the wrong one shows four rows
+   `current` is the key to leave out. Passing the wrong one shows both rows
    including the page you are on — visible immediately, which is why this takes
    a key rather than reading the route. */
 
@@ -26,10 +31,16 @@ import styles from "./sibling-offers.module.scss";
 
 /* Same order and same hrefs as offers-index.jsx — sales order, which is also
    the ItemList order in build-json-ld.js. Change one, change the others. */
-/* HARG-302: GEO + SEO. */
+/* HARG-302: /services/seo merged into /geo, dropping the duplicate SEO row.
+   Two offers total now (geo, web), so `current` always leaves exactly one
+   sibling row — the page no longer calls this from /geo itself (see
+   GeoClient.jsx: "the other offer" at n=1 read as an odd, half-empty section
+   there, where /services already does the job of listing every offer one
+   click away). It stays on /services/applications-web, where the single
+   remaining row still earns its section. */
 const OFFERS = [
-    {key: "geo", href: "/services/seo"},
-    {key: "seo", href: "/services/seo"},
+    {key: "geo", href: "/geo"},
+    {key: "web", href: "/services/applications-web"},
 ];
 
 const SiblingOffers = ({current}) => {

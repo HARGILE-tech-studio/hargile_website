@@ -15,7 +15,12 @@ export const ROUTES = {
        The dotted keys stay short and stable — the slug can change, the key
        must not (it names the seo.pages.* message subtree). */
     'services.web': '/services/applications-web',
-    'services.seo': '/services/seo',
+    /* HARG-302: /services/seo merged into /geo, at the root — GEO is the
+       page's lead offer, not a service sub-page. The 'geo' key is undotted on
+       purpose: it is not nested under 'services' any more, at the URL or in
+       seo.pages.*. Old /services/seo links get a 301 (see next.config.mjs)
+       rather than living on here as a second route to the same page. */
+    'geo': '/geo',
     'faq': '/faq',
 };
 

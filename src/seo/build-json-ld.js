@@ -21,19 +21,23 @@ const KNOWS_ABOUT = [
    (see the schemaType comment below — never in its place). serviceType values
    are copied character for character from KNOWS_ABOUT: the same topic asserted
    twice is corroboration, two near-identical strings are two topics. */
-/* HARG-302: /services/applications-web is being retired. The SEO page
-   covers both SEO and GEO; it carries one Service node for now. */
+/* HARG-302: /services/applications-web is being retired. /services/seo merged
+   into /geo, at the root — one page, one Service node, covering both GEO and
+   SEO. serviceType stays "Search engine optimization": schema.org has no GEO
+   term yet, and KNOWS_ABOUT already carries "Generative Engine Optimization"
+   on the Organization node above. */
 const SERVICE_NODES = {
-    "services.seo": {serviceType: "Search engine optimization"},
+    "geo": {serviceType: "Search engine optimization"},
 };
 
-/* The four offers as /services lists them, in the sales order the page renders
+/* The offers as /services lists them, in the sales order the page renders
    (offers-index.jsx OFFERS) — position in the ItemList has to match what a
    reader sees, or the markup describes a different page. Keys index both
    ROUTES and pages.services.index.offers, so the listed name is the visible
    row title rather than a fifth restatement of it. */
-/* HARG-302: the hub now lists GEO and SEO. */
-const SERVICES_INDEX = ["geo", "seo"];
+/* HARG-302: the hub now lists one GEO offer (was two rows, GEO and SEO,
+   pointing at the same page) plus the unchanged web offer. */
+const SERVICES_INDEX = ["geo", "web"];
 
 // Builds the JSON-LD object for a given locale + pagePath.
 // Returns null if SEO translations cannot be loaded (graceful fallback).
@@ -164,6 +168,10 @@ export async function buildJsonLd({locale, pagePath}) {
            already single-sourced, so this cannot drift from the page. */
         if (pagePath === "services") {
             const offersT = await getTranslations({locale, namespace: "pages.services.index.offers"});
+            /* HARG-302: 'geo' sits at the ROUTES root ('/geo'), 'web' still
+               lives under the 'services.' prefix ('services.web') — try the
+               offer key bare before falling back to the dotted form, so this
+               survives either shape without a second lookup table. */
             pageNode.mainEntity = {
                 "@type": "ItemList",
                 itemListOrder: "https://schema.org/ItemListOrderAscending",
@@ -172,7 +180,7 @@ export async function buildJsonLd({locale, pagePath}) {
                     "@type": "ListItem",
                     position: i + 1,
                     name: offersT(`${key}.title`),
-                    url: localeUrl(locale, ROUTES[`services.${key}`]),
+                    url: localeUrl(locale, ROUTES[key] ?? ROUTES[`services.${key}`]),
                 })),
             };
         }

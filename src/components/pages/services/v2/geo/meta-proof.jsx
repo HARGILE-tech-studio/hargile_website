@@ -16,7 +16,15 @@
  * Le panneau de code est du texte, pas une image : il part dans le HTML servi
  * comme le reste, ce qui est précisément ce que les lignes 11–13 affirment.
  * Un <pre> ferait déborder la page sur mobile, donc chaque ligne est son
- * propre élément et le débordement est confié à un conteneur qui défile seul. */
+ * propre élément et le débordement est confié à un conteneur qui défile seul.
+ *
+ * HARG-302 : titrée « Architecture & source » dans le fil Contenu → Architecture
+ * → Source → Moteur de réponse (IA) demandé pour /geo. Les quatre points se
+ * lisent déjà en deux moitiés : hreflang + schema.org sont structurels
+ * (Architecture), « tout est dans le HTML » + l'invitation à voir la source
+ * sont la preuve elle-même (Source). Les séparer casserait le renvoi numéroté
+ * de chaque point vers ses lignes dans l'extrait — un seul bloc de preuve,
+ * donc les deux mots du fil sur une seule section plutôt que sur deux. */
 
 import {useTranslations} from "next-intl";
 import section from "@/components/pages/homepage/v2/v2-section.module.scss";
