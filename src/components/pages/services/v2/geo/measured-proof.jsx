@@ -36,13 +36,18 @@
  * HARG-302 : la section reste collée à MetaProof (Architecture & source) —
  * les scores Lighthouse sont la preuve chiffrée de la même page, juste après
  * la preuve par le code. Voir l'en-tête de GeoClient.jsx pour le fil complet
- * de /geo. */
+ * de /geo.
+ *
+ * 14/09/2026 (Mihai) : le paragraphe d'intro ("Mesuré le [date] sur cette
+ * page même, avec Lighthouse...") est retiré — les chiffres se suffisent, pas
+ * besoin de les présenter. `measured.lead` reste dans fr.json/en.json au cas
+ * où, mais n'est plus lu ici. */
 
-import {useLocale, useTranslations} from "next-intl";
+import {useTranslations} from "next-intl";
 import section from "@/components/pages/homepage/v2/v2-section.module.scss";
 import {useReveal} from "@/components/pages/homepage/v2/useReveal";
 import CountUp from "@/components/pages/services/v2/shared/count-up";
-import {LIGHTHOUSE, SCORES} from "@/data/site-metrics";
+import {SCORES} from "@/data/site-metrics";
 import styles from "./measured-proof.module.scss";
 
 const R = 30;
@@ -50,20 +55,12 @@ const CIRC = 2 * Math.PI * R;
 
 const MeasuredProof = () => {
     const t = useTranslations("pages.services.detail.seo.measured");
-    const locale = useLocale();
     const reveal = useReveal();
-
-    const measuredOn = new Intl.DateTimeFormat(locale, {
-        day: "numeric", month: "long", year: "numeric",
-    }).format(new Date(`${LIGHTHOUSE.measuredOn}T12:00:00Z`));
 
     return (
         <section className={section.section}>
             <div className={section.container}>
                 <h2 className={section.heading} {...reveal(0)}>{t("title")}</h2>
-                <p className={`${section.lead} ${styles.lead}`} {...reveal(1)}>
-                    {t("lead", {date: measuredOn, tool: LIGHTHOUSE.tool})}
-                </p>
 
                 <div className={styles.gauges}>
                     {SCORES.map(({key, value}, i) => (

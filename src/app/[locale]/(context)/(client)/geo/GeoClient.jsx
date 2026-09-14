@@ -8,31 +8,29 @@
  * y reste comme fondation du GEO plutôt que comme offre concurrente (voir
  * measures.jsx et geo-answer.jsx pour cet argument, inchangé).
  *
- * Le fil conducteur imposé pour l'ordre des sections : Contenu → Architecture
- * → Source → Moteur de réponse (IA) → clôture. Mappé sur les sections
- * existantes (rien de neuf, juste redécoupé et repositionné) :
+ * 14/09/2026 (Mihai) : le GEO doit passer en premier dans toute la page, pas
+ * seulement dans le titre. La première version suivait le fil Contenu →
+ * Architecture → Source → Moteur de réponse (IA) dans cet ordre littéral, ce
+ * qui mettait le moteur de réponse — la section GEO elle-même — en quatrième
+ * position, après trois sections à dominante SEO (méthode, structure,
+ * scores). Le fil reste vrai comme *argument* (on ne peut pas prouver qu'on
+ * est cité sans d'abord montrer le contenu et l'architecture qui le rendent
+ * possible), mais comme *ordre de lecture* il enterrait le GEO. Le hero le
+ * dit maintenant aussi (IA citée avant Google dans hero.answer) — la page
+ * suit :
  *
- *   1. Process     → le rail reste la section signature de la page (voir son
- *      en-tête) : audit, technique, CONTENU, mesure. Elle ouvre la page
- *      parce qu'elle est la méthode dans son ensemble, pas une des quatre
- *      étapes du fil — le fil décrit ce que les sections suivantes prouvent
- *      une à une, la page décrit d'abord comment on y arrive.
- *   2. MetaProof    → retitrée "Architecture & source". Ses quatre points se
- *      lisaient déjà en deux moitiés : hreflang + schema.org (structurel =
- *      Architecture) puis "tout est dans le HTML" + l'invitation à voir la
- *      source (Source). Les séparer aurait cassé le mécanisme de renvois
- *      numérotés vers l'extrait de code (src/data/seo-source-excerpt.js) qui
- *      lie les quatre points à des lignes précises — un seul bloc de preuve,
- *      donc les deux titres du fil sur une seule section.
- *   3. MeasuredProof → reste collée à Architecture & source : les scores
- *      Lighthouse sont la preuve chiffrée de la même page, au même endroit
- *      que la preuve par le code. Measured-proof.jsx documente pourquoi ses
- *      Core Web Vitals restent masqués.
- *   4. GeoAnswer    → "Moteur de réponse (IA)", section reine du GEO. Titre
- *      déjà au dégradé identitaire (voir son en-tête) : rien à changer, sa
- *      place dans l'ordre suffit à la mettre en avant.
- *   5. Measures     → clôture, après le moteur de réponse : ce qu'on mesure,
- *      et le refus de garantir une citation ou un classement.
+ *   1. GeoAnswer    → "Moteur de réponse (IA)" ouvre la page, juste après le
+ *      hero. C'est l'offre : être cité par les IA. Le schéma page→moteur→
+ *      réponse est le premier argument qu'un visiteur voit, pas le dernier.
+ *   2. Process      → la méthode qui rend ça possible (audit, technique,
+ *      CONTENU, mesure). Reste la section signature (rail animé, voir son
+ *      en-tête) — elle explique comment, une fois que GeoAnswer a dit quoi.
+ *   3. MetaProof    → "Architecture & source". Preuve structurelle : cette
+ *      page applique elle-même ce qui vient d'être promis.
+ *   4. MeasuredProof → collée à Architecture & source, preuve chiffrée de la
+ *      même page (Lighthouse).
+ *   5. Measures     → clôture : ce qu'on mesure, et le refus de garantir une
+ *      citation ou un classement.
  *
  * SiblingOffers a disparu : il n'existe plus qu'une seule offre (GEO), donc
  * "les autres offres" n'a plus de sens à une seule alternative — voir
@@ -69,6 +67,10 @@ export default function GeoClient() {
                 answer={t("answer")}
                 backdrop={<WaveGridBackdrop composition="wave-188"/>}
             />
+            {/* GEO first: the offer (être cité par les IA), right after the
+                hero, ahead of the SEO-flavoured sections below. See the
+                14/09/2026 note at the top of this file. */}
+            <GeoAnswer/>
             <Process/>
             <MetaProof/>
             {/* Straight after MetaProof, which makes the claims this section
@@ -76,12 +78,6 @@ export default function GeoClient() {
                 and carry their measurement date — re-measure after any deploy
                 that touches this page. */}
             <MeasuredProof/>
-            {/* The three build on each other: MetaProof demonstrates the
-                technique on this page, GeoAnswer says what it is as an offer,
-                Measures says how we are held to it. The VENIZI proof case stays
-                on disk with its copy (shared/proof-case.jsx) — one line brings
-                it back if the page ever wants a client site again. */}
-            <GeoAnswer/>
             <Measures/>
             <MiniFaq namespace="pages.services.detail.seo.faq"/>
             <CtaBand/>
