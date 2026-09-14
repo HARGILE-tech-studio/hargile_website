@@ -8,14 +8,49 @@
 
 /* ---------- Le parcours, sur le rail de process.module.scss ---------- */
 
+/* Process passe à la verticale sous 1100px seulement ; ce parcours-ci est en
+   colonne à toutes les largeurs, donc il lui faut la forme verticale du rail
+   sans condition. Les valeurs reprennent le @media de process.module.scss :
+   rail à left: 5px, point ramené dessus à -36px, indentation sur la liste et
+   non sur .step pour ne pas emporter le point avec la copie. */
 .flow {
   margin-top: clamp(40px, 5vw, 60px);
+}
+
+/* Appliqué en plus de rail.rail / rail.railFill depuis approval.jsx. */
+.flowRail {
+  left: 5px;
+  right: auto;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  height: auto;
+}
+
+.flowRailFill {
+  background: linear-gradient(180deg, #96b9f9, rgba(150, 185, 249, 0.45));
+}
+
+/* Le point revient sur le rail et tient la ligne du numéral, comme dans la
+   forme verticale de process. */
+.flowDot {
+  position: absolute;
+  left: -36px;
+  top: 3px;
+}
+
+.flowStepBody {
+  padding-top: 0;
+  padding-left: 0;
 }
 
 .flowList {
   list-style: none;
   margin: 0;
-  padding: 0;
+  padding: 0 0 0 36px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: clamp(40px, 5vw, 56px);
 }
 
 .flowLabel {

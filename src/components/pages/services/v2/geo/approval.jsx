@@ -36,8 +36,8 @@ const FlowStep = ({label, i, count, fill, reveal, children}) => {
 
     return (
         <li className={rail.step} {...reveal(2 + i)}>
-            <motion.div className={rail.dot} style={{opacity: dotOpacity, scale: dotScale}}/>
-            <div className={rail.stepBody}>
+            <motion.div className={`${rail.dot} ${styles.flowDot}`} style={{opacity: dotOpacity, scale: dotScale}}/>
+            <div className={`${rail.stepBody} ${styles.flowStepBody}`}>
                 <motion.div className={rail.num} style={{opacity: numOpacity}}>
                     {String(i + 1).padStart(2, "0")}
                 </motion.div>
@@ -54,7 +54,7 @@ const Approval = () => {
     const flow = t.raw("flow");
     const card = t.raw("card");
     const timelineRef = useRef(null);
-    const {fill, vertical} = useRailFill(timelineRef);
+    const {fill, vertical} = useRailFill(timelineRef, {alwaysVertical: true});
 
     return (
         <section className={section.section}>
@@ -65,8 +65,11 @@ const Approval = () => {
                 {/* Le parcours d'une proposition. aria-hidden : les modes et
                     les règles en dessous disent tout en prose. */}
                 <div className={`${rail.timeline} ${styles.flow}`} ref={timelineRef} aria-hidden="true">
-                    <div className={rail.rail}>
-                        <motion.div className={rail.railFill} style={railFillStyle(fill, vertical)}/>
+                    <div className={`${rail.rail} ${styles.flowRail}`}>
+                        <motion.div
+                            className={`${rail.railFill} ${styles.flowRailFill}`}
+                            style={railFillStyle(fill, vertical)}
+                        />
                     </div>
                     <ol className={`${rail.steps} ${styles.flowList}`}>
                     {flow.steps.map((label, i) => (

@@ -33,12 +33,16 @@
  *      citation ou un classement.
  *
  * 14/09/2026, refonte (docs/PAGE-GEO-SEO-refonte.md) : deux sections
- * s'insèrent entre Process et MetaProof. Approval (« Rien n'est écrit sur
- * votre site sans votre accord ») et Access (« Vos accès ») décrivent le
- * pilote tel qu'il tourne : ce qu'il propose, qui décide, où vivent les
- * identifiants. Elles viennent juste après la méthode parce qu'elles en sont
- * la condition de confiance, et avant la preuve par la source qui reste le
- * bloc le plus honnête de la page. Le CTA final reçoit son propre texte.
+ * s'insèrent entre Process et MetaProof. Access (« Vos accès ») et Approval
+ * (« Rien n'est écrit sur votre site sans votre accord ») décrivent le pilote
+ * tel qu'il tourne : où vivent les identifiants, ce qu'il propose, qui décide.
+ * Elles viennent juste après la méthode parce qu'elles en sont la condition de
+ * confiance, et avant la preuve par la source qui reste le bloc le plus honnête
+ * de la page. Le CTA final reçoit son propre texte.
+ *
+ * Access passe entre les deux (Mihai, 14/09/2026) : Process et Approval portent
+ * tous deux le rail vertical, et adjacents ils donnaient deux fois le même
+ * dessin. Les pictos d'Access coupent la répétition.
  *
  * SiblingOffers a disparu : il n'existe plus qu'une seule offre (GEO), donc
  * "les autres offres" n'a plus de sens à une seule alternative — voir
@@ -83,8 +87,8 @@ export default function GeoClient() {
                 14/09/2026 note at the top of this file. */}
             <GeoAnswer/>
             <Process/>
-            <Approval/>
             <Access/>
+            <Approval/>
             <MetaProof/>
             {/* Straight after MetaProof, which makes the claims this section
                 then puts numbers on. Figures live in src/data/site-metrics.js
