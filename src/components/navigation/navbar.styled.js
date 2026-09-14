@@ -374,9 +374,9 @@ export const StyledLink = styled(Link)`
     cursor: pointer;
     font-weight: 400;
     /* No text-transform: the strings are already cased the way they should
-       read ("Notre service", "FAQ"...). `capitalize` title-cased every word,
-       turning "Notre service" into "Notre Service" — a casing bug, not a
-       style choice. */
+       read ("Notre service", "FAQ"...). CSS capitalize title-cased every
+       word, turning "Notre service" into "Notre Service" — a casing bug,
+       not a style choice. */
     line-height: 0.9;
     /* NOT 'transition: all': the open/close hook drives opacity and transform
        via inline styles, and a CSS transition on those replayed every inline
