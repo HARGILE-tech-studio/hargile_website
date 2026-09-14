@@ -42,10 +42,39 @@
   gap: 32px;
 }
 
-.name {
-  font-family: var(--font-headings);
-  font-weight: 600;
-  font-size: clamp(16px, 1.6vw, 20px);
-  letter-spacing: -0.01em;
-  color: #ededed;
+.logoItem {
+  display: flex;
+  align-items: center;
+}
+
+.logoLink {
+  display: block;
+  line-height: 0;
+
+  &:focus-visible {
+    outline: 2px solid rgba(150, 185, 249, 0.7);
+    outline-offset: 4px;
+    border-radius: 4px;
+  }
+}
+
+/* Grayscale at rest, full color on hover/focus — the site's one accent color
+   stays reserved for our own UI, so a client mark only shows its real colors
+   when actively engaged with. */
+.logo {
+  height: clamp(28px, 3vw, 38px);
+  width: auto;
+  filter: grayscale(1);
+  opacity: 0.7;
+  transition: filter 0.25s ease, opacity 0.25s ease;
+
+  .logoLink:hover &,
+  .logoLink:focus-visible & {
+    filter: grayscale(0);
+    opacity: 1;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
+  }
 }
