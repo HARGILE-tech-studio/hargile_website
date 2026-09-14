@@ -114,7 +114,7 @@ export default function HeroLoadingProvider({children}) {
                         }}
                         width={2000}
                         height={600}
-                        src="/images/brand/Logo_no_bg_HARGILE_tech_studio.png"
+                        src="/images/brand/logoHargile.png"
                         alt="Brand Logo"
                         sizes="20vh"
                         priority={true}

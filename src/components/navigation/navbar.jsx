@@ -30,10 +30,9 @@ import {
     SocialIcons,
     SocialIcon
 } from "@/components/navigation/navbar.styled";
-/* HARG-302: /services hub removed from nav — the homepage is the pitch now.
-   FAQ and Contact stay; FAQ carries the GEO questions. */
 const menuItems = [
     {path: '/', id: 'home'},
+    {path: '/services/seo', id: 'services'},
     {path: '/faq', id: 'faq'},
     {path: '/contact', id: 'contact'},
 ];
@@ -107,7 +106,7 @@ const Navbar = () => {
                         <OptimizedImage
                             width={2000}
                             height={600}
-                            src="/images/brand/Logo_no_bg_HARGILE_tech_studio.png"
+                            src="/images/brand/logoHargile.png"
                             alt="Brand Logo"
                             sizes="(max-width: 768px) 13rem, 16rem"
                             priority={true}
