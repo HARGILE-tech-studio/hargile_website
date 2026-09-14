@@ -16,7 +16,7 @@ const AuditCta = () => {
     const reveal = useReveal();
 
     return (
-        <section className={`${section.section} ${section.sectionEnd}`}>
+        <section className={`${section.section} ${styles.section} ${section.sectionEnd}`}>
             <div className={section.container}>
                 <div className={styles.band}>
                     <div className={styles.copy}>

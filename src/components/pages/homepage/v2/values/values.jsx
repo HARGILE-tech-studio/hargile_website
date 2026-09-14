@@ -56,7 +56,7 @@ const ValuesV2 = () => {
             <div className={section.container}>
                 <div className={styles.split}>
                     <div className={styles.intro}>
-                        <h2 className={section.heading} {...reveal(0)}>
+                        <h2 className={`${section.heading} ${styles.heading}`} {...reveal(0)}>
                             {t("who_title")}
                         </h2>
                         <p className={styles.statement} {...reveal(1)}>

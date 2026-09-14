@@ -76,7 +76,7 @@
         "contact": "Contact",
         "faq": "FAQ",
         "privacyPolicy": "Politique de confidentialité",
-        "services": "GEO & SEO",
+        "services": "notre service",
         "siteMap": "Plan du site"
       },
       "sections": {
@@ -125,7 +125,7 @@
       "i-go": "I go",
       "our-dna": "Notre ADN",
       "portfolio": "Portfolio",
-      "services": "Services",
+      "services": "notre service",
       "solutions": "Solutions"
     },
     "read-more": {
@@ -298,16 +298,16 @@
           ],
           "our-values": [
             {
-              "value": "Audit",
-              "description": "25 questions de vos acheteurs, posées aux IA. On mesure lesquelles vous citent déjà, et lesquelles citent vos concurrents."
+              "value": "Onboarding",
+              "description": "On définit les prompts et concurrents à suivre, et l'accès à votre site web."
             },
             {
               "value": "Optimisation",
-              "description": "Contenu lisible par les machines, données structurées, réponses nettes. On travaille votre site pour qu'il soit la source que les moteurs de réponse reprennent."
+              "description": "Contenu lisible par les machines, données structurées, réponses nettes. On travaille votre site pour qu'il soit la source que les IA reprennent."
             },
             {
-              "value": "Suivi",
-              "description": "Positions Google, citations par les IA, trafic organique. Les chiffres sont partagés : on regarde les mêmes que vous."
+              "value": "Suivi mensuel",
+              "description": "Un rapport en trois volets. Suivi : où en est la marque, par rapport à son point de départ et à ses concurrents. Stratégie : où aller ensuite, les sources qui citent les concurrents et pas vous. Journal : ce qui a été modifié sur le site, et pourquoi."
             }
           ],
           "terminal-file": "methode.md",
@@ -317,8 +317,8 @@
             "years": "Années d'expérience"
           },
           "subtitle": "Découvrez notre agence",
-          "who_description": "Trois étapes, pas de boîte noire. L'audit montre où vous en êtes, les corrections vous rendent citable, et le suivi prouve que ça fonctionne.",
-          "who_title": "Comment ça marche"
+          "who_description": "Pas de boîte noire, pas de tunnel figé. On optimise, on mesure, on optimise encore : l'onboarding pose le cadre, puis optimisation et suivi tournent en continu, mois après mois.",
+          "who_title": "Notre approche pour améliorer votre référencement, sur Google comme sur les IA"
         },
         "hero": {
           "arrowAlt": "Flèche",
@@ -337,19 +337,7 @@
             "headline": "Vos clients demandent à ChatGPT. Êtes-vous dans la réponse ?",
             "paragraph": "On repère les questions que vos clients posent aux IA, puis on retravaille votre site pour que ce soit vous qu'elles citent. Sur ChatGPT comme sur Google.",
             "ctaAudit": "Demander l'audit",
-            "ctaWork": "Voir comment ça marche",
-            "cardsLabel": "Notre approche",
-            "cardsLead": "Deux leviers, un seul objectif : que vos futurs clients tombent sur vous, qu'ils cherchent sur Google ou qu'ils posent la question à une IA.",
-            "cards": {
-              "geo": {
-                "title": "GEO",
-                "text": "Être nommé par les IA"
-              },
-              "seo": {
-                "title": "SEO",
-                "text": "Être trouvé sur Google"
-              }
-            }
+            "ctaWork": "Voir comment ça marche"
           }
         },
         "latest-insights": {

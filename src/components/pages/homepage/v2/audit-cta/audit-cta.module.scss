@@ -1,6 +1,15 @@
 /* Audit CTA — closing band with a slow shimmer on the gradient title.
    Same shape as the services cta-band. */
 
+/* Trust (the section right above) already closes with its own generous
+   top padding + a hairline before its logo row — stacking the shared
+   .section's 112-200px top padding on top of that left a dead gap under
+   the Wami logo with nothing in it. Cut to a tighter, band-scale top gap;
+   .band's own border-top is still the visible seam between the two. */
+.section {
+  padding-top: clamp(24px, 3vw, 40px);
+}
+
 .band {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));

@@ -298,16 +298,16 @@
           ],
           "our-values": [
             {
-              "value": "Audit",
-              "description": "25 questions your buyers ask AI. We measure which ones already cite you, and which ones cite your competitors."
+              "value": "Onboarding",
+              "description": "We define the prompts and competitors to track, and access to your website."
             },
             {
               "value": "Optimization",
-              "description": "Machine-readable content, structured data, clear answers. We work your site so it becomes the source answer engines pick up."
+              "description": "Machine-readable content, structured data, clear answers. We work your site so it becomes the source AI reuses."
             },
             {
-              "value": "Tracking",
-              "description": "Google rankings, AI citations, organic traffic. The numbers are shared: we look at the same data you do."
+              "value": "Monthly tracking",
+              "description": "A report in three parts. Tracking: where the brand stands, versus its starting point and its competitors. Strategy: where to go next, the sources that cite competitors and not you. Log: what changed on the site, and why."
             }
           ],
           "terminal-file": "method.md",
@@ -317,8 +317,8 @@
             "years": "Years experience"
           },
           "subtitle": "Get to know our agency",
-          "who_description": "Three steps, no black box. The audit shows where you stand, the optimizations make you citable, and tracking proves it works.",
-          "who_title": "How it works"
+          "who_description": "No black box, no fixed tunnel. We optimize, we measure, we optimize again: onboarding sets the frame, then optimization and tracking run continuously, month after month.",
+          "who_title": "Our approach to improving your search visibility, on Google and on AI"
         },
         "hero": {
           "arrowAlt": "Arrow",
@@ -337,19 +337,7 @@
             "headline": "Your clients ask ChatGPT. Are you in the answer?",
             "paragraph": "We spot the questions your clients ask AI, then rework your site so it's you those answers cite. On ChatGPT as much as on Google.",
             "ctaAudit": "Request audit",
-            "ctaWork": "See how it works",
-            "cardsLabel": "Our approach",
-            "cardsLead": "Two levers, one goal: that your future clients land on you, whether they search on Google or ask an AI.",
-            "cards": {
-              "geo": {
-                "title": "GEO",
-                "text": "Get named by AI"
-              },
-              "seo": {
-                "title": "SEO",
-                "text": "Get found on Google"
-              }
-            }
+            "ctaWork": "See how it works"
           }
         },
         "latest-insights": {

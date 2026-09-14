@@ -163,6 +163,15 @@ $mono: ui-monospace, "Cascadia Code", "SF Mono", Menlo, Consolas, monospace;
   align-items: center;
 }
 
+/* The shared section.heading clamp (up to 56px) was sized for a short title
+   ("Comment ça marche", two words). This one is now a full sentence for SEO
+   ("Notre approche pour améliorer votre référencement…") — at the shared size
+   it ran to six oversized lines on desktop. Capped smaller here, scoped to
+   this section only. */
+.heading {
+  font-size: clamp(28px, 2.6vw, 38px);
+}
+
 .statement {
   font-family: var(--font-headings);
   font-size: clamp(18px, 1.7vw, 24px);

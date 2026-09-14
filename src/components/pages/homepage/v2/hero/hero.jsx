@@ -2,24 +2,10 @@
 
 import {useEffect, useRef, useState} from "react";
 import {useTranslations} from "next-intl";
-import {Link} from "@/i18n/navigation";
 import CtaLink from "@/components/ui/cta-link/cta-link";
 import styles from "./hero.module.scss";
 import HeroBackdrop from "./backdrops/hero-backdrop";
 import {useHeroLoading} from "@/components/providers/hero-loading-provider";
-
-/* Each row is the offer page it names. The three services were deliberately
-   inert until now — but the pages they describe exist, and this is the home
-   page's only route to them: without these links the four offers hung off a
-   single hub, which is what left them "Discovered – currently not indexed" in
-   Search Console. MVP is the fourth offer and is not here on purpose: it has
-   its own section further down the page, which carries its own link. */
-/* HARG-302: the two offers are now GEO and SEO — both route to the same
-   SEO page for now until a dedicated GEO page exists. */
-const CARDS = [
-    {key: "geo", href: "/services/seo"},
-    {key: "seo", href: "/services/seo"},
-];
 
 /* The hero backdrop is the wave grid, at every width and with no branch left to
    resolve — chosen over cubes and colour bends after comparing them side by
@@ -172,69 +158,6 @@ const HeroV2 = () => {
                         <CtaLink href="/faq" variant="ghost">
                             {t("ctaWork")}
                         </CtaLink>
-                    </div>
-                </div>
-
-                {/* Against a lattice, floating cards fight the geometry — so the
-                    services read as ONE object instead: a labelled column where a
-                    vertical light spine threads three luminous dots. The spine
-                    draws on once at load and each node ignites with its row as the
-                    line reaches it — a single one-shot reveal, then stillness. The
-                    column stays transparent so the grid reads through it.
-
-                    The rows navigate now (see CARDS): the chevron only appears
-                    on hover or keyboard focus, so at rest the column is the same
-                    object it was when it merely stated what we provide.
-
-                    The alternative used to live right here as a second branch:
-                    three .floatCard glass panels (20px backdrop-filter, border,
-                    gradient fill, continuous drift) for anything below 1024px.
-                    Having two unrelated objects either side of a breakpoint was
-                    exactly the inconsistency the wave hero exists to remove, so
-                    the branch is gone rather than merely never taken. Same page,
-                    same content, one design. */}
-                <div className={styles.rail}>
-                    <p className={styles.railLabel}>{t("cardsLabel")}</p>
-                    <p className={styles.railLead}>{t("cardsLead")}</p>
-                    <div className={styles.railBody}>
-                        <span className={styles.railLine} aria-hidden="true"/>
-                        <ul className={styles.capList}>
-                            {CARDS.map((card, i) => (
-                                <li
-                                    key={card.key}
-                                    className={styles.capItem}
-                                    /* The only thing that varies per row. Everything
-                                       else about the reveal lives in the stylesheet —
-                                       see the note on .railLine for why none of this
-                                       is motion.* any more. */
-                                    style={{"--cap-delay": `${0.55 + i * 0.22}s`}}
-                                >
-                                    {/* The dot stays outside the link: it is
-                                        absolutely positioned against the row, and
-                                        the row is padded past it. */}
-                                    <span className={styles.capDot} aria-hidden="true"/>
-                                    <Link href={card.href} className={styles.capLink}>
-                                        <span className={styles.capBody}>
-                                            <span className={styles.capTitle}>
-                                                {t(`cards.${card.key}.title`)}
-                                                <span className={styles.capChevron} aria-hidden="true">
-                                                    <svg viewBox="0 0 16 16" fill="none">
-                                                        <path
-                                                            d="M6 3.5 10.5 8 6 12.5"
-                                                            stroke="currentColor"
-                                                            strokeWidth="1.6"
-                                                            strokeLinecap="round"
-                                                            strokeLinejoin="round"
-                                                        />
-                                                    </svg>
-                                                </span>
-                                            </span>
-                                            <span className={styles.capText}>{t(`cards.${card.key}.text`)}</span>
-                                        </span>
-                                    </Link>
-                                </li>
-                            ))}
-                        </ul>
                     </div>
                 </div>
             </div>
