@@ -2,6 +2,7 @@ import "@/app/styles/global.scss";
 import pick from 'lodash/pick';
 import {hasLocale, NextIntlClientProvider} from 'next-intl';
 import {notFound} from 'next/navigation';
+import Script from 'next/script';
 import {routing} from '@/i18n/routing';
 import {getMessages, setRequestLocale} from 'next-intl/server';
 import {generateSharedMetadata} from './shared-metadata';
@@ -54,7 +55,7 @@ export default async function LocaleLayout({children, params}) {
             {/* Pré-paint : masque le bandeau GDPR SSR (via global.scss) quand un
                 consentement est déjà stocké, pour éviter son flash avant que
                 l'hydration ne le retire. Synchrone et minuscule à dessein. */}
-            <script dangerouslySetInnerHTML={{
+            <Script id="gdpr-pre-paint" strategy="beforeInteractive" dangerouslySetInnerHTML={{
                 __html: "try{localStorage.getItem('rgpd_consents')&&document.documentElement.setAttribute('data-gdpr-stored','')}catch(e){}"
             }}/>
             <meta charSet="utf-8"/>
