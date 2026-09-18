@@ -75,12 +75,18 @@
   text-align: right;
 }
 
+.faqLink {
+  font-size: 13px;
+  color: #96b9f9;
+}
+
 @media (max-width: 760px) {
   .actions {
     align-items: flex-start;
   }
 
-  .reassurance {
+  .reassurance,
+  .faqLink {
     text-align: left;
   }
 }

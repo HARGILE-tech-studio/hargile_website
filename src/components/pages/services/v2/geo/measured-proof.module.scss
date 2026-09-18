@@ -86,6 +86,16 @@
   color: rgba(237, 237, 237, 0.5);
 }
 
+.link {
+  margin: 6px 0 0;
+  text-align: center;
+
+  a {
+    font-size: 13px;
+    color: rgba(150, 185, 249, 0.78);
+  }
+}
+
 @media (max-width: 860px) {
   .gauges {
     grid-template-columns: repeat(2, minmax(0, 1fr));

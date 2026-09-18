@@ -118,6 +118,10 @@
 
 .noteWide .noteText {
   color: rgba(237, 237, 237, 0.6);
+
+  a {
+    color: rgba(150, 185, 249, 0.78);
+  }
 }
 
 @media (max-width: 900px) {

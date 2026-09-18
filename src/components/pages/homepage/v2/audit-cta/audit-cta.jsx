@@ -6,6 +6,7 @@
    instead of "parlons de votre projet". */
 
 import {useTranslations} from "next-intl";
+import {Link} from "@/i18n/navigation";
 import CtaLink from "@/components/ui/cta-link/cta-link";
 import section from "../v2-section.module.scss";
 import {useReveal} from "../useReveal";
@@ -34,6 +35,9 @@ const AuditCta = () => {
                         <p className={styles.reassurance}>
                             {t("reassurance")}
                         </p>
+                        <Link href="/faq" className={styles.faqLink}>
+                            {t("faqLink")}
+                        </Link>
                     </div>
                 </div>
             </div>

@@ -340,9 +340,14 @@
           "v2": {
             "eyebrow": "GEO & SEO",
             "headline": "Your clients ask ChatGPT. Are you in the answer?",
-            "paragraph": "We spot the questions your clients ask AI, then rework your site so it's you those answers cite. On ChatGPT as much as on Google.",
+            "paragraph": "We identify the 25 questions your clients ask AI in your industry (GEO, Generative Engine Optimization), then rework your site so it's you those answers cite. On ChatGPT as much as on Google.",
             "ctaAudit": "Request audit",
-            "ctaWork": "See how it works"
+            "ctaWork": "See how it works",
+            "summary": [
+              "Your clients are already asking ChatGPT, Perplexity and Google who to contact.",
+              "The free audit shows who gets cited on 25 real questions from your industry.",
+              "Results in 48 hours, no strings attached."
+            ]
           }
         },
         "latest-insights": {
@@ -439,7 +444,7 @@
           "title": "The problem",
           "manifesto": [
             {
-              "text": "A prospect asks ChatGPT which lawyer to contact in Brussels."
+              "text": "A potential client asks ChatGPT a question."
             },
             {
               "text": "Your competitor is named.",
@@ -497,9 +502,10 @@
         },
         "audit-cta": {
           "title": "Start with proof",
-          "text": "Enter your website URL. We analyze your visibility in AI answers and on Google, and send you the results: the questions where your competitors are cited, and you're not. Free, no strings attached.",
+          "text": "Enter your website URL. We run 25 real questions from your industry through ChatGPT, Perplexity and Google, and send you the report: who gets cited, and which questions your competitors answer without you. Free, no strings attached, results in 48 hours.",
           "button": "Request audit",
-          "reassurance": "No dashboard to learn, no tools to master. We do the work, and we show you exactly what was done."
+          "reassurance": "No dashboard to learn, no tools to master. We do the work, and we show you exactly what was done.",
+          "faqLink": "Questions? Check the GEO & SEO FAQ"
         }
       }
     },
@@ -728,11 +734,16 @@
           "hero": {
             "eyebrow": "GEO",
             "title": "Your visibility, automated",
-            "answer": "We make SMEs visible where their customers now search: in the answers of ChatGPT, Perplexity or Gemini, and on Google. GEO and SEO, technical work, content and measurement. Whatever can be automated is. The rest we do by hand, and we show you both."
+            "answer": "We make SMEs visible where their customers now search: in the answers of ChatGPT, Perplexity or Gemini, and on Google. GEO (Generative Engine Optimization) and SEO, technical work, content and measurement. Whatever can be automated is. The rest we do by hand, and we show you both."
           },
           "geo": {
             "title": "How do you get cited by AI?",
             "lead": "When a client asks ChatGPT or Perplexity which agency builds web applications in Brussels, the assistant answers by citing its sources. Being one of those sources is where visibility now starts, and it is worked page by page.",
+            "summary": [
+              "Be cited by ChatGPT, Perplexity and Gemini, not just found on Google.",
+              "First technical effects within weeks, content effects within months.",
+              "Presence measured on 25 real questions from your industry, in French and Dutch."
+            ],
             "cols": {
               "readable": {
                 "title": "Content machines can read",
@@ -750,39 +761,39 @@
             "conditions": "Three conditions, in the order an answer engine meets them:",
             "demo": {
               "example": "An illustration, not a result",
-              "question": "Which agency builds web applications in Brussels?",
+              "question": "Who do you recommend for [your trade] in [your city]?",
               "sourcesLabel": "Sources",
-              "you": "Your brand",
-              "yourPage": "your-site.be/web-applications",
+              "you": "Your company",
+              "yourPage": "your-site.com",
               "before": {
                 "label": "Today",
-                "answer": "Three agencies come up most often:",
+                "answer": "The companies cited most often:",
                 "names": [
-                  "Agency A",
-                  "Studio B",
-                  "Collective C"
+                  "Competitor 1",
+                  "Competitor 2",
+                  "Competitor 3"
                 ],
                 "sources": [
-                  "agency-a.be",
-                  "studio-b.com",
-                  "collective-c.be"
+                  "competitor-1.com",
+                  "competitor-2.com",
+                  "competitor-3.com"
                 ],
-                "caption": "Your site exists. The engine never read it."
+                "caption": "Your company is missing. The AI has nothing to cite."
               },
               "after": {
                 "label": "After the work",
-                "answer": "Four agencies come up most often:",
+                "answer": "The companies cited most often:",
                 "names": [
-                  "Agency A",
-                  "Studio B",
-                  "Collective C"
+                  "Competitor 1",
+                  "Competitor 2",
+                  "Competitor 3"
                 ],
                 "sources": [
-                  "agency-a.be",
-                  "studio-b.com",
-                  "collective-c.be"
+                  "competitor-1.com",
+                  "competitor-2.com",
+                  "competitor-3.com"
                 ],
-                "caption": "A page that answers this question, readable and structured."
+                "caption": "Your site answers the question: the AI cites you."
               }
             }
           },
@@ -812,7 +823,7 @@
               },
               "measure": {
                 "title": "Measure",
-                "text": "We start from the day-one baseline and track what changes.",
+                "text": "We start from the starting point measured on day one (the baseline) and track what changes.",
                 "system": "your presence and your competitors' in the answers of ChatGPT, Perplexity, Gemini, Copilot and Google AI Overviews, on 25 real customer questions, in French and Dutch; rankings and traffic reviewed with you at every check-in.",
                 "us": "choosing the competitors to compare, reading, deciding, adjusting, at every check-in with you."
               }
@@ -914,7 +925,11 @@
               "Every page exists in French and English, with the tags that tell engines which one to serve.",
               "Every page carries its structured data (schema.org), validated automatically before every release.",
               "All the content is in the HTML from the first response, readable by search engines and AI assistants alike."
-            ]
+            ],
+            "links": {
+              "schema": "schema.org — structured data",
+              "googleStructuredData": "Google guide: structured data"
+            }
           },
           "measured": {
             "title": "This page, in numbers",
@@ -932,17 +947,18 @@
             },
             "targetLabel": "target {value}",
             "note": "The main content paint is still over its 2.5 second threshold, and we leave it on display rather than picking the numbers that suit us. That one is work in progress. An agency that only publishes its good scores is not telling you what it measures: it is telling you what it shows.",
-            "meta": "Lighthouse mobile, measured on {date}"
+            "meta": "Lighthouse mobile, measured on {date}",
+            "lighthouseLink": "Learn more about Google Lighthouse"
           },
           "measures": {
             "title": "What we measure and what we don't promise",
             "text": "You don't have to take our word for it. We look at the same numbers you do, at the same time, against a baseline taken on day one.",
             "points": [
-              "Your presence in AI answers, and that of the competitors you choose: mentions, share of voice, average position, and whether your domain is used as a source. On 25 real customer questions, in FR and NL, across ChatGPT, Perplexity, Gemini, Copilot and Google AI Overviews.",
+              "Your presence in AI answers, and that of the competitors you choose: mentions, share of voice (the proportion of answers that cite your brand), average position, and whether your domain is used as a source. On 25 real customer questions, in FR and NL, across ChatGPT, Perplexity, Gemini, Copilot and Google AI Overviews.",
               "Rankings on the queries that matter to your business, not the ones that look good in a report, reviewed with you at every check-in.",
               "Organic traffic, with the honest timeline: a few weeks for technical work, several months for content."
             ],
-            "refusal": "What we will not sell: a guaranteed first position, or the certainty of being cited by AI. Nobody controls Google's algorithm, nobody controls the models, and no tool \"pushes\" a site into their answers. An agency that promises you otherwise has already told you something about the rest. What we commit to: the method, and transparency about what it produces.",
+            "refusal": "What we will not sell: a guaranteed first position, or the certainty of being cited by AI. Nobody controls Google's algorithm, nobody controls the models, and no tool \"pushes\" a site into their answers. An agency that promises you otherwise controls the algorithm and the models no more than we do. What we commit to: the method, and transparency about what it produces.",
             "cadence": "Cadence: a full analysis every two weeks (weekly or monthly on request), approved proposals applied every morning, a shared check-in with you at every analysis.",
             "tracking": {
               "baseline": "Day-one baseline",
@@ -1021,7 +1037,7 @@
             ]
           },
           "cta": {
-            "text": "Enter your website URL. We hand you the facts: what holds your site back today, and your starting point in AI answers on the questions of your trade."
+            "text": "Enter your website URL. We hand you the facts within 48 h: what holds your site back today, and your starting point in AI answers on the questions of your trade."
           }
         },
         "web": {

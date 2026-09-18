@@ -340,9 +340,14 @@
           "v2": {
             "eyebrow": "GEO & SEO",
             "headline": "Vos clients demandent à ChatGPT. Êtes-vous dans la réponse ?",
-            "paragraph": "On repère les questions que vos clients posent aux IA, puis on retravaille votre site pour que ce soit vous qu'elles citent. Sur ChatGPT comme sur Google.",
+            "paragraph": "On identifie les 25 questions que vos clients posent aux IA dans votre secteur (GEO, Generative Engine Optimization), puis on retravaille votre site pour que ce soit vous qu'elles citent. Sur ChatGPT comme sur Google.",
             "ctaAudit": "Demander l'audit",
-            "ctaWork": "Voir comment ça marche"
+            "ctaWork": "Voir comment ça marche",
+            "summary": [
+              "Vos clients demandent déjà à ChatGPT, Perplexity et Google qui contacter.",
+              "L'audit gratuit montre qui est cité sur 25 questions réelles de votre secteur.",
+              "Résultats en 48 h, sans engagement."
+            ]
           }
         },
         "latest-insights": {
@@ -439,7 +444,7 @@
           "title": "Le problème",
           "manifesto": [
             {
-              "text": "Un prospect demande à ChatGPT quel avocat contacter à Bruxelles."
+              "text": "Un client potentiel pose une question à ChatGPT."
             },
             {
               "text": "Votre concurrent est nommé.",
@@ -497,9 +502,10 @@
         },
         "audit-cta": {
           "title": "Commencez par la preuve",
-          "text": "Entrez l'URL de votre site. On analyse votre visibilité dans les réponses des IA et sur Google, et on vous envoie les résultats : les questions où vos concurrents sont cités, et pas vous. Gratuit, sans engagement.",
+          "text": "Entrez l'URL de votre site. On soumet 25 questions réelles de votre secteur à ChatGPT, Perplexity et Google, et on vous envoie le rapport : qui est cité, et sur quelles questions vos concurrents apparaissent sans vous. Gratuit, sans engagement, résultats en 48 h.",
           "button": "Demander l'audit",
-          "reassurance": "Pas de dashboard à apprendre, ni d'outils à maîtriser. On fait le boulot, et on vous montre exactement ce qui a été fait."
+          "reassurance": "Pas de dashboard à apprendre, ni d'outils à maîtriser. On fait le boulot, et on vous montre exactement ce qui a été fait.",
+          "faqLink": "Des questions ? Consultez la FAQ GEO & SEO"
         }
       }
     },
@@ -728,11 +734,16 @@
           "hero": {
             "eyebrow": "GEO",
             "title": "Votre visibilité, automatisée",
-            "answer": "Nous rendons les PME visibles là où leurs clients cherchent désormais : dans les réponses de ChatGPT, Perplexity ou Gemini, et sur Google. GEO et SEO, technique, contenu et mesure. Ce qui peut être automatisé l'est. Le reste, on le fait à la main, et on vous montre les deux."
+            "answer": "Nous rendons les PME visibles là où leurs clients cherchent désormais : dans les réponses de ChatGPT, Perplexity ou Gemini, et sur Google. GEO (Generative Engine Optimization) et SEO, technique, contenu et mesure. Ce qui peut être automatisé l'est. Le reste, on le fait à la main, et on vous montre les deux."
           },
           "geo": {
             "title": "Comment se faire citer par les IA ?",
             "lead": "Quand un client demande à ChatGPT ou Perplexity quelle agence développe des applications web à Bruxelles, l'assistant répond en citant ses sources. Être l'une de ces sources, c'est le référencement qui commence, et il se travaille, page par page.",
+            "summary": [
+              "Être cité par ChatGPT, Perplexity et Gemini, pas seulement trouvé sur Google.",
+              "Premiers effets techniques en quelques semaines, effets du contenu en plusieurs mois.",
+              "Présence mesurée sur 25 questions réelles de votre métier, en français et en néerlandais."
+            ],
             "cols": {
               "readable": {
                 "title": "Un contenu lisible par les machines",
@@ -750,39 +761,39 @@
             "conditions": "Trois conditions, dans l'ordre où un moteur de réponse les rencontre :",
             "demo": {
               "example": "Illustration, pas un résultat",
-              "question": "Quelle agence fait des applications web à Bruxelles ?",
+              "question": "Qui recommandez-vous pour [votre métier] à [votre ville] ?",
               "sourcesLabel": "Sources",
-              "you": "Votre marque",
-              "yourPage": "votre-site.be/applications-web",
+              "you": "Votre entreprise",
+              "yourPage": "votre-site.be",
               "before": {
                 "label": "Aujourd'hui",
-                "answer": "Trois agences reviennent le plus souvent :",
+                "answer": "Voici les entreprises les plus souvent citées :",
                 "names": [
-                  "Agence A",
-                  "Studio B",
-                  "Collectif C"
+                  "Concurrent 1",
+                  "Concurrent 2",
+                  "Concurrent 3"
                 ],
                 "sources": [
-                  "agence-a.be",
-                  "studio-b.com",
-                  "collectif-c.be"
+                  "concurrent-1.be",
+                  "concurrent-2.be",
+                  "concurrent-3.be"
                 ],
-                "caption": "Votre site existe. Le moteur ne l'a pas lu."
+                "caption": "Votre entreprise n'apparaît pas. L'IA n'a rien à citer."
               },
               "after": {
                 "label": "Après le travail",
-                "answer": "Quatre agences reviennent le plus souvent :",
+                "answer": "Voici les entreprises les plus souvent citées :",
                 "names": [
-                  "Agence A",
-                  "Studio B",
-                  "Collectif C"
+                  "Concurrent 1",
+                  "Concurrent 2",
+                  "Concurrent 3"
                 ],
                 "sources": [
-                  "agence-a.be",
-                  "studio-b.com",
-                  "collectif-c.be"
+                  "concurrent-1.be",
+                  "concurrent-2.be",
+                  "concurrent-3.be"
                 ],
-                "caption": "Une page qui répond à cette question, lisible et structurée."
+                "caption": "Votre site répond à la question : l'IA vous cite."
               }
             }
           },
@@ -812,7 +823,7 @@
               },
               "measure": {
                 "title": "Mesure",
-                "text": "On repart de la baseline du jour 1 et on suit ce qui change.",
+                "text": "On repart du point de départ mesuré au jour 1 (la baseline) et on suit ce qui change.",
                 "system": "votre présence et celle de vos concurrents dans les réponses de ChatGPT, Perplexity, Gemini, Copilot et Google AI Overviews, sur 25 questions réelles de vos clients, en français et en néerlandais ; positions et trafic revus avec vous à chaque point.",
                 "us": "choix des concurrents à comparer, lecture, décision, ajustement, à chaque point avec vous."
               }
@@ -914,7 +925,11 @@
               "Chaque page existe en français et en anglais, avec les balises qui disent aux moteurs laquelle servir.",
               "Chaque page porte ses données structurées (schema.org), validées automatiquement avant chaque mise en production.",
               "Tout le contenu est présent dans le HTML dès la première réponse, lisible par les moteurs comme par les assistants IA."
-            ]
+            ],
+            "links": {
+              "schema": "schema.org — données structurées",
+              "googleStructuredData": "Guide Google : données structurées"
+            }
           },
           "measured": {
             "title": "Les chiffres de cette page",
@@ -932,17 +947,18 @@
             },
             "targetLabel": "seuil {value}",
             "note": "L'affichage principal dépasse encore son seuil de 2,5 secondes, et nous le laissons affiché plutôt que de choisir les chiffres qui nous arrangent. C'est le chantier en cours. Une agence qui ne publie que ses bons scores ne vous dit pas ce qu'elle mesure : elle vous dit ce qu'elle montre.",
-            "meta": "Lighthouse mobile, mesuré le {date}"
+            "meta": "Lighthouse mobile, mesuré le {date}",
+            "lighthouseLink": "En savoir plus sur Google Lighthouse"
           },
           "measures": {
             "title": "Ce qu'on mesure et ce qu'on ne promet pas",
             "text": "Vous n'avez pas à nous croire sur parole. On regarde les mêmes chiffres que vous, aux mêmes moments, à partir d'une baseline prise le premier jour.",
             "points": [
-              "Votre présence dans les réponses des IA, et celle des concurrents que vous choisissez : mentions, part de voix, position moyenne, et si votre domaine est utilisé comme source. Sur 25 questions réelles de vos clients, en FR et NL, dans ChatGPT, Perplexity, Gemini, Copilot et Google AI Overviews.",
+              "Votre présence dans les réponses des IA, et celle des concurrents que vous choisissez : mentions, part de voix (la proportion de réponses qui citent votre marque), position moyenne, et si votre domaine est utilisé comme source. Sur 25 questions réelles de vos clients, en FR et NL, dans ChatGPT, Perplexity, Gemini, Copilot et Google AI Overviews.",
               "Les positions sur les requêtes qui comptent pour votre métier, pas sur celles qui font joli dans un rapport, revues avec vous à chaque point.",
               "Le trafic organique, avec l'échéance honnête : quelques semaines pour la technique, plusieurs mois pour le contenu."
             ],
-            "refusal": "Ce que nous ne vendrons pas : la première position garantie, ni la certitude d'être cité par les IA. Personne ne contrôle l'algorithme de Google, personne ne contrôle les modèles, et aucun outil ne « pousse » un site dans leurs réponses. Une agence qui vous le promet vous dit déjà quelque chose sur le reste. Ce sur quoi nous nous engageons : la méthode, et la transparence sur ce qu'elle produit.",
+            "refusal": "Ce que nous ne vendrons pas : la première position garantie, ni la certitude d'être cité par les IA. Personne ne contrôle l'algorithme de Google, personne ne contrôle les modèles, et aucun outil ne « pousse » un site dans leurs réponses. Une agence qui vous le promet ne contrôle pas plus l'algorithme ou les modèles que nous. Ce sur quoi nous nous engageons : la méthode, et la transparence sur ce qu'elle produit.",
             "cadence": "Cadence : analyse complète toutes les deux semaines (hebdomadaire ou mensuelle sur demande), application des propositions approuvées chaque matin, point partagé avec vous à chaque analyse.",
             "tracking": {
               "baseline": "Baseline jour 1",
@@ -1021,7 +1037,7 @@
             ]
           },
           "cta": {
-            "text": "Entrez l'URL de votre site. On vous rend un état des lieux : ce qui freine votre site aujourd'hui, et votre point de départ dans les réponses des IA sur les questions de votre métier."
+            "text": "Entrez l'URL de votre site. On vous rend un état des lieux sous 48 h : ce qui freine votre site aujourd'hui, et votre point de départ dans les réponses des IA sur les questions de votre métier."
           }
         },
         "web": {

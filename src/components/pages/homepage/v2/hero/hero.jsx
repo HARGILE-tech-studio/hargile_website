@@ -159,6 +159,12 @@ const HeroV2 = () => {
                             {t("ctaWork")}
                         </CtaLink>
                     </div>
+
+                    <ul className={styles.summary}>
+                        {t.raw("summary").map((line) => (
+                            <li key={line}>{line}</li>
+                        ))}
+                    </ul>
                 </div>
             </div>
         </section>

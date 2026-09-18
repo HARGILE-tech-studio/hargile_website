@@ -95,6 +95,15 @@ const MeasuredProof = () => {
                     ))}
                 </div>
                 <p className={styles.meta} {...reveal(6)}>{t("meta", {date: measuredOn})}</p>
+                <p className={styles.link} {...reveal(6)}>
+                    <a
+                        href="https://developers.google.com/web/tools/lighthouse"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        {t("lighthouseLink")}
+                    </a>
+                </p>
             </div>
         </section>
     );

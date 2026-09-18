@@ -72,6 +72,26 @@ const MetaProof = () => {
                                 <span className={styles.noteText}>{point}</span>
                             </li>
                         ))}
+                        {/* Sources externes, en clôture de la même liste plutôt
+                            qu'en bande à part : .noteWide est déjà le rôle
+                            « invitation finale, pleine largeur, sans renvoi de
+                            ligne » — le réutiliser évite un second filet
+                            immédiatement sous celui du panneau de code. */}
+                        <li className={styles.noteWide}>
+                            <span className={styles.noteText}>
+                                <a href="https://schema.org/" target="_blank" rel="noopener noreferrer">
+                                    {t("links.schema")}
+                                </a>
+                                {" · "}
+                                <a
+                                    href="https://developers.google.com/search/docs/appearance/structured-data"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                >
+                                    {t("links.googleStructuredData")}
+                                </a>
+                            </span>
+                        </li>
                     </ul>
                 </div>
             </div>
