@@ -69,8 +69,8 @@ $mono: ui-monospace, "Cascadia Mono", "SF Mono", Menlo, Consolas, monospace;
 }
 
 /* Prose for the rendered Markdown body. The post's own H1 lives in the hero
-   (poster-hero's <h1>), so the article's own headings start at H2 by
-   convention in the source Markdown, sized here one step under
+   (poster-hero's <h1>), and marked shifts every Markdown heading one
+   level down (## arrives as h3), so the rules below start at h3, sized here one step under
    section.blockHeading, never as large as the hero title. */
 .prose {
   grid-column: 4 / span 7;
@@ -99,7 +99,7 @@ $mono: ui-monospace, "Cascadia Mono", "SF Mono", Menlo, Consolas, monospace;
     margin: 0 0 1.4em;
   }
 
-  h2, h3, h4 {
+  h3, h4, h5 {
     font-family: var(--font-headings);
     font-weight: 600;
     color: #ededed;
@@ -108,7 +108,7 @@ $mono: ui-monospace, "Cascadia Mono", "SF Mono", Menlo, Consolas, monospace;
     margin: 2em 0 0.7em;
   }
 
-  h2 {
+  h3 {
     font-size: clamp(24px, 2.4vw, 34px);
     font-weight: 700;
     margin-top: 2.2em;
@@ -116,11 +116,11 @@ $mono: ui-monospace, "Cascadia Mono", "SF Mono", Menlo, Consolas, monospace;
     border-top: 1px solid $rule;
   }
 
-  h3 {
+  h4 {
     font-size: clamp(19px, 1.9vw, 24px);
   }
 
-  h4 {
+  h5 {
     font-size: 18px;
   }
 
