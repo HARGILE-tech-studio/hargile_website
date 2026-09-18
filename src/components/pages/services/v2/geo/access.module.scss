@@ -1,123 +1,234 @@
-/* Vos accès : trois pictos sur une ligne à filet, puis le paragraphe des
-   plateformes et les deux cartouches CMS. */
+/* Vos accès : bento suisse (voir l'en-tête d'access.jsx).
 
-.lead {
-  max-width: 68ch;
+     1–5  coffre, aplat accent, deux rangées │ 6–12 journal
+                                             │ 6–12 arrêt
+     1–6  application automatique            │ 7–12 application par nous
+
+   Les filets sont partagés : chaque cellule porte son filet haut et gauche,
+   la grille n'a pas de gouttière. Aucun arrondi. Bascule à 1100px avec
+   .grid12 ; le bloc plein passe alors bord à bord, comme .panel de
+   geo-answer. */
+
+$ink: #080c16;
+$rule: rgba(255, 255, 255, 0.12);
+$mono: ui-monospace, "Cascadia Mono", "SF Mono", Menlo, Consolas, monospace;
+
+.bento {
+  margin-top: clamp(40px, 5vw, 64px);
+  column-gap: 0;
+  border-bottom: 1px solid $rule;
+  border-right: 1px solid $rule;
 }
 
-.items {
-  list-style: none;
-  margin: clamp(40px, 5vw, 60px) 0 0;
-  padding: 0;
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: clamp(28px, 3.5vw, 56px);
+.vault,
+.log,
+.revoke,
+.regime {
+  min-width: 0;
+  padding: clamp(24px, 2.6vw, 40px);
+  border-top: 1px solid $rule;
+  border-left: 1px solid $rule;
 }
 
-.item {
-  border-top: 1px solid rgba(255, 255, 255, 0.12);
-  padding-top: 22px;
-}
-
-.icon {
-  display: block;
-  width: 26px;
-  height: 26px;
-  margin-bottom: 14px;
-
-  svg {
-    width: 26px;
-    height: 26px;
-    fill: none;
-    stroke: #96b9f9;
-    stroke-width: 1.5;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-  }
-}
-
-.itemTitle {
-  font-family: var(--font-headings);
-  font-weight: 600;
-  font-size: 16px;
-  letter-spacing: -0.01em;
+.label {
+  margin: 0 0 12px;
+  font-family: $mono;
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
   color: #ededed;
+}
+
+.text {
   margin: 0;
-}
-
-.itemText {
-  margin: 6px 0 0;
-  font-size: 14px;
-  font-weight: 300;
-  color: rgba(237, 237, 237, 0.62);
-  line-height: 1.55;
-}
-
-.platforms {
-  display: grid;
-  grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr);
-  gap: clamp(28px, 4vw, 64px);
-  align-items: center;
-  margin-top: clamp(40px, 5vw, 60px);
-  padding-top: clamp(24px, 3vw, 36px);
-  border-top: 1px solid rgba(255, 255, 255, 0.12);
-}
-
-.platformsText {
-  margin: 0;
+  max-width: 52ch;
   font-size: 15px;
   font-weight: 300;
+  line-height: 1.55;
   color: rgba(237, 237, 237, 0.66);
-  line-height: 1.6;
-  max-width: 60ch;
 }
 
-/* Quatre plateformes, sans cadre : un filet haut chacune, comme les trois
-   pictos au-dessus. Le cadre faisait « logo », et ce n'en sont pas. */
-.cms {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 16px clamp(16px, 2vw, 28px);
+/* ---------- Le coffre : l'aplat, le seul accent de la section ---------- */
+
+.vault {
+  grid-column: 1 / 6;
+  grid-row: 1 / 3;
+  display: flex;
+  flex-direction: column;
+  background: #96b9f9;
+  border-color: #96b9f9;
+
+  .label {
+    color: $ink;
+  }
 }
 
-.cmsCard {
-  border-top: 1px solid rgba(255, 255, 255, 0.14);
-  padding-top: 12px;
-  min-width: 0;
-}
-
-.cmsName {
-  display: block;
+.statement {
+  margin: 0 0 clamp(40px, 5vw, 72px);
+  max-width: 14ch;
   font-family: var(--font-headings);
   font-weight: 700;
-  font-size: 18px;
-  letter-spacing: -0.02em;
+  font-size: clamp(30px, 3.1vw, 50px);
+  letter-spacing: -0.03em;
+  line-height: 1.02;
+  color: $ink;
+  text-wrap: balance;
+}
+
+.secret {
+  margin: auto 0 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 16px;
+  padding-top: 14px;
+  border-top: 1px solid rgba(8, 12, 22, 0.35);
+  font-family: $mono;
+  font-size: 12px;
+  color: rgba(8, 12, 22, 0.72);
+}
+
+.dots {
+  letter-spacing: 0.18em;
+  color: $ink;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+/* ---------- Le journal : qui, quand, pour quoi ---------- */
+
+.log,
+.revoke {
+  grid-column: 6 / 13;
+}
+
+.journal,
+.stop {
+  margin-top: clamp(20px, 2.4vw, 32px);
+  font-family: $mono;
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+}
+
+.journalHead,
+.journalRow {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(0, 2fr) minmax(0, 5fr);
+  column-gap: 16px;
+  padding: 7px 0;
+}
+
+.journalHead {
+  font-size: 10.5px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(237, 237, 237, 0.42);
+}
+
+/* La plus récente en pleine encre, les autres s'éloignent. */
+.journalRow {
+  color: rgba(237, 237, 237, 0.85);
+
+  & + & {
+    color: rgba(237, 237, 237, 0.55);
+  }
+
+  & + & + & {
+    color: rgba(237, 237, 237, 0.32);
+  }
+}
+
+/* ---------- L'arrêt : le message, puis l'état ---------- */
+
+.stop {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  column-gap: clamp(20px, 2.5vw, 40px);
+  align-items: end;
+}
+
+.message {
+  margin: 0;
+  padding: 12px 14px;
+  background: rgba(255, 255, 255, 0.06);
+  font-family: var(--font-primary);
+  font-size: 14px;
+  color: rgba(237, 237, 237, 0.88);
+}
+
+.status {
+  margin: 0;
+
+  div {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 5px 0;
+  }
+
+  dt {
+    color: rgba(237, 237, 237, 0.5);
+  }
+
+  dd {
+    margin: 0;
+    color: rgba(237, 237, 237, 0.88);
+  }
+}
+
+/* ---------- Les deux régimes de plateformes ---------- */
+
+.regime {
+  grid-column: span 6;
+}
+
+.cms {
+  margin: clamp(16px, 2vw, 28px) 0 14px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px clamp(20px, 2.4vw, 36px);
+  font-family: var(--font-headings);
+  font-weight: 700;
+  font-size: clamp(24px, 2.4vw, 36px);
+  letter-spacing: -0.025em;
+  line-height: 1.1;
   color: #ededed;
 }
 
-.cmsNote {
-  display: block;
-  margin-top: 6px;
-  font-size: 12px;
-  font-weight: 300;
-  color: rgba(237, 237, 237, 0.5);
-  line-height: 1.4;
-}
-
-@media (max-width: 900px) {
-  .items {
-    grid-template-columns: minmax(0, 1fr);
-    gap: 0;
+@media (max-width: 1100px) {
+  .bento {
+    border-right: 0;
   }
 
-  .item {
-    padding: clamp(20px, 4vw, 26px) 0;
+  .vault,
+  .log,
+  .revoke,
+  .regime {
+    grid-column: 1 / -1;
+    grid-row: auto;
+    padding: 28px 0;
+    border-left: 0;
   }
 
-  .platforms {
+  .vault {
+    margin-inline: calc(-1 * var(--container-gutter));
+    padding: 36px var(--container-gutter) 28px;
+  }
+
+  .statement {
+    max-width: 16ch;
+    font-size: clamp(28px, 7.6vw, 48px);
+  }
+
+  .stop {
     grid-template-columns: minmax(0, 1fr);
+    row-gap: 14px;
+  }
+
+  .journalHead,
+  .journalRow {
+    grid-template-columns: 84px 56px minmax(0, 1fr);
+    column-gap: 10px;
+    font-size: 11px;
   }
 }

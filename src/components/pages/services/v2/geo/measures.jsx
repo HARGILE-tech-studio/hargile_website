@@ -28,11 +28,19 @@
  *
  * Aucun score, aucune position, aucun chiffre de trafic ici. Il n'y a pas
  * encore d'historique mesuré à publier ; le jour où il y en aura, il ira dans
- * les messages. */
+ * les messages.
+ *
+ * V3, 18/09/2026 (docs/geo-swiss-design-plan.md §3.7, et Mihai : « beaucoup de
+ * texte, il faut alléger ») : même grammaire que access et approval. Les trois
+ * mesures sont des cellules (libellé mono, une phrase courte), les deux cartes
+ * de suivi sont devenues la table qu'elles étaient, la cadence est une bande
+ * de trois cellules, et le refus se lit en deux temps : l'énoncé en corps
+ * d'affiche, puis ses raisons en corps courant. `points` et `cadence` sont des
+ * listes d'objets et `refusal` un {statement, text} dans fr/en.json. L'accent
+ * de la section est la colonne « Aujourd'hui » : c'est celle qui bouge. */
 
 import {useTranslations} from "next-intl";
 import section from "@/components/pages/homepage/v2/v2-section.module.scss";
-import revealStyles from "@/components/pages/homepage/v2/reveal.module.scss";
 import {useReveal} from "@/components/pages/homepage/v2/useReveal";
 import styles from "./measures.module.scss";
 
@@ -46,51 +54,48 @@ const Measures = () => {
                 <h2 className={section.heading} {...reveal(0)}>{t("title")}</h2>
                 <p className={`${section.lead} ${styles.lead}`} {...reveal(1)}>{t("text")}</p>
 
-                {/* Trois mesures sur une ligne, ouvertes chacune par un filet.
-                    Pas de tirets ni de puces : à trois colonnes, le filet est
-                    déjà la marque de liste. */}
-                <div className={styles.cols} {...reveal(2)}>
-                    {t.raw("points").map((point) => (
-                        <p key={point} className={styles.point}>{point}</p>
-                    ))}
-                </div>
-
-                <p className={styles.cadence} {...reveal(3)}>{t("cadence")}</p>
-
-                {/* 14/09/2026 (docs/PAGE-GEO-SEO-refonte.md §8) : le format du
-                    suivi, deux cartes au même gabarit, cinq lignes. Valeurs
-                    fictives, marquées « exemple » : le message est le format,
-                    pas un résultat. aria-hidden : les trois mesures au-dessus
-                    listent déjà chaque ligne en prose. */}
-                <div className={styles.tracking} {...reveal(3)} aria-hidden="true">
-                    {[["baseline", "a"], ["today", "b"]].map(([head, col]) => (
-                        <div key={head} className={col === "b" ? styles.trackCardNow : styles.trackCard}>
-                            <div className={styles.trackHead}>
-                                <span className={styles.trackTitle}>{t(`tracking.${head}`)}</span>
-                                <span className={styles.trackExample}>{t("tracking.example")}</span>
-                            </div>
-                            <dl className={styles.trackRows}>
-                                {t.raw("tracking.rows").map((row) => (
-                                    <div key={row.label} className={styles.trackRow}>
-                                        <dt>{row.label}</dt>
-                                        <dd>{row[col]}</dd>
-                                    </div>
-                                ))}
-                            </dl>
+                <div className={`${section.grid12} ${styles.bento}`}>
+                    {t.raw("points").map((point, i) => (
+                        <div key={point.label} className={styles.point} {...reveal(2 + i)}>
+                            <p className={styles.label}>{point.label}</p>
+                            <p className={styles.text}>{point.text}</p>
                         </div>
                     ))}
+
+                    {/* Le format du suivi : une table, cinq lignes. Valeurs
+                        fictives, marquées « exemple » : le message est le
+                        format, pas un résultat. aria-hidden : les trois
+                        mesures au-dessus listent déjà chaque ligne en prose. */}
+                    <div className={styles.tracking} {...reveal(5)} aria-hidden="true">
+                        <div className={styles.trackHead}>
+                            <span>{t("tracking.example")}</span>
+                            <span>{t("tracking.baseline")}</span>
+                            <span className={styles.now}>{t("tracking.today")}</span>
+                        </div>
+                        {t.raw("tracking.rows").map((row) => (
+                            <div key={row.label} className={styles.trackRow}>
+                                <span>{row.label}</span>
+                                <span>{row.a}</span>
+                                <span className={styles.now}>{row.b}</span>
+                            </div>
+                        ))}
+                    </div>
+
+                    <div className={styles.cadence} {...reveal(6)}>
+                        {t.raw("cadence").map((c) => (
+                            <div key={c.label}>
+                                <p className={styles.label}>{c.label}</p>
+                                <p className={styles.cadenceValue}>{c.value}</p>
+                            </div>
+                        ))}
+                    </div>
                 </div>
 
-                {/* Le pas le plus large de la page, puis un filet accent court :
-                    c'est le changement de registre, et plus aucune boîte ne
-                    l'annonce. */}
-                <div className={styles.refusalBlock}>
-                    <span
-                        className={`${styles.refusalRule} ${revealStyles.hairline}`}
-                        aria-hidden="true"
-                        {...reveal(4)}
-                    />
-                    <p className={styles.refusal} {...reveal(5)}>{t("refusal")}</p>
+                {/* Le pas le plus large de la page, puis l'énoncé sur lequel
+                    elle s'arrête. */}
+                <div className={`${section.grid12} ${styles.refusalBlock}`}>
+                    <p className={styles.refusal} {...reveal(7)}>{t("refusal.statement")}</p>
+                    <p className={styles.refusalText} {...reveal(8)}>{t("refusal.text")}</p>
                 </div>
             </div>
         </section>

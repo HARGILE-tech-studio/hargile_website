@@ -831,16 +831,16 @@
           },
           "approval": {
             "title": "Nothing is written to your site without your consent",
-            "text": "The system does not edit your site live. It proposes. Every recommendation becomes a proposal: the page concerned, the current value, the proposed value, and why.",
+            "text": "The system does not edit your site live. It proposes, you decide.",
             "modesTitle": "You choose the mode",
             "modes": {
               "validate": {
                 "title": "Approval mode",
-                "text": "You receive every proposal and accept or reject it. Nothing goes out without your click. This is the default."
+                "text": "You accept or reject every proposal. Nothing goes out without your click. This is the default."
               },
               "auto": {
                 "title": "Automatic mode",
-                "text": "You trust us with routine changes (titles, descriptions): proposals we have approved are applied every morning, under a daily cap you set. You can switch back to approval mode at any time."
+                "text": "For routine changes (titles, descriptions): proposals we approve are applied every morning, under a daily cap you set. Back to approval mode at any time."
               }
             },
             "bothTitle": "In both modes",
@@ -876,14 +876,17 @@
               "before": "Our services",
               "afterLabel": "Proposed",
               "after": "Web development, GEO and SEO for SMEs in Brussels. Free audit within 48 h.",
-              "why": "Why: description too short (12 characters), the page names neither the trade nor the city.",
+              "why": "Description too short (12 characters): the page names neither the trade nor the city.",
               "accept": "Accept",
-              "reject": "Reject"
+              "reject": "Reject",
+              "whyLabel": "Why",
+              "pending": "Waiting for your decision",
+              "applied": "Applied this morning · cap 5 / day"
             }
           },
           "access": {
             "title": "Your credentials",
-            "text": "Your credentials are never stored in our database. They live in an encrypted vault, and every read is traced: who, when, what for. To stop, one message is enough: we remove the subscription from our CRM, the system reads nothing more, nothing breaks.",
+            "text": "Your credentials are never stored in our database.",
             "items": {
               "vault": {
                 "title": "Encrypted vault",
@@ -891,11 +894,11 @@
               },
               "log": {
                 "title": "Traced reads",
-                "text": "Who, when, what for."
+                "text": "Every read of the vault is logged: who, when, what for."
               },
               "revoke": {
                 "title": "Stop on request",
-                "text": "One message, and we remove the subscription."
+                "text": "One message is enough. The system reads nothing more, nothing breaks."
               }
             },
             "platforms": "WordPress (Yoast, Rank Math, The SEO Framework) and Shopify: approved proposals are applied automatically. Webflow and custom-built sites: same audit, same proposals, applied by us, by hand or in the code.",
@@ -916,20 +919,79 @@
                 "name": "Custom-built sites",
                 "note": "applied in the code, by us"
               }
+            },
+            "vaultField": "CMS credential",
+            "log": {
+              "head": [
+                "When",
+                "Who",
+                "What for"
+              ],
+              "rows": [
+                [
+                  "14/09 09:02",
+                  "pilot",
+                  "apply · /services"
+                ],
+                [
+                  "14/09 07:00",
+                  "pilot",
+                  "scheduled analysis"
+                ],
+                [
+                  "02/09 16:41",
+                  "Hargile",
+                  "initial connection"
+                ]
+              ]
+            },
+            "revoke": {
+              "message": "“Hello, we're stopping the subscription.”",
+              "status": [
+                [
+                  "Subscription",
+                  "removed"
+                ],
+                [
+                  "Vault reads",
+                  "0"
+                ]
+              ]
+            },
+            "regimes": {
+              "auto": {
+                "label": "Applied automatically",
+                "text": "Approved proposals are applied to your site. Yoast, Rank Math and The SEO Framework supported."
+              },
+              "manual": {
+                "label": "Applied by us",
+                "text": "Same audit, same proposals. We apply them by hand or in the code."
+              }
             }
           },
           "metaProof": {
             "title": "Architecture & source",
-            "text": "The method we propose is the one we apply to our own site. View this page's source: it is all there.",
+            "text": "This page applies the method it sells. View its source: it is all there.",
             "points": [
-              "Every page exists in French and English, with the tags that tell engines which one to serve.",
-              "Every page carries its structured data (schema.org), validated automatically before every release.",
-              "All the content is in the HTML from the first response, readable by search engines and AI assistants alike."
+              {
+                "title": "Two languages, declared",
+                "text": "Every page exists in French and English, with the tags that tell engines which one to serve."
+              },
+              {
+                "title": "Structured data",
+                "text": "schema.org on every page, validated automatically before every release."
+              },
+              {
+                "title": "It is all in the HTML",
+                "text": "The content is there from the first response, readable by search engines and AI assistants alike."
+              }
             ],
             "links": {
               "schema": "schema.org — structured data",
               "googleStructuredData": "Google guide: structured data"
-            }
+            },
+            "sourceLabel": "Page source",
+            "lines": "Lines"
           },
           "measured": {
             "title": "This page, in numbers",
@@ -952,14 +1014,39 @@
           },
           "measures": {
             "title": "What we measure and what we don't promise",
-            "text": "You don't have to take our word for it. We look at the same numbers you do, at the same time, against a baseline taken on day one.",
+            "text": "You don't have to take our word for it. We look at the same numbers you do, against a baseline taken on day one.",
             "points": [
-              "Your presence in AI answers, and that of the competitors you choose: mentions, share of voice (the proportion of answers that cite your brand), average position, and whether your domain is used as a source. On 25 real customer questions, in FR and NL, across ChatGPT, Perplexity, Gemini, Copilot and Google AI Overviews.",
-              "Rankings on the queries that matter to your business, not the ones that look good in a report, reviewed with you at every check-in.",
-              "Organic traffic, with the honest timeline: a few weeks for technical work, several months for content."
+              {
+                "label": "Presence in AI answers",
+                "text": "Mentions, share of voice, average position, domain cited as a source, against the competitors you choose. On 25 real customer questions, in FR and NL, across ChatGPT, Perplexity, Gemini, Copilot and Google AI Overviews."
+              },
+              {
+                "label": "Google rankings",
+                "text": "On the queries that matter to your business, not the ones that look good in a report."
+              },
+              {
+                "label": "Organic traffic",
+                "text": "With the honest timeline: a few weeks for technical work, several months for content."
+              }
             ],
-            "refusal": "What we will not sell: a guaranteed first position, or the certainty of being cited by AI. Nobody controls Google's algorithm, nobody controls the models, and no tool \"pushes\" a site into their answers. An agency that promises you otherwise controls the algorithm and the models no more than we do. What we commit to: the method, and transparency about what it produces.",
-            "cadence": "Cadence: a full analysis every two weeks (weekly or monthly on request), approved proposals applied every morning, a shared check-in with you at every analysis.",
+            "refusal": {
+              "statement": "What we will not sell: a guaranteed first position, or the certainty of being cited by AI.",
+              "text": "Nobody controls Google's algorithm, nobody controls the models, and no tool \"pushes\" a site into their answers. What we commit to: the method, and transparency about what it produces."
+            },
+            "cadence": [
+              {
+                "label": "Full analysis",
+                "value": "Every two weeks"
+              },
+              {
+                "label": "Approved proposals",
+                "value": "Applied every morning"
+              },
+              {
+                "label": "Shared check-in",
+                "value": "At every analysis"
+              }
+            ],
             "tracking": {
               "baseline": "Day-one baseline",
               "today": "Today",

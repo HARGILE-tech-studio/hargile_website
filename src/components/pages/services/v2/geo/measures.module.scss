@@ -1,170 +1,209 @@
-/* Ce qu'on mesure — une colonne d'énoncés, aucun cadre.
+/* Ce qu'on mesure (voir l'en-tête de measures.jsx).
 
-   Même moule que web/price-method depuis son dé-cadrage : titre, paragraphe,
-   les trois mesures sur une ligne, puis un écart deux fois plus large que tous
-   les autres, et le refus. Ce qui annonce le changement de registre est cet
-   écart, maintenant qu'aucune règle ne le fait. */
+     1–4 │ 5–8 │ 9–12   les trois mesures
+     1–7  la table de suivi            │ 8–12 la cadence, trois cellules
+     (le plus grand pas de la page)
+     1–8  le refus, en corps d'affiche │ 9–12 ses raisons
+
+   Même grammaire que access et approval : filets partagés, libellés mono,
+   aucun arrondi. Un seul accent : la colonne « Aujourd'hui ». */
+
+$rule: rgba(255, 255, 255, 0.12);
+$mono: ui-monospace, "Cascadia Mono", "SF Mono", Menlo, Consolas, monospace;
 
 .lead {
-  max-width: 72ch;
+  max-width: 60ch;
+  text-wrap: pretty;
 }
 
-.cols {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: clamp(28px, 3.5vw, 56px);
-  margin-top: clamp(40px, 5vw, 60px);
+.bento {
+  margin-top: clamp(40px, 5vw, 64px);
+  column-gap: 0;
+  border-right: 1px solid $rule;
+  border-bottom: 1px solid $rule;
 }
 
-/* Le filet ouvre chaque mesure au lieu de la fermer : le bloc se termine sur
-   la dernière phrase, pas sur une ligne sous elle. */
+.point,
+.tracking,
+.cadence > div {
+  min-width: 0;
+  padding: clamp(24px, 2.6vw, 40px);
+  border-top: 1px solid $rule;
+  border-left: 1px solid $rule;
+}
+
 .point {
-  border-top: 1px solid rgba(255, 255, 255, 0.12);
-  padding-top: 22px;
+  grid-column: span 4;
+}
+
+.label {
+  margin: 0 0 12px;
+  font-family: $mono;
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #ededed;
+}
+
+.text {
   margin: 0;
   font-size: 15px;
   font-weight: 300;
+  line-height: 1.55;
   color: rgba(237, 237, 237, 0.66);
-  line-height: 1.6;
 }
 
-.cadence {
-  margin: clamp(32px, 4vw, 48px) 0 0;
-  font-size: 14px;
-  font-weight: 300;
-  color: rgba(237, 237, 237, 0.55);
-  line-height: 1.6;
-  max-width: 72ch;
-}
+/* ---------- La table de suivi ---------- */
 
-/* Les deux cartes de suivi, même gabarit. Celle d'aujourd'hui prend le
-   filet accent : c'est la colonne qui bouge. */
 .tracking {
+  grid-column: 1 / 8;
+  font-variant-numeric: tabular-nums;
+}
+
+.trackHead,
+.trackRow {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: clamp(16px, 2.5vw, 32px);
-  margin-top: clamp(28px, 3.5vw, 44px);
-  max-width: 760px;
-}
+  grid-template-columns: minmax(0, 1fr) 16ch 12ch;
+  column-gap: clamp(16px, 2.4vw, 40px);
+  align-items: baseline;
+  padding: 9px 0;
 
-/* Sans cadre : un filet haut par carte, accent sur celle d'aujourd'hui. */
-.trackCard,
-.trackCardNow {
-  border-top: 1px solid rgba(255, 255, 255, 0.14);
-  min-width: 0;
-}
-
-.trackCardNow {
-  border-top-color: rgba(150, 185, 249, 0.7);
+  span + span {
+    text-align: right;
+  }
 }
 
 .trackHead {
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  gap: 8px;
-  padding: 14px 0 10px;
-}
-
-.trackTitle {
-  font-family: var(--font-headings);
-  font-weight: 600;
-  font-size: 13px;
-  color: rgba(237, 237, 237, 0.85);
-}
-
-.trackCardNow .trackTitle {
-  color: #96b9f9;
-}
-
-.trackExample {
-  font-size: 11px;
-  font-weight: 300;
+  padding-top: 0;
+  font-family: $mono;
+  font-size: 10.5px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
   color: rgba(237, 237, 237, 0.42);
-  letter-spacing: 0.02em;
-}
 
-.trackRows {
-  margin: 0;
-  padding: 0;
+  .now {
+    color: #96b9f9;
+  }
 }
 
 .trackRow {
-  display: flex;
-  justify-content: space-between;
-  gap: 12px;
-  padding: 7px 0;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+  font-size: 15px;
+  font-weight: 300;
+  color: rgba(237, 237, 237, 0.66);
 
-  &:last-child {
-    border-bottom: 0;
-  }
-
-  dt {
-    font-size: 13px;
-    font-weight: 300;
-    color: rgba(237, 237, 237, 0.6);
-  }
-
-  dd {
-    margin: 0;
+  span + span {
     font-family: var(--font-headings);
     font-weight: 600;
-    font-size: 13px;
-    color: rgba(237, 237, 237, 0.88);
-    font-variant-numeric: tabular-nums;
+    font-size: 18px;
+    color: rgba(237, 237, 237, 0.5);
+  }
+
+  .now {
+    color: #96b9f9;
   }
 }
 
-.trackCardNow .trackRow dd {
-  color: #96b9f9;
+/* ---------- La cadence ---------- */
+
+.cadence {
+  grid-column: 8 / 13;
+  display: grid;
+  grid-template-rows: repeat(3, minmax(0, 1fr));
+
+  > div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-block: clamp(16px, 1.6vw, 24px);
+  }
+
+  .label {
+    margin-bottom: 6px;
+    color: rgba(237, 237, 237, 0.5);
+  }
 }
 
-/* Le plus grand pas vertical de la page — délibérément le double d'un pas de
-   bloc ordinaire. C'est lui qui dit « on change de registre ». */
+.cadenceValue {
+  margin: 0;
+  font-family: var(--font-headings);
+  font-weight: 600;
+  font-size: clamp(18px, 1.6vw, 22px);
+  letter-spacing: -0.018em;
+  color: #ededed;
+}
+
+/* ---------- Le refus ---------- */
+
+/* Le plus grand pas vertical de la page : c'est lui qui dit « on change de
+   registre ». */
 .refusalBlock {
-  margin-top: clamp(64px, 8vw, 104px);
+  margin-top: clamp(72px, 9vw, 128px);
+  align-items: end;
 }
 
-/* Court et accent, à gauche : la même marque que le bloc « ownership » de
-   web/made-in-house, réduite à un tiret. Sur ce site, l'accent sur un filet
-   veut dire « et voici la limite de ce que nous revendiquons » — et depuis le
-   06/08/2026 c'est le seul endroit de /services/seo qui la porte. */
-.refusalRule {
-  display: block;
-  width: 44px;
-  height: 1px;
-  background: rgba(150, 185, 249, 0.7);
-}
-
-/* Pleine encre et un cran plus gros que le corps courant : ce n'est pas une
-   note de bas de section, c'est l'énoncé sur lequel la page s'arrête. */
 .refusal {
-  font-size: clamp(17px, 1.5vw, 21px);
+  grid-column: 1 / 9;
+  margin: 0;
+  max-width: 20ch;
+  font-family: var(--font-headings);
+  font-weight: 700;
+  font-size: clamp(30px, 3.6vw, 58px);
+  letter-spacing: -0.03em;
+  line-height: 1.04;
+  color: #ededed;
+  text-wrap: balance;
+}
+
+.refusalText {
+  grid-column: 9 / 13;
+  margin: 0;
+  font-size: 15px;
   font-weight: 300;
-  color: rgba(237, 237, 237, 0.88);
-  line-height: 1.55;
-  letter-spacing: -0.01em;
-  max-width: 58ch;
-  margin: clamp(22px, 2.5vw, 30px) 0 0;
+  line-height: 1.6;
+  color: rgba(237, 237, 237, 0.7);
 }
 
-@media (max-width: 860px) {
-  .cols {
-    grid-template-columns: minmax(0, 1fr);
-    gap: 0;
+@media (max-width: 1100px) {
+  .bento {
+    border-right: 0;
   }
 
-  /* Empilées, les trois mesures redeviennent des rangs : le filet les ouvre
-     toujours, mais l'air passe dans le padding plutôt que dans le gap. */
-  .point {
-    padding: clamp(20px, 4vw, 26px) 0;
-    max-width: 68ch;
+  .point,
+  .tracking,
+  .cadence,
+  .refusal,
+  .refusalText {
+    grid-column: 1 / -1;
   }
-}
 
-@media (max-width: 560px) {
-  .tracking {
-    grid-template-columns: minmax(0, 1fr);
+  .point,
+  .tracking,
+  .cadence > div {
+    padding-inline: 0;
+    border-left: 0;
+  }
+
+  .trackHead,
+  .trackRow {
+    grid-template-columns: minmax(0, 1fr) 9ch 11ch;
+    column-gap: 10px;
+  }
+
+  .trackHead {
+    font-size: 9.5px;
+    letter-spacing: 0.04em;
+  }
+
+  .trackRow {
+    font-size: 14px;
+
+    span + span {
+      font-size: 15px;
+    }
+  }
+
+  .refusalText {
+    margin-top: 24px;
+    max-width: 60ch;
   }
 }

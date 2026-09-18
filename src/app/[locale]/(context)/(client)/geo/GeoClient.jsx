@@ -44,6 +44,10 @@
  * tous deux le rail vertical, et adjacents ils donnaient deux fois le même
  * dessin. Les pictos d'Access coupent la répétition.
  *
+ * 18/09/2026 : Approval n'a plus de rail et Access n'a plus de pictos. Access,
+ * Approval, MetaProof et Measures partagent une grammaire, le « bento suisse »
+ * (docs/geo-swiss-design-plan.md §7) ; l'ordre des sections ne change pas.
+ *
  * SiblingOffers a disparu : il n'existe plus qu'une seule offre (GEO), donc
  * "les autres offres" n'a plus de sens à une seule alternative — voir
  * sibling-offers.jsx, qui documente pourquoi il ne route plus que vers /geo

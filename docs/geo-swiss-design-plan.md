@@ -306,3 +306,34 @@ hot-reload loop), not a screenshot pass.
 > v2-section.module.scss. Copie fr/en intouchée. Une seule couleur accent par
 > section. Un seul mouvement signature sur la page (rangée 04 de GeoAnswer).
 > Je regarde en live à 1440 et 400 : une phase à la fois, je valide à l'œil.
+
+## 7. Passe du 18/09 (soir) : le « bento suisse » sur quatre sections
+
+Demande de Mihai : trop de texte sur la page, l'alléger, la rendre plus lisible
+et plus dessinée, en restant suisse. Références : la grille de fonctionnalités
+de clickup.com (cellules à filets partagés, libellé mono en capitales, deux
+lignes de texte, un objet d'interface dans chaque cellule) et spinxdigital.com
+(grands énoncés typographiques). Cette passe **remplace §3.3, §3.4, §3.5 et
+§3.7** pour la forme ; leurs intentions tiennent.
+
+La grammaire, identique dans les quatre sections :
+
+- une grille de cellules à **filets partagés** (filet haut + gauche par
+  cellule, pas de gouttière), aucun arrondi, aucun fond sauf l'accent ;
+- dans chaque cellule : **libellé mono 12px en capitales**, une phrase courte,
+  et si possible un **objet en HTML** qui montre au lieu de redire ;
+- **un accent par section**, qui veut dire quelque chose ;
+- sous 1100px les cellules s'empilent et perdent leur filet gauche.
+
+| Section | Forme | L'accent | Copie changée (fr + en) |
+|---|---|---|---|
+| Access | aplat « coffre » 1–5 sur deux rangées (première phrase du lead en corps d'affiche, champ masqué) ; journal « quand / qui / pour quoi » et message d'arrêt + état en 6–12 ; deux régimes de plateformes 6/6, CMS en typographie | l'aplat du coffre | `text` réduit à une phrase ; `items.log.text`, `items.revoke.text` réécrits ; nouveaux `vaultField`, `log`, `revoke`, `regimes`. `platforms` et `cms.*.note` non lus |
+| Approval | h2 1–7 + lead 9–12 ; bande du parcours en quatre cellules (rail retiré) ; modes 1–4 en **deux boutons réels** qui changent le pied de la proposition 5–12 (validation : Refuser / Accepter ; automatique : appliquée + ligne de journal) ; quatre règles numérotées | le bouton Accepter, en aplat | `text`, `modes.*.text` raccourcis ; `card.why` sans son préfixe ; nouveaux `card.whyLabel`, `card.pending`, `card.applied`. `flow.branch*`, `flow.journal` non lus |
+| MetaProof | extrait 1–7 dans une cellule, trois points 8–12 en cellules : renvoi de lignes, titre, phrase | le système de renvoi (filet des lignes prouvées, « Lignes 2–3 ») | `text` raccourci ; `points` devient `[{title, text}]` ; nouveaux `sourceLabel`, `lines` |
+| Measures | trois mesures 4/4/4 ; table de suivi 1–7 (les deux cartes fusionnées) ; cadence 8–12 en trois cellules ; le refus en corps d'affiche 1–8, ses raisons 9–12 | la colonne « Aujourd'hui » | `text` raccourci ; `points` devient `[{label, text}]`, `cadence` `[{label, value}]`, `refusal` `{statement, text}` (la phrase « Une agence qui vous le promet… » a sauté) |
+
+Le seul état interactif de la page est le choix du mode dans Approval. Le HTML
+servi est le mode validation, les deux textes de mode sont toujours dans le
+HTML, et le fondu du pied ne joue qu'après un clic.
+
+Restent à traiter dans cette grammaire : Process (§3.2) et MeasuredProof (§3.6).

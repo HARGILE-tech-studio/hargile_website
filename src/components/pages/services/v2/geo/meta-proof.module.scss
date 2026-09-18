@@ -1,29 +1,56 @@
-/* La vue source — l'extrait à gauche, les quatre points en annotations à
-   droite. Aucun cadre : le panneau de code est tenu par un filet haut et par
-   sa police, pas par une boîte. Le cadre 16px d'avant rimait avec Measures. */
+/* La vue source — l'extrait à gauche (colonnes 1–7), les trois points en
+   cellules à droite (8–12). Même grammaire que access et approval : filets
+   partagés, libellés mono, aucun arrondi. L'accent de la section est le
+   système de renvoi : le filet des lignes prouvées et le numéro de lignes de
+   chaque point. */
+
+$rule: rgba(255, 255, 255, 0.12);
+$mono: ui-monospace, "Cascadia Mono", "SF Mono", Menlo, Consolas, monospace;
 
 .lead {
-  max-width: 68ch;
+  max-width: 60ch;
+  text-wrap: pretty;
 }
 
 .split {
-  display: grid;
-  grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
-  gap: clamp(32px, 4.5vw, 72px);
-  margin-top: clamp(40px, 5vw, 60px);
-  align-items: start;
+  margin-top: clamp(40px, 5vw, 64px);
+  column-gap: 0;
+  border-right: 1px solid $rule;
+  border-bottom: 1px solid $rule;
 }
 
 .code {
-  border-top: 1px solid rgba(255, 255, 255, 0.14);
-  padding-top: clamp(20px, 2.4vw, 28px);
+  grid-column: 1 / 8;
   min-width: 0;
+  padding: clamp(24px, 2.6vw, 40px);
+  border-top: 1px solid $rule;
+  border-left: 1px solid $rule;
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.label {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin: 0 0 clamp(20px, 2.4vw, 32px);
+  font-family: $mono;
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #ededed;
+}
+
+.url {
+  letter-spacing: 0;
+  text-transform: none;
+  color: rgba(237, 237, 237, 0.5);
 }
 
 .codeScroll {
-  font-family: ui-monospace, "Cascadia Mono", "SF Mono", Menlo, Consolas, monospace;
-  font-size: clamp(11.5px, 1vw, 13px);
-  line-height: 1.75;
+  font-family: $mono;
+  font-size: clamp(11.5px, 1.05vw, 14px);
+  line-height: 2;
   color: rgba(237, 237, 237, 0.56);
 }
 
@@ -70,62 +97,96 @@
 }
 
 .ln {
-  color: rgba(150, 185, 249, 0.38);
+  color: rgba(237, 237, 237, 0.28);
   user-select: none;
   font-variant-numeric: tabular-nums;
 }
 
 .notes {
+  grid-column: 8 / 13;
   list-style: none;
   margin: 0;
   padding: 0;
   display: flex;
   flex-direction: column;
-  gap: clamp(20px, 2.4vw, 28px);
+}
+
+.note,
+.links {
+  margin: 0;
+  padding: clamp(18px, 1.8vw, 26px) clamp(24px, 2.6vw, 40px);
+  border-top: 1px solid $rule;
+  border-left: 1px solid $rule;
 }
 
 .note {
-  display: grid;
-  grid-template-columns: 5.5ch minmax(0, 1fr);
-  gap: 14px;
-  align-items: baseline;
-}
-
-/* L'invitation finale ne renvoie à aucune ligne : elle porte sur tout
-   l'extrait, donc elle prend toute la largeur au lieu de laisser une colonne
-   de renvoi vide, et un filet la sépare des trois annotations. */
-.noteWide {
-  display: block;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
-  padding-top: clamp(18px, 2vw, 24px);
+  flex: 1;
 }
 
 .ref {
-  font-family: ui-monospace, "Cascadia Mono", "SF Mono", Menlo, Consolas, monospace;
-  font-size: 11.5px;
-  letter-spacing: 0.04em;
-  color: rgba(150, 185, 249, 0.78);
+  display: block;
+  margin-bottom: 10px;
+  font-family: $mono;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #96b9f9;
   font-variant-numeric: tabular-nums;
-  white-space: nowrap;
+}
+
+.noteTitle {
+  margin: 0;
+  font-family: var(--font-headings);
+  font-weight: 600;
+  font-size: clamp(18px, 1.6vw, 22px);
+  letter-spacing: -0.018em;
+  line-height: 1.2;
+  color: #ededed;
 }
 
 .noteText {
-  font-size: 15px;
+  margin: 8px 0 0;
+  font-size: 14px;
   font-weight: 300;
-  color: rgba(237, 237, 237, 0.72);
-  line-height: 1.6;
+  color: rgba(237, 237, 237, 0.66);
+  line-height: 1.55;
 }
 
-.noteWide .noteText {
-  color: rgba(237, 237, 237, 0.6);
+.links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 24px;
+  font-family: $mono;
+  font-size: 12px;
 
   a {
-    color: rgba(150, 185, 249, 0.78);
+    color: rgba(237, 237, 237, 0.6);
+    text-underline-offset: 3px;
+
+    &:hover {
+      color: #ededed;
+    }
   }
 }
 
-@media (max-width: 900px) {
+@media (max-width: 1100px) {
   .split {
-    grid-template-columns: minmax(0, 1fr);
+    border-right: 0;
+  }
+
+  .code,
+  .notes {
+    grid-column: 1 / -1;
+  }
+
+  .code {
+    border-right: 1px solid $rule;
+    padding: 24px 20px;
+  }
+
+  .note,
+  .links {
+    border-left: 0;
+    padding-inline: 0;
   }
 }

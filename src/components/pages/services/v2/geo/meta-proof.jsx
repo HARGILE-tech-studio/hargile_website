@@ -24,7 +24,14 @@
  * (Architecture), « tout est dans le HTML » + l'invitation à voir la source
  * sont la preuve elle-même (Source). Les séparer casserait le renvoi numéroté
  * de chaque point vers ses lignes dans l'extrait — un seul bloc de preuve,
- * donc les deux mots du fil sur une seule section plutôt que sur deux. */
+ * donc les deux mots du fil sur une seule section plutôt que sur deux.
+ *
+ * V3, 18/09/2026 (Mihai : « beaucoup de texte, il faut alléger ») : même
+ * grammaire que access et approval. L'extrait est posé sur .grid12 (colonnes
+ * 1–7) dans une cellule à filets, les points passent à droite en cellules :
+ * renvoi de lignes en mono, un titre, une phrase. `points` est devenu une
+ * liste de {title, text} dans fr/en.json, même ordre, même contrat avec
+ * SOURCE_EXCERPT.refs. */
 
 import {useTranslations} from "next-intl";
 import section from "@/components/pages/homepage/v2/v2-section.module.scss";
@@ -43,13 +50,17 @@ const MetaProof = () => {
                 <h2 className={section.heading} {...reveal(0)}>{t("title")}</h2>
                 <p className={`${section.lead} ${styles.lead}`} {...reveal(1)}>{t("text")}</p>
 
-                <div className={styles.split}>
-                    {/* aria-hidden : les quatre points disent en prose ce que
+                <div className={`${section.grid12} ${styles.split}`}>
+                    {/* aria-hidden : les points disent en prose ce que
                         l'extrait montre, donc le faire lire ligne à ligne par
                         un lecteur d'écran doublerait l'argument sans l'ajouter.
                         Le texte reste dans le HTML — c'est ce que lisent les
                         moteurs, et c'est tout l'intérêt. */}
                     <div className={styles.code} {...reveal(2)} aria-hidden="true">
+                        <p className={styles.label}>
+                            <span>{t("sourceLabel")}</span>
+                            <span className={styles.url}>{SOURCE_EXCERPT.url.replace("https://", "")}</span>
+                        </p>
                         <div className={styles.codeScroll}>
                             {SOURCE_EXCERPT.lines.map((line, i) => (
                                 <span
@@ -63,34 +74,25 @@ const MetaProof = () => {
                         </div>
                     </div>
 
-                    <ul className={styles.notes} {...reveal(3)}>
+                    <ul className={styles.notes}>
                         {points.map((point, i) => (
-                            <li key={point} className={SOURCE_EXCERPT.refs[i] ? styles.note : styles.noteWide}>
-                                {SOURCE_EXCERPT.refs[i] ? (
-                                    <span className={styles.ref}>{SOURCE_EXCERPT.refs[i]}</span>
-                                ) : null}
-                                <span className={styles.noteText}>{point}</span>
+                            <li key={point.title} className={styles.note} {...reveal(3 + i)}>
+                                <span className={styles.ref}>{t("lines")} {SOURCE_EXCERPT.refs[i]}</span>
+                                <h3 className={styles.noteTitle}>{point.title}</h3>
+                                <p className={styles.noteText}>{point.text}</p>
                             </li>
                         ))}
-                        {/* Sources externes, en clôture de la même liste plutôt
-                            qu'en bande à part : .noteWide est déjà le rôle
-                            « invitation finale, pleine largeur, sans renvoi de
-                            ligne » — le réutiliser évite un second filet
-                            immédiatement sous celui du panneau de code. */}
-                        <li className={styles.noteWide}>
-                            <span className={styles.noteText}>
-                                <a href="https://schema.org/" target="_blank" rel="noopener noreferrer">
-                                    {t("links.schema")}
-                                </a>
-                                {" · "}
-                                <a
-                                    href="https://developers.google.com/search/docs/appearance/structured-data"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                >
-                                    {t("links.googleStructuredData")}
-                                </a>
-                            </span>
+                        <li className={styles.links} {...reveal(6)}>
+                            <a href="https://schema.org/" target="_blank" rel="noopener noreferrer">
+                                {t("links.schema")}
+                            </a>
+                            <a
+                                href="https://developers.google.com/search/docs/appearance/structured-data"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
+                                {t("links.googleStructuredData")}
+                            </a>
                         </li>
                     </ul>
                 </div>

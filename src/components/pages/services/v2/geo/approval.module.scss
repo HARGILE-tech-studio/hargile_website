@@ -1,188 +1,154 @@
-/* Le parcours d'une proposition en quatre cases reliées, puis les deux modes
-   à gauche et la carte de proposition à droite. Hairlines, pas de fonds :
-   la carte est le seul objet cadré, parce que c'est un objet. */
+/* Rien n'est écrit sans votre accord (voir l'en-tête d'approval.jsx).
+
+     1–7  h2                                  │ 9–12 lead
+     bande du parcours, quatre cellules
+     1–4  les deux modes (boutons)            │ 5–12 la proposition
+     Dans les deux modes : quatre cellules
+
+   Même grammaire que access : filets partagés, libellés mono, aucun arrondi.
+   Un seul accent : l'aplat du bouton Accepter. Bascule à 1100px. */
+
+$ink: #080c16;
+$rule: rgba(255, 255, 255, 0.12);
+$mono: ui-monospace, "Cascadia Mono", "SF Mono", Menlo, Consolas, monospace;
+
+.opener {
+  align-items: end;
+}
+
+.heading {
+  grid-column: 1 / 8;
+  text-wrap: balance;
+}
 
 .lead {
-  max-width: 68ch;
+  grid-column: 9 / 13;
+  margin-top: 0;
 }
 
-/* ---------- Le parcours, sur le rail de process.module.scss ---------- */
-
-/* Process passe à la verticale sous 1100px seulement ; ce parcours-ci est en
-   colonne à toutes les largeurs, donc il lui faut la forme verticale du rail
-   sans condition. Les valeurs reprennent le @media de process.module.scss :
-   rail à left: 5px, point ramené dessus à -36px, indentation sur la liste et
-   non sur .step pour ne pas emporter le point avec la copie. */
-.flow {
-  margin-top: clamp(40px, 5vw, 60px);
-}
-
-/* Appliqué en plus de rail.rail / rail.railFill depuis approval.jsx. */
-.flowRail {
-  left: 5px;
-  right: auto;
-  top: 0;
-  bottom: 0;
-  width: 1px;
-  height: auto;
-}
-
-.flowRailFill {
-  background: linear-gradient(180deg, #96b9f9, rgba(150, 185, 249, 0.45));
-}
-
-/* Le point revient sur le rail et tient la ligne du numéral, comme dans la
-   forme verticale de process. */
-.flowDot {
-  position: absolute;
-  left: -36px;
-  top: 3px;
-}
-
-.flowStepBody {
-  padding-top: 0;
-  padding-left: 0;
-}
-
-.flowList {
-  list-style: none;
+.label {
   margin: 0;
-  padding: 0 0 0 36px;
-  display: grid;
-  grid-template-columns: minmax(0, 1fr);
-  gap: clamp(40px, 5vw, 56px);
-}
-
-.flowLabel {
-  display: block;
-  margin-top: 10px;
-  font-family: var(--font-headings);
-  font-weight: 600;
-  font-size: clamp(18px, 1.6vw, 22px);
-  letter-spacing: -0.015em;
+  font-family: $mono;
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
   color: #ededed;
 }
 
-/* La bifurcation sous Décision : deux libellés, chacun tenu par un tiret
-   vertical, comme deux branches qui partent du même point. */
-.branch {
+.flowNum {
+  display: block;
+  margin-bottom: 8px;
+  font-family: $mono;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  font-variant-numeric: tabular-nums;
+  color: rgba(237, 237, 237, 0.42);
+}
+
+/* ---------- Le parcours : une bande, pas un rail ---------- */
+
+.flow {
+  list-style: none;
+  margin: clamp(40px, 5vw, 64px) 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  border-right: 1px solid $rule;
+
+  /* margin: 0 — une règle globale donne une marge basse aux li. */
+  li {
+    margin: 0;
+    padding: 16px clamp(16px, 2vw, 28px) 18px;
+    border-top: 1px solid $rule;
+    border-left: 1px solid $rule;
+    font-family: var(--font-headings);
+    font-weight: 600;
+    font-size: clamp(15px, 1.3vw, 18px);
+    letter-spacing: -0.01em;
+    color: #ededed;
+  }
+}
+
+/* ---------- Les modes et la proposition ---------- */
+
+.stage {
+  column-gap: 0;
+  border-right: 1px solid $rule;
+  border-bottom: 1px solid $rule;
+}
+
+.modes {
+  grid-column: 1 / 5;
   display: flex;
   flex-direction: column;
-  gap: 6px;
-  margin-top: 12px;
-  padding-left: 12px;
-  border-left: 1px solid rgba(150, 185, 249, 0.45);
+  border-top: 1px solid $rule;
+  border-left: 1px solid $rule;
 
-  span {
-    font-size: 12.5px;
-    font-weight: 300;
-    color: rgba(237, 237, 237, 0.62);
+  > .label {
+    padding: clamp(20px, 2.2vw, 32px) clamp(20px, 2.2vw, 32px) 0;
   }
 }
 
-.journal {
-  display: block;
-  margin-top: 12px;
-  max-width: 34ch;
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  border-radius: 6px;
-  padding: 8px 10px;
-}
-
-.journalTitle {
-  display: block;
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: rgba(237, 237, 237, 0.42);
-  margin-bottom: 6px;
-}
-
-.journalLine {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 4px 10px;
-  font-family: ui-monospace, "Cascadia Mono", "SF Mono", Menlo, Consolas, monospace;
-  font-size: 11px;
-  color: rgba(237, 237, 237, 0.66);
-
-  span:last-child {
-    color: #96b9f9;
-  }
-}
-
-/* ---------- Modes et carte ---------- */
-
-.split {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 0.9fr);
-  gap: clamp(32px, 4.5vw, 72px);
-  margin-top: clamp(48px, 6vw, 76px);
-  align-items: start;
-}
-
-.kicker {
-  margin: 0 0 16px;
-  font-size: 11.5px;
-  font-weight: 600;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: rgba(150, 185, 249, 0.85);
-}
-
+/* Un mode est un bouton pleine largeur. L'actif : pleine encre et un filet
+   gauche blanc ; l'inactif s'efface. Pas d'accent ici, il est sur Accepter. */
 .mode {
-  border-top: 1px solid rgba(255, 255, 255, 0.12);
-  padding: 20px 0 24px;
+  display: block;
+  width: 100%;
+  margin: 0;
+  padding: clamp(18px, 2vw, 28px) clamp(20px, 2.2vw, 32px);
+  background: none;
+  border: 0;
+  box-shadow: inset 2px 0 0 transparent;
+  text-align: left;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+  opacity: 0.45;
+  transition: opacity 0.25s ease, box-shadow 0.25s ease, background-color 0.25s ease;
+
+  &:hover {
+    opacity: 0.8;
+  }
+
+  &:focus-visible {
+    outline: 1px solid #ededed;
+    outline-offset: -4px;
+  }
+
+  &[aria-pressed="true"] {
+    opacity: 1;
+    background: rgba(255, 255, 255, 0.04);
+    box-shadow: inset 2px 0 0 #ededed;
+  }
+}
+
+.modeTitle {
+  display: block;
+  font-size: clamp(18px, 1.6vw, 22px);
 }
 
 .modeText {
-  margin: 10px 0 0;
-  font-size: 15px;
+  display: block;
+  margin-top: 8px;
+  font-size: 14px;
   font-weight: 300;
-  color: rgba(237, 237, 237, 0.66);
-  line-height: 1.6;
-  max-width: 56ch;
+  line-height: 1.55;
+  color: rgba(237, 237, 237, 0.7);
 }
 
-.mode + .kicker {
-  margin-top: 16px;
-}
-
-.rules {
-  list-style: none;
-  margin: 0;
-  padding: 0;
+.card {
+  grid-column: 5 / 13;
   display: flex;
   flex-direction: column;
-  gap: 10px;
-
-  li {
-    position: relative;
-    padding-left: 18px;
-    font-size: 14.5px;
-    font-weight: 300;
-    color: rgba(237, 237, 237, 0.66);
-    line-height: 1.55;
-    max-width: 56ch;
-
-    &::before {
-      content: "";
-      position: absolute;
-      left: 0;
-      top: 0.7em;
-      width: 8px;
-      height: 1px;
-      background: rgba(150, 185, 249, 0.8);
-    }
-  }
+  border-top: 1px solid $rule;
+  border-left: 1px solid $rule;
+  min-width: 0;
 }
 
-/* La carte de proposition. */
-.card {
-  border: 1px solid rgba(150, 185, 249, 0.42);
-  border-radius: 10px;
-  overflow: hidden;
+.cardHead,
+.cardRow,
+.cardFoot {
+  padding: clamp(16px, 1.8vw, 24px) clamp(20px, 2.6vw, 40px);
 }
 
 .cardHead {
@@ -191,93 +157,190 @@
   align-items: baseline;
   gap: 12px;
   flex-wrap: wrap;
-  padding: 12px 16px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.cardTitle {
-  font-family: var(--font-headings);
-  font-weight: 600;
-  font-size: 13px;
-  color: #96b9f9;
 }
 
 .cardMeta {
-  font-family: ui-monospace, "Cascadia Mono", "SF Mono", Menlo, Consolas, monospace;
-  font-size: 11.5px;
+  font-family: $mono;
+  font-size: 12px;
   color: rgba(237, 237, 237, 0.5);
 }
 
 .cardRow {
   display: grid;
-  grid-template-columns: 7ch minmax(0, 1fr);
-  gap: 12px;
-  padding: 12px 16px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  grid-template-columns: 9ch minmax(0, 1fr);
+  column-gap: 20px;
   align-items: baseline;
+  padding-block: 10px;
+}
+
+.cardRow:nth-last-child(2) {
+  padding-bottom: clamp(20px, 2.4vw, 32px);
 }
 
 .cardLabel {
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.08em;
+  font-family: $mono;
+  font-size: 10.5px;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   color: rgba(237, 237, 237, 0.42);
 }
 
 .cardBefore {
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 300;
-  color: rgba(237, 237, 237, 0.5);
+  color: rgba(237, 237, 237, 0.45);
   text-decoration: line-through;
   text-decoration-color: rgba(237, 237, 237, 0.3);
 }
 
+/* La phrase écrite pour un client : c'est elle qu'on vient lire. */
 .cardAfter {
-  font-size: 14px;
-  font-weight: 400;
-  color: rgba(237, 237, 237, 0.88);
-  line-height: 1.5;
+  max-width: 24ch;
+  font-family: var(--font-headings);
+  font-weight: 600;
+  font-size: clamp(22px, 2.5vw, 38px);
+  letter-spacing: -0.025em;
+  line-height: 1.12;
+  color: #ededed;
+  text-wrap: balance;
 }
 
 .cardWhy {
-  margin: 0;
-  padding: 12px 16px;
-  font-size: 13px;
+  max-width: 56ch;
+  font-size: 14px;
   font-weight: 300;
-  color: rgba(237, 237, 237, 0.6);
-  line-height: 1.5;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  line-height: 1.55;
+  color: rgba(237, 237, 237, 0.62);
 }
 
-.cardActions {
+.cardFoot {
+  margin-top: auto;
   display: flex;
-  gap: 10px;
-  padding: 12px 16px;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  min-height: 84px;
+  box-sizing: border-box;
+  border-top: 1px solid $rule;
+}
+
+.footNote {
+  margin-right: auto;
+  font-family: $mono;
+  font-size: 12px;
+  color: rgba(237, 237, 237, 0.5);
 }
 
 .accept,
 .reject {
   display: inline-block;
-  padding: 7px 14px;
-  border-radius: 999px;
-  font-size: 13px;
-  font-weight: 500;
-  border: 1px solid;
+  padding: 10px 22px;
+  font-family: var(--font-headings);
+  font-size: 14px;
+  font-weight: 600;
 }
 
 .accept {
-  border-color: #96b9f9;
-  color: #96b9f9;
+  background: #96b9f9;
+  color: $ink;
 }
 
 .reject {
-  border-color: rgba(255, 255, 255, 0.2);
   color: rgba(237, 237, 237, 0.6);
 }
 
-@media (max-width: 900px) {
-  .split {
+.journalLine {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 14px;
+  font-family: $mono;
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+  color: rgba(237, 237, 237, 0.7);
+
+  span:last-child {
+    color: #ededed;
+  }
+}
+
+/* Le pied change avec le mode : un fondu, une fois. */
+.stage[data-touched] .cardFoot > * {
+  animation: foot 0.3s ease-out both;
+}
+
+@keyframes foot {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* ---------- Dans les deux modes ---------- */
+
+.rulesTitle {
+  margin-top: clamp(40px, 5vw, 64px);
+}
+
+.rules {
+  list-style: none;
+  margin: 16px 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  column-gap: clamp(16px, 2vw, 32px);
+
+  li {
+    margin: 0;
+    padding-top: 16px;
+    border-top: 1px solid $rule;
+    font-size: 14.5px;
+    font-weight: 300;
+    line-height: 1.55;
+    color: rgba(237, 237, 237, 0.72);
+  }
+}
+
+@media (max-width: 1100px) {
+  .heading,
+  .lead,
+  .modes,
+  .card {
+    grid-column: 1 / -1;
+  }
+
+  .lead {
+    margin-top: 20px;
+  }
+
+  .flow,
+  .rules {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .rules {
+    row-gap: 24px;
+  }
+
+  .cardRow {
     grid-template-columns: minmax(0, 1fr);
+    row-gap: 4px;
+  }
+}
+
+@media (max-width: 560px) {
+  .rules {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mode {
+    transition: none;
+  }
+
+  .stage[data-touched] .cardFoot > * {
+    animation: none;
   }
 }

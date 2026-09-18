@@ -2,117 +2,84 @@
 
 /* Rien n'est écrit sur votre site sans votre accord.
  *
- * 14/09/2026 (docs/PAGE-GEO-SEO-refonte.md §4) : la section qui décrit le
- * pilote tel qu'il tourne. Deux objets montrés plutôt qu'illustrés, même
- * famille d'argument que meta-proof : le parcours d'une proposition (Analyse →
- * Proposition → Décision → Écriture vérifiée, avec la bifurcation validation /
- * automatique et une ligne de journal) et la carte de proposition telle que
- * le client la voit (page, actuel, proposé, pourquoi, deux boutons).
+ * V2, 18/09/2026 (docs/geo-swiss-design-plan.md §3.4, et Mihai : « beaucoup de
+ * texte, refaire les modes avec la proposition et le mode validation ») : le
+ * second rail a sauté. La section est un seul objet, la proposition telle que
+ * le client la voit, et le choix du mode agit dessus :
  *
- * Le parcours est sur le même rail animé que Process (demande de Mihai,
- * 14/09/2026) : mêmes styles importés de process.module.scss, même hook. C'est
- * une exception au budget d'un mouvement par page, assumée parce que les deux
- * rails disent la même chose, un ordre réel, et se lisent comme un seul motif.
+ *   mode validation  → la proposition attend, Refuser / Accepter
+ *   mode automatique → elle est déjà appliquée, et la ligne de journal le dit
  *
- * La carte est une maquette : les boutons sont des <span>, pas des <button>,
- * pour qu'un lecteur d'écran ne trouve pas deux actions mortes. La ligne de
- * journal est fictive et reprend celle du doc. */
+ * C'est le seul état interactif de la page, et il ne sert qu'à ça : montrer
+ * que le mode change qui décide, pas ce qui est proposé. Le HTML servi est le
+ * mode validation (le mode par défaut du produit), et les deux textes de mode
+ * sont toujours dans le HTML ; le mode inactif est seulement atténué.
+ *
+ * Le parcours (Analyse → Proposition → Décision → Écriture vérifiée) est une
+ * bande de quatre cellules au-dessus, sans rail ni points. L'accent de la
+ * section est le bouton Accepter, en aplat : c'est la décision du client.
+ *
+ * La carte est une maquette : Refuser / Accepter sont des <span>, pas des
+ * <button>, pour qu'un lecteur d'écran ne trouve pas deux actions mortes. Les
+ * deux boutons de mode, eux, sont réels. `flow.branch*` et `flow.journal`
+ * restent dans fr/en.json, non lus. */
 
-import {useRef} from "react";
-import {motion, useTransform} from "motion/react";
+import {useState} from "react";
 import {useTranslations} from "next-intl";
 import section from "@/components/pages/homepage/v2/v2-section.module.scss";
 import {useReveal} from "@/components/pages/homepage/v2/useReveal";
-import {railFillStyle, useRailFill} from "@/components/pages/services/v2/shared/use-rail-fill";
-import rail from "./process.module.scss";
 import styles from "./approval.module.scss";
 
-const FlowStep = ({label, i, count, fill, reveal, children}) => {
-    const at = i / count;
-    const ignite = useTransform(fill, [at, at + 0.1], [0, 1]);
-    const dotOpacity = useTransform(ignite, [0, 1], [0.25, 1]);
-    const dotScale = useTransform(ignite, [0, 1], [0.6, 1]);
-    const numOpacity = useTransform(ignite, [0, 1], [0.4, 1]);
-
-    return (
-        <li className={rail.step} {...reveal(2 + i)}>
-            <motion.div className={`${rail.dot} ${styles.flowDot}`} style={{opacity: dotOpacity, scale: dotScale}}/>
-            <div className={`${rail.stepBody} ${styles.flowStepBody}`}>
-                <motion.div className={rail.num} style={{opacity: numOpacity}}>
-                    {String(i + 1).padStart(2, "0")}
-                </motion.div>
-                <span className={styles.flowLabel}>{label}</span>
-                {children}
-            </div>
-        </li>
-    );
-};
+const MODES = ["validate", "auto"];
 
 const Approval = () => {
     const t = useTranslations("pages.services.detail.seo.approval");
     const reveal = useReveal();
     const flow = t.raw("flow");
     const card = t.raw("card");
-    const timelineRef = useRef(null);
-    const {fill, vertical} = useRailFill(timelineRef, {alwaysVertical: true});
+    const [mode, setMode] = useState("validate");
+    /* Le fondu du pied ne joue qu'après un clic : le HTML servi est fini. */
+    const [touched, setTouched] = useState(false);
 
     return (
         <section className={section.section}>
             <div className={section.container}>
-                <h2 className={section.heading} {...reveal(0)}>{t("title")}</h2>
-                <p className={`${section.lead} ${styles.lead}`} {...reveal(1)}>{t("text")}</p>
-
-                {/* Le parcours d'une proposition. aria-hidden : les modes et
-                    les règles en dessous disent tout en prose. */}
-                <div className={`${rail.timeline} ${styles.flow}`} ref={timelineRef} aria-hidden="true">
-                    <div className={`${rail.rail} ${styles.flowRail}`}>
-                        <motion.div
-                            className={`${rail.railFill} ${styles.flowRailFill}`}
-                            style={railFillStyle(fill, vertical)}
-                        />
-                    </div>
-                    <ol className={`${rail.steps} ${styles.flowList}`}>
-                    {flow.steps.map((label, i) => (
-                        <FlowStep key={label} label={label} i={i} count={flow.steps.length} fill={fill} reveal={reveal}>
-                            {i === 2 ? (
-                                <span className={styles.branch}>
-                                    <span>{flow.branchValidate}</span>
-                                    <span>{flow.branchAuto}</span>
-                                </span>
-                            ) : null}
-                            {i === 3 ? (
-                                <span className={styles.journal}>
-                                    <span className={styles.journalTitle}>{flow.journal}</span>
-                                    <span className={styles.journalLine}>
-                                        {flow.journalLine.map((cell) => <span key={cell}>{cell}</span>)}
-                                    </span>
-                                </span>
-                            ) : null}
-                        </FlowStep>
-                    ))}
-                    </ol>
+                <div className={`${section.grid12} ${styles.opener}`}>
+                    <h2 className={`${section.heading} ${styles.heading}`} {...reveal(0)}>{t("title")}</h2>
+                    <p className={`${section.lead} ${styles.lead}`} {...reveal(1)}>{t("text")}</p>
                 </div>
 
-                <div className={styles.split}>
-                    <div className={styles.modes}>
-                        <p className={styles.kicker} {...reveal(3)}>{t("modesTitle")}</p>
-                        {["validate", "auto"].map((m, i) => (
-                            <div key={m} className={styles.mode} {...reveal(4 + i)}>
-                                <h3 className={section.blockHeading}>{t(`modes.${m}.title`)}</h3>
-                                <p className={styles.modeText}>{t(`modes.${m}.text`)}</p>
-                            </div>
+                <ol className={styles.flow} {...reveal(2)}>
+                    {flow.steps.map((label, i) => (
+                        <li key={label}>
+                            <span className={styles.flowNum}>{String(i + 1).padStart(2, "0")}</span>
+                            {label}
+                        </li>
+                    ))}
+                </ol>
+
+                <div className={`${section.grid12} ${styles.stage}`} data-touched={touched ? "" : undefined}>
+                    <div className={styles.modes} {...reveal(3)}>
+                        <p className={styles.label}>{t("modesTitle")}</p>
+                        {MODES.map((m) => (
+                            <button
+                                key={m}
+                                type="button"
+                                className={styles.mode}
+                                aria-pressed={mode === m}
+                                onClick={() => { setMode(m); setTouched(true); }}
+                            >
+                                <span className={`${section.blockHeading} ${styles.modeTitle}`}>{t(`modes.${m}.title`)}</span>
+                                <span className={styles.modeText}>{t(`modes.${m}.text`)}</span>
+                            </button>
                         ))}
-                        <p className={styles.kicker} {...reveal(6)}>{t("bothTitle")}</p>
-                        <ul className={styles.rules} {...reveal(6)}>
-                            {t.raw("rules").map((r) => <li key={r}>{r}</li>)}
-                        </ul>
                     </div>
 
-                    {/* La carte de proposition, l'objet le plus concret de la
-                        page. Maquette : aucune action réelle. */}
+                    {/* La proposition, l'objet le plus concret de la page.
+                        Maquette : aucune action réelle. */}
                     <div className={styles.card} {...reveal(4)} aria-hidden="true">
                         <div className={styles.cardHead}>
-                            <span className={styles.cardTitle}>{card.title}</span>
+                            <span className={styles.label}>{card.title}</span>
                             <span className={styles.cardMeta}>{card.page} · {card.field}</span>
                         </div>
                         <div className={styles.cardRow}>
@@ -123,13 +90,38 @@ const Approval = () => {
                             <span className={styles.cardLabel}>{card.afterLabel}</span>
                             <span className={styles.cardAfter}>{card.after}</span>
                         </div>
-                        <p className={styles.cardWhy}>{card.why}</p>
-                        <div className={styles.cardActions}>
-                            <span className={styles.accept}>{card.accept}</span>
-                            <span className={styles.reject}>{card.reject}</span>
+                        <div className={styles.cardRow}>
+                            <span className={styles.cardLabel}>{card.whyLabel}</span>
+                            <span className={styles.cardWhy}>{card.why}</span>
+                        </div>
+                        <div className={styles.cardFoot}>
+                            {mode === "validate" ? (
+                                <>
+                                    <span className={styles.footNote}>{card.pending}</span>
+                                    <span className={styles.reject}>{card.reject}</span>
+                                    <span className={styles.accept}>{card.accept}</span>
+                                </>
+                            ) : (
+                                <>
+                                    <span className={styles.footNote}>{card.applied}</span>
+                                    <span className={styles.journalLine}>
+                                        {flow.journalLine.map((cell) => <span key={cell}>{cell}</span>)}
+                                    </span>
+                                </>
+                            )}
                         </div>
                     </div>
                 </div>
+
+                <p className={`${styles.label} ${styles.rulesTitle}`} {...reveal(5)}>{t("bothTitle")}</p>
+                <ol className={styles.rules} {...reveal(6)}>
+                    {t.raw("rules").map((r, i) => (
+                        <li key={r}>
+                            <span className={styles.flowNum}>{String(i + 1).padStart(2, "0")}</span>
+                            {r}
+                        </li>
+                    ))}
+                </ol>
             </div>
         </section>
     );

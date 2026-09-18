@@ -831,16 +831,16 @@
           },
           "approval": {
             "title": "Rien n'est écrit sur votre site sans votre accord",
-            "text": "Le système ne modifie pas votre site en direct. Il propose. Chaque recommandation devient une proposition : la page concernée, la valeur actuelle, la valeur proposée, et pourquoi.",
+            "text": "Le système ne modifie pas votre site en direct. Il propose, vous décidez.",
             "modesTitle": "Vous choisissez le mode",
             "modes": {
               "validate": {
                 "title": "Mode validation",
-                "text": "Vous recevez chaque proposition et vous l'acceptez ou la refusez. Rien ne part sans votre clic. C'est le mode par défaut."
+                "text": "Vous acceptez ou refusez chaque proposition. Rien ne part sans votre clic. C'est le mode par défaut."
               },
               "auto": {
                 "title": "Mode automatique",
-                "text": "Vous nous faites confiance sur les changements de routine (titres, descriptions) : les propositions approuvées par nous sont appliquées chaque matin, avec un plafond quotidien que vous fixez. Vous pouvez repasser en mode validation à tout moment."
+                "text": "Pour la routine (titres, descriptions) : les propositions que nous approuvons sont appliquées chaque matin, sous un plafond quotidien que vous fixez. Retour au mode validation à tout moment."
               }
             },
             "bothTitle": "Dans les deux modes",
@@ -876,14 +876,17 @@
               "before": "Nos services",
               "afterLabel": "Proposé",
               "after": "Développement web, GEO et SEO pour PME à Bruxelles. Audit gratuit en 48 h.",
-              "why": "Pourquoi : description trop courte (12 caractères), la page n'annonce ni le métier ni la ville.",
+              "why": "Description trop courte (12 caractères) : la page n'annonce ni le métier ni la ville.",
               "accept": "Accepter",
-              "reject": "Refuser"
+              "reject": "Refuser",
+              "whyLabel": "Pourquoi",
+              "pending": "En attente de votre décision",
+              "applied": "Appliquée ce matin · plafond 5 / jour"
             }
           },
           "access": {
             "title": "Vos accès",
-            "text": "Vos identifiants ne sont jamais stockés dans notre base de données. Ils vivent dans un coffre chiffré, et chaque lecture est tracée : qui, quand, pour quoi. Pour arrêter, un message suffit : on retire l'abonnement de notre CRM, le système ne lit plus rien, rien ne casse.",
+            "text": "Vos identifiants ne sont jamais stockés dans notre base de données.",
             "items": {
               "vault": {
                 "title": "Coffre chiffré",
@@ -891,11 +894,11 @@
               },
               "log": {
                 "title": "Lecture tracée",
-                "text": "Qui, quand, pour quoi."
+                "text": "Chaque lecture du coffre est journalisée : qui, quand, pour quoi."
               },
               "revoke": {
                 "title": "Arrêt sur demande",
-                "text": "Un message, et on retire l'abonnement."
+                "text": "Un message suffit. Le système ne lit plus rien, rien ne casse."
               }
             },
             "platforms": "WordPress (Yoast, Rank Math, The SEO Framework) et Shopify : les propositions approuvées sont appliquées automatiquement. Webflow et sites sur mesure : même audit, mêmes propositions, application faite par nous, à la main ou dans le code.",
@@ -916,20 +919,79 @@
                 "name": "Sites sur mesure",
                 "note": "application dans le code, par nous"
               }
+            },
+            "vaultField": "identifiant CMS",
+            "log": {
+              "head": [
+                "Quand",
+                "Qui",
+                "Pour quoi"
+              ],
+              "rows": [
+                [
+                  "14/09 09:02",
+                  "pilote",
+                  "application · /services"
+                ],
+                [
+                  "14/09 07:00",
+                  "pilote",
+                  "analyse planifiée"
+                ],
+                [
+                  "02/09 16:41",
+                  "Hargile",
+                  "connexion initiale"
+                ]
+              ]
+            },
+            "revoke": {
+              "message": "« Bonjour, on arrête l'abonnement. »",
+              "status": [
+                [
+                  "Abonnement",
+                  "retiré"
+                ],
+                [
+                  "Lectures du coffre",
+                  "0"
+                ]
+              ]
+            },
+            "regimes": {
+              "auto": {
+                "label": "Application automatique",
+                "text": "Les propositions approuvées sont appliquées sur votre site. Yoast, Rank Math et The SEO Framework pris en charge."
+              },
+              "manual": {
+                "label": "Application par nous",
+                "text": "Même audit, mêmes propositions. On applique à la main ou dans le code."
+              }
             }
           },
           "metaProof": {
             "title": "Architecture & source",
-            "text": "La méthode qu'on vous propose est celle qu'on applique à notre propre site. Affichez le code source de cette page : tout y est.",
+            "text": "Cette page applique la méthode qu'elle vend. Affichez son code source : tout y est.",
             "points": [
-              "Chaque page existe en français et en anglais, avec les balises qui disent aux moteurs laquelle servir.",
-              "Chaque page porte ses données structurées (schema.org), validées automatiquement avant chaque mise en production.",
-              "Tout le contenu est présent dans le HTML dès la première réponse, lisible par les moteurs comme par les assistants IA."
+              {
+                "title": "Deux langues, déclarées",
+                "text": "Chaque page existe en français et en anglais, avec les balises qui disent aux moteurs laquelle servir."
+              },
+              {
+                "title": "Données structurées",
+                "text": "Du schema.org sur chaque page, validé automatiquement avant chaque mise en production."
+              },
+              {
+                "title": "Tout est dans le HTML",
+                "text": "Le contenu est là dès la première réponse, lisible par les moteurs comme par les assistants IA."
+              }
             ],
             "links": {
               "schema": "schema.org — données structurées",
               "googleStructuredData": "Guide Google : données structurées"
-            }
+            },
+            "sourceLabel": "Code source",
+            "lines": "Lignes"
           },
           "measured": {
             "title": "Les chiffres de cette page",
@@ -952,14 +1014,39 @@
           },
           "measures": {
             "title": "Ce qu'on mesure et ce qu'on ne promet pas",
-            "text": "Vous n'avez pas à nous croire sur parole. On regarde les mêmes chiffres que vous, aux mêmes moments, à partir d'une baseline prise le premier jour.",
+            "text": "Vous n'avez pas à nous croire sur parole. On regarde les mêmes chiffres que vous, à partir d'une baseline prise le premier jour.",
             "points": [
-              "Votre présence dans les réponses des IA, et celle des concurrents que vous choisissez : mentions, part de voix (la proportion de réponses qui citent votre marque), position moyenne, et si votre domaine est utilisé comme source. Sur 25 questions réelles de vos clients, en FR et NL, dans ChatGPT, Perplexity, Gemini, Copilot et Google AI Overviews.",
-              "Les positions sur les requêtes qui comptent pour votre métier, pas sur celles qui font joli dans un rapport, revues avec vous à chaque point.",
-              "Le trafic organique, avec l'échéance honnête : quelques semaines pour la technique, plusieurs mois pour le contenu."
+              {
+                "label": "Présence dans les IA",
+                "text": "Mentions, part de voix, position moyenne, domaine cité en source, face aux concurrents que vous choisissez. Sur 25 questions réelles de vos clients, en FR et NL, dans ChatGPT, Perplexity, Gemini, Copilot et Google AI Overviews."
+              },
+              {
+                "label": "Positions Google",
+                "text": "Sur les requêtes qui comptent pour votre métier, pas sur celles qui font joli dans un rapport."
+              },
+              {
+                "label": "Trafic organique",
+                "text": "Avec l'échéance honnête : quelques semaines pour la technique, plusieurs mois pour le contenu."
+              }
             ],
-            "refusal": "Ce que nous ne vendrons pas : la première position garantie, ni la certitude d'être cité par les IA. Personne ne contrôle l'algorithme de Google, personne ne contrôle les modèles, et aucun outil ne « pousse » un site dans leurs réponses. Une agence qui vous le promet ne contrôle pas plus l'algorithme ou les modèles que nous. Ce sur quoi nous nous engageons : la méthode, et la transparence sur ce qu'elle produit.",
-            "cadence": "Cadence : analyse complète toutes les deux semaines (hebdomadaire ou mensuelle sur demande), application des propositions approuvées chaque matin, point partagé avec vous à chaque analyse.",
+            "refusal": {
+              "statement": "Ce que nous ne vendrons pas : la première position garantie, ni la certitude d'être cité par les IA.",
+              "text": "Personne ne contrôle l'algorithme de Google, personne ne contrôle les modèles, et aucun outil ne « pousse » un site dans leurs réponses. Ce sur quoi nous nous engageons : la méthode, et la transparence sur ce qu'elle produit."
+            },
+            "cadence": [
+              {
+                "label": "Analyse complète",
+                "value": "Toutes les deux semaines"
+              },
+              {
+                "label": "Propositions approuvées",
+                "value": "Appliquées chaque matin"
+              },
+              {
+                "label": "Point partagé",
+                "value": "À chaque analyse"
+              }
+            ],
             "tracking": {
               "baseline": "Baseline jour 1",
               "today": "Aujourd'hui",
