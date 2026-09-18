@@ -1,7 +1,7 @@
 /* Vos accès : bento suisse (voir l'en-tête d'access.jsx).
 
-     1–5  coffre, aplat accent, deux rangées │ 6–12 journal
-                                             │ 6–12 arrêt
+     1–12 coffre : l'aplat sur toute la largeur, l'énoncé en corps d'affiche
+     1–6  journal                            │ 7–12 arrêt
      1–6  application automatique            │ 7–12 application par nous
 
    Les filets sont partagés : chaque cellule porte son filet haut et gauche,
@@ -58,9 +58,8 @@ $mono: ui-monospace, "Cascadia Mono", "SF Mono", Menlo, Consolas, monospace;
    sur le bord de l'aplat (--bite moins --start). */
 .vault {
   --start: 0px;
-  --bite: clamp(72px, 8.5vw, 132px);
-  grid-column: 1 / 6;
-  grid-row: 1 / 3;
+  --bite: clamp(120px, 17vw, 264px);
+  grid-column: 1 / -1;
   position: relative;
   display: flex;
   flex-direction: column;
@@ -85,10 +84,10 @@ $mono: ui-monospace, "Cascadia Mono", "SF Mono", Menlo, Consolas, monospace;
 
 .statement {
   margin: 0 0 clamp(40px, 5vw, 72px) calc(var(--start) - var(--bite) - clamp(20px, 2vw, 32px));
-  max-width: 13ch;
+  max-width: 17ch;
   font-family: var(--font-headings);
   font-weight: 700;
-  font-size: clamp(32px, 3.4vw, 54px);
+  font-size: clamp(44px, 6vw, 96px);
   letter-spacing: -0.03em;
   line-height: 1.02;
   text-wrap: balance;
@@ -131,7 +130,7 @@ $mono: ui-monospace, "Cascadia Mono", "SF Mono", Menlo, Consolas, monospace;
 
 .log,
 .revoke {
-  grid-column: 6 / 13;
+  grid-column: span 6;
 }
 
 .journal,
