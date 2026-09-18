@@ -34,15 +34,21 @@ Lire dans cet ordre, avant de proposer quoi que ce soit :
 
 ## L'état du dépôt
 
-Branche `pmihai31/harg-391-prompt-session-blog` (celle du prompt blog, on
-n'a pas changé de branche). **Rien du 18/09 n'est commité** : geo-answer
-(jsx + scss), `v2-section.module.scss` (ajout de `.grid12`), `fr.json` et
-`en.json` (copie de la démo : question « Qui recommandez-vous pour [votre
-métier] à [votre ville] ? », Concurrent 1/2/3, Votre entreprise), le plan,
-`.gitignore` (ajout de `.work/`), plus des modifications antérieures non
-liées (audit-cta, hero, measured-proof, meta-proof). Première chose à faire :
-proposer à Mihai un commit du travail GEO sur une branche dédiée, en
-laissant de côté ce qui n'est pas à lui.
+Branche **`pmihai31/geo-swiss-redesign`**, créée le 18/09 depuis la branche
+du prompt blog (`8dcf5b5`, qui contient ce prompt-là aussi). Trois commits,
+**non poussés** ; Mihai décide du push et du tag (jamais sans son go) :
+
+| Commit | Contenu |
+|---|---|
+| `a6027ca` | passe de contenu : résumés sous les heros, liens externes, copie de la démo dans fr/en.json |
+| `038d5d8` | section 1 en style suisse, `.grid12`, plan, ce prompt, le skill swiss-design, `.work/` ignoré |
+| `54ba948` | docs : analyses de contenu (PDF), notes Tenken, images contact-402 |
+
+Reste un fichier non suivi, `prod-geo.tmp.html` (un dump de la page en
+prod), volontairement pas commité : à supprimer ou à ignorer.
+
+Pour démarrer : `git checkout pmihai31/geo-swiss-redesign`, `npm run dev`,
+ouvrir `http://localhost:3000/fr/geo`.
 
 ## Ce que Mihai a retenu, en six passes (à ne pas redécouvrir)
 
