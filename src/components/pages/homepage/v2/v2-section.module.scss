@@ -123,3 +123,19 @@
   color: transparent;
   -webkit-text-stroke: 1px rgba(150, 185, 249, 0.26);
 }
+
+/* 12-column grid (docs/geo-swiss-design-plan.md §1). Sections place blocks by
+   explicit grid-column span; nothing is centered. Collapses to one column at
+   the shared 1100px stack point the /geo sections already use. */
+.grid12 {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: clamp(16px, 2vw, 32px);
+  row-gap: 0;
+}
+
+@media (max-width: 1100px) {
+  .grid12 {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

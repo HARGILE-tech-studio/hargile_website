@@ -72,3 +72,6 @@ sitemap-lastmod.json
 
 # Lighthouse CI local output
 .lighthouseci/
+
+# Session working files (scripts, screenshots, contact sheets)
+.work/

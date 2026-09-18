@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "skills": {
+    "swiss-design": {
+      "source": "zeke/swiss-design-skill",
+      "sourceType": "github",
+      "skillPath": "swiss-design/SKILL.md",
+      "computedHash": "f0387f7156355487985a81ccf7cd0abbc8db37ce2db3751aa5607f528841d75b"
+    }
+  }
+}

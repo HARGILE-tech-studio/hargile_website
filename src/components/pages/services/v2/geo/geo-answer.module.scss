@@ -1,345 +1,513 @@
-/* GEO : l'avant / après en deux cartes « assistant », puis les trois
-   conditions. Un seul point de bascule (1100px) pour les cartes et les
-   colonnes, comme avant pour la figure. Tout en HTML, aucune image : c'est
-   l'argument de la section. Filets et hairlines, pas de fond plein, sauf la
-   bulle de réponse qui prend un voile à 0,04 pour se lire comme une bulle. */
+/* GEO, composé à la suisse (docs/geo-swiss-design-plan.md §3.1), en affiche
+   jouée : la question se tape en corps d'affiche, la réponse arrive nom par
+   nom dans une phrase à appels de source, votre marque en dernier avec son
+   point accent, puis la ligne des sources. Filets
+   et texte, aucun fond, aucun cadre. Le contraste d'échelle fait l'image.
+   Bascule unique à 1100px, portée par .grid12.
 
-.title {
-  width: fit-content;
-  max-width: 100%;
-  background: linear-gradient(135deg, #ffffff 30%, #dce7fd 68%, #96b9f9 105%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  padding-bottom: 0.06em;
+   ── LA CHORÉGRAPHIE ───────────────────────────────────────────────────────
+   Un seul observer (useChoreo dans geo-answer.jsx) pose data-wait sur .demo
+   tant qu'elle est hors écran, puis data-play. Le HTML servi n'a ni l'un ni
+   l'autre : tout est visible, état final. Chaque enfant a un état parqué
+   sous [data-wait] et une animation sous [data-play], avec son heure de
+   départ ci-dessous. Tout se règle avec deux variables :
+
+     $type  la cadence de frappe de la question (par lettre)
+     $row   l'écart entre deux noms de la réponse
+
+   Feuille de temps (s), pour 54 lettres :
+     0.00  filet du haut se trace
+     0.10  la question se tape           → finit vers 0.10 + 54 × $type
+     T     légende, puis « Quatre agences… »
+     T+.3  nom 1, puis 2, 3 à $row d'écart ; le vôtre en 4e, avec le point
+     T+.3+3×$row+.3  la ligne des sources
+     +.3   « Illustration, pas un résultat »
+
+   Mouvement réduit : les états parqués sautent, tout se pose d'un coup. */
+
+$out: cubic-bezier(0.16, 1, 0.3, 1);
+$mono: ui-monospace, "Cascadia Mono", "SF Mono", Menlo, Consolas, monospace;
+
+$type: 0.032s;
+$row: 0.3s;
+/* Fin de la frappe pour la question française (54 signes) ; l'anglaise en
+   a 49, elle finit un peu plus tôt et attend, ce qui ne se voit pas. */
+$T: 0.1s + 54 * $type;
+
+/* ---------- L'ouverture : lead à gauche, trois énoncés à droite ---------- */
+
+.opener {
+  margin-top: 20px;
+  align-items: start;
 }
 
 .lead {
-  max-width: 68ch;
+  grid-column: 1 / 7;
+  margin-top: 0;
+  max-width: 60ch;
 }
 
-/* ---------- Avant / après ---------- */
-
-.demo {
-  margin-top: clamp(44px, 5.5vw, 72px);
-}
-
-.cards {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: clamp(20px, 3vw, 40px);
-}
-
-.card,
-.cardCited {
-  display: flex;
-  flex-direction: column;
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  border-radius: 10px;
-  min-width: 0;
-}
-
-/* La carte de droite est celle qui compte : équerres accent aux coins, même
-   notation que le mount de l'ancienne figure. */
-.cardCited {
-  border-color: rgba(150, 185, 249, 0.42);
-}
-
-.cardHead {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 12px 16px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.cardLabel {
-  font-family: var(--font-headings);
-  font-weight: 600;
-  font-size: 13px;
-  letter-spacing: 0.02em;
-  color: rgba(237, 237, 237, 0.8);
-}
-
-.cardCited .cardLabel {
-  color: #96b9f9;
-}
-
-.cardDots {
-  display: inline-flex;
-  gap: 5px;
-
-  i {
-    width: 7px;
-    height: 7px;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.16);
-  }
-}
-
-.chat {
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-  padding: clamp(16px, 2vw, 24px);
-  flex: 1;
-}
-
-/* La question, alignée à droite comme dans un fil de discussion. */
-.question {
-  align-self: flex-end;
-  max-width: 88%;
-  margin: 0;
-  padding: 10px 14px;
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  border-radius: 14px 14px 4px 14px;
-  font-size: 14px;
-  font-weight: 400;
-  color: rgba(237, 237, 237, 0.85);
-  line-height: 1.45;
-}
-
-.answer {
-  align-self: flex-start;
-  width: 92%;
-  padding: 14px 16px;
-  background: rgba(255, 255, 255, 0.04);
-  border-radius: 14px 14px 14px 4px;
-}
-
-.answerText {
-  margin: 0 0 10px;
-  font-size: 14px;
-  font-weight: 300;
-  color: rgba(237, 237, 237, 0.7);
-  line-height: 1.5;
-}
-
-.names {
+.summary {
+  grid-column: 8 / 13;
   list-style: none;
   margin: 0;
   padding: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  font-size: 14px;
-  font-weight: 500;
-  color: rgba(237, 237, 237, 0.85);
-
-  li::before {
-    content: "";
-    display: inline-block;
-    width: 5px;
-    height: 5px;
-    border-radius: 50%;
-    background: rgba(237, 237, 237, 0.4);
-    margin-right: 10px;
-    vertical-align: middle;
-  }
-}
-
-/* Vous : la seule ligne accent des deux cartes, avec son point. */
-.you {
-  color: #96b9f9;
-  font-weight: 600;
-
-  &::before {
-    background: #96b9f9 !important;
-  }
-}
-
-.sources {
-  margin-top: 14px;
-  padding-top: 12px;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.sourcesLabel {
-  display: block;
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: rgba(237, 237, 237, 0.42);
-  margin-bottom: 8px;
-}
-
-.sourceList {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
 
   li {
-    font-family: ui-monospace, "Cascadia Mono", "SF Mono", Menlo, Consolas, monospace;
-    font-size: 11.5px;
-    padding: 3px 8px;
-    border: 1px solid rgba(255, 255, 255, 0.14);
-    border-radius: 999px;
-    color: rgba(237, 237, 237, 0.6);
-    overflow-wrap: anywhere;
+    padding: 0 0 16px 18px;
+    position: relative;
+    font-family: var(--font-headings);
+    font-weight: 500;
+    font-size: 15px;
+    letter-spacing: -0.01em;
+    color: rgba(237, 237, 237, 0.82);
+    line-height: 1.45;
+
+    /* Le point, plutôt qu'un filet : la même marque que sur votre nom. */
+    &::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0.55em;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: rgba(237, 237, 237, 0.35);
+    }
   }
 }
 
-.yourPage {
-  border-color: rgba(150, 185, 249, 0.7) !important;
-  color: #96b9f9 !important;
+/* ---------- L'affiche : le bloc plein et l'écran qui le chevauche ---------- */
+
+$ink: #080c16;
+
+.demo {
+  margin-top: clamp(56px, 7vw, 96px);
+  row-gap: 0;
+  align-items: start;
 }
 
-.caption {
-  margin: 0;
-  padding: 12px 16px 14px;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
-  font-size: 13.5px;
-  font-weight: 300;
-  color: rgba(237, 237, 237, 0.62);
-  line-height: 1.5;
-}
-
-.cardCited .caption {
-  color: rgba(237, 237, 237, 0.82);
-}
-
-/* ---------- Les repères a / b / c sous la carte de droite ---------- */
-
-.marks {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: clamp(20px, 3vw, 40px);
-  margin-top: 18px;
-}
-
-.marksRule {
-  display: none;
-}
-
-.markList {
-  grid-column: 2;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
+/* Le bloc plein : sept colonnes, la couleur accent en aplat, la question en
+   encre de page dessus. Une trame de points dans son coin, comme sur les
+   références : statique, ça ne bouge pas. */
+.panel {
+  grid-column: 1 / 8;
+  grid-row: 1;
   position: relative;
-  padding-top: 14px;
+  padding: clamp(36px, 4.5vw, 72px) clamp(28px, 3.5vw, 56px) clamp(32px, 4vw, 56px);
+  background: #96b9f9;
+  color: $ink;
+  overflow: hidden;
 
-  /* Le filet qui relie les trois repères à la carte au-dessus. */
-  &::before {
+  &::after {
     content: "";
     position: absolute;
     top: 0;
-    left: 24px;
-    width: 1px;
-    height: 14px;
-    background: rgba(150, 185, 249, 0.6);
+    right: 0;
+    width: 38%;
+    height: 42%;
+    background-image: radial-gradient(circle, rgba(8, 12, 22, 0.28) 1.3px, transparent 1.6px);
+    background-size: 34px 34px;
+    background-position: 17px 17px;
+    pointer-events: none;
   }
 }
 
-.markPill {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 5px 10px 5px 6px;
-  border: 1px solid rgba(150, 185, 249, 0.35);
-  border-radius: 999px;
-  font-size: 12.5px;
-  color: rgba(237, 237, 237, 0.72);
-}
-
-.markLetter {
-  display: inline-grid;
-  place-items: center;
-  width: 18px;
-  height: 18px;
-  border-radius: 50%;
-  background: rgba(150, 185, 249, 0.16);
+.question {
+  position: relative;
+  margin: 0 0 clamp(40px, 6vw, 96px);
+  max-width: 13ch;
   font-family: var(--font-headings);
   font-weight: 700;
-  font-size: 11px;
-  color: #96b9f9;
+  font-size: clamp(38px, 4.6vw, 76px);
+  letter-spacing: -0.03em;
+  line-height: 0.98;
+  color: $ink;
+  text-wrap: balance;
 }
 
-.example {
-  margin: 14px 0 0;
-  font-size: 12px;
+/* Les blancs à remplir, [votre métier] et [votre ville] : même corps, mais
+   en maigre et en encre atténuée, pour que le lecteur y mette son métier. */
+.slot {
+  font-weight: 400;
+  color: rgba(8, 12, 22, 0.55);
+}
+
+/* Avant / après, en bas du bloc, en encre à 0,7. */
+.legend {
+  position: relative;
+  margin: 0;
+  max-width: 34ch;
+  display: grid;
+  grid-template-columns: max-content minmax(0, 1fr);
+  column-gap: 18px;
+  row-gap: 6px;
+  font-size: 13px;
+  line-height: 1.45;
+
+  dt {
+    font-family: var(--font-headings);
+    font-weight: 600;
+    color: $ink;
+  }
+
+  dd {
+    margin: 0;
+    font-weight: 400;
+    color: rgba(8, 12, 22, 0.72);
+  }
+}
+
+/* ---------- La réponse : quatre entrées compactes ---------- */
+
+/* L'écran de réponse : colonnes 6-13, même rangée que le bloc, dans la
+   couleur de la page pour mordre sur le bloc. Il part sous la troisième
+   ligne de la question et dépasse sous le bloc, comme le portrait qui
+   déborde du bloc rouge des références. */
+.reply {
+  grid-column: 6 / 13;
+  grid-row: 1;
+  align-self: start;
+  position: relative;
+  z-index: 1;
+  margin-top: clamp(280px, 24vw, 360px);
+  padding: clamp(24px, 3vw, 40px) 0 0 clamp(24px, 3vw, 48px);
+  background: $ink;
+}
+
+.answerLead {
+  margin: 0 0 16px;
+  max-width: 48ch;
+  font-size: 15px;
   font-weight: 300;
-  color: rgba(237, 237, 237, 0.42);
-  letter-spacing: 0.02em;
+  line-height: 1.6;
+  color: rgba(237, 237, 237, 0.7);
 }
 
-/* ---------- Les trois conditions ---------- */
+/* Les entrées : numéro | nom | domaine, sur trois pistes, sans filet. Le
+   pas vertical est de 8px (base du skill) : 12px de padding, 40px de haut. */
+.entries {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.entry,
+.entryYou {
+  display: grid;
+  grid-template-columns: 2.5em minmax(0, 1fr) auto;
+  column-gap: 16px;
+  align-items: baseline;
+  padding: 10px 12px 10px 0;
+  font-size: 16px;
+  line-height: 1.4;
+  color: rgba(237, 237, 237, 0.85);
+}
+
+/* La vôtre : l'aplat accent atténué du skill (« card with accent tint »),
+   la seule couleur de l'écran. Le numéro passe en accent plein. */
+.entryYou {
+  margin-top: 4px;
+  padding-left: 12px;
+  background: rgba(150, 185, 249, 0.12);
+  color: #ededed;
+  font-weight: 500;
+
+  .n {
+    color: #96b9f9;
+  }
+}
+
+.n {
+  font-family: $mono;
+  font-variant-numeric: tabular-nums;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  color: rgba(237, 237, 237, 0.42);
+}
+
+.name {
+  font-family: var(--font-headings);
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+
+.entryYou .name {
+  font-weight: 600;
+}
+
+.domain {
+  font-family: $mono;
+  font-size: 12px;
+  color: rgba(237, 237, 237, 0.42);
+  overflow-wrap: anywhere;
+}
+
+.entryYou .domain {
+  color: rgba(237, 237, 237, 0.7);
+}
+
+/* ---------- Les trois conditions : fiche technique ---------- */
+
+/* Retenue le 18/09 parmi sept propositions (planches dans .work/) : glyphe |
+   titre | texte sur trois pistes, comme la fiche Gillette des références.
+   Pas de fond, pas de filet, peu de hauteur ; l'ordre est celui de la
+   lecture. */
 
 .conditions {
-  margin: clamp(44px, 5.5vw, 72px) 0 0;
-  font-size: 15px;
-  font-weight: 400;
-  color: rgba(237, 237, 237, 0.8);
+  margin-top: clamp(56px, 7vw, 96px);
+  align-items: start;
 }
 
-.cols {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: clamp(28px, 3.5vw, 56px);
-  margin-top: clamp(24px, 3vw, 36px);
+.aside {
+  grid-column: 1 / 6;
+  margin-bottom: clamp(20px, 2.5vw, 32px);
 }
 
-.rule {
+.mark {
   display: block;
-  width: 100%;
+  width: 48px;
   height: 1px;
-  background: rgba(255, 255, 255, 0.12);
+  margin-bottom: 20px;
+  background: #96b9f9;
 }
 
-.body {
-  padding-top: 24px;
+.asideText {
+  margin: 0;
+  max-width: 28ch;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.5;
+  color: rgba(237, 237, 237, 0.85);
 }
 
-.colMark {
+.list {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* glyphe | [ titre | texte ] : le glyphe tient sa colonne, le corps se
+   scinde en deux à son tour. */
+.item {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(0, 10fr);
+  column-gap: clamp(20px, 2.5vw, 40px);
+  align-items: center;
+  padding: clamp(18px, 2vw, 28px) 0;
+}
+
+.itemBody {
+  display: grid;
+  grid-template-columns: minmax(0, 4fr) minmax(0, 6fr);
+  column-gap: clamp(20px, 2.5vw, 40px);
+  align-items: center;
+}
+
+.glyph {
   display: block;
-  font-family: var(--font-headings);
-  font-weight: 700;
-  font-size: 13px;
-  color: rgba(150, 185, 249, 0.9);
-  margin-bottom: 10px;
+  width: clamp(40px, 4vw, 56px);
+  height: clamp(40px, 4vw, 56px);
+  justify-self: center;
+
+  svg {
+    width: 100%;
+    height: 100%;
+    fill: none;
+    stroke: #96b9f9;
+    stroke-width: 1.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
 }
 
-.colText {
+.itemTitle {
+  text-wrap: balance;
+  max-width: 14ch;
+}
+
+.itemText {
+  margin: 0;
+  max-width: 52ch;
   font-size: 15px;
   font-weight: 300;
-  color: rgba(237, 237, 237, 0.62);
   line-height: 1.6;
-  margin: 12px 0 0;
+  color: rgba(237, 237, 237, 0.7);
 }
 
-/* ---------- Bascule ---------- */
+/* ---------- Parqué : hors écran, rien n'est encore là ---------- */
+
+.demo[data-wait] {
+  .ch,
+  .legend,
+  .answerLead,
+  .entry,
+  .entryYou {
+    opacity: 0;
+  }
+
+  .entry,
+  .entryYou {
+    transform: translateY(8px);
+  }
+}
+
+/* ---------- Joué : chaque chose à son heure ---------- */
+
+.demo[data-play] {
+  /* Fondu linéaire de 20ms, pas step-end : Chrome peut finir une animation
+     à progress 0,9999999 (flottant), et une marche y lit encore « from » —
+     la première lettre restait à opacity 0 (18/09). Un fondu de 20ms est
+     visuellement une marche. */
+  .ch {
+    animation: type 0.02s linear both;
+    animation-delay: calc(0.1s + var(--i) * #{$type});
+  }
+
+  .legend {
+    animation: fade 0.5s $out both;
+    animation-delay: $T;
+  }
+
+  .answerLead {
+    animation: fade 0.5s $out both;
+    animation-delay: $T + 0.15s;
+  }
+
+  .entry,
+  .entryYou {
+    animation: rise 0.55s $out both;
+    animation-delay: calc(#{$T + 0.3s} + var(--r) * #{$row});
+  }
+
+}
+
+@keyframes type {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .demo[data-wait] {
+    .entry,
+    .entryYou {
+      transform: none;
+    }
+  }
+
+  .demo[data-play] * {
+    animation: fade 0.4s ease-out both !important;
+    animation-delay: 0s !important;
+  }
+}
+
+/* ---------- Bascule (la grille est déjà en une colonne) ---------- */
 
 @media (max-width: 1100px) {
-  .cards,
-  .marks {
+  .lead,
+  .summary,
+  .reply,
+  .aside,
+  .list {
+    grid-column: 1 / -1;
+  }
+
+  .summary {
+    margin-top: 28px;
+  }
+
+  /* Le bloc passe bord à bord : il sort de la gouttière du conteneur, et
+     son padding la remplace. La question se règle sur la largeur de l'écran
+     pour que « recommandez-vous » tienne sur une ligne à 360px. */
+  .panel {
+    grid-column: 1 / -1;
+    grid-row: auto;
+    margin-inline: calc(-1 * var(--container-gutter));
+    padding: 40px var(--container-gutter) 64px;
+  }
+
+  .question {
+    max-width: none;
+    font-size: clamp(28px, 8.4vw, 60px);
+    overflow-wrap: anywhere;
+  }
+
+  /* La légende s'empile : libellé au-dessus de sa phrase. */
+  .legend {
     grid-template-columns: minmax(0, 1fr);
+    row-gap: 2px;
+
+    dd {
+      margin-bottom: 12px;
+    }
   }
 
-  .markList {
-    grid-column: 1;
+  /* Le chevauchement passe en vertical : l'écran remonte sur le bloc, en
+     retrait à gauche. */
+  .reply {
+    grid-row: auto;
+    margin: -40px 0 0 20px;
+    padding: 24px 0 0 20px;
   }
 
-  .cols {
-    grid-template-columns: minmax(0, 1fr);
-    gap: 0;
+  .entry,
+  .entryYou {
+    grid-template-columns: 2.5em minmax(0, 1fr);
   }
 
-  .body {
-    padding: clamp(22px, 4vw, 30px) 0;
+  .domain {
+    grid-column: 2;
   }
 
-  .col:last-child .body {
-    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  .aside {
+    margin-bottom: 8px;
   }
 
-  .colText {
-    max-width: 68ch;
+  .item {
+    grid-template-columns: 40px minmax(0, 1fr);
+    align-items: start;
+    padding: 18px 0;
+  }
+
+  .glyph {
+    width: 32px;
+    height: 32px;
+    justify-self: start;
+  }
+
+  .itemBody {
+    display: block;
+  }
+
+  .itemTitle {
+    max-width: none;
+  }
+
+  .itemText {
+    margin-top: 8px;
   }
 }
