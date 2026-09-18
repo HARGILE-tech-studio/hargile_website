@@ -34,27 +34,36 @@ $row: 0.3s;
    a 49, elle finit un peu plus tôt et attend, ce qui ne se voit pas. */
 $T: 0.1s + 54 * $type;
 
-/* ---------- L'ouverture : lead à gauche, trois énoncés à droite ---------- */
+/* ---------- Le lead et les trois énoncés, dans la figure ---------- */
 
-.opener {
-  margin-top: 20px;
-  align-items: start;
-}
-
+/* Le lead tient le vide en haut à droite du bloc, au-dessus de l'écran de
+   réponse ; il doit rester plus court que le margin-top de .reply. Les trois
+   énoncés ferment la figure sur une ligne. Placement explicite : dans le DOM
+   ils précèdent le bloc. */
 .lead {
-  grid-column: 1 / 7;
+  grid-column: 9 / 13;
+  grid-row: 1;
+  align-self: start;
   margin-top: 0;
-  max-width: 60ch;
+  font-size: clamp(16px, 1.35vw, 20px);
+  line-height: 1.5;
+  color: rgba(237, 237, 237, 0.82);
+  text-wrap: pretty;
 }
 
 .summary {
-  grid-column: 8 / 13;
+  grid-column: 1 / -1;
+  grid-row: 2;
   list-style: none;
-  margin: 0;
+  margin: clamp(40px, 5vw, 72px) 0 0;
   padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  column-gap: clamp(16px, 2vw, 32px);
 
   li {
-    padding: 0 0 16px 18px;
+    margin: 0;
+    padding: 0 0 0 18px;
     position: relative;
     font-family: var(--font-headings);
     font-weight: 500;
@@ -62,6 +71,7 @@ $T: 0.1s + 54 * $type;
     letter-spacing: -0.01em;
     color: rgba(237, 237, 237, 0.82);
     line-height: 1.45;
+    max-width: 38ch;
 
     /* Le point, plutôt qu'un filet : la même marque que sur votre nom. */
     &::before {
@@ -82,7 +92,7 @@ $T: 0.1s + 54 * $type;
 $ink: #080c16;
 
 .demo {
-  margin-top: clamp(56px, 7vw, 96px);
+  margin-top: clamp(28px, 3.5vw, 48px);
   row-gap: 0;
   align-items: start;
 }
@@ -436,8 +446,15 @@ $ink: #080c16;
     grid-column: 1 / -1;
   }
 
+  .lead,
   .summary {
-    margin-top: 28px;
+    grid-row: auto;
+  }
+
+  .summary {
+    grid-template-columns: minmax(0, 1fr);
+    row-gap: 14px;
+    margin: 28px 0 40px;
   }
 
   /* Le bloc passe bord à bord : il sort de la gouttière du conteneur, et

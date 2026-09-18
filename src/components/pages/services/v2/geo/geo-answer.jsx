@@ -50,7 +50,7 @@
  *
  * Tout est en HTML : la réponse est une phrase et une liste, pas une image,
  * ce qui est précisément l'argument de la condition a. La figure reste
- * aria-hidden parce que les trois colonnes portent l'argument en prose.
+ * aria-hidden (bloc et écran) parce que les trois colonnes portent l'argument en prose.
  *
  * La limite de ce que la page revendique n'est pas ici mais dans
  * measures.refusal, une section plus bas. Ne pas remettre de clôture ici sans
@@ -132,33 +132,43 @@ const GeoAnswer = () => {
             <div className={section.container}>
                 <h2 className={section.heading} {...reveal(0)}>{t("title")}</h2>
 
-                <div className={`${section.grid12} ${styles.opener}`}>
-                    <p className={`${section.lead} ${styles.lead}`} {...reveal(1)}>{t("lead")}</p>
-                    {/* En bref : trois énoncés à droite du lead, cellules à filet,
-                        pour les lecteurs pressés et les moteurs de réponse
-                        (Otterly, 18/09 : Summary Block, pire score de la page). */}
-                    <ul className={styles.summary} {...reveal(2)}>
-                        {t.raw("summary").map((line) => (
-                            <li key={line}>{line}</li>
-                        ))}
-                    </ul>
-                </div>
+                {/* V4g, 18/09 (Mihai : « il y a une dissonance » entre l'ouverture
+                    et l'affiche) : le lead et les trois énoncés sont entrés
+                    dans la figure. Le lead occupe le vide en haut à droite du
+                    bloc, au-dessus de l'écran de réponse : la question à
+                    gauche, ce qui se passe à droite, la réponse dessous. Il
+                    reprend la question de l'affiche (votre métier, votre
+                    ville) au lieu de la nôtre. Les trois énoncés ferment la
+                    figure, sur une ligne. L'ordre du DOM ne change pas (h2,
+                    lead, énoncés, figure) : la grille place, le mobile
+                    empile dans cet ordre.
 
-                {/* aria-hidden : les trois colonnes disent en prose ce que la
-                    figure montre. Le texte part quand même dans le HTML.
+                    aria-hidden est descendu sur le bloc et l'écran : les
+                    trois colonnes disent en prose ce que la figure montre. Le
+                    texte part quand même dans le HTML.
 
                     Composition suisse (V4d, 18/09, d'après les références de
                     swiss-design.fun envoyées par Mihai) : un bloc plein de
                     couleur sur sept colonnes avec la question dedans, et
                     l'écran de réponse qui chevauche son bord droit, dans la
                     couleur de la page. Aucun filet : le chevauchement fait la
-                    structure. Le contraste d'échelle fait l'image. Un seul observer (useChoreo) ; chaque enfant a son
-                    moment dans le .scss. */}
-                <div className={`${section.grid12} ${styles.demo}`} ref={choreo} aria-hidden="true">
+                    structure. Un seul observer (useChoreo) ; chaque enfant a
+                    son moment dans le .scss. */}
+                <div className={`${section.grid12} ${styles.demo}`} ref={choreo}>
+                    <p className={`${section.lead} ${styles.lead}`} {...reveal(1)}>{t("lead")}</p>
+                    {/* En bref : trois énoncés pour les lecteurs pressés et les
+                        moteurs de réponse (Otterly, 18/09 : Summary Block,
+                        pire score de la page). */}
+                    <ul className={styles.summary} {...reveal(2)}>
+                        {t.raw("summary").map((line) => (
+                            <li key={line}>{line}</li>
+                        ))}
+                    </ul>
+
                     {/* Le panneau plein : la question, côté « vous ». L'écran
                         de réponse vient mordre sur son bord droit, comme la
                         photo sur le bloc rouge des références suisses. */}
-                    <div className={styles.panel}>
+                    <div className={styles.panel} aria-hidden="true">
                         <p className={styles.question}>
                             {typed.map(({ch, slot}, i) => (
                                 <span key={i} className={slot ? `${styles.ch} ${styles.slot}` : styles.ch} style={{"--i": i}}>
@@ -174,7 +184,7 @@ const GeoAnswer = () => {
                         </dl>
                     </div>
 
-                    <div className={styles.reply}>
+                    <div className={styles.reply} aria-hidden="true">
                         {/* La réponse : la phrase d'ouverture, puis quatre entrées
                             (numéro, nom, domaine), comme la liste d'un vrai
                             assistant. Le vôtre est le dernier, sur un aplat

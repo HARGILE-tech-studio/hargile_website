@@ -121,6 +121,14 @@ Gotcha found while building: Chrome can finish a CSS animation at progress
 0.9999999 instead of 1, so `step-end` easing leaves the element on its
 *from* keyframe. Use a 20ms linear fade for a typewriter, never a step.
 
+V4g, 18/09 (soir) : le lead et les trois énoncés sont entrés dans la figure
+(Mihai : dissonance entre l'ouverture et l'affiche). Le lead tient le vide en
+haut à droite du bloc, colonnes 9–12, au-dessus de l'écran de réponse, et
+reprend la question de l'affiche (« votre métier, dans votre ville ») au lieu
+de « applications web à Bruxelles » ; `geo.lead` changé en fr et en. Les trois
+énoncés ferment la figure sur une ligne 4/4/4. Ordre du DOM inchangé. Le
+schéma ASCII ci-dessus date d'avant V4d et n'est plus à jour.
+
 ### 3.2 Process — quiet: a table, not a timeline
 
 Today: four steps on the fill-on-scroll rail, each with Système / Nous lines.
