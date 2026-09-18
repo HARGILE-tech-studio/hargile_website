@@ -5,7 +5,7 @@
  * V2, 18/09/2026 (Mihai : « beaucoup de texte, il faut alléger », références
  * ClickUp et SpinX) : un bento suisse. Des cellules à filets partagés, chacune
  * avec un libellé mono en capitales, une phrase, et un objet qui montre la
- * garantie au lieu de la redire : le champ masqué du coffre, trois lignes du
+ * garantie au lieu de la redire : trois lignes du
  * journal de lecture (ses colonnes sont « qui, quand, pour quoi »), le message
  * d'arrêt et l'état qui le suit. Le lead de trois phrases a sauté : sa première
  * phrase est devenue l'énoncé du bloc plein, les deux autres vivent dans les
@@ -23,9 +23,11 @@
  * 18/09, plus tard (Mihai) : le titre « Vos accès » a sauté, « pas assez
  * bon ». L'énoncé du bloc plein est le h2 de la section ; `access.title` reste
  * dans fr/en.json, non lu. Et comme sur l'affiche de référence, une photo
- * jouxte l'aplat à droite : des coffres numérotés, en niveaux de gris
- * (Wikimedia Commons, « Safe Deposit Boxes.png », CC0, donc sans crédit
- * obligatoire). Décorative : alt vide.
+ * jouxte l'aplat à droite : un cadenas à combinaison sur un clavier, choisi
+ * par Mihai (Unsplash, Sasun Bughdaryan, licence Unsplash, sans crédit
+ * obligatoire ; original dans public/images/brand/). Couleur gardée : son
+ * bleu est celui de l'accent. Recadrée en portrait sur le cadenas.
+ * Décorative : alt vide.
  *
  * Les objets sont aria-hidden : libellé et phrase disent tout en prose. */
 
@@ -57,15 +59,20 @@ const Access = () => {
                     <h2 className={styles.statement}>{t("text")}</h2>
                     <div className={styles.photo}>
                         <Image
-                            src="/images/pages/geo/safe-deposit-boxes.webp"
+                            src="/images/pages/geo/padlock.webp"
                             alt=""
                             fill
                             sizes="(max-width: 1100px) 100vw, 25vw"
                         />
                     </div>
-                    <p className={styles.secret} aria-hidden="true">
-                        <span>{t("vaultField")}</span>
-                        <span className={styles.dots}>••••••••••••••••</span>
+                    {/* Le coffre a un nom, et le lecteur peut aller vérifier
+                        (Mihai, 18/09) : même geste que les liens schema.org
+                        de meta-proof. */}
+                    <p className={styles.vaultNote}>
+                        {t("vaultNote")}{" "}
+                        <a href="https://infisical.com/" target="_blank" rel="noopener noreferrer">
+                            {t("vaultLink")}
+                        </a>
                     </p>
                 </div>
 

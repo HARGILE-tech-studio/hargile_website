@@ -920,7 +920,6 @@
                 "note": "applied in the code, by us"
               }
             },
-            "vaultField": "CMS credential",
             "log": {
               "head": [
                 "When",
@@ -967,7 +966,9 @@
                 "label": "Applied by us",
                 "text": "Same audit, same proposals. We apply them by hand or in the code."
               }
-            }
+            },
+            "vaultNote": "They live in Infisical, an open-source secrets manager: an encrypted vault, outside our database.",
+            "vaultLink": "Learn more about Infisical"
           },
           "metaProof": {
             "title": "Architecture & source",

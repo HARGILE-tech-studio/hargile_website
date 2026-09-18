@@ -920,7 +920,6 @@
                 "note": "application dans le code, par nous"
               }
             },
-            "vaultField": "identifiant CMS",
             "log": {
               "head": [
                 "Quand",
@@ -967,7 +966,9 @@
                 "label": "Application par nous",
                 "text": "Même audit, mêmes propositions. On applique à la main ou dans le code."
               }
-            }
+            },
+            "vaultNote": "Ils vivent dans Infisical, un gestionnaire de secrets open source : un coffre chiffré, hors de notre base de données.",
+            "vaultLink": "En savoir plus sur Infisical"
           },
           "metaProof": {
             "title": "Architecture & source",
