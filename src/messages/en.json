@@ -78,6 +78,7 @@
       "copyright": "© {year} HARGILE. All Rights Reserved",
       "links": {
         "aboutUs": "About Us",
+        "blog": "Blog",
         "contact": "Contact",
         "faq": "FAQ",
         "privacyPolicy": "Privacy Policy",
@@ -124,6 +125,7 @@
     },
     "menu": {
       "agves": "AGVES",
+      "blog": "Blog",
       "contact": "Contact",
       "faq": "FAQ",
       "home": "Home",
@@ -209,6 +211,17 @@
           "title": "Our Team"
         }
       }
+    },
+    "blog": {
+      "ctaSecondary": "See the services",
+      "empty": "No articles yet. Check back soon.",
+      "hero": {
+        "title": "The HARGILE blog",
+        "answer": "Notes on GEO, SEO and visibility in AI answers: what we're seeing, what we're testing, and what it changes for the businesses we work with."
+      },
+      "publishedOn": "Published on",
+      "readMore": "Read the article",
+      "updatedOn": "Updated on"
     },
     "faq": {
       "ctaSecondary": "See the services",
@@ -493,7 +506,7 @@
             },
             "architects": {
               "title": "Architects & engineering firms",
-              "text": "A developer asks ChatGPT which architect to choose for their project. Your portfolio speaks for itself — if it's read."
+              "text": "A developer asks ChatGPT which architect to choose for their project. Your portfolio speaks for itself: if it's read."
             }
           }
         },
@@ -1410,8 +1423,8 @@
   "seo": {
     "global": {
       "defaultDescription": "HARGILE makes businesses visible in AI assistant answers and on Google. GEO and SEO, from Brussels.",
-      "defaultImageAlt": "HARGILE — GEO & SEO",
-      "defaultTitle": "HARGILE — Visible in AI and on Google",
+      "defaultImageAlt": "HARGILE: GEO & SEO",
+      "defaultTitle": "HARGILE: Visible in AI and on Google",
       "siteName": "HARGILE"
     },
     "pages": {
@@ -1424,6 +1437,16 @@
         },
         "schemaType": "AboutPage",
         "title": "About HARGILE - Our Story & Mission | Digital Innovation Agency"
+      },
+      "blog": {
+        "description": "HARGILE's notes and analysis on GEO, SEO and visibility in AI answers and on Google.",
+        "og": {
+          "description": "What we're seeing, what we're testing, and what it changes for AI and Google visibility.",
+          "imageAlt": "HARGILE Blog",
+          "title": "HARGILE Blog: GEO, SEO and AI visibility"
+        },
+        "schemaType": "CollectionPage",
+        "title": "HARGILE Blog: GEO, SEO and AI visibility"
       },
       "contact": {
         "description": "A project, a question, or a free audit of your visibility in AI answers and on Google. Write to us, we reply within 48 hours.",
@@ -1459,7 +1482,7 @@
         "description": "GEO and SEO for businesses in Belgium. Get named by ChatGPT, Perplexity and AI answer engines, and found on Google.",
         "og": {
           "description": "GEO and SEO for businesses in Belgium. Get named by ChatGPT, Perplexity and AI answer engines, and found on Google.",
-          "imageAlt": "HARGILE — GEO & SEO",
+          "imageAlt": "HARGILE: GEO & SEO",
           "title": "HARGILE | Get named by AI, not just indexed"
         },
         "schemaType": "WebPage",

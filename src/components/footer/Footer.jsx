@@ -21,14 +21,14 @@ const Footer = () => {
 
     // The *build* year, inlined by next.config.mjs. Calling new Date() during
     // render of a client component would be non-deterministic (server prerender
-    // and hydration can straddle a year boundary), which Next.js 16 flags — and
+    // and hydration can straddle a year boundary), which Next.js 16 flags, and
     // the previous hardcoded 2025 meant the raw HTML, the only thing AI crawlers
     // ever read since none of them run JS, advertised a stale year indefinitely.
     //
     // An effect used to correct this to the live year after mount. It was
     // dropped: it fired a cascading render on every visit to fix a value that is
     // already correct in the HTML, and it only ever fixed it for JS-running
-    // humans — crawlers kept reading the build year regardless. If a deploy ever
+    // humans: crawlers kept reading the build year regardless. If a deploy ever
     // sits unrebuilt across New Year the footer lags, which is what `postbuild`
     // refreshing this env var on every build is there to prevent.
     const year = Number(process.env.NEXT_PUBLIC_BUILD_YEAR) || 2025;
@@ -59,7 +59,7 @@ const Footer = () => {
     return (
         <FooterContainerStyled>
             <FooterInnerStyled>
-                {/* Top bar: brand — nav column — socials. New site links belong in
+                {/* Top bar: brand, nav column, socials. New site links belong in
                     the nav column. */}
                 <FooterContentStyled>
                     <BrandBlockStyled>
@@ -69,6 +69,7 @@ const Footer = () => {
 
                     <BottomLinksStyled as="nav" aria-label={t('sections.company')}>
                         <FooterLinkStyled as={Link} href="/geo">{t('links.services')}</FooterLinkStyled>
+                        <FooterLinkStyled as={Link} href="/blog">{t('links.blog')}</FooterLinkStyled>
                         <FooterLinkStyled as={Link} href="/faq">{t('links.faq')}</FooterLinkStyled>
                         <FooterLinkStyled as={Link} href="/contact">{t('links.contact')}</FooterLinkStyled>
                         <FooterLinkStyled as={Link}
