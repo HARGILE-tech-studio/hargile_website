@@ -213,13 +213,19 @@
       }
     },
     "blog": {
+      "back": "All articles",
       "ctaSecondary": "See the services",
       "empty": "No articles yet. Check back soon.",
       "hero": {
         "title": "The HARGILE blog",
         "answer": "Notes on GEO, SEO and visibility in AI answers: what we're seeing, what we're testing, and what it changes for the businesses we work with."
       },
+      "next": {
+        "label": "Up next",
+        "text": "The next article is in review. Nothing goes out here without someone on the team reading it first."
+      },
       "publishedOn": "Published on",
+      "readingTime": "{minutes} min read",
       "readMore": "Read the article",
       "updatedOn": "Updated on"
     },

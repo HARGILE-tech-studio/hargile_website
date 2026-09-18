@@ -213,13 +213,19 @@
       }
     },
     "blog": {
+      "back": "Tous les articles",
       "ctaSecondary": "Voir les services",
       "empty": "Aucun article pour le moment. Revenez bientôt.",
       "hero": {
         "title": "Le blog HARGILE",
         "answer": "Des notes sur le GEO, le SEO et la visibilité dans les réponses des IA : ce qu'on observe, ce qu'on teste, et ce que ça change pour les entreprises qu'on accompagne."
       },
+      "next": {
+        "label": "À suivre",
+        "text": "Le prochain article est en relecture. Rien ne sort ici sans avoir été relu par quelqu'un de l'équipe."
+      },
       "publishedOn": "Publié le",
+      "readingTime": "{minutes} min de lecture",
       "readMore": "Lire l'article",
       "updatedOn": "Mis à jour le"
     },

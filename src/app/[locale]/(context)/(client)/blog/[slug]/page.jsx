@@ -2,6 +2,7 @@ import {notFound} from "next/navigation";
 import {getTranslations} from "next-intl/server";
 import {getAllSlugs, getAvailableLocales, getPost} from "@/lib/blog";
 import {routing} from "@/i18n/routing";
+import {Link} from "@/i18n/navigation";
 import {generateContentMetadata} from "@/seo/generate-page-metadata";
 import {buildBlogPostJsonLd} from "@/seo/build-json-ld";
 import JsonLd from "@/components/seo/JsonLd";
@@ -48,6 +49,8 @@ export default async function BlogPostPage({params}) {
     const availableLocales = getAvailableLocales(slug);
     const jsonLd = await buildBlogPostJsonLd({locale, post, availableLocales});
     const t = await getTranslations({locale, namespace: "pages.blog"});
+    // ponytail: 200 words a minute over the rendered text, tags stripped.
+    const minutes = Math.max(1, Math.round(post.html.replace(/<[^>]+>/g, " ").split(/\s+/).length / 200));
 
     return (
         <>
@@ -62,30 +65,35 @@ export default async function BlogPostPage({params}) {
             />
             <section className={section.section}>
                 <div className={section.container}>
-                    <p className={styles.meta}>
-                        <span>{post.author}</span>
-                        <span className={styles.metaSeparator} aria-hidden="true">/</span>
-                        <span>
-                            {t("publishedOn")} <time dateTime={post.date}>{formatBlogDate(post.date, locale)}</time>
-                        </span>
-                        {post.updated ? (
-                            <>
-                                <span className={styles.metaSeparator} aria-hidden="true">/</span>
-                                <span>
-                                    {t("updatedOn")}{" "}
-                                    <time dateTime={post.updated}>{formatBlogDate(post.updated, locale)}</time>
-                                </span>
-                            </>
-                        ) : null}
-                    </p>
-
-                    {post.tags.length > 0 ? (
-                        <ul className={styles.tags}>
-                            {post.tags.map((tag) => (
-                                <li className={styles.tag} key={tag}>{tag}</li>
-                            ))}
-                        </ul>
-                    ) : null}
+                    <div className={section.grid12}>
+                        {/* The metadata lives in the margin, in mono, the
+                            way /geo labels its cells: the reading column
+                            stays text only. */}
+                        <aside className={styles.margin}>
+                            <Link href="/blog" className={styles.back}>{t("back")}</Link>
+                            <dl className={styles.meta}>
+                                <div>
+                                    <dt>{t("publishedOn")}</dt>
+                                    <dd><time dateTime={post.date}>{formatBlogDate(post.date, locale)}</time></dd>
+                                </div>
+                                {post.updated ? (
+                                    <div>
+                                        <dt>{t("updatedOn")}</dt>
+                                        <dd><time dateTime={post.updated}>{formatBlogDate(post.updated, locale)}</time></dd>
+                                    </div>
+                                ) : null}
+                                <div>
+                                    <dt>{post.author}</dt>
+                                    <dd>{t("readingTime", {minutes})}</dd>
+                                </div>
+                                {post.tags.length > 0 ? (
+                                    <div>
+                                        <dt>Tags</dt>
+                                        <dd>{post.tags.join(", ")}</dd>
+                                    </div>
+                                ) : null}
+                            </dl>
+                        </aside>
 
                     {/*
                         This Markdown-derived HTML comes from our own repository
@@ -100,7 +108,8 @@ export default async function BlogPostPage({params}) {
                         wraps it, so the article body is fully present in the
                         first HTML response for crawlers that never run JS.
                     */}
-                    <div className={styles.prose} dangerouslySetInnerHTML={{__html: post.html}}/>
+                        <div className={styles.prose} dangerouslySetInnerHTML={{__html: post.html}}/>
+                    </div>
                 </div>
             </section>
         </>

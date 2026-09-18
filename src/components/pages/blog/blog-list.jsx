@@ -32,34 +32,55 @@ const BlogList = ({posts}) => {
         );
     }
 
+    /* Same grammar as /geo's Access section: the latest post alone as a
+       poster (offset flat, title crossing it in two colours), the older ones
+       detached below in cells with shared hairlines. The closing cell keeps
+       the grid's last row full while the archive is still short. */
+    const [latest, ...rest] = posts;
+    const meta = (post) => (
+        <p className={styles.label}>
+            <time dateTime={post.date}>{formatBlogDate(post.date, locale)}</time>
+            {post.tags.map((tag) => <span key={tag}>{tag}</span>)}
+        </p>
+    );
+
     return (
         <section className={section.section}>
             <div className={section.container}>
-                <ul className={styles.list}>
-                    {posts.map((post, i) => (
-                        <li key={post.slug}>
-                            <article className={styles.card} {...reveal(i)}>
-                                <p className={styles.meta}>
-                                    <time dateTime={post.date}>{formatBlogDate(post.date, locale)}</time>
-                                    {post.tags.length > 0 && (
-                                        <span className={styles.tags}>
-                                            {post.tags.map((tag) => (
-                                                <span className={styles.tag} key={tag}>{tag}</span>
-                                            ))}
-                                        </span>
-                                    )}
-                                </p>
-                                <h2 className={styles.title}>
+                <article className={styles.poster} {...reveal(0)}>
+                    {meta(latest)}
+                    <h2 className={styles.statement}>
+                        <Link href={`/blog/${latest.slug}`} className={styles.link}>
+                            {latest.title}
+                        </Link>
+                    </h2>
+                    <p className={styles.posterNote}>{latest.description}</p>
+                    <span className={styles.posterMore} aria-hidden="true">{t("readMore")}</span>
+                </article>
+
+                {rest.length === 0 ? null : (
+                <ul className={`${section.grid12} ${styles.bento}`}>
+                    {rest.map((post, i) => (
+                        <li key={post.slug} className={styles.cell}>
+                            <article className={styles.card} {...reveal(1 + i)}>
+                                {meta(post)}
+                                <h2 className={section.blockHeading}>
                                     <Link href={`/blog/${post.slug}`} className={styles.link}>
                                         {post.title}
                                     </Link>
                                 </h2>
-                                <p className={styles.description}>{post.description}</p>
-                                <span className={styles.readMore} aria-hidden="true">{t("readMore")}</span>
+                                <p className={styles.text}>{post.description}</p>
                             </article>
                         </li>
                     ))}
+                    {rest.length % 2 === 0 ? null : (
+                        <li className={`${styles.cell} ${styles.next}`} {...reveal(1 + rest.length)}>
+                            <p className={styles.label}>{t("next.label")}</p>
+                            <p className={styles.text}>{t("next.text")}</p>
+                        </li>
+                    )}
                 </ul>
+                )}
             </div>
         </section>
     );
