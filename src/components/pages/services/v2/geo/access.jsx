@@ -49,25 +49,27 @@ const Access = () => {
     return (
         <section className={section.section}>
             <div className={section.container}>
-                <div className={`${section.grid12} ${styles.bento}`}>
-                    {/* Le bloc plein : la garantie première, en corps d'affiche. */}
-                    <div className={styles.vault} {...reveal(0)}>
-                        <p className={styles.label}>{t("items.vault.title")}</p>
-                        <h2 className={styles.statement}>{t("text")}</h2>
-                        <div className={styles.photo}>
-                            <Image
-                                src="/images/pages/geo/safe-deposit-boxes.webp"
-                                alt=""
-                                fill
-                                sizes="(max-width: 1100px) 100vw, 25vw"
-                            />
-                        </div>
-                        <p className={styles.secret} aria-hidden="true">
-                            <span>{t("vaultField")}</span>
-                            <span className={styles.dots}>••••••••••••••••</span>
-                        </p>
+                {/* Le bloc plein : la garantie première, en corps d'affiche.
+                    Seul, détaché des quatre cellules (Mihai, 18/09) : c'est
+                    une affiche, pas la première case d'un bento. */}
+                <div className={styles.vault} {...reveal(0)}>
+                    <p className={styles.label}>{t("items.vault.title")}</p>
+                    <h2 className={styles.statement}>{t("text")}</h2>
+                    <div className={styles.photo}>
+                        <Image
+                            src="/images/pages/geo/safe-deposit-boxes.webp"
+                            alt=""
+                            fill
+                            sizes="(max-width: 1100px) 100vw, 25vw"
+                        />
                     </div>
+                    <p className={styles.secret} aria-hidden="true">
+                        <span>{t("vaultField")}</span>
+                        <span className={styles.dots}>••••••••••••••••</span>
+                    </p>
+                </div>
 
+                <div className={`${section.grid12} ${styles.bento}`}>
                     <div className={styles.log} {...reveal(1)}>
                         <p className={styles.label}>{t("items.log.title")}</p>
                         <p className={styles.text}>{t("items.log.text")}</p>

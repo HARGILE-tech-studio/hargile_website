@@ -1,6 +1,7 @@
 /* Vos accès : bento suisse (voir l'en-tête d'access.jsx).
 
-     1–12 coffre : l'aplat sur toute la largeur, l'énoncé en corps d'affiche
+     coffre : l'affiche, seule, sur toute la largeur
+     (un pas de section)
      1–6  journal                            │ 7–12 arrêt
      1–6  application automatique            │ 7–12 application par nous
 
@@ -14,6 +15,7 @@ $rule: rgba(255, 255, 255, 0.12);
 $mono: ui-monospace, "Cascadia Mono", "SF Mono", Menlo, Consolas, monospace;
 
 .bento {
+  margin-top: clamp(64px, 8vw, 120px);
   column-gap: 0;
   border-bottom: 1px solid $rule;
   border-right: 1px solid $rule;
