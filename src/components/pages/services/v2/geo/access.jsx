@@ -20,8 +20,16 @@
  * de logos tiers redessinés. `access.platforms` et les `cms.*.note` restent
  * dans fr/en.json, non lus.
  *
+ * 18/09, plus tard (Mihai) : le titre « Vos accès » a sauté, « pas assez
+ * bon ». L'énoncé du bloc plein est le h2 de la section ; `access.title` reste
+ * dans fr/en.json, non lu. Et comme sur l'affiche de référence, une photo
+ * jouxte l'aplat à droite : des coffres numérotés, en niveaux de gris
+ * (Wikimedia Commons, « Safe Deposit Boxes.png », CC0, donc sans crédit
+ * obligatoire). Décorative : alt vide.
+ *
  * Les objets sont aria-hidden : libellé et phrase disent tout en prose. */
 
+import Image from "next/image";
 import {useTranslations} from "next-intl";
 import section from "@/components/pages/homepage/v2/v2-section.module.scss";
 import {useReveal} from "@/components/pages/homepage/v2/useReveal";
@@ -41,20 +49,26 @@ const Access = () => {
     return (
         <section className={section.section}>
             <div className={section.container}>
-                <h2 className={section.heading} {...reveal(0)}>{t("title")}</h2>
-
                 <div className={`${section.grid12} ${styles.bento}`}>
                     {/* Le bloc plein : la garantie première, en corps d'affiche. */}
-                    <div className={styles.vault} {...reveal(1)}>
+                    <div className={styles.vault} {...reveal(0)}>
                         <p className={styles.label}>{t("items.vault.title")}</p>
-                        <p className={styles.statement}>{t("text")}</p>
+                        <h2 className={styles.statement}>{t("text")}</h2>
+                        <div className={styles.photo}>
+                            <Image
+                                src="/images/pages/geo/safe-deposit-boxes.webp"
+                                alt=""
+                                fill
+                                sizes="(max-width: 1100px) 100vw, 25vw"
+                            />
+                        </div>
                         <p className={styles.secret} aria-hidden="true">
                             <span>{t("vaultField")}</span>
                             <span className={styles.dots}>••••••••••••••••</span>
                         </p>
                     </div>
 
-                    <div className={styles.log} {...reveal(2)}>
+                    <div className={styles.log} {...reveal(1)}>
                         <p className={styles.label}>{t("items.log.title")}</p>
                         <p className={styles.text}>{t("items.log.text")}</p>
                         <div className={styles.journal} aria-hidden="true">
@@ -69,7 +83,7 @@ const Access = () => {
                         </div>
                     </div>
 
-                    <div className={styles.revoke} {...reveal(3)}>
+                    <div className={styles.revoke} {...reveal(2)}>
                         <p className={styles.label}>{t("items.revoke.title")}</p>
                         <p className={styles.text}>{t("items.revoke.text")}</p>
                         <div className={styles.stop} aria-hidden="true">
@@ -86,7 +100,7 @@ const Access = () => {
                     </div>
 
                     {REGIMES.map(({key, cms}, i) => (
-                        <div key={key} className={styles.regime} {...reveal(4 + i)}>
+                        <div key={key} className={styles.regime} {...reveal(3 + i)}>
                             <p className={styles.label}>{t(`regimes.${key}.label`)}</p>
                             <p className={styles.cms}>
                                 {cms.map((c) => <span key={c}>{t(`cms.${c}.name`)}</span>)}

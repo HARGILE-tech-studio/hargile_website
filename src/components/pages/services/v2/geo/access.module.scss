@@ -14,7 +14,6 @@ $rule: rgba(255, 255, 255, 0.12);
 $mono: ui-monospace, "Cascadia Mono", "SF Mono", Menlo, Consolas, monospace;
 
 .bento {
-  margin-top: clamp(40px, 5vw, 64px);
   column-gap: 0;
   border-bottom: 1px solid $rule;
   border-right: 1px solid $rule;
@@ -59,17 +58,20 @@ $mono: ui-monospace, "Cascadia Mono", "SF Mono", Menlo, Consolas, monospace;
 .vault {
   --start: 0px;
   --bite: clamp(120px, 17vw, 264px);
+  /* La photo tient les trois dernières colonnes ; l'aplat s'arrête sur elle. */
+  --photo: 25%;
   grid-column: 1 / -1;
   position: relative;
   display: flex;
   flex-direction: column;
   padding-left: calc(var(--bite) + clamp(20px, 2vw, 32px));
+  padding-right: calc(var(--photo) + clamp(24px, 2.6vw, 40px));
   border-color: transparent;
 
   &::before {
     content: "";
     position: absolute;
-    inset: 0 0 0 var(--bite);
+    inset: 0 var(--photo) 0 var(--bite);
     background: #96b9f9;
   }
 
@@ -87,7 +89,7 @@ $mono: ui-monospace, "Cascadia Mono", "SF Mono", Menlo, Consolas, monospace;
   max-width: 17ch;
   font-family: var(--font-headings);
   font-weight: 700;
-  font-size: clamp(44px, 6vw, 96px);
+  font-size: clamp(44px, 5.8vw, 92px);
   letter-spacing: -0.03em;
   line-height: 1.02;
   text-wrap: balance;
@@ -103,6 +105,17 @@ $mono: ui-monospace, "Cascadia Mono", "SF Mono", Menlo, Consolas, monospace;
   @media (forced-colors: active) {
     color: CanvasText;
     background: none;
+  }
+}
+
+/* La photo de l'affiche : même hauteur que l'aplat, collée à son bord. */
+.vault > .photo {
+  position: absolute;
+  inset: 0 0 0 auto;
+  width: var(--photo);
+
+  img {
+    object-fit: cover;
   }
 }
 
@@ -249,7 +262,21 @@ $mono: ui-monospace, "Cascadia Mono", "SF Mono", Menlo, Consolas, monospace;
     padding: 36px var(--container-gutter) 28px calc(var(--bite) + 16px);
   }
 
+  /* La photo passe dans le flux, en bandeau sous l'énoncé. */
+  .vault {
+    --photo: 0%;
+  }
+
+  .vault > .photo {
+    position: relative;
+    inset: auto;
+    width: auto;
+    height: 180px;
+    margin-bottom: 28px;
+  }
+
   .statement {
+    margin-bottom: 28px;
     margin-left: calc(var(--start) - var(--bite) - 16px);
     max-width: 16ch;
     font-size: clamp(28px, 7.6vw, 48px);
