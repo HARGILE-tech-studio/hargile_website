@@ -214,6 +214,7 @@
     },
     "blog": {
       "back": "Tous les articles",
+      "contents": "Sommaire",
       "ctaSecondary": "Voir les services",
       "empty": "Aucun article pour le moment. Revenez bientôt.",
       "hero": {

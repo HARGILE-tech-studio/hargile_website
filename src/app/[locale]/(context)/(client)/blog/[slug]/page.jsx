@@ -6,6 +6,7 @@ import {Link} from "@/i18n/navigation";
 import {generateContentMetadata} from "@/seo/generate-page-metadata";
 import {buildBlogPostJsonLd} from "@/seo/build-json-ld";
 import JsonLd from "@/components/seo/JsonLd";
+import ReadingNav from "@/components/pages/blog/reading-nav";
 import PosterHero from "@/components/pages/services/v2/shared/poster-hero";
 import WaveGridBackdrop from "@/components/pages/services/v2/shared/wave-grid-backdrop";
 import {formatBlogDate} from "@/lib/format-date";
@@ -58,41 +59,50 @@ export default async function BlogPostPage({params}) {
             <PosterHero
                 title={post.title}
                 answer={post.description}
-                /* wave-312: exported, unused elsewhere (see BlogPageClient for
-                   the sibling comment on wave-97): one frame for the article
-                   template, shared by every post rather than the index. */
+                /* wave-312: exported, unused elsewhere (see blog-index-backdrop
+                   for the sibling comment on wave-97): one frame for the
+                   article template, shared by every post rather than the
+                   index. */
                 backdrop={<WaveGridBackdrop composition="wave-312"/>}
             />
-            <section className={section.section}>
+            <section className={`${section.section} ${section.sectionEnd}`}>
                 <div className={section.container}>
+                    {/* The byline sits above the article, across the measure,
+                        rather than in the margin: who wrote this and when is
+                        the first thing a reader checks on a piece about a
+                        fast-moving subject, and the margin below is the
+                        reading nav's. Reference: tryprofound.com/blog. */}
+                    <div className={styles.byline}>
+                        <Link href="/blog" className={styles.back}>{t("back")}</Link>
+                        <p className={styles.bylineMeta}>
+                            <span className={styles.author}>{post.author}</span>
+                            <span aria-hidden="true">/</span>
+                            <time dateTime={post.date}>{formatBlogDate(post.date, locale)}</time>
+                            <span aria-hidden="true">/</span>
+                            <span>{t("readingTime", {minutes})}</span>
+                            {post.updated ? (
+                                <>
+                                    <span aria-hidden="true">/</span>
+                                    <span>
+                                        {t("updatedOn")}{" "}
+                                        <time dateTime={post.updated}>{formatBlogDate(post.updated, locale)}</time>
+                                    </span>
+                                </>
+                            ) : null}
+                        </p>
+                        {post.tags.length > 0 ? (
+                            <p className={styles.tags}>{post.tags.join(" / ")}</p>
+                        ) : null}
+                    </div>
+
                     <div className={section.grid12}>
-                        {/* The metadata lives in the margin, in mono, the
-                            way /geo labels its cells: the reading column
-                            stays text only. */}
+                        {/* Sticky in its own column: the nav follows the read
+                            without the article having to give up measure for
+                            it. Its own component because the active-section
+                            highlight needs the client; the list itself is in
+                            the server HTML either way. */}
                         <aside className={styles.margin}>
-                            <Link href="/blog" className={styles.back}>{t("back")}</Link>
-                            <dl className={styles.meta}>
-                                <div>
-                                    <dt>{t("publishedOn")}</dt>
-                                    <dd><time dateTime={post.date}>{formatBlogDate(post.date, locale)}</time></dd>
-                                </div>
-                                {post.updated ? (
-                                    <div>
-                                        <dt>{t("updatedOn")}</dt>
-                                        <dd><time dateTime={post.updated}>{formatBlogDate(post.updated, locale)}</time></dd>
-                                    </div>
-                                ) : null}
-                                <div>
-                                    <dt>{post.author}</dt>
-                                    <dd>{t("readingTime", {minutes})}</dd>
-                                </div>
-                                {post.tags.length > 0 ? (
-                                    <div>
-                                        <dt>Tags</dt>
-                                        <dd>{post.tags.join(", ")}</dd>
-                                    </div>
-                                ) : null}
-                            </dl>
+                            <ReadingNav headings={post.headings} label={t("contents")}/>
                         </aside>
 
                     {/*

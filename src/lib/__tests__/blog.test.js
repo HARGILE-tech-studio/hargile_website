@@ -154,9 +154,29 @@ describe("heading rendering", () => {
     it("shifts markdown heading levels down one so the body never emits a second h1", async () => {
         const {getPost} = await loadBlogWithCwd("heading-shift");
         const post = getPost("fr", "titre-dans-le-corps");
-        expect(post.html).not.toContain("<h1>");
-        expect(post.html).toContain("<h2>Titre dans le corps</h2>");
-        expect(post.html).toContain("<h3>Sous-titre</h3>");
+        expect(post.html).not.toContain("<h1");
+        expect(post.html).toContain("<h2 id=\"titre-dans-le-corps\">Titre dans le corps</h2>");
+        expect(post.html).toContain("<h3 id=\"sous-titre\">Sous-titre</h3>");
+    });
+
+    /* The ids are what the article page reading nav links to, so a heading
+       losing its anchor would silently break every link in that nav. */
+    /* The reading nav renders these strings through JSX, which escapes what
+       it is given: an entity left in here prints as `Ce qu&#39;on mesure`. */
+    it("lists the body's sections as plain text, with entities decoded", async () => {
+        const {getPost} = await loadBlogWithCwd("heading-shift");
+        const post = getPost("fr", "titre-dans-le-corps");
+        const texts = post.headings.map((h) => h.text);
+        expect(texts).toContain("Ce qu'on mesure");
+        for (const text of texts) expect(text).not.toMatch(/&[a-z#0-9]+;/);
+    });
+
+    it("gives every heading an accent-free slug id for the reading nav to link", async () => {
+        const {getPost} = await loadBlogWithCwd("heading-shift");
+        const post = getPost("fr", "titre-dans-le-corps");
+        const ids = [...post.html.matchAll(/<h[2-6] id="([^"]*)"/g)].map((m) => m[1]);
+        expect(ids.length).toBeGreaterThan(0);
+        for (const id of ids) expect(id).toMatch(/^[a-z0-9-]+$/);
     });
 });
 

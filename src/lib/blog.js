@@ -28,12 +28,36 @@ const REQUIRED_FIELDS = ["title", "description", "date", "locale"];
    second <h1>, an accessibility and SEO fault on the exact per-page gate this
    repo enforces in CI. Configured once at module load via marked.use() rather
    than per-call, so both getPost's marked.parse() calls below share it. */
+
+/* Slug for a heading's anchor id. Accent-insensitive (NFD, then strip the
+   combining marks) so "Donnees structurees" and "Données structurées" give the
+   same stable ASCII id, which is what a URL fragment wants. Deliberately not a
+   dependency: this is five lines, and github-slugger would be a package for
+   them. Two headings with identical text would collide; the reading nav links
+   the first, which is what a reader clicking a repeated title expects anyway. */
+function slugify(text) {
+    return text
+        .normalize("NFD")
+        .replace(/\p{M}/gu, "")
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, "-")
+        .replace(/^-+|-+$/g, "");
+}
+
 marked.use({
     gfm: true,
     renderer: {
-        heading({tokens, depth}) {
+        /* The `id` is added here, in the renderer, rather than by a client
+           component after hydration: the article's reading nav links to these
+           anchors, so they have to exist in the server HTML for a reader who
+           arrives on a fragment URL with no JS. `text` is the plain-text form
+           of the heading, so inline markup (`**bold**`, a link) never leaks
+           into the id. */
+        heading({tokens, depth, text}) {
             const level = Math.min(depth + 1, 6);
-            return `<h${level}>${this.parser.parseInline(tokens)}</h${level}>\n`;
+            const id = slugify(text);
+            const attr = id ? ` id="${id}"` : "";
+            return `<h${level}${attr}>${this.parser.parseInline(tokens)}</h${level}>\n`;
         },
     },
 });
@@ -244,6 +268,43 @@ export function getAllSlugs(locale) {
     return loadLocale(locale).map((post) => post.slug);
 }
 
+/* marked escapes text for HTML, so a heading with an apostrophe arrives as
+   `Ce qu&#39;on mesure`. That is correct inside the document, but the reading
+   nav puts this string through JSX, which escapes again and would print the
+   entity. Only the five marked emits are handled, and `&amp;` goes last so a
+   double-escaped `&amp;#39;` cannot be turned into an apostrophe.
+
+   Not a DOM parse and not a dependency: the input is marked's own escaping,
+   which is this exact set. */
+function decodeEntities(text) {
+    return text
+        .replace(/&#39;/g, "'")
+        .replace(/&quot;/g, '"')
+        .replace(/&lt;/g, "<")
+        .replace(/&gt;/g, ">")
+        .replace(/&amp;/g, "&");
+}
+
+/* The top-level section headings of a rendered body, for the article page
+   reading nav.
+
+   Read back off the HTML rather than walking the markdown tokens a second
+   time: the ids are assigned by the renderer above, so this is the one place
+   that is guaranteed to agree with the anchors actually in the document. A
+   regex is enough because the input is marked output, not arbitrary HTML —
+   the heading tags it emits are exactly the shape matched here.
+
+   h3 only, which is what a markdown `##` becomes: the renderer above shifts
+   every heading down a level, so an article's top-level sections arrive as h3
+   and its subsections as h4. A nav listing the h4s too would restate the
+   article instead of giving it a spine. */
+function headingsOf(html) {
+    return [...html.matchAll(/<h3 id="([^"]+)">(.*?)<\/h3>/g)].map(([, id, inner]) => ({
+        id,
+        text: decodeEntities(inner.replace(/<[^>]+>/g, "")),
+    }));
+}
+
 /* A single published post with its rendered HTML body, or null when it does
    not exist, is a draft, or `slug` fails validation (the URL-facing path). */
 export function getPost(locale, slug) {
@@ -264,7 +325,7 @@ export function getPost(locale, slug) {
     // blog content can arrive from an unreviewed or user-submitted source.
     const html = marked.parse(content);
 
-    return {...meta, html};
+    return {...meta, html, headings: headingsOf(html)};
 }
 
 /* Locales in which a given slug exists and is publishable (not draft). Drives
