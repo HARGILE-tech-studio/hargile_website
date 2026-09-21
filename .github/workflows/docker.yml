@@ -47,6 +47,21 @@ jobs:
           # Google discards lastmod for.
           fetch-depth: 0
 
+      # gen-sitemap-lastmod.cjs reads the page→sources map out of
+      # next-sitemap.config.js rather than copying it, and that config now
+      # requires gray-matter at module load to read the blog front matter. So
+      # this step needs node_modules, which it never did while the config had
+      # no dependencies — v0.35.0 failed here, after the tag was already
+      # pushed. Only the two packages the config itself loads, so the step
+      # stays a few seconds rather than a full install.
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Install the sitemap config's own dependencies
+        run: npm install --no-save --no-audit --no-fund gray-matter
+
       # Must run before the build: the image has no git (node:20-alpine, and
       # .git is in .dockerignore), so next-sitemap cannot resolve these itself
       # and silently omits lastmod — which is what shipped in v0.27.1.
