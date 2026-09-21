@@ -191,13 +191,16 @@ $mono: ui-monospace, "Cascadia Mono", "SF Mono", Menlo, Consolas, monospace;
      stretched ::after. */
   isolation: isolate;
 
+  /* The band starts a little before the title column and stops short of the
+     container's right edge (Mihai, 21/09: it ran the full width and read as a
+     page-wide block rather than as one entry). It still has to clear the tags
+     in columns 11-12, so it ends past them rather than at the title's own
+     edge — a band with an end, not a bleed. */
   &::before {
     content: "";
     position: absolute;
     z-index: -1;
-    /* Starts a little before the title column, runs past the right edge. */
-    inset: 0 auto 0 calc(25% - 24px);
-    width: 100vw;
+    inset: 0 8.5% 0 calc(25% - 24px);
     background: $accent;
   }
 
@@ -214,9 +217,19 @@ $mono: ui-monospace, "Cascadia Mono", "SF Mono", Menlo, Consolas, monospace;
     line-height: 1.02;
   }
 
+  /* Columns 11-12 are now outside the band, and ink-on-dark is unreadable, so
+     the first row's tags move under the title where the band still is. */
   .tags {
+    grid-column: 4 / span 6;
+    grid-row: 2;
+    margin-top: 14px;
+    text-align: left;
     color: $ink;
     opacity: 0.7;
+  }
+
+  .desc {
+    grid-row: 3;
   }
 }
 
@@ -263,6 +276,19 @@ $mono: ui-monospace, "Cascadia Mono", "SF Mono", Menlo, Consolas, monospace;
     &::before {
       inset: 72px auto 0 28px;
       width: 100vw;
+    }
+
+    /* Undo the desktop placement: .first .tags outranks the one-column rule
+       above it, so without this the tags keep their 6-column track and squeeze
+       the whole stacked row into it. */
+    .tags,
+    .desc {
+      grid-column: 1 / -1;
+      grid-row: auto;
+    }
+
+    .tags {
+      margin-top: 0;
     }
 
     .name,
