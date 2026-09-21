@@ -1,0 +1,69 @@
+/* The article's reading nav. Quiet by design: this is a spine for the text
+   beside it, not a second navigation. No numbering, no progress bar, no box —
+   a rule down the left, and the current section picked out in the accent. */
+
+$accent: #96b9f9;
+$mono: ui-monospace, "Cascadia Mono", "SF Mono", Menlo, Consolas, monospace;
+
+.nav {
+  font-family: $mono;
+  font-size: 12px;
+  letter-spacing: 0.06em;
+}
+
+.label {
+  margin: 0 0 14px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(237, 237, 237, 0.4);
+  text-shadow: none;
+}
+
+.list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  /* The rule the markers sit on. */
+  border-left: 1px solid rgba(255, 255, 255, 0.14);
+
+  li {
+    margin: 0;
+  }
+}
+
+.link {
+  display: block;
+  /* The marker is a segment of the left border, so the padding is what gives
+     each entry its height on the rule. */
+  padding: 9px 0 9px 16px;
+  margin-left: -1px;
+  border-left: 1px solid transparent;
+  font: inherit;
+  letter-spacing: inherit;
+  line-height: 1.45;
+  color: rgba(237, 237, 237, 0.62);
+  text-decoration: none;
+  transition: color 0.2s, border-color 0.2s;
+
+  &:hover {
+    color: #ededed;
+  }
+
+  &:focus-visible {
+    outline: 2px solid rgba(150, 185, 249, 0.8);
+    outline-offset: 2px;
+  }
+}
+
+/* The section being read. The border segment replaces the rule's own line for
+   this entry, which is why the entry pulls itself 1px left. */
+.active {
+  border-left-color: $accent;
+  color: $accent;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .link {
+    transition: none;
+  }
+}

@@ -1,0 +1,315 @@
+/* The blog index: header on the wave grid, then the archive as a ledger.
+   See blog-index.jsx for why this is not /geo's poster.
+
+     header : title 1-7, lead 9-12, wave grid behind, no 100svh box
+     (a section step)
+     rows   : date 1-3 | title 4-10 | tags 11-12, shared hairlines
+     the latest row : a flat starting on the title column, running off-screen
+
+   Bascule unique à 1100px, comme les sections de /geo. Aucun arrondi. */
+
+$ink: #080c16;
+$accent: #96b9f9;
+$paper: #ededed;
+$rule: rgba(255, 255, 255, 0.14);
+$mono: ui-monospace, "Cascadia Mono", "SF Mono", Menlo, Consolas, monospace;
+
+/* ---------- The header ---------- */
+
+.head {
+  position: relative;
+  /* Not 100svh: this is a band with the archive continuing under it, which is
+     exactly why it needs its own backdrop rather than poster-hero's. The
+     navbar floats over the top, so the top padding clears it. */
+  padding: clamp(150px, 15vw, 240px) 0 clamp(72px, 9vw, 140px);
+  margin-inline: calc(50% - 50vw);
+  /* The mask fades the grid out at the bottom onto this. */
+  background: $ink;
+  overflow: hidden;
+}
+
+.headInner {
+  position: relative;
+  z-index: 1;
+  align-items: end;
+}
+
+.title {
+  grid-column: 1 / span 8;
+  margin: 0;
+  font-family: var(--font-headings);
+  font-weight: 700;
+  font-size: clamp(48px, 6.6vw, 104px);
+  letter-spacing: -0.03em;
+  line-height: 0.96;
+  color: $paper;
+  text-shadow: none;
+}
+
+/* One clause per line. Inline-block so each clause wraps as a unit if it is
+   too wide for the column, instead of the browser choosing its own break
+   across the whole sentence. The space between them is in the markup, so the
+   title still reads as one sentence to a screen reader and in copy-paste. */
+.titleLine {
+  display: inline-block;
+}
+
+.lead {
+  grid-column: 9 / span 4;
+  margin: 0;
+  padding-bottom: 10px;
+  font-size: 17px;
+  font-weight: 300;
+  line-height: 1.55;
+  color: rgba(237, 237, 237, 0.72);
+  text-shadow: none;
+}
+
+/* ---------- The archive ---------- */
+
+/* The header already provides the step above, so the section's own top padding
+   would double it. */
+.archive {
+  padding-top: clamp(56px, 7vw, 112px);
+}
+
+.empty {
+  max-width: 52ch;
+  margin: 0;
+  font-size: clamp(17px, 1.8vw, 20px);
+  font-weight: 300;
+  line-height: 1.6;
+  color: rgba(237, 237, 237, 0.68);
+}
+
+.rows {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.row {
+  position: relative;
+  align-items: baseline;
+  margin: 0;
+  padding: clamp(22px, 2.4vw, 36px) 0;
+  border-top: 1px solid $rule;
+  color: $paper;
+  transition: color 0.2s;
+
+  &:last-child {
+    border-bottom: 1px solid $rule;
+  }
+
+  /* The whole row lights up, since the whole row is the hit area. */
+  &:hover:not(.first) {
+    color: $accent;
+  }
+}
+
+/* The type lives on the <time> as well as the <p>: _typography.scss sizes the
+   `time` element globally, and an element selector beats an inherited value. */
+.date,
+.date time {
+  font-family: var(--font-headings);
+  font-weight: 700;
+  font-size: clamp(30px, 3.4vw, 54px);
+  letter-spacing: -0.03em;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+  text-shadow: none;
+}
+
+.date {
+  grid-column: 1 / span 3;
+  margin: 0;
+
+  /* The year, reset out of the display size it would otherwise inherit. */
+  span {
+    margin-left: 10px;
+    font-family: $mono;
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: 0.1em;
+    opacity: 0.55;
+  }
+}
+
+.name {
+  grid-column: 4 / span 7;
+  margin: 0;
+  font-family: var(--font-headings);
+  font-weight: 600;
+  font-size: clamp(22px, 2.3vw, 34px);
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  text-wrap: balance;
+  text-shadow: none;
+}
+
+/* Single hit area, single focus stop: the ::after stretches over the whole row,
+   matching offers-index.jsx's anchor pattern. */
+.link {
+  font: inherit;
+  letter-spacing: inherit;
+  color: inherit;
+  text-decoration: none;
+
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+  }
+
+  &:focus-visible {
+    outline: 2px solid rgba(150, 185, 249, 0.8);
+    outline-offset: 4px;
+  }
+}
+
+.tags {
+  grid-column: 11 / span 2;
+  margin: 0;
+  text-align: right;
+  font-family: $mono;
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  opacity: 0.55;
+  text-shadow: none;
+}
+
+/* ---------- The latest entry ---------- */
+
+/* One accent per section and it means something: it marks the newest piece.
+   The flat starts on the title column and runs off the right edge of the
+   screen, so the date stays on the page in accent while the title sits in ink
+   on the flat — the two-colour crossing of /geo's poster, done as a band
+   rather than as a cell, which is the difference Mihai asked for. */
+.first {
+  border-top: 0;
+  /* The other rows sit on a baseline; this one has a description under the
+     title, so its pieces align to the top of the band instead. */
+  align-items: start;
+  padding: clamp(32px, 3.6vw, 56px) 0 clamp(36px, 4vw, 60px);
+  margin-bottom: clamp(24px, 3vw, 48px);
+  /* The flat is z-index -1 against this, so the row's own children stay above
+     it without each needing position: relative — which would break the link's
+     stretched ::after. */
+  isolation: isolate;
+
+  /* The band starts a little before the title column and stops short of the
+     container's right edge (Mihai, 21/09: it ran the full width and read as a
+     page-wide block rather than as one entry). It still has to clear the tags
+     in columns 11-12, so it ends past them rather than at the title's own
+     edge — a band with an end, not a bleed. */
+  &::before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    inset: 0 8.5% 0 calc(25% - 24px);
+    background: $accent;
+  }
+
+  .date,
+  .date time {
+    color: $accent;
+    font-size: clamp(44px, 5.6vw, 88px);
+  }
+
+  .name {
+    color: $ink;
+    font-weight: 700;
+    font-size: clamp(32px, 3.9vw, 62px);
+    line-height: 1.02;
+  }
+
+  /* Columns 11-12 are now outside the band, and ink-on-dark is unreadable, so
+     the first row's tags move under the title where the band still is. */
+  .tags {
+    grid-column: 4 / span 6;
+    grid-row: 2;
+    margin-top: 14px;
+    text-align: left;
+    color: $ink;
+    opacity: 0.7;
+  }
+
+  .desc {
+    grid-row: 3;
+  }
+}
+
+.desc {
+  grid-column: 4 / span 5;
+  margin: clamp(20px, 2.2vw, 32px) 0 0;
+  font-size: 15px;
+  line-height: 1.55;
+  color: rgba(8, 12, 22, 0.8);
+  text-shadow: none;
+}
+
+@media (max-width: 1100px) {
+  .title,
+  .lead,
+  .date,
+  .name,
+  .tags,
+  .desc {
+    grid-column: 1 / -1;
+  }
+
+  .lead {
+    margin-top: 20px;
+    padding-bottom: 0;
+  }
+
+  .row {
+    row-gap: 8px;
+  }
+
+  .tags {
+    text-align: left;
+  }
+
+  /* Stacked, the band is full width with the date sitting above it, not a
+     shape offset to one side (Mihai, 21/09: it read as pushed right). It
+     bleeds past both edges of the screen: the row sits inside
+     .content-container, whose own vw-based padding adds to the gutter, so a
+     -1 * --container-gutter inset stops short. Anchored off-screen on the left
+     by 50vw and run 100vw wide, which covers the full width whatever that
+     outer padding is, and the copy gets its own padding back.
+
+     The top inset clears the date, which stays on the page above the band. */
+  .first {
+    &::before {
+      inset: 84px auto 0 calc(50% - 50vw);
+      width: 100vw;
+    }
+
+    /* Undo the desktop placement: .first .tags outranks the one-column rule
+       above it, so without this the tags keep their 6-column track and squeeze
+       the whole stacked row into it. */
+    .tags,
+    .desc {
+      grid-column: 1 / -1;
+      grid-row: auto;
+    }
+
+    .tags {
+      margin-top: 0;
+    }
+
+    /* The band is full-bleed now, so the copy keeps the container gutter
+       rather than being held off an inset edge. */
+    .name,
+    .tags,
+    .desc {
+      padding-left: 0;
+    }
+
+    .name {
+      padding-top: 28px;
+    }
+  }
+}

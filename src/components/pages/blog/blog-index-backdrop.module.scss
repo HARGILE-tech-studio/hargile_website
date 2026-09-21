@@ -1,0 +1,77 @@
+/* Layer for the blog index header's wave grid. See blog-index-backdrop.jsx for
+   why this is not the M4 poster hero's backdrop.
+
+   The grid is a floor the copy sits on, so it runs edge to edge and is made
+   readable by fading the layer, never by cropping it — same principle as the
+   services one, different shape.
+
+   Two differences from that layer, both because this header is not 100svh:
+
+   1. A vertical falloff at the BOTTOM. The services hero fills the screen and
+      the next section butts onto it, so it ends where the section ends and any
+      roll-off would read as the surface running out. This header is a band with
+      the archive continuing below it on the same background, so the grid has to
+      hand over to flat colour rather than stop at an edge.
+   2. The horizontal ramp is mirrored. The poster hero's copy sits left and its
+      mask darkens toward the left; here the headline sits left and the lead
+      sits right of it, so the quiet part is the whole upper-left and the grid
+      keeps its strength on the right, where nothing is written. */
+
+.backdrop {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  /* The renderer is alpha, so the pillars' unlit sides are transparent rather
+     than black. Matched to $background-dark — anything else shows a tint seam
+     where the mask thins the layer. */
+  background: #080c16;
+
+  /* Two masks composited: the horizontal falloff toward the copy column, and
+     the vertical hand-off to the page below. `mask-composite: intersect` so the
+     result is the darker of the two rather than their sum. */
+  mask-image:
+    linear-gradient(to right, rgba(0, 0, 0, 0.42) 0%, rgba(0, 0, 0, 0.6) 46%, #000 88%),
+    linear-gradient(to bottom, #000 0%, #000 52%, rgba(0, 0, 0, 0) 100%);
+  -webkit-mask-composite: source-in;
+  mask-composite: intersect;
+
+  /* Single dial for how present the grid is. Carried in a custom property
+     because the arrival fade ends on this value and `animation-fill-mode: both`
+     would otherwise outrank a plain opacity override in the media query. */
+  --grid-opacity: 0.9;
+  opacity: var(--grid-opacity);
+
+  /* One fade on arrival, no loop — the frame never moves once painted. */
+  animation: blogGridIn 0.5s ease-out both;
+}
+
+@keyframes blogGridIn {
+  from { opacity: 0.01; }
+  to { opacity: var(--grid-opacity); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .backdrop { animation: none; }
+}
+
+/* cover, not contain: the export is a 1.6:1 frame and this header is any ratio.
+   That crop reproduces what the live camera did with its field-of-view lock,
+   which is why one image covers every viewport. */
+.still {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+/* One column below 860px: the copy spans the full width, so a horizontal
+   falloff has nowhere left to hide — drop it, keep the vertical hand-off, and
+   lean on opacity instead. */
+@media (max-width: 860px) {
+  .backdrop {
+    mask-image: linear-gradient(to bottom, #000 0%, #000 46%, rgba(0, 0, 0, 0) 100%);
+    --grid-opacity: 0.55;
+  }
+}
