@@ -16,6 +16,9 @@ $mono: ui-monospace, "Cascadia Mono", "SF Mono", Menlo, Consolas, monospace;
 /* ---------- The byline ---------- */
 
 .byline {
+  /* The navbar floats over the page, and the section's top padding alone let
+     this row sit under it. */
+  padding-top: clamp(16px, 2vw, 28px);
   display: flex;
   flex-wrap: wrap;
   align-items: baseline;
@@ -69,8 +72,16 @@ $mono: ui-monospace, "Cascadia Mono", "SF Mono", Menlo, Consolas, monospace;
   }
 }
 
-/* The one piece of the byline set in full white: who wrote it. */
+/* Who wrote it, and the only part of the byline that is not mono: a name is
+   a name, not a label, and set in the mono caps of its neighbours it read as
+   one more field rather than as a person (Mihai, 21/09: "pas d'auteur ?" —
+   it was there and he could not see it). */
 .author {
+  font-family: var(--font-headings);
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  text-transform: none;
   color: #ededed;
 }
 
