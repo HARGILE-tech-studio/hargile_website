@@ -40,6 +40,14 @@ const dateParts = (date) => {
     return {day, month, year};
 };
 
+/* "Ce qu'on observe, ce qu'on teste" → ["Ce qu'on observe,", "ce qu'on teste"].
+   A title with no comma comes back as one line, so this is safe for any copy. */
+const titleLines = (title) => {
+    const at = title.indexOf(",");
+    if (at === -1) return [title];
+    return [title.slice(0, at + 1), title.slice(at + 1).trim()];
+};
+
 const BlogIndex = ({posts}) => {
     const t = useTranslations("pages.blog");
     const locale = useLocale();
@@ -51,7 +59,18 @@ const BlogIndex = ({posts}) => {
             <header className={styles.head}>
                 <BlogIndexBackdrop/>
                 <div className={`${section.container} ${section.grid12} ${styles.headInner}`}>
-                    <h1 className={styles.title}>{t("hero.title")}</h1>
+                    {/* The title is two clauses split by a comma and it has to
+                        break there, not mid-clause. `text-wrap: balance` picked
+                        its own break, so the comma is the split point here and
+                        the two halves are separate lines. t.rich is not needed:
+                        the copy stays one string in fr/en.json, split on read. */}
+                    <h1 className={styles.title}>
+                        {titleLines(t("hero.title")).map((line, i) => (
+                            <span key={line} className={styles.titleLine}>
+                                {i > 0 ? " " : null}{line}
+                            </span>
+                        ))}
+                    </h1>
                     <p className={styles.lead}>{t("hero.answer")}</p>
                 </div>
             </header>

@@ -35,16 +35,23 @@ $mono: ui-monospace, "Cascadia Mono", "SF Mono", Menlo, Consolas, monospace;
 }
 
 .title {
-  grid-column: 1 / span 7;
+  grid-column: 1 / span 8;
   margin: 0;
   font-family: var(--font-headings);
   font-weight: 700;
-  font-size: clamp(56px, 8.4vw, 136px);
+  font-size: clamp(48px, 6.6vw, 104px);
   letter-spacing: -0.03em;
-  line-height: 0.94;
+  line-height: 0.96;
   color: $paper;
-  text-wrap: balance;
   text-shadow: none;
+}
+
+/* One clause per line. Inline-block so each clause wraps as a unit if it is
+   too wide for the column, instead of the browser choosing its own break
+   across the whole sentence. The space between them is in the markup, so the
+   title still reads as one sentence to a screen reader and in copy-paste. */
+.titleLine {
+  display: inline-block;
 }
 
 .lead {
@@ -265,16 +272,18 @@ $mono: ui-monospace, "Cascadia Mono", "SF Mono", Menlo, Consolas, monospace;
     text-align: left;
   }
 
-  /* The flat goes edge to edge on the right and starts 28px in, with the copy
-     held off it by 44px — same geometry /geo's poster falls back to.
+  /* Stacked, the band is full width with the date sitting above it, not a
+     shape offset to one side (Mihai, 21/09: it read as pushed right). It
+     bleeds past both edges of the screen: the row sits inside
+     .content-container, whose own vw-based padding adds to the gutter, so a
+     -1 * --container-gutter inset stops short. Anchored off-screen on the left
+     by 50vw and run 100vw wide, which covers the full width whatever that
+     outer padding is, and the copy gets its own padding back.
 
-     `right` is not -1 * --container-gutter: the row sits inside
-     .content-container, whose own vw-based padding adds to the gutter, so that
-     value stops short of the screen. Anchored on the left and run 100vw wide
-     instead, which reaches the edge whatever the outer padding is. */
+     The top inset clears the date, which stays on the page above the band. */
   .first {
     &::before {
-      inset: 72px auto 0 28px;
+      inset: 84px auto 0 calc(50% - 50vw);
       width: 100vw;
     }
 
@@ -291,14 +300,16 @@ $mono: ui-monospace, "Cascadia Mono", "SF Mono", Menlo, Consolas, monospace;
       margin-top: 0;
     }
 
+    /* The band is full-bleed now, so the copy keeps the container gutter
+       rather than being held off an inset edge. */
     .name,
     .tags,
     .desc {
-      padding-left: 44px;
+      padding-left: 0;
     }
 
     .name {
-      padding-top: 24px;
+      padding-top: 28px;
     }
   }
 }
