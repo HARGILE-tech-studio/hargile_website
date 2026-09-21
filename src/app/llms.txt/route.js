@@ -38,8 +38,10 @@ function body() {
 
 The site is published in French and English. French is the default and is
 served at the root: ${page("/")} is the French home page. English lives under
-/en. Each page exists in both languages and the two are cross-linked with
-hreflang; neither is a translation proxy of the other.
+/en. Every marketing page exists in both languages, cross-linked with
+hreflang; neither is a translation proxy of the other. Blog articles are
+published in both languages when a translation exists, and an article that
+exists in one language only declares no alternate in the other.
 
 The full copy of every page is present in the first HTML response: no
 JavaScript execution is required to read this site.
