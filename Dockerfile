@@ -27,6 +27,12 @@ RUN addgroup --system --gid 1001 nodejs \
 COPY --from=builder --chown=nextjs:nodejs /app/public ./public
 COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
+# HARG-386 : script de vérification Sentry, lancé à la main dans le pod
+# (kubectl exec ... node scripts/sentry-smoke.mjs) avec la même config que l'app.
+# @sentry/node est tracé dans le node_modules standalone grâce à
+# serverExternalPackages (next.config), sinon Turbopack l'inline dans le chunk.
+COPY --from=builder --chown=nextjs:nodejs /app/scripts/sentry-smoke.mjs ./scripts/sentry-smoke.mjs
+COPY --from=builder --chown=nextjs:nodejs /app/src/lib/sentry/config.mjs ./src/lib/sentry/config.mjs
 
 USER nextjs
 EXPOSE 3000

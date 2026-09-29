@@ -11,7 +11,7 @@ const nextConfig = {
     output: "standalone",
     env: {
         /* Inlined at build time, so the same literal ends up in the SSR HTML and
-           in the client bundle — no hydration mismatch, and no `new Date()`
+           in the client bundle, no hydration mismatch, and no `new Date()`
            during render. The footer copyright used to be seeded with a hardcoded
            2025 and only corrected in an effect, which meant the *raw* HTML said
            2025 forever. AI crawlers do not execute JavaScript, so that stale
@@ -41,6 +41,11 @@ const nextConfig = {
         ],
     },
     reactCompiler: true,
+    /* HARG-386 : sans cette entrée, Turbopack inline @sentry/node dans le
+       chunk serveur et le paquet n'est pas copié dans .next/standalone/node_modules,
+       donc scripts/sentry-smoke.mjs échouerait dans l'image. (Pas de
+       withSentryConfig : aucun upload de source maps, aucun build client.) */
+    serverExternalPackages: ['@sentry/node'],
     cacheComponents: true,
     experimental: {
         turbopackFileSystemCacheForDev: true,
@@ -51,7 +56,7 @@ const nextConfig = {
            later and deploys stop propagating without a purge. Cap page freshness
            to a few minutes and let the browser revalidate via ETag, while
            `stale-while-revalidate` keeps perf. Assets under /_next/static stay
-           immutable — the matcher excludes them. */
+           immutable, the matcher excludes them. */
         return [
             {
                 source: '/((?!_next/static|_next/image|api/).*)',
@@ -80,7 +85,7 @@ const nextConfig = {
             {path: 'about-us', to: '/', permanent: false},
             // 'services' left this list on 2026-07-30: the M4 pages live at
             // /services and /services/* again. Visitors who cached the old 301
-            // eat that cost — accepted, the traffic was near zero.
+            // eat that cost, accepted, the traffic was near zero.
             {path: 'sitemap', to: '/', permanent: true},
             // The AI and MVP offer pages were retired: 301 both to the services
             // index, the closest surviving destination, rather than 404.
@@ -91,7 +96,7 @@ const nextConfig = {
             {path: 'solutions/agves', to: '/', permanent: true},
             {path: 'solutions/i-go', to: '/', permanent: true},
             {path: 'solutions/multipass', to: '/', permanent: true},
-            // The portfolio now lives on its own subdomain — send visitors there.
+            // The portfolio now lives on its own subdomain, send visitors there.
             {path: 'portfolio', to: 'https://portfolio.hargile.com/', permanent: true},
         ];
 
