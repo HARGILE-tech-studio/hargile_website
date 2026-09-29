@@ -13,12 +13,14 @@ README.md
 
 # Nothing below is read by `next build` (or by next-sitemap, which only needs
 # next-sitemap.config.js at the root). They were being shipped into the build
-# context by `COPY . .` for no reason — a few MB per build.
+# context by `COPY . .` for no reason , a few MB per build.
 docs
 examplesPages
 raw-screenshots
 banner
 scripts
+# Sauf le script de vérification Sentry (HARG-386), copié dans l'image finale.
+!scripts/sentry-smoke.mjs
 .claude
 .github
 .playwright-mcp
