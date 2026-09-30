@@ -10,9 +10,9 @@ import HomePageClient from "@/app/[locale]/(context)/(client)/HomePageClient";
    It is kept anyway, for one reason found the hard way: **`scripts/export-wave-grid.mjs`
    drives it, and pointing that script at `/` instead does not work.** Driving `/`
    left `agent-browser open` waiting indefinitely and no image was ever written,
-   where this route captures in about half a minute. The likely difference is the
-   branded loader overlay, which HeroLoadingProvider mounts on `/` and `/contact`
-   only — but the cause was not pinned down, so treat the route as load-bearing
+   where this route captures in about half a minute. The suspected cause was the
+   branded loader overlay on `/`, since removed — but that was never confirmed
+   (see also agent-browser session collisions), so treat the route as load-bearing
    rather than as scaffolding. Deleting it breaks `npm run images:wavegrid:home`,
    which is how the sub-1024px hero image is made.
 

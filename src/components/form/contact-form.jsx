@@ -2,7 +2,7 @@
 // (Adjust path as necessary for your project structure)
 
 import { useTranslations } from "next-intl";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm, useWatch } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
@@ -27,28 +27,10 @@ import {
 import ContactBackdrop from "@/components/pages/contact/contact-backdrop";
 import { ProseContactSection } from "@/components/pages/homepage/quote-request/components/ProseContactSection";
 import { PrivacyFooter } from "@/components/pages/homepage/quote-request/components/PrivacyFooter";
-import { useHeroLoading } from "@/components/providers/hero-loading-provider";
 
 export default function ContactForm() {
   const t = useTranslations("components.contact-form");
 
-  /* Same contract as before — tell the layout-level loader once the backdrop
-     has painted, so the page is revealed with it already in place — but the
-     signal moved. It used to watch for a <canvas> appearing, because the bends
-     were WebGL; the grid is an <img>, so there is no canvas to wait for and
-     that watcher would never have fired. HeroLoadingProvider covers "/" and
-     "/contact" and falls back to a 2.5s SAFETY_MS, so the symptom would not
-     have been a stuck page — it would have been every contact load sitting
-     behind the overlay for the full two and a half seconds. */
-  const { markHeroReady } = useHeroLoading();
-  const readyRef = useRef(false);
-  const onBackdropReady = useCallback(() => {
-    if (readyRef.current) return;
-    readyRef.current = true;
-    // Two rAFs: onLoad fires when the image is decoded, this waits until it has
-    // actually been composited, which is what the canvas path also promised.
-    requestAnimationFrame(() => requestAnimationFrame(() => markHeroReady()));
-  }, [markHeroReady]);
 
   // Define Zod Schema based on your form fields
   // Ensure field names match the 'name' prop used in register (e.g., 'description')
@@ -184,7 +166,7 @@ export default function ContactForm() {
   return (
     <PageWrapper>
       <BackdropSlot aria-hidden="true">
-        <ContactBackdrop onReady={onBackdropReady} />
+        <ContactBackdrop />
       </BackdropSlot>
       <FormContainer>
         {/* titleAs is h1, not h2: this is the page's main heading and /contact

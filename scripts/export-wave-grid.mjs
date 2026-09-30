@@ -100,8 +100,8 @@ const OUT_DIR = path.join("public", "images", "wave-grid");
    two render the same hero from the same component. Repointing it at `/` was
    tried and reverted: `agent-browser open` never returned on `/` and no image
    was written, where the preview route captures in about half a minute. The
-   likely difference is the branded loader overlay, which HeroLoadingProvider
-   mounts on `/` and `/contact` only — but the cause was not pinned down. So the
+   suspected cause, the branded loader overlay on `/`, has since been removed —
+   but it was never confirmed as the cause. So the
    preview route is load-bearing for this script; do not delete it as a duplicate
    of `/` without re-testing this. */
 const TARGETS = {

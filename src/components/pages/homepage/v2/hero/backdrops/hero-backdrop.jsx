@@ -1,7 +1,7 @@
 "use client";
 
 import dynamic from "next/dynamic";
-import {useCallback, useState, useSyncExternalStore} from "react";
+import {useCallback, useEffect, useState, useSyncExternalStore} from "react";
 import {useWaveFrame} from "@/components/pages/services/v2/shared/wave-frame";
 import styles from "../hero.module.scss";
 
@@ -25,19 +25,38 @@ import styles from "../hero.module.scss";
 // having one.
 const WaveGrid = dynamic(() => import("@/components/pages/services/v2/shared/wave-grid"), {ssr: false});
 
-/* Desktop only: warm the wave chunk at module evaluation rather than after
-   mount — the three.js download is what the branded loader spends most of its
-   life waiting on, and Turbopack dedupes this against the dynamic() load above.
+/* The live canvas waits for the visitor's first interaction, and the wide still
+   holds the frame until then.
 
-   Deliberately NOT done below the breakpoint, and the reason is stronger now
-   than it was: there is no canvas down there at all, only the still image, so
-   prefetching three.js on a phone would download ~150 kB to render nothing.
-   Even when mobile did mount a canvas, the earlier fetch pulled the three.js
-   parse/execute forward into the hydration window and measured as +1.7 s of
-   mobile TBT. */
-if (typeof window !== "undefined" && window.matchMedia("(min-width: 1024px)").matches) {
-    import("@/components/pages/services/v2/shared/wave-grid");
-}
+   It used to mount at once, with three.js even prefetched at module evaluation
+   so a full-screen loader could wait on it. That put the three.js parse, ~1600
+   instances, two shader compiles and the shadow pass inside the hydration
+   window: ~450 ms of desktop TBT and a Speed Index held behind the loader, which
+   is what capped desktop Lighthouse at 70-75 while mobile (no canvas) sat at
+   93-98. The still is the same composition, so nothing is missing before the
+   first pointer move — and the live grid is driven by the pointer anyway.
+
+   Not on a timer: a timer lands inside the trace Lighthouse measures, and would
+   put the same long tasks back into TBT. Reduced motion never wakes it — the
+   live grid would only render the still frame the image already shows.
+
+   Cost: the parse now happens right after the first interaction. A click
+   landing in that window waits on it. */
+const WAKE_EVENTS = ["pointermove", "pointerdown", "keydown", "wheel", "scroll"];
+
+const useFirstInteraction = (enabled) => {
+    const [woke, setWoke] = useState(false);
+
+    useEffect(() => {
+        if (!enabled || woke) return;
+        if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+        const wake = () => setWoke(true);
+        WAKE_EVENTS.forEach((e) => window.addEventListener(e, wake, {once: true, passive: true}));
+        return () => WAKE_EVENTS.forEach((e) => window.removeEventListener(e, wake));
+    }, [enabled, woke]);
+
+    return woke;
+};
 
 /* The homepage's own quiet zone — deliberately NOT the /services ellipse.
 
@@ -282,7 +301,8 @@ const RELIEF_FOR = {phone: HOME_RELIEF_PHONE, tablet: HOME_RELIEF_TABLET, wide: 
    profile by design. Passing it would only affect the authoring paths, where it
    would misrepresent what actually ships. */
 
-/* A canvas on desktop, the exported still below 1024px.
+/* The exported still everywhere, with a live canvas taking over on desktop
+   after the first interaction.
 
    This is the split /services already ships, arrived at for the same reason — a
    surface that never moves costs ~20 kB of AVIF against ~150 kB of three.js plus
@@ -292,7 +312,7 @@ const RELIEF_FOR = {phone: HOME_RELIEF_PHONE, tablet: HOME_RELIEF_TABLET, wide: 
 
    What it buys beyond the bytes is the thing this whole exercise was for: the
    same grid, the same colour, the same composition language on both viewports.
-   Desktop moves, mobile does not. */
+   Desktop moves once touched, mobile does not. */
 const WaveSurface = () => {
     const {variant: wave, exportSize} = useWaveSwitches();
     const frame = useFrame(exportSize);
@@ -312,6 +332,7 @@ const WaveSurface = () => {
        browsing seeded still frames — live mode ignores the seed table entirely
        and fills its trail from the pointer instead. */
     const authored = exportSize !== null || wave !== null;
+    const woke = useFirstInteraction(frame === "wide" && !authored);
 
     if (authored) {
         // Unresolved only on the ?wave= path; an export answers from its size.
@@ -330,74 +351,66 @@ const WaveSurface = () => {
     // Unresolved viewport — render nothing rather than guessing. See useFrame.
     if (frame === null) return null;
 
-    /* The wide frame is a canvas — unless it can't be. On failure this falls
-       through to the <picture>, where the unconditional wide <source> is the one
-       that matches at these widths. */
-    if (frame === "wide" && !canvasFailed) {
-        return <WaveGrid mode="live" calm={HOME_CALM} onUnavailable={handleUnavailable}/>;
-    }
+    /* The wide frame gets the canvas once woken — unless it can't start, in
+       which case the still simply stays. The still sits ABOVE the canvas and
+       fades out rather than the canvas fading in: the canvas renders with alpha,
+       so a still left underneath would show through every trough. */
+    const live = frame === "wide" && woke && !canvasFailed;
 
     return (
-        <picture>
-            {/* Phone render — a different composition, not a crop. Its media
-                query must match PHONE_MAX, which is what the canvas branch above
-                switches on.
+        <>
+            {live ? <WaveGrid mode="live" calm={HOME_CALM} onUnavailable={handleUnavailable}/> : null}
+            <picture>
+                {/* Phone render — a different composition, not a crop. Its media
+                    query must match PHONE_MAX, which is what the canvas branch above
+                    switches on.
 
-                These two must stay FIRST: <picture> takes the first matching
-                <source>, so the wide AVIF below would otherwise win at every
-                width and the phone render would never be served. */}
-            <source
-                media={`(max-width: ${PHONE_MAX}px)`}
-                srcSet={`${IMAGE_DIR}/${PHONE_IMAGE}.avif`}
-                type="image/avif"
-            />
-            <source
-                media={`(max-width: ${PHONE_MAX}px)`}
-                srcSet={`${IMAGE_DIR}/${PHONE_IMAGE}.webp`}
-                type="image/webp"
-            />
-            {/* The 641-1023px band. Its own composition, for the same reason
-                the phone has one: see TABLET_IMAGE. */}
-            <source
-                media={`(max-width: ${TABLET_MAX}px)`}
-                srcSet={`${IMAGE_DIR}/${TABLET_IMAGE}.avif`}
-                type="image/avif"
-            />
-            <source
-                media={`(max-width: ${TABLET_MAX}px)`}
-                srcSet={`${IMAGE_DIR}/${TABLET_IMAGE}.webp`}
-                type="image/webp"
-            />
-            {/* The wide pair, and it is genuinely reachable — but by only one
-                route, which is worth stating because it looked reachable by a
-                different one for a while and wasn't.
-
-                It is NOT "what desktop gets". Desktop gets the canvas; this
-                <picture> is skipped entirely at >=1024px. It is what desktop
-                gets when the canvas *cannot start* — WaveGrid reports that
-                through onUnavailable, the wide branch above stops returning a
-                canvas, and this is then the first <source> that matches, since
-                the phone and tablet media queries both fail past 1023px.
-
-                Before that signal existed, a desktop without WebGL got an empty
-                mount and no backdrop at all, while home.* sat unused in /public:
-                the fallback was present, correct, and unreachable. */}
-            <source srcSet={`${IMAGE_DIR}/${HOME_IMAGE}.avif`} type="image/avif"/>
-            <img
-                className={styles.waveStill}
-                src={`${IMAGE_DIR}/${HOME_IMAGE}.webp`}
-                alt=""
-                /* Intrinsic size of the export — the element is absolutely
-                   positioned, so this is about decode sizing, not layout. */
-                width={2560}
-                height={1600}
-                decoding="async"
-                /* Largest thing in the viewport and very likely the LCP element.
-                   Left to lazy defaults it arrives after the copy, which is the
-                   pop-in the canvas already had. */
-                fetchPriority="high"
-            />
-        </picture>
+                    These two must stay FIRST: <picture> takes the first matching
+                    <source>, so the wide AVIF below would otherwise win at every
+                    width and the phone render would never be served. */}
+                <source
+                    media={`(max-width: ${PHONE_MAX}px)`}
+                    srcSet={`${IMAGE_DIR}/${PHONE_IMAGE}.avif`}
+                    type="image/avif"
+                />
+                <source
+                    media={`(max-width: ${PHONE_MAX}px)`}
+                    srcSet={`${IMAGE_DIR}/${PHONE_IMAGE}.webp`}
+                    type="image/webp"
+                />
+                {/* The 641-1023px band. Its own composition, for the same reason
+                    the phone has one: see TABLET_IMAGE. */}
+                <source
+                    media={`(max-width: ${TABLET_MAX}px)`}
+                    srcSet={`${IMAGE_DIR}/${TABLET_IMAGE}.avif`}
+                    type="image/avif"
+                />
+                <source
+                    media={`(max-width: ${TABLET_MAX}px)`}
+                    srcSet={`${IMAGE_DIR}/${TABLET_IMAGE}.webp`}
+                    type="image/webp"
+                />
+                {/* The wide pair. It is what desktop paints first: the phone and tablet media
+                    queries both fail past 1023px, so this is the first <source>
+                    that matches. It stays until the canvas wakes, and for good when
+                    the canvas cannot start (onUnavailable). */}
+                <source srcSet={`${IMAGE_DIR}/${HOME_IMAGE}.avif`} type="image/avif"/>
+                <img
+                    className={live ? `${styles.waveStill} ${styles.waveStillOut}` : styles.waveStill}
+                    src={`${IMAGE_DIR}/${HOME_IMAGE}.webp`}
+                    alt=""
+                    /* Intrinsic size of the export — the element is absolutely
+                       positioned, so this is about decode sizing, not layout. */
+                    width={2560}
+                    height={1600}
+                    decoding="async"
+                    /* Largest thing in the viewport and very likely the LCP element.
+                       Left to lazy defaults it arrives after the copy, which is the
+                       pop-in the canvas already had. */
+                    fetchPriority="high"
+                />
+            </picture>
+        </>
     );
 };
 
