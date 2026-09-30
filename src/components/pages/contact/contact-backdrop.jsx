@@ -204,14 +204,7 @@ const VariantPicker = ({variant}) => {
     );
 };
 
-/* `onReady` fires when the backdrop has actually painted, and the contact route
-   needs it: HeroLoadingProvider holds a full-screen loader over "/" and
-   "/contact" until the page reports in. The old bends reported when their
-   canvas appeared; a still image has no canvas, so without this the route would
-   fall through to the provider's 2.5s SAFETY_MS backstop on every load — the
-   page would be ready and sitting behind the overlay for two seconds. The image
-   is decoded before onLoad fires, so it is the same promise the canvas made. */
-const ContactBackdrop = ({composition = DEFAULT_COMPOSITION, onReady}) => {
+const ContactBackdrop = ({composition = DEFAULT_COMPOSITION}) => {
     const compact = useCompact();
     const search = useSyncExternalStore(subscribeToUrl, readParams, readParamsOnServer);
     const {variant, exportSize, image, frames, pinned} = useUrlSwitches(search, composition);
@@ -275,11 +268,6 @@ const ContactBackdrop = ({composition = DEFAULT_COMPOSITION, onReady}) => {
                             height={1600}
                             decoding="async"
                             fetchPriority="high"
-                            onLoad={onReady}
-                            /* A 404 or a decode failure must still dismiss the
-                               loader, or a missing frame turns into a page that
-                               never reveals. */
-                            onError={onReady}
                         />
                     </picture>
                 )}

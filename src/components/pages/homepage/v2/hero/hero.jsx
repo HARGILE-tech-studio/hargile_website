@@ -1,11 +1,9 @@
 "use client";
 
-import {useEffect, useRef, useState} from "react";
 import {useTranslations} from "next-intl";
 import CtaLink from "@/components/ui/cta-link/cta-link";
 import styles from "./hero.module.scss";
 import HeroBackdrop from "./backdrops/hero-backdrop";
-import {useHeroLoading} from "@/components/providers/hero-loading-provider";
 
 /* The hero backdrop is the wave grid, at every width and with no branch left to
    resolve — chosen over cubes and colour bends after comparing them side by
@@ -26,111 +24,12 @@ import {useHeroLoading} from "@/components/providers/hero-loading-provider";
      h1 and the old glass cards were each fixed for. They are CSS keyframes
      instead. */
 
-/* Signals when the hero's backdrop has actually painted, so the branded loader
-   can dismiss on "hero ready" rather than a fixed timer.
-
-   The live wave grid is an ssr:false dynamic import that appends a <canvas> once
-   its context is up and the first shader is compiled. We watch the backdrop
-   subtree for that element (MutationObserver), then wait two animation frames to
-   guarantee a painted frame before flagging ready.
-
-   **It has to watch for an <img> too.** Below 1024px the backdrop serves the
-   exported still instead of a canvas, and a canvas-only query would never be
-   satisfied — the hero would fall through to the hard timeout below and the
-   loader would visibly outstay content that was already on screen. An image is
-   not ready when it appears, though, only when it has decoded, so that branch
-   waits on `complete` / the load event rather than resolving at once.
-
-   A hard timeout keeps the whole thing honest: the loader must never outstay the
-   content, even if a device fails to report either element. */
-const useBackdropReady = (containerRef) => {
-    const [ready, setReady] = useState(false);
-
-    useEffect(() => {
-        const container = containerRef.current;
-        if (!container) return;
-
-        let raf1 = 0;
-        let raf2 = 0;
-        let done = false;
-        let pending = null; // the <img> we're waiting on, so its listener can be removed
-
-        const markReady = () => {
-            if (done) return;
-            done = true;
-            // Two rAFs: the element exists in the DOM, now let it paint a frame.
-            raf1 = requestAnimationFrame(() => {
-                raf2 = requestAnimationFrame(() => setReady(true));
-            });
-        };
-
-        // A canvas is painted by the time it is appended; an image is only a
-        // promise of pixels until it has decoded. `complete` covers the common
-        // case where it was already in the HTTP cache, and it is also true on a
-        // failed load — which is correct here, since a broken image is still a
-        // reason to stop waiting.
-        const markWhenPainted = (el) => {
-            if (el.tagName !== "IMG" || el.complete) {
-                markReady();
-                return;
-            }
-            pending = el;
-            el.addEventListener("load", markReady, {once: true});
-            el.addEventListener("error", markReady, {once: true});
-        };
-
-        const found = () => container.querySelector("canvas, img");
-
-        const initial = found();
-        if (initial) markWhenPainted(initial);
-
-        const observer = new MutationObserver(() => {
-            const el = found();
-            if (el) {
-                observer.disconnect();
-                markWhenPainted(el);
-            }
-        });
-        observer.observe(container, {childList: true, subtree: true});
-
-        // Safety net: never let the loader hang past the point of usefulness.
-        const timeout = setTimeout(() => {
-            observer.disconnect();
-            setReady(true);
-        }, 2000);
-
-        return () => {
-            observer.disconnect();
-            clearTimeout(timeout);
-            pending?.removeEventListener("load", markReady);
-            pending?.removeEventListener("error", markReady);
-            if (raf1) cancelAnimationFrame(raf1);
-            if (raf2) cancelAnimationFrame(raf2);
-        };
-    }, [containerRef]);
-
-    return ready;
-};
-
 const HeroV2 = () => {
     const t = useTranslations("pages.homepage.sections.hero.v2");
-    const backdropRef = useRef(null);
-    const backdropReady = useBackdropReady(backdropRef);
-
-    // Tell the full-screen loader (layout level) the hero has painted, so it can
-    // draw its ring to completion and dismiss. On mobile the backdrop is an
-    // <img>, not a canvas at all; useBackdropReady waits for whichever of the two
-    // the viewport mounts, so this fires correctly on both.
-    const {markHeroReady} = useHeroLoading();
-    useEffect(() => {
-        if (backdropReady) markHeroReady();
-    }, [backdropReady, markHeroReady]);
 
     return (
         <section className={styles.section}>
-            <div ref={backdropRef} className={styles.backdropHost}>
-                <HeroBackdrop/>
-            </div>
+            <HeroBackdrop/>
 
             <div className={styles.container}>
                 {/* The copy reveals are CSS keyframes (hero.module.scss), not
